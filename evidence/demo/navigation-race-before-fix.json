@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-31T10:36:48.304Z",
+  "error": "AssertionError [ERR_ASSERTION]: navigation commands: \n    at check (F:\\AI_TESTEXAM\\evidence\\demo\\verify.cjs:16:49)\n    at run (F:\\AI_TESTEXAM\\evidence\\demo\\verify.cjs:63:7)",
+  "passed_checks": 179
+}
