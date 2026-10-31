@@ -1,0 +1,20 @@
+test_all_real_documents_preserve_headings_and_every_code_block (__main__.RendererTest.test_all_real_documents_preserve_headings_and_every_code_block) ... ok
+test_build_check_detects_stale_output (__main__.RendererTest.test_build_check_detects_stale_output) ... ok
+test_code_and_evidence_rebased_to_source (__main__.RendererTest.test_code_and_evidence_rebased_to_source) ... ok
+test_code_is_escaped_without_losing_text (__main__.RendererTest.test_code_is_escaped_without_losing_text) ... ok
+test_commonmark_and_table_structure (__main__.RendererTest.test_commonmark_and_table_structure) ... ok
+test_cross_document_anchor (__main__.RendererTest.test_cross_document_anchor) ... ok
+test_dangerous_destinations_rejected (__main__.RendererTest.test_dangerous_destinations_rejected) ... ok
+test_duplicate_and_chinese_heading_ids (__main__.RendererTest.test_duplicate_and_chinese_heading_ids) ... ok
+test_every_real_local_link_and_fragment_resolves (__main__.RendererTest.test_every_real_local_link_and_fragment_resolves) ... ok
+test_explicit_external_links_remain_hyperlinks (__main__.RendererTest.test_explicit_external_links_remain_hyperlinks) ... ok
+test_no_html_script_or_remote_image_execution (__main__.RendererTest.test_no_html_script_or_remote_image_execution) ... ok
+test_raw_unselected_markdown_is_labeled (__main__.RendererTest.test_raw_unselected_markdown_is_labeled) ... ok
+test_render_deterministic_and_source_unchanged (__main__.RendererTest.test_render_deterministic_and_source_unchanged) ... ok
+test_same_document_anchor (__main__.RendererTest.test_same_document_anchor) ... ok
+test_toc_and_history_note_once (__main__.RendererTest.test_toc_and_history_note_once) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.684s
+
+OK

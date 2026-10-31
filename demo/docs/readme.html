@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="source-sha256" content="72688a850726c636f79f68dac1764ef50a9d9ac5cc116e08c07d5c91cbb176cf">
+  <title>Contentops CLI · S0–S6 · ContentOps 文档</title>
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body id="document-top">
+  <a class="skip-link" href="#document-body">跳至正文</a>
+  <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
+  <div class="reading-layout">
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-从-github-获取并运行">从 GitHub 获取并运行</a></li>
+<li class="toc-level-2"><a href="#section-离线-html-demo">离线 HTML Demo</a></li>
+<li class="toc-level-2"><a href="#section-构建与运行">构建与运行</a></li>
+<li class="toc-level-2"><a href="#section-查询命令">查询命令</a></li>
+<li class="toc-level-2"><a href="#section-写命令默认预览显式授权后执行">写命令：默认预览，显式授权后执行</a></li>
+<li class="toc-level-2"><a href="#section-脚本读取结果">脚本读取结果</a></li>
+<li class="toc-level-2"><a href="#section-mock-状态与原始材料">Mock 状态与原始材料</a></li>
+<li class="toc-level-2"><a href="#section-显式-mock-故障与恢复">显式 Mock 故障与恢复</a></li>
+<li class="toc-level-2"><a href="#section-验证与阶段边界">验证与阶段边界</a></li></ul></nav></details></aside>
+    <main id="document-body" tabindex="-1">
+      <div class="document-meta"><span>当前实现与运行说明</span><a href="../../README.md">原始 Markdown 文件</a></div>
+
+      <article class="markdown-body"><h1 id="section-contentops-cli-s0s6">Contentops CLI · S0–S6</h1>
+<p>内容运营后台的 Java CLI。目前已实现 <strong>Mock 数据驱动的四个查询命令与单条审核、标签新增、组合处理</strong>。真实 HTTP 尚未实现。产品合同见 <a href="02-product-plan.html">docs/02</a>，实施顺序见 <a href="03-architecture.html">docs/03</a>。以下描述当前 48 小时原型，未将完整两周 MVP 的功能标为已完成。</p>
+<p>任务二已使用新 Mock 副本实际完成：<a href="06-operation-record.html">操作记录</a> · <a href="task2-evidence.html">原始命令与证据</a>。本次从 132 条 pending 的实际第一页选取 ct_000004，经零写入预览后完成一次 approve 并新增“悬疑”，新 JVM 核查历史仅增加一条；这是演示性操作，不代表真实业务合规结论。</p>
+<p>任务三专项设计已完成：<a href="07-agent-plan.html">Agent 批量处理方案</a>。推荐冻结 ID、人工审批和轻量账本后逐条复用 CLI；批次执行器仍未实现，也未执行 100 条。</p>
+<h2 id="section-从-github-获取并运行">从 GitHub 获取并运行</h2>
+<p>安装 Git、JDK 21 和 Maven 3.9.x（开发验收版本为 3.9.4），确认 <code>java -version</code>、<code>mvn -version</code> 可用且 Maven 使用 JDK 21。以下命令在 PowerShell 7 中执行：</p>
+<pre><code class="language-powershell">git clone https://github.com/DMoon22222/contentops-cli.git
+cd contentops-cli
+mvn -B -ntp verify
+if ($LASTEXITCODE -ne 0) { throw '构建或测试失败，请先检查 Maven 输出' }
+java -jar ./target/contentops.jar --help
+
+# 新建独立 Mock 状态目录，进行只读查询
+$env:CONTENTOPS_STATE_DIR = Join-Path $PWD ('.contentops/try-' + [guid]::NewGuid())
+java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1
+</code></pre>
+<p>首次构建需要联网下载 Maven 依赖；构建后的 JAR 包含运行依赖和 Mock seed，可离线运行，无须后台服务、账号或 API Key。源码、测试、Maven 配置、启动/验证脚本、原始接口和虚构样例、设计文档、HTML Demo 及其引用的实测证据均在仓库中。<code>target/</code> 产物由构建生成，Maven 缓存、个人配置、运行中的 Mock 状态、重复附件 ZIP、提交包和 AI 会话记录不上传。本仓库是可运行项目源码发布，试炼最终交付状态仍以 <a href="04-delivery-plan.html">交付清单</a> 为准。</p>
+<h2 id="section-离线-html-demo">离线 HTML Demo</h2>
+<p>直接双击 <a href="../index.html">demo/index.html</a>，保留整个 <code>demo/</code> 目录。不需要 Java、Node、服务、网络或 CDN。页面保留三个入口：<strong>产品方案 → CLI 交互体验 → 技术设计与演进</strong>。</p>
+<p>产品首页先展示已实现的内容查询、内容审核和标签维护，再用任务二案例说明效果；当前 Mock 原型、完整两周 MVP 待补齐项及未来 Agent 扩展分组呈现。点击“打开 CLI 交互体验”即可进入第二部分。</p>
+<p>第二部分现在是可输入命令的浏览器终端。输入后按 Enter 或点击“运行”；↑↓ 浏览历史，<code>help</code> 查看七条命令及参数，<code>clear</code> 只清屏。快捷按钮只填入命令，不会自动执行。“复制”复制当前输入或最近一条命令。右侧摘要随当前模拟状态更新。</p>
+<p>推荐在<strong>网页输入框</strong>中依次体验（以下短命令不代表 Windows 已安装 <code>contentops</code> 启动器）：</p>
+<pre><code class="language-text">content list --review-status pending
+content get ct_000004
+content process ct_000004 --action approve --reason &quot;网页模拟决定&quot; --add 悬疑
+content process ct_000004 --action approve --reason &quot;网页模拟决定&quot; --add 悬疑 --execute --yes
+content get ct_000004 --output json
+content history ct_000004
+</code></pre>
+<p>写命令默认预览；只有 <code>--execute --yes</code> 同时出现才修改网页内存。模拟器使用原始 seed 的完整 300 条内容、25 个标签，初始 pending=132。刷新或点击“重置数据”恢复初始数据；有模拟修改时需再确认重置，命令历史与业务数据分开管理。不使用 localStorage/sessionStorage，不读写 Java 状态目录。JSON 标记 <code>environment=browser</code>、<code>source=browser_simulator</code>，其中退出码是模拟结果，不是 JVM 进程码。</p>
+<p>网页新生成的模拟结果与真实记录分开。“查看真实 Java CLI 运行记录”保留任务二的独立 Mock 实测（新增“悬疑”）和 S5 故障/恢复记录（新增“轻松”）；它们不随网页操作或重置改变。Agent 仍是未来设计，未实现批次执行器。网页不调用 JAR、不连接 API，也不模拟生产网络故障。真正运行 Java CLI 仍使用下文的 <code>java -jar ./target/contentops.jar ...</code>，网页还保留了独立的 JAR 命令参考。</p>
+<p>“技术说明”和“Agent 方案”保留简短说明；完整方案默认打开预先排版的 <a href="index.html">HTML 文档目录</a>。重点入口为 <a href="02-product-plan.html">产品方案</a>、<a href="03-architecture.html">技术架构</a>、<a href="06-operation-record.html">实际操作记录</a>、<a href="07-agent-plan.html">Agent 批量方案</a> 和 <a href="readme.html">运行说明</a>。共 11 份阅读版，另包括 01/04、任务二/S5 证据索引、原题和附件说明；不转换全部历史日志。原始 Markdown 保留在根目录、<code>docs/</code> 及证据原位置，网页资料区的原稿链接明确标为“原始 Markdown 文件”。历史设计阅读页有阶段提示，未修改原文来覆盖过去的状态。</p>
+<p>阅读版使用真正的标题、表格、目录锚点和代码块；表格与长代码可横向滚动。跨文档链接优先指向对应 HTML，代码和证据链接按源位置重算。Mermaid 围栏保留完整源码，不联网加载图表库。真实记录继续保留完整 JSON、stderr、实际退出码及来源链接。若要在 PowerShell 中试用真正的写命令，先按下文设置新的独立状态目录。</p>
+<p>只有维护者重新生成阅读版时需要 Python 3.12 和锁定的构建依赖（当前环境已有 markdown-it-py 4.2.0 / mdurl 0.1.2）；首次安装需要可用包源。打开生成 HTML 不需要这些工具：</p>
+<pre><code class="language-powershell">python -m pip install -r scripts/requirements-docs.txt
+python scripts/render-docs.py
+python scripts/render-docs.py --check
+python scripts/test-render-docs.py
+</code></pre>
+<p>源文件映射与 SHA 见 <a href="manifest.json">manifest.json</a>。修改源 Markdown、转换脚本或模板后重新生成；<code>--check</code> 只检测生成件是否过期。转换关闭原生 HTML、禁用自动图片加载，阅读页无 JavaScript/CDN。当前首页与文档阅读验收见 <a href="../../evidence/demo-docs/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">demo-docs</a>。</p>
+<p>本轮实现和实际验证见 <a href="../../evidence/demo-playground/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">Playground 验收记录</a>，包括独立 JavaScript 引擎测试与真实浏览器操作。历史 <a href="../../evidence/demo-simplified/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">精简版</a>、<a href="../../evidence/demo-review/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">571 项评审版</a>、<a href="../../evidence/demo/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">407 项 S6 原版</a>及截图未覆盖。<code>evidence/demo/verify.cjs</code> 的新结果写入 <code>evidence/demo-playground/</code>。Java、原始材料、<code>demo/data.js</code>、任务二/S5 工作副本与证据不变；<code>demo/seed.js</code> 是另外导出的只读模拟器输入。</p>
+<h2 id="section-构建与运行">构建与运行</h2>
+<p>在项目根目录使用 JDK 21、Maven 3.9.x、PowerShell 7：</p>
+<pre><code class="language-powershell">mvn -B -ntp test
+mvn -B -ntp verify
+java -jar ./target/contentops.jar --help
+</code></pre>
+<p>编译目标为 Java 17，Shade 产物为 <code>target/contentops.jar</code>。当前实际运行验收使用 Temurin 21.0.7、Maven 3.9.4、Windows 11 和 PowerShell 7.6.5；尚未在 Java 17 JVM 或 Windows PowerShell 5.1 上验收。</p>
+<p>依赖固定为 Picocli 4.7.7、Jackson BOM 2.21.8、JUnit Jupiter 5.13.4。没有 Spring Boot、数据库或 Mock HTTP 服务器。<code>.mvn/maven.config</code> 将 Maven 缓存放到忽略目录 <code>.contentops/m2</code>，解决本机全局缓存的写权限问题；请从项目根目录构建，首次构建需要下载依赖。</p>
+<h2 id="section-查询命令">查询命令</h2>
+<p>为试用指定独立的绝对状态目录，避免读取已有演示状态：</p>
+<pre><code class="language-powershell">$env:CONTENTOPS_STATE_DIR = Join-Path $PWD ('.contentops/try-' + [guid]::NewGuid())
+
+java -jar ./target/contentops.jar --env mock content list --review-status pending --page 1
+java -jar ./target/contentops.jar --env mock content list --content-id ct_000004 --review-status pending
+java -jar ./target/contentops.jar --env mock content get ct_000004
+java -jar ./target/contentops.jar --env mock content history ct_000003
+java -jar ./target/contentops.jar --env mock tags list --status active
+java -jar ./target/contentops.jar --env mock tags list --status all
+</code></pre>
+<p>列表固定每页 20 条，筛选条件按 AND 组合；越界空页保留真实匹配总数。历史按时间倒序显示，不重写原始历史。标签默认只显示 active，<code>all</code> 包含 deprecated；<code>--status deprecated</code> 不在本阶段参数范围内。</p>
+<p>公共参数 <code>--env</code>、<code>--output table|json</code>、<code>--help</code> 在各级命令可用，默认为 mock/table。<code>--non-interactive</code> 可用于脚本；当前原型均不读取 stdin。各级 <code>--help</code> 不实例化 Gateway、不创建状态目录、不调用网络。<code>--env api</code> 明确返回退出码 2，不会回退 Mock。</p>
+<p>Windows 也可用 <code>./scripts/contentops.cmd</code> 启动，它传递参数并保留 Java 进程退出码。</p>
+<h2 id="section-写命令默认预览显式授权后执行">写命令：默认预览，显式授权后执行</h2>
+<p>继续使用上面新建的独立 Mock 状态目录。以下是可复现的调用方式；审核决定由人工提供，CLI 不判断内容是否应当通过。</p>
+<pre><code class="language-powershell"># 单独审核：默认预览，reject 必须提供非空理由
+java -jar ./target/contentops.jar --env mock content review ct_000004 --action approve --reason '人工给出的演示决定'
+
+# 单独新增标签：计算完整目标数组，可重复 --add，不按逗号拆分
+java -jar ./target/contentops.jar --env mock content tags update ct_000004 --add '轻松'
+
+# 组合预览：任何标签校验失败都会在审核提交之前阻断
+java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason '演示：人工已给出审核决定' --add '轻松'
+
+# 实际执行：两项授权参数必须同时出现
+java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason '演示：人工已给出审核决定' --add '轻松' --execute --yes
+
+# 新 JVM 重新读取持久化结果
+java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+java -jar ./target/contentops.jar --env mock content history ct_000004
+</code></pre>
+<p>所有写命令不带授权参数时只读取、校验并输出计划，<code>mode=preview/status=previewed</code>，零业务写入；预览成功不代表执行成功。<code>--execute</code> 缺少 <code>--yes</code>，或只给 <code>--yes</code>，都返回 rejected/2，不等待 stdin。完整两周 MVP 的输入内容 ID 确认尚未实现。</p>
+<p><code>--action approve|reject</code> 和 <code>--reason</code> 用于 review/process。tags update 只接受 <code>--add</code> 和执行授权；不接受没有实现用途的 reason、remove/set。未知参数、重复的单值参数以及 <code>--apply/--force/--dry-run</code> 均拒绝，不静默忽略。</p>
+<p>业务约束属于 CLI：只审核 pending；reject 必须有理由；只对真正新增的标签要求存在且 active。保留存量废弃/未知标签并给出警告，原有标签顺序和数据不被自动清洗。已存在标签的独立执行返回 <code>no_change</code>、tags=skipped/matched，不发 PUT。默认预览即使目标无变化也返回 previewed。</p>
+<p>process 按“全部校验/计划 → 授权 → 重读并检查 → 单 item 审核 → 计数检查及回读 → 检查标签未变化 → 全数组 PUT → 最终回读”执行。标签不变时只跳过标签写入。两项 API 各提交一次完整本地快照，<strong>没有联合事务、回滚或自动重试</strong>。GET 与写入之间仍有竞争窗口，没有服务端版本控制，不能宣称并发安全。</p>
+<p>审核成功但标签失败时，用独立标签命令重新计划和修复；不要重做 process 来重复审核。Mock 新日志的操作人固定为 <code>op_mock_cli</code>，时间取注入的 Clock；这是本地模拟身份，不是真实认证身份。creators 的计数、tags.usage_count 等原始聚合字段保持原值。</p>
+<h2 id="section-脚本读取结果">脚本读取结果</h2>
+<pre><code class="language-powershell">$raw = &amp; java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+$cliExit = $LASTEXITCODE
+$result = $raw | ConvertFrom-Json
+if ($cliExit -ne 0 -or $result.exit_code -ne $cliExit -or
+    $result.environment -ne 'mock' -or $result.mode -ne 'read' -or
+    $result.status -ne 'succeeded') {
+    throw 'CLI 未确认读取成功，请检查 error 与 stderr'
+}
+$result.data
+</code></pre>
+<p>stdout 在 JSON 模式下只有一个 UTF-8 信封对象，诊断走 stderr。业务数据位于 <code>data</code>；详情包含 OpenAPI 中的完整 12 字段，中文正文和 emoji 保留。解析失败时无法确定的 command/mode 等字段允许为 null，不伪造执行上下文。不要使用 <code>2&gt;&amp;1</code> 将错误文本混入 JSON。</p>
+<p>写入结果在 <code>data</code> 中保留 plan、steps、observed。步骤分别记录 write（not_sent/acknowledged/failed/unknown/skipped）和 verification（not_checked/matched/mismatched/unavailable）。observed 是最近成功读取的状态；回读失败时保留旧观测，不用计划目标填充。收到合规写入响应仍须回读匹配；result 接受 schema 规定的字符串，不只接受示例值 ok。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>status / 实际退出码</th>
+<th>含义及处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>succeeded / 0</td>
+<td>读取成功，或 mode=execute 的全部必要步骤已获确认且核对匹配</td>
+</tr>
+<tr>
+<td>previewed / 0</td>
+<td>仅预览，未写入</td>
+</tr>
+<tr>
+<td>no_change / 0</td>
+<td>独立标签执行无需 PUT</td>
+</tr>
+<tr>
+<td>rejected / 2</td>
+<td>参数、授权或业务前置条件拒绝，尚未写入</td>
+</tr>
+<tr>
+<td>failed / 3</td>
+<td>读取失败，或明确的单项写入失败且无已成功步骤</td>
+</tr>
+<tr>
+<td>partial / 4</td>
+<td>审核已核对成功，标签明确失败或被变化检查阻断</td>
+</tr>
+<tr>
+<td>unknown / 5</td>
+<td>写入异常/响应丢失/计数无法解释；不重发、不继续后续写入</td>
+</tr>
+<tr>
+<td>verification_failed / 6</td>
+<td>写入已获确认，回读不匹配或不可用；不撤销既有写入</td>
+</tr>
+<tr>
+<td>failed / 1</td>
+<td>内部或输出失败，不能当作可信执行结果</td>
+</tr>
+</tbody>
+</table></div>
+<p>cancelled/7 保留在模型中，本原型没有交互取消场景。PowerShell 请立即保存 <code>$LASTEXITCODE</code>，并同时检查 environment、mode、status、exit_code 和步骤；单看退出 0 或 JSON 可解析不足以证明审核完成。unknown 不因另行读取到目标状态就变为本次操作成功。输出丢失、JVM 中断或截断时也不要自动重放写入。</p>
+<h2 id="section-mock-状态与原始材料">Mock 状态与原始材料</h2>
+<ul>
+<li>只读 seed 从原始 <code>内容运营后台接口数据/mock_data.json</code> 无过滤打包到 JAR 的 <code>seed/mock_data.json</code>；构建和运行不修改附件。</li>
+<li><code>CONTENTOPS_STATE_DIR</code> 必须是独立的绝对目录，默认是用户目录下 <code>.contentops/mock/v1</code>。原始附件目录及其子目录禁止用作工作目录。</li>
+<li>无 <code>state.json</code> 时，从只读 seed 创建内存数据视图。读取可能创建目录和 <code>state.lock</code> 元数据，<strong>不创建业务快照</strong>。</li>
+<li>每次读取均加 sidecar 文件锁并重新加载完整快照，没有长期状态缓存。已有 <code>state.json</code> 不会被只读命令重写；损坏、重复 JSON 键或 seed/版本不匹配时明确失败，不回退 seed。</li>
+<li>快照提交顺序：锁内加载 → 完整数据树副本 → 同目录临时文件写入并 <code>force(true)</code> → 关闭文件 → 原子替换。保留原始七类数据及 <code>_note</code>、未使用字段和已有异常数据。审核单次 API 的状态与日志一起提交；无成功项的批次不新建/重写快照。它不构成审核和标签两个操作的联合事务。</li>
+<li>提交前实际探测同目录原子创建和替换能力；不支持时拒绝提交，不降级为非原子覆盖。锁等待上限为 2 秒。不承诺硬件断电后的目录项持久性，也没有跨机器/网络盘保证。</li>
+</ul>
+<p>当前没有初始化或重置 CLI。需要初始视图时换一个独立状态目录；损坏工作副本应保留排查，不自动删除。Gateway 保留列表审核语义：最多 20 项、重复调用追加日志，不施加 CLI 的 pending/理由政策。标签 Gateway 接收完整数组，不施加 active 校验；CLI 只开放单条 add，不直接暴露底层宽松能力。</p>
+<h2 id="section-显式-mock-故障与恢复">显式 Mock 故障与恢复</h2>
+<p><code>CONTENTOPS_MOCK_SCENARIO</code> 只用于本地开发演示。未设置时不创建故障包装器，正常行为不变；设置空串、未知名称或在 api 环境设置该变量均拒绝。关闭时使用 <code>Remove-Item Env:\CONTENTOPS_MOCK_SCENARIO</code>，不要用空串代替清除。<code>--help</code> 仍然跳过业务配置和 Gateway。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>场景值</th>
+<th>注入位置</th>
+<th>process 结果</th>
+<th>磁盘中的实际结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tags-reject-before-write</td>
+<td>标签 delegate 调用前拒绝</td>
+<td>partial/4</td>
+<td>审核已提交，标签未改</td>
+</tr>
+<tr>
+<td>review-commit-response-lost</td>
+<td>审核 delegate 真正提交后抛未知</td>
+<td>unknown/5</td>
+<td>审核已提交，标签未执行</td>
+</tr>
+<tr>
+<td>tags-commit-response-lost</td>
+<td>标签 delegate 真正提交后抛未知</td>
+<td>unknown/5</td>
+<td>审核及标签均已提交</td>
+</tr>
+<tr>
+<td>review-readback-mismatch</td>
+<td>审核成功后的指定内容回读，一次返回旧审核状态</td>
+<td>verification_failed/6</td>
+<td>审核已提交，标签未执行</td>
+</tr>
+<tr>
+<td>tags-readback-mismatch</td>
+<td>标签成功后的回读，一次返回旧标签</td>
+<td>verification_failed/6</td>
+<td>审核及标签均已提交</td>
+</tr>
+</tbody>
+</table></div>
+<p>回读故障由写入事件和内容 ID 标记触发，不按“第几个 GET”猜测。只改变返回视图，不把旧数据写回磁盘。新 JVM 的普通 get 不会凭场景配置自行触发写后故障；核查与恢复仍应先清除故障变量。</p>
+<p>临时复现部分失败（只影响当前 PowerShell 进程环境，不修改永久配置；请使用新的状态目录）：</p>
+<pre><code class="language-powershell">$env:CONTENTOPS_STATE_DIR = Join-Path $PWD ('.contentops/fault-try-' + [guid]::NewGuid())
+$env:CONTENTOPS_MOCK_SCENARIO = 'tags-reject-before-write'
+java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason '人工提供的本地故障演示决定' --add '轻松' --execute --yes
+$firstExit = $LASTEXITCODE # 应核对实际 JSON，partial 对应 4
+
+Remove-Item Env:\CONTENTOPS_MOCK_SCENARIO
+java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+java -jar ./target/contentops.jar --env mock content history ct_000004
+java -jar ./target/contentops.jar --env mock --output json content tags update ct_000004 --add '轻松' --execute --yes
+$recoveryExit = $LASTEXITCODE
+java -jar ./target/contentops.jar --env mock content history ct_000004
+</code></pre>
+<p>若当前终端已有状态/场景配置，手工演示前保存并在结束后恢复；下面的自动验证脚本直接为子进程指定变量，不改变调用方配置。切换任何故障场景时都换一个新目录，不能复用已审核内容来假装从 pending 开始。</p>
+<p>partial 表示已确认部分完成，因此独立补标签即可；重新执行 process 会被 pending 规则拒绝。unknown 表示本次调用没有获得可信确认，尽管另一个 JVM 可能读到目标值，原结果仍为 unknown；不要盲目重试。verification_failed 保留 acknowledged，表示确认后的视图核对不通过，不能反推“没写入”或自动回滚。这些都是受控本地模拟，未验证真实 HTTP 超时、网络重发或生产一致性。</p>
+<p>启用场景时 JSON warnings/诊断 stderr 含 <code>MOCK_FAULT_ACTIVE scenario=...</code>。Gateway 已实例化时还含 <code>MOCK_CALL_COUNTS { ... }</code>，用于保存本次 JVM 的实际计数：review/tag attempts 为 Application 调用包装器次数，delegate_calls 为实际进入底层 Mock 方法次数；不是成功提交次数。回读故障为了捕获旧视图额外调用一次详情 delegate，所以 delegate_content_reads 可能比 content_reads 多 1。injected_readbacks 应为 1。计数只在本次进程内存在，不是服务端审计或幂等机制；普通默认环境不输出这组诊断。</p>
+<h2 id="section-验证与阶段边界">验证与阶段边界</h2>
+<p>S5 的 <code>mvn test</code>：156 项；<code>mvn verify</code>：156 项单元/契约测试 + 36 项独立 JVM 集成测试，全部通过，0 失败、0 错误、0 跳过。另有 47 次实际 JAR 调用，覆盖正常基线、五种故障、独立标签恢复、重复审核及配置拒绝，见 <a href="s5-evidence.html">S5 证据</a>。<a href="../../evidence/s3-s4/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">S3–S4 证据</a> 与 <a href="../../evidence/s0-s2/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">S0–S2 历史证据</a> 保持不变。</p>
+<p>复跑独立 JAR 验证（使用新证据目录；S3–S4 脚本会在专用新 Mock 工作副本执行人工演示审核和标签更新）：</p>
+<pre><code class="language-powershell">./scripts/verify-s0-s2.ps1 -EvidenceDirectory ('evidence/s0-s2/recheck-' + [guid]::NewGuid())
+./scripts/verify-s3-s4.ps1 -EvidenceDirectory ('evidence/s3-s4/recheck-' + [guid]::NewGuid())
+./scripts/verify-s5.ps1 -EvidenceDirectory ('evidence/s5/recheck-' + [guid]::NewGuid())
+</code></pre>
+<p>测试状态统一放在被忽略的 <code>target/test-state</code> 下；只读手工验证状态位于 <code>.contentops/manual-validation</code>，S3–S4 状态位于 <code>.contentops/s3-s4-validation</code>，S5 状态位于 <code>.contentops/s5-validation</code>。每个故障采用新子目录，核查/恢复 JVM 清除场景配置，与后续任务二正式演示分开。脚本保存原始 stdout/stderr/进程退出码、步骤、计数、快照 SHA/revision 及内容/日志事实，任一断言失败返回非零；已存在的命令/场景证据会拒绝覆盖。构建缓存、产物、完整运行状态均不纳入 Git。证据是实际开发验证记录，不是任务二正式操作记录，也不替代完整 AI 对话导出。</p>
+<p>Java 实施已完成至 S5；任务二正式 Mock 操作记录和任务三设计见页首导航。实际文件提交后丢响应、跨 JVM 的部分失败/核对失败、独立标签恢复与不重试已验证。缺失计数、写后读取不可用等额外分支继续由 RecordingGateway 单元测试覆盖；真实 HTTP 的超时、接收次数与协议行为仍未验证。没有新增自动恢复、resume、幂等键或任务管理；pending 检查只防止顺序重复审核，不消除竞态，也不是服务端强幂等。remove/set、人工交互确认、HTTP、Agent 批次运行系统和最终交付仍未实现。HTML 离线回放现已完成，见页首入口。</p>
+</article>
+      <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 README.md</span></footer>
+    </main>
+  </div>
+</body>
+</html>

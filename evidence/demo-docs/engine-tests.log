@@ -1,0 +1,47 @@
+✔ export retains all original seed data and source SHA (4.937ms)
+✔ tokenizer supports whitespace, Chinese and both quote styles (1.2311ms)
+✔ quoted empty values remain tokens for business validation (0.0821ms)
+✔ unclosed quotes, input limits and controls rejected (0.2583ms)
+✔ shell features rejected, quoted characters stay literal text (0.492ms)
+✔ prefix and inherited global options accepted (0.2366ms)
+✔ unknown, unsupported and duplicate single options rejected (2.2463ms)
+✔ missing required values and extra positional arguments rejected (2.6467ms)
+✔ unsupported remove/set, bool values and environments rejected (2.0349ms)
+✔ help and clear never modify business data (5.9164ms)
+✔ full dataset is queryable in fixed 20-item pages (3.4746ms)
+✔ pending count 132, final page 12 and AND filters (2.2494ms)
+✔ invalid page/status/ID inputs fail without writes (5.6133ms)
+✔ details preserve full fields, Chinese body and anomalies (6.2033ms)
+✔ unknown get/history fail with read code3 (2.044ms)
+✔ history sorted on a copy, retains all original actions (4.6265ms)
+✔ tags default23 active, all25 includes two deprecated (1.8826ms)
+✔ all three write previews are zero-write, clock not called (9.0726ms)
+✔ each one-sided authorization rejected before writing (10.7452ms)
+✔ review approve changes only state and one matching browser log (2.3564ms)
+✔ reject requires a nonempty reason, then records correct action (4.9173ms)
+✔ invalid action rejected and tags-only rejects reason (2.1201ms)
+✔ omitted approve reason matches Java plan null and stored empty log reason (2.6673ms)
+✔ tags add keeps all old tags and never changes review status (1.9353ms)
+✔ repeated --add deduplicates requested tags and warns (1.8553ms)
+✔ unknown, deprecated and empty additions block process before review (15.0341ms)
+✔ controlled fixtures: existing unknown/deprecated tags retained unchanged (6.3307ms)
+✔ no_change only on execute; duplicate add never reorders original data (5.1364ms)
+✔ process performs ordered review/verify/tags/verify with one log (2.1028ms)
+✔ process can skip unchanged tags after review (2.2674ms)
+✔ repeated rapid executions cannot add review logs again (2.4101ms)
+✔ tags remain independently editable after approved review (2.1526ms)
+✔ reset restores complete original business state, seed never mutates (6.7963ms)
+✔ results and exported views do not alias engine memory (2.6503ms)
+✔ unrelated collections and the other299 contents remain unchanged (3.2389ms)
+✔ JSON envelope identifies browser simulation and does not invent API acknowledgements (1.8473ms)
+✔ HTML-looking reasons are stored as literal browser text (1.8433ms)
+✔ recognized JSON preference survives later lexical rejection (1.8553ms)
+✔ local preparation errors do not pretend that Java wrote anything (5.3069ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 163.1303

@@ -1,0 +1,1317 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="source-sha256" content="1395249857d11cc6ab5e9819a64d5b8fd5a897b3826feaab0376d9ab25a78697">
+  <title>Java 技术架构与实施方案 · ContentOps 文档</title>
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body id="document-top">
+  <a class="skip-link" href="#document-body">跳至正文</a>
+  <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
+  <div class="reading-layout">
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-1-设计结论依据与实现状态">1. 设计结论、依据与实现状态</a></li>
+<li class="toc-level-3"><a href="#section-11-已有待实现与不实现">1.1 已有、待实现与不实现</a></li>
+<li class="toc-level-3"><a href="#section-12-已确认的产品合同">1.2 已确认的产品合同</a></li>
+<li class="toc-level-2"><a href="#section-2-技术选型与具体版本">2. 技术选型与具体版本</a></li>
+<li class="toc-level-3"><a href="#section-21-本机环境事实">2.1 本机环境事实</a></li>
+<li class="toc-level-3"><a href="#section-22-三种-cli-方案比较">2.2 三种 CLI 方案比较</a></li>
+<li class="toc-level-3"><a href="#section-23-jdk-选择21-开发验收release-17">2.3 JDK 选择：21 开发验收，release 17</a></li>
+<li class="toc-level-3"><a href="#section-24-固定依赖与构建插件">2.4 固定依赖与构建插件</a></li>
+<li class="toc-level-3"><a href="#section-25-构建与打包合同">2.5 构建与打包合同</a></li>
+<li class="toc-level-2"><a href="#section-3-整体架构与项目目录">3. 整体架构与项目目录</a></li>
+<li class="toc-level-3"><a href="#section-31-依赖方向">3.1 依赖方向</a></li>
+<li class="toc-level-3"><a href="#section-32-拟定目录本轮不创建">3.2 拟定目录（本轮不创建）</a></li>
+<li class="toc-level-3"><a href="#section-33-关键类职责">3.3 关键类职责</a></li>
+<li class="toc-level-2"><a href="#section-4-六项-gatewaydto-与-api-契约">4. 六项 Gateway、DTO 与 API 契约</a></li>
+<li class="toc-level-3"><a href="#section-41-方法映射">4.1 方法映射</a></li>
+<li class="toc-level-3"><a href="#section-42-必要模型">4.2 必要模型</a></li>
+<li class="toc-level-2"><a href="#section-5-mock真实修改工作副本而不是预设成功输出">5. Mock：真实修改工作副本，而不是预设成功输出</a></li>
+<li class="toc-level-3"><a href="#section-51-json-与-sqlite-的比较">5.1 JSON 与 SQLite 的比较</a></li>
+<li class="toc-level-3"><a href="#section-52-状态路径与格式">5.2 状态路径与格式</a></li>
+<li class="toc-level-3"><a href="#section-53-初始化读取与重置">5.3 初始化、读取与重置</a></li>
+<li class="toc-level-3"><a href="#section-54-写入与并发控制">5.4 写入与并发控制</a></li>
+<li class="toc-level-3"><a href="#section-55-mock-六方法的行为">5.5 Mock 六方法的行为</a></li>
+<li class="toc-level-2"><a href="#section-6-http-gateway-与配置安全">6. HTTP Gateway 与配置安全</a></li>
+<li class="toc-level-3"><a href="#section-61-实现边界">6.1 实现边界</a></li>
+<li class="toc-level-3"><a href="#section-62-序列化与响应">6.2 序列化与响应</a></li>
+<li class="toc-level-3"><a href="#section-63-超时与防重发">6.3 超时与防重发</a></li>
+<li class="toc-level-3"><a href="#section-64-配置与敏感信息">6.4 配置与敏感信息</a></li>
+<li class="toc-level-2"><a href="#section-7-三项写操作的代码级协作">7. 三项写操作的代码级协作</a></li>
+<li class="toc-level-3"><a href="#section-71-先计划再授权再执行">7.1 先计划、再授权、再执行</a></li>
+<li class="toc-level-3"><a href="#section-72-计划计算">7.2 计划计算</a></li>
+<li class="toc-level-3"><a href="#section-73-process-流程图">7.3 process 流程图</a></li>
+<li class="toc-level-3"><a href="#section-74-contentservice-的执行伪代码">7.4 ContentService 的执行伪代码</a></li>
+<li class="toc-level-3"><a href="#section-75-独立命令如何复用">7.5 独立命令如何复用</a></li>
+<li class="toc-level-2"><a href="#section-8-结果模型异常与退出码">8. 结果模型、异常与退出码</a></li>
+<li class="toc-level-3"><a href="#section-81-统一-java-结果形状">8.1 统一 Java 结果形状</a></li>
+<li class="toc-level-3"><a href="#section-82-异常只表达事实service-按进度判定整体">8.2 异常只表达事实，service 按进度判定整体</a></li>
+<li class="toc-level-3"><a href="#section-83-结果判定表保持-02">8.3 结果判定表（保持 02）</a></li>
+<li class="toc-level-2"><a href="#section-9-picoclipowershell-与进程接口">9. Picocli、PowerShell 与进程接口</a></li>
+<li class="toc-level-3"><a href="#section-91-命令树与参数处理">9.1 命令树与参数处理</a></li>
+<li class="toc-level-3"><a href="#section-92-解析错误也要有-json">9.2 解析错误也要有 JSON</a></li>
+<li class="toc-level-3"><a href="#section-93-确认流和退出码">9.3 确认、流和退出码</a></li>
+<li class="toc-level-3"><a href="#section-94-windows-调用与中文">9.4 Windows 调用与中文</a></li>
+<li class="toc-level-2"><a href="#section-10-测试架构与-02-验收映射">10. 测试架构与 02 验收映射</a></li>
+<li class="toc-level-3"><a href="#section-101-三层测试不依赖真实后台">10.1 三层测试，不依赖真实后台</a></li>
+<li class="toc-level-3"><a href="#section-102-受控故障怎样真正发生">10.2 受控故障怎样真正发生</a></li>
+<li class="toc-level-3"><a href="#section-103-独立-jvm-与文件故障验证">10.3 独立 JVM 与文件故障验证</a></li>
+<li class="toc-level-3"><a href="#section-104-r-01r-24-的可执行测试落点">10.4 R-01～R-24 的可执行测试落点</a></li>
+<li class="toc-level-3"><a href="#section-105-验证命令及证据">10.5 验证命令及证据</a></li>
+<li class="toc-level-2"><a href="#section-11-与-02-产品合同的补充冲突与建议">11. 与 02 产品合同的补充、冲突与建议</a></li>
+<li class="toc-level-2"><a href="#section-12-48-小时最小实施路径与-codex-分阶段任务">12. 48 小时最小实施路径与 Codex 分阶段任务</a></li>
+<li class="toc-level-3"><a href="#section-121-最小原型必须保留的能力">12.1 最小原型必须保留的能力</a></li>
+<li class="toc-level-3"><a href="#section-122-分阶段文件范围验证与完成条件">12.2 分阶段文件范围、验证与完成条件</a></li>
+<li class="toc-level-3"><a href="#section-123-最小真实运行链路">12.3 最小真实运行链路</a></li>
+<li class="toc-level-3"><a href="#section-124-html-与完整-ai-协作记录">12.4 HTML 与完整 AI 协作记录</a></li>
+<li class="toc-level-2"><a href="#section-13-两周补齐与已知限制">13. 两周补齐与已知限制</a></li></ul></nav></details></aside>
+    <main id="document-body" tabindex="-1">
+      <div class="document-meta"><span>技术评审</span><a href="../../docs/03-Java%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88.md">原始 Markdown 文件</a></div>
+<p class="stage-note">本文保留对应阶段的设计与决策记录；当前实现情况请以<a href="../index.html#product">产品概览</a>和<a href="readme.html">README</a>为准。</p>
+      <article class="markdown-body"><h1 id="section-java-技术架构与实施方案">Java 技术架构与实施方案</h1>
+<h2 id="section-1-设计结论依据与实现状态">1. 设计结论、依据与实现状态</h2>
+<p>采用<strong>单模块 Java CLI：Maven + Picocli + Jackson + JDK HttpClient + JUnit 5</strong>。不启动 Web 服务，不引入 Spring Boot、SQLite、消息队列或任务平台。业务通过一个六方法 Gateway 接口访问 Mock 或 HTTP；Application Service 负责审核、标签和固定两步组合。</p>
+<p>Mock 使用可跨进程读取的 JSON 工作快照，配合独立锁文件、同目录临时文件和原子替换。<strong>一次 Mock API 写入</strong>可以在同一快照内保存内容状态及其审核记录；<strong>审核和标签这两次调用仍然分别提交</strong>，不会被包装为一个事务。</p>
+<h3 id="section-11-已有待实现与不实现">1.1 已有、待实现与不实现</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已有且本轮核查</td>
+<td>原题、OpenAPI、mock_data.json、<a href="01-requirements.html">01 分析</a>、<a href="02-product-plan.html">02 产品方案</a>；本机 Java/Maven/PowerShell 版本；所选依赖的官方文档</td>
+</tr>
+<tr>
+<td>本轮交付</td>
+<td>本技术文档；其中目录、类型、伪代码、命令和测试结果条件均为待实现方案</td>
+</tr>
+<tr>
+<td>48 小时准备实现</td>
+<td>Mock 驱动的最小 CLI、真实状态修改与持久化、核心错误分类、必要测试、HTML Demo、运行说明和真实 AI 协作记录</td>
+</tr>
+<tr>
+<td>两周完整 MVP 准备实现</td>
+<td>02 的完整 P0，包括标签 remove/set、交互确认、六项 HTTP 适配及完整回归；真实联调取决于实际环境是否提供</td>
+</tr>
+<tr>
+<td>暂不实现</td>
+<td>自动审核判断、100 条批处理/恢复、写入自动重试、强幂等、远程事务、额外后台 API、分布式组件</td>
+</tr>
+</tbody>
+</table></div>
+<p>本轮没有初始化 Maven 项目、创建 Java/脚本实现、下载项目依赖、执行审核或修改原始附件。后文的构建与运行命令均是后续开发的验证方式，<strong>不是已经成功运行的记录</strong>。</p>
+<h3 id="section-12-已确认的产品合同">1.2 已确认的产品合同</h3>
+<p>用户已确认：仅审核 pending，驳回必须有非空理由；只能新增 active 标签，存量废弃标签可以保留/移除；P0 不清空标签。这些规则放在 Application 层，不能伪装成上游原有校验。</p>
+<p>沿用 02 的七个命令入口、默认预览、execute/yes、状态与退出码。存量未知标签仍按 02 的保留/移除策略处理，不允许新增。本文不修改 01/02；需要补充的少量合同边界集中列在第 11 节。</p>
+<h2 id="section-2-技术选型与具体版本">2. 技术选型与具体版本</h2>
+<h3 id="section-21-本机环境事实">2.1 本机环境事实</h3>
+<p>2026-10-31 在本工作区只读执行版本检查，得到：</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>实测结果</th>
+<th>对实施的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java / javac</td>
+<td>Eclipse Temurin OpenJDK <strong>21.0.7+6 LTS</strong>，javac 21.0.7</td>
+<td>无须为了原型安装另一个 JDK；这不是“当前安全补丁最新版”的声明</td>
+</tr>
+<tr>
+<td>Maven</td>
+<td><strong>3.9.4</strong>，路径 <code>F:\Develop\apache-maven-3.9.4-bin\apache-maven-3.9.4</code></td>
+<td>用现有 Maven；构建时固定项目依赖和插件，不因本机有更新缓存就随意换版本</td>
+</tr>
+<tr>
+<td>JAVA_HOME</td>
+<td><code>C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot</code></td>
+<td>后续检查 Maven 实际使用的 Java 与此一致</td>
+</tr>
+<tr>
+<td>Shell / 编码</td>
+<td>PowerShell <strong>7.6.5</strong>；当前控制台输出编码 UTF-8</td>
+<td>Windows 首个验收环境明确；其他 Shell 的兼容性单列验证</td>
+</tr>
+<tr>
+<td>Maven 本地缓存</td>
+<td>有 Picocli 4.7.6、部分 Jackson 2.21.x、部分 JUnit/插件缓存</td>
+<td>目录存在不等于目标版本的完整依赖可离线构建；本轮未验证依赖解析，下一阶段首先做构建检查</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-22-三种-cli-方案比较">2.2 三种 CLI 方案比较</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>适合当前需求的部分</th>
+<th>成本/不足</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java + Picocli</td>
+<td>多级命令、帮助、类型转换、重复选项、错误处理和退出码已有支持；可直接生成普通可执行 JAR</td>
+<td>需手动组装少量对象，自己定义业务输出合同</td>
+<td><strong>选择</strong>，正好覆盖命令解析、业务编排、文件和 HTTP 调用</td>
+</tr>
+<tr>
+<td>Spring Boot + Picocli</td>
+<td>可使用依赖注入、配置和应用生命周期；已有 Spring 业务模块时便于复用</td>
+<td>当前没有既有 Bean/服务可复用，会增加依赖、应用上下文和配置机制；默认启动日志还需避免污染 stdout</td>
+<td>不采用。Boot 能以非 Web 方式运行，并非一定启动 HTTP 服务；舍弃它是因为本项目收益不足，而不是技术上不能做 CLI</td>
+</tr>
+<tr>
+<td>main 中自行解析</td>
+<td>最少外部依赖，几个固定参数时可行</td>
+<td>七个多级入口、重复标签、公共选项、帮助和解析错误需要自行维护；容易出现语法/JSON 错误合同分裂</td>
+<td>main 仅作启动入口，不承担手写参数解析器</td>
+</tr>
+</tbody>
+</table></div>
+<p>上述比较是结合本项目的工程判断。Picocli 的能力见 <a href="https://picocli.info/" rel="noreferrer noopener">官方手册</a>；Boot 的命令行与非 Web 启动能力见 <a href="https://docs.spring.io/spring-boot/reference/features/spring-application.html" rel="noreferrer noopener">SpringApplication 文档</a>。不引用未实测的毫秒级启动或 JAR 体积指标。</p>
+<h3 id="section-23-jdk-选择21-开发验收release-17">2.3 JDK 选择：21 开发验收，release 17</h3>
+<p>选择本机 JDK 21 作为开发和首轮运行基线；Maven 配置 <code>maven.compiler.release=17</code>，仅使用 Java 17 已有语言/API，包括 record、java.time、NIO 和 HttpClient。这样可保留 Java 17 字节码兼容目标，无须引入 Java 21 专有功能。</p>
+<p>这不等于已在 JDK 17 上运行通过；交付说明只声明实际测试的 JDK。若后续要求支持 17，再使用真实 JDK 17 跑同一套进程测试。不能一边 release=17，一边调用 JDK 21 新增的 HttpClient.close() 等 API。<a href="https://maven.apache.org/plugins-archives/maven-compiler-plugin-3.14.1/examples/set-compiler-release.html" rel="noreferrer noopener">Compiler 的 release 配置</a>、<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.net.http/java/net/http/HttpClient.html" rel="noreferrer noopener">JDK 17 HttpClient</a>。</p>
+<p>不使用虚拟线程、预览语法、JPMS 模块化、GraalVM native image 或 jlink。单条同步流程没有对应收益。</p>
+<p>依赖能否下载、默认 Maven 缓存能否写入尚未验证。后续 S0 若受缓存写权限限制，可通过 <code>-Dmaven.repo.local</code> 指向工作区 <code>.contentops/m2</code>，不要改系统 Maven 配置或为了凑本机缓存而静默降级依赖；网络/解析失败先记录为构建阻塞，不伪造已构建结果。</p>
+<h3 id="section-24-固定依赖与构建插件">2.4 固定依赖与构建插件</h3>
+<p>以下是本方案的版本锁定值，不使用 LATEST、动态区间或自动升级：</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>用途</th>
+<th>Maven 坐标 / 版本</th>
+<th>选择依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>命令解析</td>
+<td><code>info.picocli:picocli:4.7.7</code></td>
+<td>官方文档对应的稳定版本，具备所需命令/异常处理能力；不加入 codegen 或 Spring 集成。<a href="https://picocli.info/" rel="noreferrer noopener">官方版本与手册</a></td>
+</tr>
+<tr>
+<td>JSON 版本对齐</td>
+<td>import <code>com.fasterxml.jackson:jackson-bom:2.21.8</code></td>
+<td>选择仍维护的 2.x LTS 分支补丁，不迁移 Jackson 3 的新包名/API；官方列出 2.21.8 已于 2026-10-17 发布。<a href="https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.21" rel="noreferrer noopener">2.21 发布说明</a></td>
+</tr>
+<tr>
+<td>JSON 运行库</td>
+<td><code>com.fasterxml.jackson.core:jackson-databind</code>、<code>com.fasterxml.jackson.datatype:jackson-datatype-jsr310</code>，均由上述 BOM 管理</td>
+<td>前者传递引入 core/annotations；后者处理 Instant。不要手动把每个组件都写成同一版本号，annotations 等组件按 BOM 实际版本对齐。<a href="https://github.com/FasterXML/jackson-bom/blob/jackson-bom-2.21.8/pom.xml" rel="noreferrer noopener">BOM 2.21.8</a></td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>JDK 自带 <code>java.net.http.HttpClient</code></td>
+<td>无额外 Maven 依赖；同步发送即可，避免引入第二套 HTTP 框架</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>test scope <code>org.junit.jupiter:junit-jupiter:5.13.4</code></td>
+<td>用户要求的 JUnit 5，含参数化和测试引擎；本需求不需要升级 JUnit 6。<a href="https://docs.junit.org/5.13.4/user-guide/" rel="noreferrer noopener">5.13.4 官方指南</a></td>
+</tr>
+<tr>
+<td>编译</td>
+<td><code>maven-compiler-plugin:3.14.1</code></td>
+<td>明确 release=17、源码 UTF-8；固定成熟版本，现有环境有缓存。<a href="https://maven.apache.org/plugins-archives/maven-compiler-plugin-3.14.1/" rel="noreferrer noopener">官方归档</a></td>
+</tr>
+<tr>
+<td>单测 / 进程集成测试</td>
+<td><code>maven-surefire-plugin:3.5.5</code>、<code>maven-failsafe-plugin:3.5.5</code></td>
+<td>前者跑 <code>*Test</code>，后者在 package 后跑 <code>*IT</code>；同版本便于统一配置。<a href="https://github.com/apache/maven-surefire/releases/tag/surefire-3.5.5" rel="noreferrer noopener">Apache 3.5.5 发布</a></td>
+</tr>
+<tr>
+<td>可执行 JAR</td>
+<td><code>maven-shade-plugin:3.6.2</code></td>
+<td>package 阶段整合运行依赖，写入 Main-Class；无需 Boot repackage。<a href="https://maven.apache.org/plugins/maven-shade-plugin/usage.html" rel="noreferrer noopener">官方用法</a>、<a href="https://maven.apache.org/plugins/maven-shade-plugin/examples/executable-jar.html" rel="noreferrer noopener">可执行 JAR</a></td>
+</tr>
+<tr>
+<td>基础构建插件</td>
+<td>resources <strong>3.3.1</strong>、jar <strong>3.4.2</strong>、clean <strong>3.4.1</strong></td>
+<td>固定默认生命周期插件，避免依赖 Maven 隐含的旧默认值。<a href="https://maven.apache.org/plugins-archives/maven-resources-plugin-3.3.1/" rel="noreferrer noopener">Resources</a>、<a href="https://maven.apache.org/plugins-archives/maven-jar-plugin-3.4.2/" rel="noreferrer noopener">JAR</a>、<a href="https://maven.apache.org/plugins-archives/maven-clean-plugin-3.4.1/" rel="noreferrer noopener">Clean</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>不引入 Mockito：当前只有六方法 Gateway 需要替身，Recording/Fault Gateway 和真实临时工作副本更容易验证“是否真的写入”。Clock 可直接注入固定值。若后续出现难以替代的依赖再评估，不为 mock 而 mock。也暂不引入 Lombok、ORM、日志框架、OpenAPI 代码生成或完整 JSON Schema 校验库。</p>
+<p>Jackson 配置要点：显式 JavaTimeModule、snake_case、时间输出 ISO-8601；接受响应扩展字段但显式校验写入必需字段；不启用多态 default typing。持久化使用 JsonNode 保留所有七类数据和未知字段，业务接口使用少量 record，不让 application 操作 JSON 树。</p>
+<h3 id="section-25-构建与打包合同">2.5 构建与打包合同</h3>
+<ul>
+<li>一个 Maven jar 模块，<code>artifactId=contentops</code>，初始版本 <code>0.1.0</code>，最终产物 <code>target/contentops.jar</code>。</li>
+<li>Shade 设置入口 <code>com.example.contentops.Main</code>，合并 services 资源，保留必要许可证；不 relocate、不 minimizeJar，避免反射序列化类型被删；不在项目根生成 dependency-reduced-pom。</li>
+<li>原始 mock_data.json 作为<strong>未过滤资源</strong>复制到构建输出的 <code>seed/mock_data.json</code> 后打入 JAR；构建不重写附件。运行时以资源流读取 seed，无须再依赖附件所在目录。</li>
+<li><code>mvn -B -ntp test</code> 跑单元/Mock 契约；<code>mvn -B -ntp verify</code> 先打包，再跑 Failsafe 的独立 JVM 测试；<code>mvn package</code> 不能代替完整 verify。</li>
+<li>构建输出与 CLI 输出分开：不要通过 <code>mvn exec:java</code> 给脚本提供 JSON，Maven 日志可能混入 stdout。实际演示使用 <code>java -jar</code> 或薄启动脚本。</li>
+</ul>
+<h2 id="section-3-整体架构与项目目录">3. 整体架构与项目目录</h2>
+<h3 id="section-31-依赖方向">3.1 依赖方向</h3>
+<pre><code class="language-mermaid">flowchart TB
+    M[Main: 配置与手动装配] --&gt; CLI[CLI: 解析、确认、渲染]
+    M --&gt; IMPL[选择 Mock / HTTP Gateway]
+    CLI --&gt; APP[ContentService + TagPlanner]
+    APP --&gt; PORT[ContentGateway: 六个方法]
+    APP --&gt; MODEL[record / 计划 / 步骤结果]
+    CLI --&gt; MODEL
+    MOCK[JsonMockGateway] -.实现.-&gt; PORT
+    HTTP[HttpContentGateway] -.实现.-&gt; PORT
+    IMPL --&gt; MOCK
+    IMPL --&gt; HTTP
+    MOCK --&gt; STORE[JsonStateStore: 锁、读写、原子替换]
+    STORE --&gt; FILE[seed 只读 / 工作快照可写]
+    HTTP --&gt; CLIENT[JDK HttpClient + Jackson]
+</code></pre>
+<p>Application 不依赖 Picocli、System.in/out、HttpClient、文件路径或 Jackson；Gateway 不认识退出码、确认提示和表格。Main 是唯一选择具体数据源并组装对象的地方。使用构造方法传依赖，不建 DI 容器。</p>
+<p>手动装配分两段：先构建无 I/O 的命令树并完成解析；确认不是 help/解析错误后，才根据 root 中的 env 加载配置并创建 Gateway/Service。Main 可把一个组装函数传给 runner，在叶命令真正运行时调用；无需额外 Factory 接口或框架。否则在构造命令树时就读取状态/令牌，会破坏 help 不产生 I/O 的验收条件。</p>
+<p>只保留一个业务 Gateway 接口。持久化、渲染、配置和标签计算都先用具体类；不为每层再加 ServiceImpl、RepositoryFactory、通用 CRUD、事件总线或一套内部 HTTP 服务器。</p>
+<h3 id="section-32-拟定目录本轮不创建">3.2 拟定目录（本轮不创建）</h3>
+<pre><code class="language-text">AI_TESTEXAM/
+├─ pom.xml
+├─ src/main/java/com/example/contentops/
+│  ├─ Main.java
+│  ├─ cli/
+│  │  ├─ RootCommand.java
+│  │  ├─ ReadCommands.java
+│  │  ├─ WriteCommands.java
+│  │  ├─ CliRunner.java
+│  │  ├─ Confirmation.java
+│  │  └─ ResultRenderer.java
+│  ├─ application/
+│  │  ├─ ContentService.java
+│  │  ├─ TagPlanner.java
+│  │  └─ OperationRejected.java
+│  ├─ gateway/
+│  │  ├─ ContentGateway.java
+│  │  └─ GatewayFailure.java
+│  ├─ model/
+│  │  ├─ ContentModels.java
+│  │  ├─ OperationModels.java
+│  │  └─ ResultModels.java
+│  └─ infrastructure/
+│     ├─ AppConfig.java
+│     ├─ JsonSupport.java
+│     ├─ mock/
+│     │  ├─ JsonMockGateway.java
+│     │  ├─ JsonStateStore.java
+│     │  └─ FaultInjectingGateway.java
+│     └─ http/HttpContentGateway.java             # 两周补齐
+├─ src/test/java/com/example/contentops/
+│  ├─ application/*Test.java
+│  ├─ gateway/*Test.java
+│  ├─ cli/*Test.java
+│  ├─ integration/*IT.java
+│  └─ support/RecordingGateway.java
+├─ scripts/contentops.cmd
+├─ demo/index.html
+├─ docs/01-...、02-...、03-...、04-运行与演示说明.md
+├─ docs/AI协作记录.md
+├─ evidence/                                   # 真实执行证据，脱敏
+└─ 内容运营后台接口数据/                       # 只读原始附件
+</code></pre>
+<p>ReadCommands 内放四个静态命令类，WriteCommands 内放三个；命名空间容器可嵌套在 RootCommand，避免每个空容器单开文件。model 中的相关小 record/enum 也可作为静态嵌套类型；不是要求按每个字段或每个状态生成文件。类型增大后再拆，不在本期预建空层。</p>
+<h3 id="section-33-关键类职责">3.3 关键类职责</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>类</th>
+<th>责任与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main</td>
+<td>配置 UTF-8 流、创建 runner、按环境装配 service/gateway、最后调用 System.exit；业务步骤不写在 main</td>
+</tr>
+<tr>
+<td>RootCommand / ReadCommands / WriteCommands</td>
+<td>保持 02 的命令树；解析选项为输入对象，调用 service；不直接改文件、不直接拼 HTTP</td>
+</tr>
+<tr>
+<td>CliRunner</td>
+<td>安装解析/执行异常处理器；创建 invocation_id 和调用上下文；保证每次只渲染一个结果并返回同一个退出码；help 不初始化 Gateway</td>
+</tr>
+<tr>
+<td>Confirmation</td>
+<td>依据输出模式、TTY、non-interactive、execute/yes，做本次授权；可在 CLI 单测中传入可控输入输出</td>
+</tr>
+<tr>
+<td>ResultRenderer</td>
+<td>同一个结果对象输出 JSON 或表格；先完整序列化再写 stdout；中途确认显示走 stderr</td>
+</tr>
+<tr>
+<td>ContentService</td>
+<td>只读组合、生成计划、执行前检查、固定两步写入与核对、保留执行进度；统一判定业务结果</td>
+</tr>
+<tr>
+<td>TagPlanner</td>
+<td>纯函数：校验增删/替换、active/存量规则，计算完整目标标签、差异和 no-change；不访问 Gateway</td>
+</tr>
+<tr>
+<td>ContentGateway</td>
+<td>六项现有能力的最小边界；返回事实 DTO 或 GatewayFailure，不决定 partial/退出码</td>
+</tr>
+<tr>
+<td>JsonMockGateway / HttpContentGateway</td>
+<td>分别实现本地模拟行为与真实 HTTP 序列化/解析；不增加 CLI 业务规则</td>
+</tr>
+<tr>
+<td>JsonStateStore</td>
+<td>一次读或一次更新的锁、最新快照加载、临时文件提交；不把审核与标签合并提交</td>
+</tr>
+<tr>
+<td>FaultInjectingGateway</td>
+<td>只在 Mock 的显式受控场景中使用；可在真正持久化后抛“响应丢失”，不靠打印失败制造假证据</td>
+</tr>
+<tr>
+<td>AppConfig / JsonSupport</td>
+<td>环境与路径校验、敏感配置；集中 Jackson 配置。AppConfig 不是第二套业务参数解释器</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-4-六项-gatewaydto-与-api-契约">4. 六项 Gateway、DTO 与 API 契约</h2>
+<h3 id="section-41-方法映射">4.1 方法映射</h3>
+<p>以下是签名设计，不是已经生成的接口源码：</p>
+<pre><code class="language-text">ContentGateway
+  Page&lt;ContentSummary&gt; listContents(ContentQuery query)
+  ContentDetail getContent(String contentId)
+  List&lt;ReviewLog&gt; getReviewLogs(String contentId)
+  ReviewCounts submitReviews(List&lt;ReviewItem&gt; items)
+  List&lt;TagItem&gt; listTags()
+  TagAck replaceTags(String contentId, List&lt;String&gt; completeTags)
+</code></pre>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>Java 方法</th>
+<th>现有 API</th>
+<th>必须保留的语义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>listContents</td>
+<td><code>GET /admin/contents</code></td>
+<td>AND；固定 20 条/页；query 不带 page_size；summary 不带正文</td>
+</tr>
+<tr>
+<td>getContent</td>
+<td><code>GET /admin/contents/{content_id}</code></td>
+<td>当前详情；每次需要核对时真的读取；不能用 plan 代替</td>
+</tr>
+<tr>
+<td>getReviewLogs</td>
+<td><code>GET /admin/contents/{content_id}/review-logs</code></td>
+<td>全量历史；Mock 返回倒序；读取服务也可防御性排序，不丢 quality/visibility 动作</td>
+</tr>
+<tr>
+<td>submitReviews</td>
+<td><code>POST /admin/content-reviews</code></td>
+<td>DTO 正确保留 items 与两项计数；Application 永远传一个 item；重复调用的 API 行为仍是追加记录</td>
+</tr>
+<tr>
+<td>listTags</td>
+<td><code>GET /admin/tags</code></td>
+<td>取全部；CLI 的 status/keyword 在应用读取后本地过滤</td>
+</tr>
+<tr>
+<td>replaceTags</td>
+<td><code>PUT /admin/contents/{content_id}/tags</code></td>
+<td>请求为完整数组，无标签库校验；返回字符串 result，不硬编码必须等于 ok</td>
+</tr>
+</tbody>
+</table></div>
+<p>Gateway 保留 list 参数，是为了表达现有审核合同并测上限/重复行为，<strong>不开放批量 CLI</strong>。不定义一个没有上游对应的 process Gateway 方法。</p>
+<h3 id="section-42-必要模型">4.2 必要模型</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>模型组</th>
+<th>建议类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ContentModels</td>
+<td>ContentSummary、ContentDetail、ReviewLog、TagItem、Page&lt;T&gt;、ContentQuery、ReviewItem、ReviewCounts、TagAck</td>
+<td>只建六项 API 所需模型，不建 Creator/Report/Promo 的 Java 实体；这些原始字段由树模型原样保存</td>
+</tr>
+<tr>
+<td>OperationModels</td>
+<td>WriteSpec、ReviewDecision、TagChange、OperationPlan、ContentSnapshot、OperationKind</td>
+<td>区分用户意图与已计算的完整标签目标；OperationKind 只有 REVIEW/TAGS/PROCESS</td>
+</tr>
+<tr>
+<td>ResultModels</td>
+<td>CliResult&lt;T&gt;、WriteData、StepResult、CliError、UpstreamError、Outcome、WriteState、VerificationState</td>
+<td>字段及枚举对应 02；没有一个代表全部结果的 success:boolean</td>
+</tr>
+</tbody>
+</table></div>
+<p>DTO 的审核/质量/可见性和日志 action 可保留字符串，以便只读展示未识别的新值；写入 action 使用受限枚举转为 approve/reject。日期使用 Instant；原始工作树中的字符串仍原样保存。集合向上返回不可变副本，避免调用者直接改到持久化对象。</p>
+<p>计数使用可判空的 Integer，并检查字段是否存在，避免缺失计数反序列化成 0。reason 未提供时计划可以为 null，但构造上游 JSON 必须省略该字段；不能发送 null 冒充 string。</p>
+<p>不要为每个界面字段复制 Domain/DTO/VO 三套类。仅当 JSON 信封和上游响应结构不同才进行映射；文件 JSON 树局限在 infrastructure。</p>
+<h2 id="section-5-mock真实修改工作副本而不是预设成功输出">5. Mock：真实修改工作副本，而不是预设成功输出</h2>
+<h3 id="section-51-json-与-sqlite-的比较">5.1 JSON 与 SQLite 的比较</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>本场景收益</th>
+<th>需要承担的成本</th>
+<th>决策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单一 JSON 工作快照</td>
+<td>与约 200 KB 的原始数据结构接近；便于保留非本期字段、比对和重置；无 JDBC/表迁移</td>
+<td>每次更新重写整个快照；必须自行处理锁、完整写入和错误分类</td>
+<td><strong>本期选择</strong>，300 条规模和串行 CLI 足够；不声称适合长期高并发后台</td>
+</tr>
+<tr>
+<td>SQLite</td>
+<td>本地事务、查询和多表一致性更成熟</td>
+<td>JDBC 驱动、表结构、导入映射与迁移，以及原始数据字段/异常保留策略；仍不能使两个远程 API 原子提交</td>
+<td>后续若有显著数据量、并行任务或历史查询需求再评估</td>
+</tr>
+</tbody>
+</table></div>
+<p>SQLite 的提交/回滚机制确有价值，参见 <a href="https://sqlite.org/atomiccommit.html" rel="noreferrer noopener">SQLite 原子提交说明</a>；当前取舍基于规模与交付成本，不是认为文件持久化天然比数据库可靠。</p>
+<h3 id="section-52-状态路径与格式">5.2 状态路径与格式</h3>
+<p>配置 <code>CONTENTOPS_STATE_DIR</code> 为绝对路径；默认 <code>${user.home}/.contentops/mock/v1</code>。演示和所有测试显式覆盖到项目的 <code>.contentops</code> 或临时目录，避免误用个人历史状态。切换工作目录不会改变已经配置的绝对状态位置。</p>
+<pre><code class="language-text">CONTENTOPS_STATE_DIR/
+  state.lock                   固定名称，不随 state.json 替换
+  state.json                   最近一次成功提交的完整快照
+  state.&lt;uuid&gt;.tmp             本次提交的临时文件；正常结束后不残留
+</code></pre>
+<p>工作快照外层字段为 <code>state_schema_version=1</code>、<code>seed_sha256</code>、<code>revision</code>、<code>data</code>。data 保存原始根对象的全部七类数据和 <code>_note</code>，不只保存 contents；Java 不使用的字段仍保留。CLI 信封的 schema_version 与这个本地格式版本是两回事。</p>
+<p>本次原始 seed SHA-256 为：</p>
+<pre><code class="language-text">44ba17cbe95432547a8fe380f81e0416ae51404957ed0c87de5ced7f8e3939b0
+</code></pre>
+<p>程序只读 JAR 中的 <code>/seed/mock_data.json</code>，不提供覆盖原始附件路径的写入参数。状态文件名固定，不能把 seed 路径当作 state.json。工作目录不允许放在原始附件目录内；对符号链接/重解析路径进行规范化检查，不向来源目录回写。</p>
+<h3 id="section-53-初始化读取与重置">5.3 初始化、读取与重置</h3>
+<ol>
+<li>每个 Gateway 调用都从磁盘重新加载，不能在构造函数读取一次后永久使用缓存。返回给 service 的 DTO 与工作树脱离。</li>
+<li>state.json 不存在时，只读调用使用 seed 的内存副本；首次实际修改才提交 revision=1 的工作快照。不因第一次预览就写入“初始业务状态”。</li>
+<li>state.json 已存在时校验格式版本、seed 指纹和 JSON 结构；损坏、指纹不符、字段缺失均明确失败，<strong>不静默退回 seed</strong>，以免把已做过的审核伪装成从未发生。</li>
+<li>原始数据中的日志时间冲突、废弃标签等不做自动清洗。只排序返回视图，不重写原始历史顺序来制造“干净来源”。</li>
+<li>重置采用<strong>新建一个空的状态目录并切换环境变量</strong>。不增加 mock reset 业务命令，不递归删除旧目录；旧工作副本可保留作为演示证据。</li>
+</ol>
+<p>后续运行示例，需在已实现、已打包后于工程根目录执行：</p>
+<pre><code class="language-powershell">$env:CONTENTOPS_STATE_DIR = Join-Path (Get-Location).Path ('.contentops/demo-' + [guid]::NewGuid().ToString('N'))
+java -jar ./target/contentops.jar --env mock content get ct_000004
+</code></pre>
+<p>上述只读命令可能初始化目录和锁文件等<strong>协调元数据</strong>，但不得创建/改写业务 state.json、增加日志或调用写方法。02 的“预览不写入”按业务快照和 POST/PUT 次数验收，不承诺整个文件系统绝无元数据变化。已有工作快照的预览前后 SHA、revision 必须不变。</p>
+<h3 id="section-54-写入与并发控制">5.4 写入与并发控制</h3>
+<p>对本机本地文件系统，每次 Gateway 读取/写入都获取同一个 sidecar 文件的排他 FileLock；数据很小，先不做读写共享锁优化。tryLock 最多等待 2 秒，取不到锁就明确失败，不无限阻塞。锁在 finally/try-with-resources 中释放；同一 JVM 的测试不得并发使用同一 store 实例绕过其串行约定。<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/channels/FileLock.html" rel="noreferrer noopener">FileLock 的跨进程及 JVM 内限制</a>。</p>
+<p>一次更新的顺序是：</p>
+<pre><code class="language-text">取得 state.lock
+  -&gt; 读取最新 state.json（没有则读取 seed）
+  -&gt; 深拷贝并在内存执行这一次 API 的变更
+  -&gt; revision + 1；验证结构；生成完整 UTF-8 字节
+  -&gt; 在同一目录 CREATE_NEW 写唯一 tmp，写完全部字节并 FileChannel.force(true)
+  -&gt; 关闭 tmp 的句柄
+  -&gt; 原子移动 tmp 到 state.json
+  -&gt; 成功后才返回这一次 API 的成功响应
+释放 state.lock
+</code></pre>
+<p>必须循环写完 ByteBuffer，不能假定一次 channel.write 就写全。不能先 truncate state.json 再慢慢序列化，也不能替换 state.lock 本身。</p>
+<p>原子移动采用 ATOMIC_MOVE，但不能声称加上 REPLACE_EXISTING 就跨平台保证替换：JDK 文档明确 ATOMIC_MOVE 下其他选项被忽略，目标已存在时的替换行为与实现有关。因此首次写业务状态前，在同目录的独立探测文件上验证“原子创建与替换已有目标”可行；不支持时拒绝写入，<strong>不降级为非原子覆盖</strong>。探测不碰业务 state.json。<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html#move(java.nio.file.Path,java.nio.file.Path,java.nio.file.CopyOption...)" rel="noreferrer noopener">Files.move 合同</a>。</p>
+<p>force(true) 和原子替换可降低进程中断造成半份 JSON 的风险，但不构成对断电、磁盘损坏、所有网络盘和目录元数据持久化的完整承诺。<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/channels/FileChannel.html#force(boolean)" rel="noreferrer noopener">FileChannel.force</a>。首轮支持本地磁盘；网络共享盘、同步盘不进入验收范围。</p>
+<p>失败时的处理：</p>
+<ul>
+<li>临时文件生成/force 失败且尚未进入替换：已知本次业务未提交，返回明确失败；保留旧快照，不重试写入。</li>
+<li>替换或提交后的返回发生异常，无法证明是否提交：WRITE_UNKNOWN；不能因为没有返回成功就自动重做。</li>
+<li>进程被杀死：锁随进程释放；下次只读取有效 state.json。残留 tmp 不自动选为最新状态，也不自动合并；损坏快照报错后由人核查/换新演示副本。</li>
+<li>两周版可额外保留一份上一代 <code>.bak</code> 便于人工核查，但不是自动恢复依据，也不是 48 小时底线。</li>
+</ul>
+<p>锁只覆盖<strong>一次本地 Gateway 操作</strong>，不跨人工确认，也不跨整个 process。两个不同内容的修改必须在锁内加载最新数据，避免互相覆盖；同一内容的两个操作仍可能在应用检查与写入之间竞争。不能给 Mock 偷加“整个 process 原子完成”的保证，让它表现得比真实 API 更安全。</p>
+<h3 id="section-55-mock-六方法的行为">5.5 Mock 六方法的行为</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>本地行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>listContents</td>
+<td>原始数组顺序作为本地稳定顺序，按支持字段 AND 过滤后分页 20；keyword 在标题/正文做包含匹配；投影 Summary。此排序/匹配细节是 Mock 选择，不扩大真实 API 保证</td>
+</tr>
+<tr>
+<td>getContent</td>
+<td>按 ID 返回当前详情；找不到给出 Mock 明确读取错误，不伪造真实服务的业务码</td>
+</tr>
+<tr>
+<td>getReviewLogs</td>
+<td>返回完整记录的倒序副本，空记录返回空数组；保留 limit/take_down 等全部动作</td>
+</tr>
+<tr>
+<td>submitReviews</td>
+<td>超过 20 拒绝，文档给出的 400 可作为 Mock 合同异常的 httpStatus，不编造业务 code；逐项统计已存在且输入有效的成功与失败；每个成功项修改 review_status，并追加一条含 action/reason/operator_id/created_at 的模拟日志；同一 API 提交的状态与日志在一次本地快照中保存，不外推真实批次原子性</td>
+</tr>
+<tr>
+<td>listTags</td>
+<td>返回全部标签；不替 CLI 过滤 active</td>
+</tr>
+<tr>
+<td>replaceTags</td>
+<td>将 tags 替换为传入完整数组，不做 active/标签库检查；不附加审核日志。API schema 未限制空数组，Mock 若接受空数组也仅是模拟选择；CLI 的非空限制不由它代办</td>
+</tr>
+</tbody>
+</table></div>
+<p>Mock Gateway 自身<strong>不限制 pending、不强制 reject 理由、不禁止未知标签</strong>；这些限制必须由 Application 实现。直接做 Gateway 契约测试时，重复审核应真的追加第二条日志，以证明 CLI 的防重复来自前置检查，而不是 mock 把重复写偷偷去重了。</p>
+<p>审核批次没有成功项时不提交新工作快照；内部批量与异常项规则是为贴近现有合同的本地模拟，CLI 仍只传一项。存储读取失败归 READ_FAILURE；更新在提交前明确失败才归 REJECTED_NO_COMMIT，不能把所有锁/文件错误不分阶段地归为同一退出码。</p>
+<p>新增日志使用注入的 Clock，模拟操作人可固定为 <code>op_mock_cli</code> 并说明来源；不声称真实审核日志一定透传这个值或接受调用者自报身份。真实操作日志 <code>op_api</code> 的局限仍存在。</p>
+<p>只变更本期声明的内容字段和审核记录；creators.content_total/content_pending、tags.usage_count 等非本期聚合字段保留原值，不擅自实现未说明的聚合更新。CLI 没有这些额外查询能力，演示也不以它们作为写入正确性证据。</p>
+<h2 id="section-6-http-gateway-与配置安全">6. HTTP Gateway 与配置安全</h2>
+<h3 id="section-61-实现边界">6.1 实现边界</h3>
+<p>48 小时以 Mock 为验收数据源，不启动一个常驻 mock HTTP 服务，也不为暂时无法连接的地址部署反向代理。此时 <code>--env api</code> 明确返回 rejected / 2、API_ENV_NOT_IMPLEMENTED，不能回落为 mock。</p>
+<p>两周版实现 HttpContentGateway 的六个方法，并使用<strong>测试期间临时启动的本机 HTTP fixture</strong>验证协议。该 fixture 不是产品服务器，也不是现有后台；真实联调仍须另外拿到可用地址与令牌。</p>
+<h3 id="section-62-序列化与响应">6.2 序列化与响应</h3>
+<ul>
+<li>复用一个同步 HttpClient，不为每个请求创建 client。初版使用 HTTP/1.1、Redirect.NEVER，不配置自动 Authenticator；只按上游要求发送 X-Admin-Token。</li>
+<li>query 与每个 path segment 分别按 UTF-8 正确编码；不将 ID 或中文标签直接拼成未编码 URL，不用字符串替换模拟 URI 编码。</li>
+<li>写请求固定 JSON Content-Type/Accept，Jackson 生成字节。审核 action 为小写 approve/reject；items 一项；标签传完整数组；可选 reason 缺省则省略。</li>
+<li>按 JSON 节点检查关键响应字段后再转 DTO：计数必须存在且为合法整数、items 必须是数组、标签 Ack 必须有字符串 result；不能把缺失值默认成成功。</li>
+<li>GET 出现错误对象、畸形 JSON 或必需读取结构不可用：READ_FAILURE。写请求收到畸形/不合预期响应：WRITE_UNKNOWN，而不是自动再次请求。</li>
+<li>真实错误保留可得的 HTTP 状态和业务 code/message，并脱敏；不从中文 message 猜可重试性。1/0、0/1 的审核计数分类由 service 完成。</li>
+</ul>
+<p>明确拒绝与未知要保守区分：受控 Mock 的落库前拒绝、明确的单项 failed_count 可以标已失败；HTTP 侧可按确认过的认证拒绝或业务拒绝合同分类。当前没有业务码表，不能把所有 400/409/422 或全部非 2xx 都当成“肯定未写入”。未获确认的写入错误默认未知，待真实合同补全后再扩大明确拒绝规则。</p>
+<h3 id="section-63-超时与防重发">6.3 超时与防重发</h3>
+<p>建议初始连接超时 3 秒、请求超时 10 秒，通过受控配置覆盖为正值；这是客户端设计值，不是服务端 SLA。同步调用不需要线程池/异步编排。请求体/响应体按 UTF-8，读取失败保持对应的读失败或写入未知。</p>
+<p>应用没有重试循环仍不够：JDK 有内部重试设置。Main 必须在创建第一个 client 前固定以下 JVM 属性，不接受配置将其放宽：</p>
+<pre><code class="language-text">jdk.httpclient.disableRetryConnect=true
+jdk.httpclient.enableAllMethodRetry=false
+jdk.httpclient.redirects.retrylimit=1
+</code></pre>
+<p>同时关闭重定向与认证重试来源，不跟随 3xx 重新发送请求。<a href="https://docs.oracle.com/en/java/javase/21/core/java-networking.html" rel="noreferrer noopener">JDK 21 网络属性</a> 描述了这些属性的含义；它们是 JDK 实现配置，不能仅看属性字符串就宣称所有运行时都已保证不重发。</p>
+<p>HTTP 适配验收必须包括服务端接收计数、响应中断/超时、3xx 等场景，确认指定 JDK 下审核和标签各最多接收一次；未验证的 JDK 版本不承诺同样行为。无条件自动重试、followRedirects(NORMAL) 和 HTTP/2 扩展均不加入首版。写请求在 send 后超时/断流，原则上视为未知；仅能证明发生在发送前的配置/序列化错误才作未提交处理。</p>
+<h3 id="section-64-配置与敏感信息">6.4 配置与敏感信息</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--env</code></td>
+<td>02 的命令参数，优先决定数据源；默认 mock，不自动探测网络后切换</td>
+</tr>
+<tr>
+<td><code>CONTENTOPS_STATE_DIR</code></td>
+<td>Mock 绝对工作路径；缺省见 5.2；不使用当前目录寻找“任意一个 state.json”</td>
+</tr>
+<tr>
+<td><code>CONTENTOPS_API_BASE_URL</code></td>
+<td>两周版 api 必填；拒绝 example.invalid、userinfo、query/fragment；初版要求根地址，不引入路径前缀重写</td>
+</tr>
+<tr>
+<td><code>CONTENTOPS_ADMIN_TOKEN</code></td>
+<td>api 必填，只放认证头；不放 CLI 参数、URL、日志、HTML 或提交到仓库的配置样例中；环境变量并非密钥保险库，长期保管留给部署环境</td>
+</tr>
+<tr>
+<td><code>CONTENTOPS_CONNECT_TIMEOUT_MS</code> / <code>CONTENTOPS_REQUEST_TIMEOUT_MS</code></td>
+<td>默认 3000 / 10000；接受 1–120000 毫秒整数，这是客户端配置范围；配置错误为 2，不悄悄改成无限等待</td>
+</tr>
+<tr>
+<td><code>CONTENTOPS_MOCK_SCENARIO</code></td>
+<td>仅显式 Mock 受控演示使用，详见测试设计；api 环境设置该项时拒绝，防止把注入故障混成真实错误</td>
+</tr>
+</tbody>
+</table></div>
+<p>api 常规环境要求 HTTPS，不关闭证书/主机名验证；纯本机测试 fixture 可使用 loopback HTTP，并在测试说明中标明。默认不打开 JDK HTTP headers/content 调试日志，以免泄露令牌或业务文本。异常消息也不能包含未经处理的认证配置、请求头或完整正文。</p>
+<h2 id="section-7-三项写操作的代码级协作">7. 三项写操作的代码级协作</h2>
+<h3 id="section-71-先计划再授权再执行">7.1 先计划、再授权、再执行</h3>
+<p>ContentService 提供 <code>plan(WriteSpec)</code> 与 <code>execute(OperationPlan)</code> 两个主要写用例方法；独立审核、标签和 process 共用它们，通过 OperationKind 限定允许的步骤。读取方法可直接转发 Gateway 并做展示所需的过滤/排序。</p>
+<p>OperationPlan 是本次调用内的不可变对象，包含：内容 ID、原审核状态与标签快照、审核决定/理由、完整目标标签、变更差异和 warnings。CLI 不能自己再算另一份标签计划；execute 也不能从用户参数重新计算后静默改变已确认的目标。</p>
+<p>授权职责在 CLI：计划成功后，默认只返回 previewed；execute/yes 或交互确认通过才调用 execute。execute 内仍检查当前状态，不能因为拿到 plan 就跳过业务前置检查。这个内存对象不是审批文件、权限凭证或服务端锁。</p>
+<pre><code class="language-text">CLI write command:
+  解析为 WriteSpec；校验 execute/yes/非交互组合
+  plan = ContentService.plan(spec)
+  若未带 execute：渲染 preview(plan)，返回 0
+  若 JSON/非交互/无控制台 且缺 yes：渲染 rejected，返回 2
+  若需要人工确认：向 stderr 显示计划，读取完整 ID
+      取消/EOF/不匹配：渲染 cancelled，返回 7
+  result = ContentService.execute(plan)
+  CliRunner 包装同一个 result 为 JSON/表格并返回其退出码
+</code></pre>
+<h3 id="section-72-计划计算">7.2 计划计算</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>用例</th>
+<th>计划阶段的读取与校验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>review</td>
+<td>getContent；核对 ID/必要字段、pending、action、reject 理由；保存标签快照供执行前变化检查，但不查标签库</td>
+</tr>
+<tr>
+<td>tags update</td>
+<td>getContent + listTags；保留当前审核状态作展示，不要求 pending；TagPlanner 计算完整非空目标并验证新增集合</td>
+</tr>
+<tr>
+<td>process</td>
+<td>getContent + listTags；先完成全部审核/标签校验，再给出一个包含两步的计划；不允许先审核再发现非法标签</td>
+</tr>
+</tbody>
+</table></div>
+<p>TagPlanner 的核心规则是集合差分：<code>newlyAdded = target - before</code>，只对 newlyAdded 要求库中 active；保留/移除的存量废弃或未知标签不被误拦截。目标与原标签集合相同则 hasTagChanges=false；输入冲突和非法值仍须先拒绝。</p>
+<h3 id="section-73-process-流程图">7.3 process 流程图</h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[参数和模式校验] --&gt; B[读详情和标签库，计算完整计划]
+    B --&gt; C{预览还是执行}
+    C --&gt;|预览| P[previewed / 0，零写入]
+    C --&gt;|执行| D[取得明确授权]
+    D --&gt; E[再次读详情，比较审核状态和标签]
+    E --&gt;|变化或不再 pending| R[rejected / 2，零写入]
+    E --&gt;|一致| F[提交一个审核 item]
+    F --&gt;|明确失败| X[failed / 3]
+    F --&gt;|超时或计数异常| U[unknown / 5，停止]
+    F --&gt;|1 成功 0 失败| G[审核 acknowledged，回读详情]
+    G --&gt;|不可读或审核不匹配| V[verification_failed / 6]
+    G --&gt;|审核匹配但标签变化| Q[partial / 4，标签未提交]
+    G --&gt;|都符合| H{标签有实际变化}
+    H --&gt;|无| S[标签 skipped/matched，succeeded / 0]
+    H --&gt;|有| I[PUT 完整目标标签]
+    I --&gt;|明确拒绝| Q
+    I --&gt;|响应未知| U
+    I --&gt;|响应合规| J[标签 acknowledged，回读详情]
+    J --&gt;|审核或标签不匹配/不可读| V
+    J --&gt;|均匹配| K[succeeded / 0]
+</code></pre>
+<p>参数或读取在计划阶段失败时也立即返回，不进入授权/写入。流程图中成功、计数等均是预期条件，不是实测结果。</p>
+<h3 id="section-74-contentservice-的执行伪代码">7.4 ContentService 的执行伪代码</h3>
+<p>以下是用于指导控制流的伪代码，不是本轮生成的 Java 实现：</p>
+<pre><code class="language-text">execute(plan):
+  progress = 初始化已计划的步骤为 not_sent/not_checked
+  current = getContent(plan.id)                   # 真正读取
+  比较当前标签集合与 plan.before.tags
+  review/process 还比较审核状态且要求 pending    # 变化则零写入 rejected
+
+  if 包含 review:
+    执行审核写调用，并把“调用进行中”记入 progress
+    counts = submitReviews([一个 ReviewItem])
+    if counts == (0, 1): 记录 review.failed，结束
+    if counts != (1, 0): 记录 review.unknown，结束
+    记录 review.acknowledged/not_checked
+    observed = 回读详情
+    if 不可读或审核不匹配: 记录 unavailable/mismatched，结束
+    记录 review.verification=matched
+    if 包含 tags 且 observed.tags != plan.before.tags:
+      标签保持 not_sent，以 partial 结束
+
+  if 包含 tags:
+    if 目标集合没有变化:
+      记录 tags.skipped/matched
+    else:
+      replaceTags(plan.id, plan.completeTargetTags)
+      # 拒绝/未知分别保留，失败就停止，绝不自动再 PUT
+      记录 tags.acknowledged/not_checked
+      observed = 回读详情
+      核对 tags；process 还核对所要求的审核状态
+      标记各项 matched/mismatched/unavailable
+
+  依据 progress 生成整体结果，不能只看最后一个 API 是否返回 200
+</code></pre>
+<p>写调用包装器必须在调用前记录正在执行哪个步骤，捕获 GatewayFailure 后保留先前成功状态。异常不是从最外层统一改成 failed/3：例如审核已获确认后的 GET 失败是 6，审核已核对成功后的标签明确拒绝是 4。</p>
+<p>未执行的步骤不标 failed；未知的步骤不标 not_sent。最终回读发现审核后来被别人修改时，也要更新审核 verification 为 mismatched 并返回 6，即使标签已经匹配。</p>
+<h3 id="section-75-独立命令如何复用">7.5 独立命令如何复用</h3>
+<ul>
+<li>review 只有审核步骤，成功条件为计数 1/0 + 审核状态匹配，不执行标签 PUT。</li>
+<li>tags update 只有标签步骤；允许对 approved 内容补标签。无变化时 fresh read 已确认目标，返回 no_change/0、tags=skipped/matched，零 PUT。</li>
+<li>process 标签无变化时仍执行必要审核，整体为 succeeded；标签 skipped，不能声称标签写入成功。</li>
+<li>process 标签失败后的人工恢复使用独立 tags update，重新读取和计划；不重做 review，也不提供跳过审核的隐式 resume。</li>
+</ul>
+<p>不要加 @Transactional。JsonStateStore 的一次快照替换只保证一个本地模拟 API 的提交边界；HTTP Gateway 不可能受本地事务保护。也不通过反向审核或覆盖旧标签做自动回滚。</p>
+<h2 id="section-8-结果模型异常与退出码">8. 结果模型、异常与退出码</h2>
+<h3 id="section-81-统一-java-结果形状">8.1 统一 Java 结果形状</h3>
+<p>采用如下 record/enum 形状，具体声明放在三个 model 文件中；字段命名经 JsonSupport 转为 02 的 snake_case：</p>
+<pre><code class="language-text">CliResult&lt;T&gt;(schemaVersion, invocationId, environment, command, mode,
+             status, exitCode, contentId, T data, CliError error, warnings)
+WriteData(plan, Map&lt;步骤名, StepResult&gt; steps, observed)
+StepResult(write, verification, apiResult)
+CliError(code, message, step, UpstreamError upstream)
+UpstreamError(httpStatus, code, message)
+</code></pre>
+<p>StepResult.apiResult 只允许复制已收到的 <code>success_count / failed_count</code> 或 <code>result</code> 等小型字段 Map/null；不放 Throwable、认证头、HttpResponse 或文件对象。observed 永远来自最近一次成功读取，可以为空；不使用 plan.after 填充“实际状态”。reason/error/upstream 的 null 按 02 保留，不能全局 NON_NULL 后悄悄改变信封。</p>
+<p>Outcome 在模型中绑定 wire 字符串和退出码：PREVIEWED、SUCCEEDED、NO_CHANGE 都对应 0，但 mode 不同；其余逐项见下表。不要在命令类里分别写一套状态/数值映射。枚举必须显式输出小写 wire 值，不能让 Jackson 默认输出 <code>ACKNOWLEDGED</code> 等大写 Java 名称。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>write 状态</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>not_sent</td>
+<td>没有调用该写方法，包括预览或前一步阻断</td>
+</tr>
+<tr>
+<td>acknowledged</td>
+<td>收到符合合同的成功响应；仍须核对</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>已明确失败，不把不确定的网络错误放进来</td>
+</tr>
+<tr>
+<td>unknown</td>
+<td>可能已发生写入，但响应/计数不足以判定</td>
+</tr>
+<tr>
+<td>skipped</td>
+<td>目标无变化，明确省略该写入</td>
+</tr>
+</tbody>
+</table></div>
+<p>verification 保持 <code>not_checked / matched / mismatched / unavailable</code>。预览的待写步骤必须是 not_sent/not_checked；只读命令没有写步骤。</p>
+<h3 id="section-82-异常只表达事实service-按进度判定整体">8.2 异常只表达事实，service 按进度判定整体</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>异常/失败类型</th>
+<th>使用位置</th>
+<th>不应包含的假设</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Picocli ParameterException</td>
+<td>参数语法/类型/重复选项，runner 转为 rejected/2</td>
+<td>不把解析异常直接打印堆栈到 stdout</td>
+</tr>
+<tr>
+<td>OperationRejected</td>
+<td>pending、理由、标签、计划变化等本地业务限制</td>
+<td>不代表服务端返回了同名业务码；审核已发生后不能再一律报“零写入”</td>
+</tr>
+<tr>
+<td>GatewayFailure.READ_FAILURE</td>
+<td>读取失败、无法使用的响应、损坏工作文件</td>
+<td>不固定映射 3；如果这是写后核对读取，必须是 6</td>
+</tr>
+<tr>
+<td>GatewayFailure.REJECTED_NO_COMMIT</td>
+<td>明确未提交的拒绝、Mock 落库前故障、锁获取失败等</td>
+<td>不声称所有 HTTP 4xx 都符合此类</td>
+</tr>
+<tr>
+<td>GatewayFailure.WRITE_UNKNOWN</td>
+<td>写入超时/丢响应/无法解释响应/无法确认本地替换结果</td>
+<td>不转为“失败后自动重试”</td>
+</tr>
+<tr>
+<td>非预期异常</td>
+<td>service 依据当前进度保留事实；runner 处理尚未执行业务的错误</td>
+<td>不能丢掉已成功审核的记录或默认返回 0</td>
+</tr>
+</tbody>
+</table></div>
+<p>GatewayFailure 保存受限的上游状态和脱敏消息，cause 仅供内部诊断，绝不直接序列化；不在 Gateway 里硬编码退出 4，因为它不知道之前是否已经审核成功。</p>
+<h3 id="section-83-结果判定表保持-02">8.3 结果判定表（保持 02）</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>情形</th>
+<th>整体 status / 码</th>
+<th>必须保留的步骤事实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>合法预览</td>
+<td>previewed / 0，mode=preview</td>
+<td>全部待写步骤 not_sent，state/revision 不变</td>
+</tr>
+<tr>
+<td>完整执行且核对匹配</td>
+<td>succeeded / 0，mode=execute</td>
+<td>必要步骤 acknowledged/matched，允许合法 skipped/matched</td>
+</tr>
+<tr>
+<td>独立标签无变化</td>
+<td>no_change / 0，mode=execute</td>
+<td>tags=skipped/matched，零 PUT</td>
+</tr>
+<tr>
+<td>参数/业务/确认方式拒绝，尚无写入</td>
+<td>rejected / 2</td>
+<td>零写入；error 使用 CLI 代码</td>
+</tr>
+<tr>
+<td>人工取消/EOF/输入 ID 不符</td>
+<td>cancelled / 7</td>
+<td>零写入</td>
+</tr>
+<tr>
+<td>只读/前置读取失败、无成功步骤时明确写失败</td>
+<td>failed / 3</td>
+<td>具体步骤 not_sent 或 failed，不编造失败原因</td>
+</tr>
+<tr>
+<td>审核已核对成功，标签明确失败或提交前被阻断</td>
+<td>partial / 4</td>
+<td>review acknowledged/matched，tags failed 或 not_sent</td>
+</tr>
+<tr>
+<td>任一写入未知</td>
+<td>unknown / 5</td>
+<td>未知步骤为 unknown；之前成功保留，之后步骤不执行</td>
+</tr>
+<tr>
+<td>已获确认但核对失败/不可读</td>
+<td>verification_failed / 6</td>
+<td>acknowledged 保留；verification 为 mismatched/unavailable；不撤销</td>
+</tr>
+<tr>
+<td>写入前未分类内部错误</td>
+<td>failed / 1</td>
+<td>无成功承诺；可能已写时按进度优先保留 5/6/4，而非统一压成 1</td>
+</tr>
+</tbody>
+</table></div>
+<p>若 JVM 被杀死、stdout 写出失败或输出被截断，就不能保证给出完整 JSON；调用方按 02 视为无可信结果，不自动重放。正常结果先序列化到内存再输出，并检测输出错误；不能用成功退出掩盖结果根本没有交付。已完成业务但渲染失败时也不得重新执行用例来“补一份结果”。</p>
+<p>单条审核收到 0/1 时只能知道这个 ID 失败，不能伪造逐项原因；收到 2/0 等不可能计数时为 5。写入未知不会因后来读取到目标值被提升为 succeeded。</p>
+<h2 id="section-9-picoclipowershell-与进程接口">9. Picocli、PowerShell 与进程接口</h2>
+<h3 id="section-91-命令树与参数处理">9.1 命令树与参数处理</h3>
+<p>RootCommand 名为 contentops，注册 content、tags 两个容器；content 下为 list/get/history/review/process 和 tags update，顶层 tags 下只有 list。与 02 完全相同。</p>
+<ul>
+<li>公共选项在 root 定义 <code>scope=INHERIT</code>；叶命令通过同一个上下文取值，不复制七份环境/输出配置。标准帮助在各层可用。</li>
+<li>每个叶命令实现 Callable&lt;Integer&gt; 或由统一 runner 返回结果码；不在子命令里调用 System.exit。</li>
+<li>action 是受限枚举；page 使用整数转换器及正数校验；标签用可重复的 List&lt;String&gt; 选项，每次 arity=1，不按逗号偷偷拆分标签名。</li>
+<li><strong>不使用 exclusive=false 的“共同出现” ArgGroup 强迫 add/remove 一起提供</strong>。把标签选项放在同一 mixin/参数对象中，由共享校验验证“set 与增删互斥；增删至少一项；同值冲突”。可以用 validate=false 分组帮助，但不依赖错误的嵌套组自动校验。</li>
+<li>不用一个互斥组表达 execute/yes：yes 依赖 execute，execute 又允许交互不带 yes，必须按模式做交叉校验。</li>
+<li>显式关闭选项/子命令缩写、未知参数容忍、单值参数覆盖、@file 展开；只允许标签列表重复，重复 action 等为 2。避免原型默默获得输入文件或额外写入能力。</li>
+</ul>
+<p>Picocli 的继承选项、ArgGroup 和异常处理依据 <a href="https://picocli.info/" rel="noreferrer noopener">官方命令手册</a>。这些 API 是解析机制，pending/active 等规则仍不放在注解转换器里。</p>
+<h3 id="section-92-解析错误也要有-json">9.2 解析错误也要有 JSON</h3>
+<p>安装 IParameterExceptionHandler 与 IExecutionExceptionHandler，重用同一个 CliResult factory 和 renderer；默认 handler 会输出错误/usage，不能直接作为最终 JSON 合同。</p>
+<p>推荐并支持的写法保持 <code>contentops [公共参数] 子命令...</code>。当用户先给合法 <code>--output json</code> 再发生 page/action/未知参数错误，handler 必须按 JSON 输出 rejected/2，而不是夹杂 usage。help 请求优先，不创建 Gateway 或读取令牌/状态。</p>
+<p>参数解析可能在 command/mode 尚未确定时就中断。不要靠自己重新解释整份原始 args；此时 command/mode/content_id 可为空的补充建议见第 11 节。若 <code>--output</code> 本身非法或出现在解析停止点之后，按已成功解析的输出设置或默认 table 报错，不能承诺从损坏语法中猜出 JSON 意图。</p>
+<h3 id="section-93-确认流和退出码">9.3 确认、流和退出码</h3>
+<p>交互确认不使用 <code>@Option(interactive=true)</code>：那是参数读取机制，不等于对已经计算好的两步计划确认。Confirmation 只在 table、允许交互、System.console() 非空、execute 且无 yes 时向 stderr 展示计划，并从控制台读取完整 ID。JSON、non-interactive 或无 console 时缺 yes 必须返回 2，绝不尝试读取管道 stdin。</p>
+<p>同一个进程只渲染一次最终结果。默认预览作为最终输出走 stdout；执行中计划/提示走 stderr。JSON 禁用 ANSI 和进度条，输出 UTF-8 无 BOM，任何解析/业务错误也走同一信封。</p>
+<p>Main 只做“<code>exitCode = runner.run(args)</code>，最后 <code>System.exit(exitCode)</code>”；只返回 Java 方法的 int 而不 System.exit 会导致 JVM 正常退出 0，是必须用进程测试发现的问题。</p>
+<h3 id="section-94-windows-调用与中文">9.4 Windows 调用与中文</h3>
+<p>分发保留逻辑命令名 contentops：Windows 提供薄 <code>scripts/contentops.cmd</code>，只转发参数到 JAR，结束时传回 Java 的 ERRORLEVEL；不安装全局别名，不悄悄吞掉非零码。源码中不依赖 Shell 命令串拼接来调用自身。</p>
+<p>在 PowerShell 7 中的等价入口如下，都是后续实施后的命令：</p>
+<pre><code class="language-powershell">java -Dfile.encoding=UTF-8 -jar ./target/contentops.jar --env mock --output json content get ct_000004
+./scripts/contentops.cmd --env mock --output json content get ct_000004
+</code></pre>
+<p>Java 输出流本身显式使用 UTF-8 的 Writer；不只依赖 <code>file.encoding</code>。PowerShell 会解码原生命令输出，首轮验收记录控制台编码；必要时设置 <code>[Console]::OutputEncoding</code> 为 UTF-8。把控制台的“显示正常”与文件实际为 UTF-8 分开检查。<a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_character_encoding?view=powershell-7.6" rel="noreferrer noopener">PowerShell 编码官方说明</a>。</p>
+<p>保存结果时先捕获原生退出码，再做 JSON/文件操作：</p>
+<pre><code class="language-powershell">$jsonText = &amp; java -Dfile.encoding=UTF-8 -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason &quot;演示：调用方明确提供的决定&quot; --add &quot;轻松&quot; --execute --yes 2&gt; cli-error.log
+$cliExit = $LASTEXITCODE
+$jsonText | Set-Content -LiteralPath './cli-result.json' -Encoding utf8
+$result = $jsonText | ConvertFrom-Json
+</code></pre>
+<p>脚本应检查 <code>$cliExit</code> 与 result.exit_code、environment、mode、status 和步骤核对结果一致；不用 <code>$?</code> 代替具体退出码。Windows PowerShell 5.1 的重定向/编码行为不同，本期不宣称未经验证即兼容。管道输入确认、复杂 TTY 兼容和终端宽度库不属于 48 小时切片。</p>
+<h2 id="section-10-测试架构与-02-验收映射">10. 测试架构与 02 验收映射</h2>
+<h3 id="section-101-三层测试不依赖真实后台">10.1 三层测试，不依赖真实后台</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>测试方式</th>
+<th>关键证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单元测试</td>
+<td>TagPlanner、ContentService、Outcome；固定 Clock，手写 RecordingGateway 包装可控替身</td>
+<td>无授权零写入、items 一项、调用顺序、标签完整数组、各类错误映射；不靠 sleeps 模拟超时</td>
+</tr>
+<tr>
+<td>Gateway 契约/存储测试</td>
+<td>JsonMockGateway + @TempDir 的真实文件；两周补 HttpContentGateway + 测试临时 HTTP fixture</td>
+<td>状态和日志确实改变；重复提交追加；读写一致；协议字段和计数合规；锁/原子替换不丢数据</td>
+</tr>
+<tr>
+<td>CLI 集成测试</td>
+<td>Failsafe 在 package 后 ProcessBuilder 启动真正 <code>java -jar target/contentops.jar</code></td>
+<td>实际进程码、stdout JSON、stderr、第二 JVM 查询、原始文件 SHA 不变；不能只调用 Java 方法返回 int 就说 CLI 通过</td>
+</tr>
+</tbody>
+</table></div>
+<p>JUnit 5 使用 @TempDir 隔离每个场景、@ParameterizedTest 覆盖输入/结果矩阵，测试默认串行，不共享用户目录。<a href="https://docs.junit.org/5.13.4/user-guide/" rel="noreferrer noopener">JUnit 5.13.4 指南</a>。不需要 Mockito 或外部 mock 服务。</p>
+<p>Http fixture 两周内用 JDK 自带 HttpServer 绑定 <code>127.0.0.1:0</code>，随机端口、测试结束关闭，只实现被测响应/计数，不复刻整套后台。它用于验证编码、认证头、非 2xx、畸形响应、超时和接收次数；这不属于不必要的常驻模拟服务器。<a href="https://docs.oracle.com/en/java/javase/21/docs/api/jdk.httpserver/com/sun/net/httpserver/HttpServer.html" rel="noreferrer noopener">JDK HttpServer</a>。必要时给测试 JVM 显式添加 jdk.httpserver 模块。</p>
+<h3 id="section-102-受控故障怎样真正发生">10.2 受控故障怎样真正发生</h3>
+<p>FaultInjectingGateway 只包装 Mock Gateway，场景通过 <code>CONTENTOPS_MOCK_SCENARIO</code> 显式设置。所有启用场景的结果 warnings 必须有 <code>MOCK_FAULT_ACTIVE</code> 及场景名；场景名未知为 2，api 环境不接受此配置。它不是业务命令参数，也不表示真实 API 有同名错误码。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>场景值</th>
+<th>注入点</th>
+<th>必须检查的真实副作用和结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tags-reject-before-write</code></td>
+<td>审核正常完成后，标签方法调用进入时在 delegate 之前抛 REJECTED_NO_COMMIT</td>
+<td>工作副本已 approved、日志 +1、标签未改；退出 4；再次独立补标签不增加审核日志</td>
+</tr>
+<tr>
+<td><code>review-commit-response-lost</code></td>
+<td>调用真实 Mock submitReviews 并成功持久化，然后抛 WRITE_UNKNOWN</td>
+<td>退出 5，标签 not_sent；第二 JVM get 为 approved，日志 +1；首次结果仍 unknown，不能变成 succeeded</td>
+</tr>
+<tr>
+<td><code>tags-commit-response-lost</code></td>
+<td>真实 replaceTags 完成持久化，然后抛 WRITE_UNKNOWN</td>
+<td>退出 5；第二 JVM 已有目标标签；审核成功事实保留，不能重新审核</td>
+</tr>
+<tr>
+<td><code>review-readback-mismatch</code></td>
+<td>写入 acknowledged 后，下一个详情读取一次性返回预先保存的旧快照</td>
+<td>退出 6；标签不写；真实持久化审核仍已改变；第二 JVM 不经过这次伪读可看到新状态</td>
+</tr>
+<tr>
+<td><code>tags-readback-mismatch</code></td>
+<td>标签写入后的一次回读返回旧标签视图</td>
+<td>退出 6；工作快照仍是新标签；不为了“核对失败”把数据改回去</td>
+</tr>
+</tbody>
+</table></div>
+<p>注入装饰器的阶段标记只存在本次 JVM；普通独立 get 没有先发生写入，不触发“写后下一次读”故障。计数异常、读失败、认证拒绝等通过单元替身或 HTTP fixture 测，不必给产品加十几个隐藏开关。</p>
+<p>网络超时分两件事验证：Application 用已提交后抛异常的确定性场景验证语义；HTTP fixture 延迟/中断验证真实 HttpClient 的 timeout 和重发次数。不能因前者通过就声称真实网络行为已经测试。</p>
+<h3 id="section-103-独立-jvm-与文件故障验证">10.3 独立 JVM 与文件故障验证</h3>
+<p>CliProcessIT 使用当前 java.home 下的 java.exe/Java 可执行文件和参数 List，不拼 Shell 字符串。分别并发读取 stdout/stderr，防止管道填满阻塞；设置进程总时限，超时只终止本测试创建的子进程。以 UTF-8 解码并校验退出码、完整单 JSON、无 BOM/ANSI。</p>
+<p>基本场景：进程 A 执行 process，进程 B 使用相同绝对 CONTENTOPS_STATE_DIR get/history；再启动进程 C 重复审核，应在 pending 检查处拒绝且审核记录数量不再增加。</p>
+<p>持久化还要测试：</p>
+<ul>
+<li>预览前工作文件不存在则预览后仍无 state.json；已有文件则 SHA/revision 不变。允许 lock 元数据变化。</li>
+<li>两个进程更新<strong>不同内容</strong>后，两项结果均在快照中，不因旧内存副本整文件覆盖而丢失；不把此测试扩展成同 ID 的全局去重承诺。</li>
+<li>临时写入/force 前的可控异常保持旧快照有效；原子替换能力不支持时明确拒绝，不走降级覆盖。</li>
+<li>两周版在测试专用检查点暂停写进程并终止，检查留下的是完整旧/新快照；只操作临时目录，不能终止无关 Java 进程。</li>
+<li>state.json 被截断或 seed 指纹错误后读取失败，不自动初始化；换新状态目录才重置。</li>
+<li>对题目、OpenAPI、原始 Mock、01/02 计算操作前后 SHA；JAR 中 seed 字节也应与原始 Mock 相同。</li>
+</ul>
+<h3 id="section-104-r-01r-24-的可执行测试落点">10.4 R-01～R-24 的可执行测试落点</h3>
+<p>“48h 子集”只表示该项中列出的核心分支先交付，其他分支仍是两周 P0，不能写为全部验收已通过。测试名是拟定类/方法，不是已存在文件。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>02 条件</th>
+<th>拟定测试落点与断言</th>
+<th>阶段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-01</td>
+<td>JsonMockGatewayContractTest.filtersAndPages：132、20/12、精确 ID；稳定 Mock 顺序不外推真实 API</td>
+<td>48h 子集：pending/page/ID；两周全量</td>
+</tr>
+<tr>
+<td>R-02</td>
+<td>CliParsingTest.invalidInputs + GatewayContractTest.emptyMatches：无匹配与非法 page/枚举/未知参数分开</td>
+<td>48h 核心；两周补筛选矩阵</td>
+</tr>
+<tr>
+<td>R-03</td>
+<td>JsonMockGatewayContractTest.history：ct_000003 倒序、空历史、全部动作</td>
+<td>48h</td>
+</tr>
+<tr>
+<td>R-04</td>
+<td>ContentServiceTest.tagFiltering：23/25、轻松一项，Gateway 不接收伪过滤参数</td>
+<td>48h 默认 active；两周全量</td>
+</tr>
+<tr>
+<td>R-05</td>
+<td>CliProcessIT.previewDoesNotPersist + RecordingGateway：所有已支持写命令零 POST/PUT，state 不变</td>
+<td>48h 必须</td>
+</tr>
+<tr>
+<td>R-06</td>
+<td>CliParsingTest.authorization + Confirmation 测试 + CliProcessIT：缺 yes 不读 stdin，yes 无 execute 拒绝</td>
+<td>48h 非交互；两周补真实终端人工验收</td>
+</tr>
+<tr>
+<td>R-07</td>
+<td>ContentServiceTest.singleReview + GatewayContractTest.reviewPersists：items 长度 1、action 小写、reason 省略、日志 +1</td>
+<td>48h</td>
+</tr>
+<tr>
+<td>R-08</td>
+<td>ContentServiceTest.reviewCounts：1/0、0/1、2/0、字段缺失；HTTP 序列化/畸形响应另测</td>
+<td>48h 语义；两周 HTTP</td>
+</tr>
+<tr>
+<td>R-09</td>
+<td>ContentServiceTest.pendingAndReason + CliProcessIT.repeatRejected：重复调用被 CLI 拒绝、计数不增加</td>
+<td>48h</td>
+</tr>
+<tr>
+<td>R-10</td>
+<td>ContentServiceTest.invalidTagBeforeReview：轻松松拒绝、两项写调用 0</td>
+<td>48h</td>
+</tr>
+<tr>
+<td>R-11</td>
+<td>TagPlannerTest.completeTargets + CliProcessIT：新增不删原标签；remove/set 的完整数组</td>
+<td>48h add；两周 remove/set</td>
+</tr>
+<tr>
+<td>R-12</td>
+<td>TagPlannerTest.noChange + ContentServiceTest.skipsPut：no_change 与 process 标签 skipped</td>
+<td>48h add 已存在；两周全模式</td>
+</tr>
+<tr>
+<td>R-13</td>
+<td>CliParsingTest.tagModes + TagPlannerTest.nonEmpty：冲突/空/移除最后一个标签</td>
+<td>48h 空值和非法模式拒绝；两周全量</td>
+</tr>
+<tr>
+<td>R-14</td>
+<td>TagPlannerTest.legacyTags：存量可保留/移除、新增 deprecated/unknown 拒绝</td>
+<td>48h 新增校验/保留；两周移除全量</td>
+</tr>
+<tr>
+<td>R-15</td>
+<td>ContentServiceTest.changedSnapshot：执行前变化零写；审核后标签变化为 4、零 PUT</td>
+<td>48h 核心防御；两周补多进程场景</td>
+</tr>
+<tr>
+<td>R-16</td>
+<td>ContentServiceTest.processOrder + CliProcessIT.success：顺序、两项写各一次、最终匹配</td>
+<td>48h 必须</td>
+</tr>
+<tr>
+<td>R-17</td>
+<td>CliProcessIT.partialThenTagsOnly：真实持久化审核，故障标签不改；恢复后总日志仅 +1</td>
+<td>48h 必须</td>
+</tr>
+<tr>
+<td>R-18</td>
+<td>CliProcessIT.committedButResponseLost：review/tags 两个场景、独立进程核对、无重复写</td>
+<td>48h 必须</td>
+</tr>
+<tr>
+<td>R-19</td>
+<td>ContentServiceTest.verificationFailure + CliProcessIT：mismatched/unavailable、保留 acknowledged</td>
+<td>48h 基本分支；两周 HTTP/多种读取故障</td>
+</tr>
+<tr>
+<td>R-20</td>
+<td>GatewayContractTest.readErrors + ContentServiceTest.phaseAwareReadFailure：不存在/缺字段/错 ID；写后读错不能报 3</td>
+<td>48h Mock；两周 HTTP/鉴权</td>
+</tr>
+<tr>
+<td>R-21</td>
+<td>CliProcessIT.resultEnvelope：状态矩阵、真实退出码、仅一个 JSON、stderr 分离</td>
+<td>48h 已支持分支；两周完整</td>
+</tr>
+<tr>
+<td>R-22</td>
+<td>AppConfig/CliParsingTest.environment：api 未实现明确拒绝、无回退；后续 HTTP 测凭据脱敏</td>
+<td>48h 环境底线；两周完整配置</td>
+</tr>
+<tr>
+<td>R-23</td>
+<td>CliProcessIT.crossJvm + JsonStateStoreTest：跨进程、新目录重置、原始附件 SHA</td>
+<td>48h 必须；两周补中断/并发压力</td>
+</tr>
+<tr>
+<td>R-24</td>
+<td>RecordingGateway 的白名单调用断言 + 进程异常说明</td>
+<td>48h 核心；两周 HTTP 收到次数/3xx/中断</td>
+</tr>
+</tbody>
+</table></div>
+<p>产品验收映射：P-01/02 对应 help 与 R-01/02；P-03 对应 R-03、Unicode/空字段样本；P-04～06 对应 R-07、11、16；P-07 对应 R-06、09、10、13；P-08/09 对应 R-17～19；P-10 对照 R-21 和 HTML/文档人工检查。不是仅靠单测数量证明产品可用。</p>
+<h3 id="section-105-验证命令及证据">10.5 验证命令及证据</h3>
+<pre><code class="language-powershell">mvn -B -ntp test
+mvn -B -ntp verify
+java -jar ./target/contentops.jar --help
+</code></pre>
+<p>开发阶段可用 <code>mvn -B -ntp '-Dtest=TagPlannerTest,ContentServiceTest' test</code> 缩小验证范围；打包/跨 JVM 验收必须跑 verify。Windows 脚本额外检查 <code>./scripts/contentops.cmd</code> 返回的 LASTEXITCODE 与直接 Java 调用一致。</p>
+<p>最终 evidence 保存实际命令、时间、工具版本、原始退出码和输出、调用计数/前后状态、测试报告路径与附件校验值。预期 JSON 不计作实测证据；本轮没有这些 Java 测试报告。</p>
+<h2 id="section-11-与-02-产品合同的补充冲突与建议">11. 与 02 产品合同的补充、冲突与建议</h2>
+<p>业务规则、七个命令、状态值和 0～7 退出码都不需要改动。以下是本轮发现的实现边界；原文件未修改：</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>原合同中的未明确处/冲突</th>
+<th>本文最小建议</th>
+<th>性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>解析尚未成功的错误信封</td>
+<td>可能根本不存在合法 command/mode，而 02 的正常信封只列 read/preview/execute</td>
+<td>参数解析失败时 mode/content_id 为 null；command 仅在可确定合法叶命令时保留，否则 null；照常 rejected/2。env 未提供用 mock，合法已解析值保留，env 本身解析失败则 environment=null；合法调用仍严格使用原值</td>
+<td>需补充错误 schema，不改变正常命令；可在评审后合入产品合同</td>
+</tr>
+<tr>
+<td>JSON 解析错误的输出方式</td>
+<td>错误可能出现在 <code>--output json</code> 被解析之前</td>
+<td>保持“公共参数在命令前”的推荐写法；合法前置 json 已解析则保证 JSON。output 本身错误或从未成功解析时用已知模式/默认 table，不重新造参数解析器</td>
+<td>错误边界说明</td>
+</tr>
+<tr>
+<td>预览零写入与文件锁初始化</td>
+<td>跨进程锁可能创建空目录/锁文件</td>
+<td>零写入指业务 state/revision、审核日志及写方法不变；允许协调元数据，不因初始化业务文件破坏预览</td>
+<td>对验收对象的明确，不新增业务写入</td>
+</tr>
+<tr>
+<td>简写 contentops 如何运行</td>
+<td>文档使用逻辑可执行名，Windows/JAR 需要实际入口</td>
+<td><code>java -jar ...</code> 或薄 contentops.cmd 转发，命令后缀不变；不新增另一套 Java 命令</td>
+<td>分发实现方式</td>
+</tr>
+<tr>
+<td>48 小时 18 小时工作量粗估</td>
+<td>具体化文件锁、故障与跨进程测试后，需要更多实施时间</td>
+<td>第 12 节按约 20 小时有效工作重估并保持范围收缩；这是估算修正，不把完整两周 P0塞入试炼</td>
+<td>排期修正，原范围不变</td>
+</tr>
+</tbody>
+</table></div>
+<p>其中第一项是需要明确确认的 schema 边界；本轮文档采用该建议，实施时不得在不记录决定的情况下输出新增“未知模式”枚举或改退出码。pending/理由/active/不清空已由用户确认，不再重复提请批准。</p>
+<h2 id="section-12-48-小时最小实施路径与-codex-分阶段任务">12. 48 小时最小实施路径与 Codex 分阶段任务</h2>
+<h3 id="section-121-最小原型必须保留的能力">12.1 最小原型必须保留的能力</h3>
+<p>七个入口按原命名提供，但参数面缩小：list 先支持 review-status/page/content-id；tags list 先提供 active/all；review 支持 approve/reject；tags update 与 process 先实现 add。remove/set/keyword 等未实现参数显式拒绝，help/HTML 标注原型范围。</p>
+<p>必须具备：默认预览、execute+yes、非交互不等待、pending/理由/active 校验、完整目标标签、执行前核对、真实 Mock 持久化与第二 JVM 查询、部分失败 4/未知 5/核对失败 6、禁止写入重试。不能为了赶 HTML 而删除这些底线。</p>
+<p>人工输入完整 ID、标签 remove/set、全部过滤和完整 HTTP 适配放在两周 P0 补齐。48 小时中即使是交互终端，也先要求 execute+yes；缺 yes 为明确拒绝，不假装已实现交互确认。</p>
+<h3 id="section-122-分阶段文件范围验证与完成条件">12.2 分阶段文件范围、验证与完成条件</h3>
+<p>每一阶段只完成本阶段范围并留下真实验证记录，再继续下一阶段。下列任务描述可交给后续 Codex 顺序执行，<strong>不是要求现在开始实现</strong>。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>文件范围与工作</th>
+<th>验证命令/方法</th>
+<th>完成条件</th>
+<th class="align-right">估时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S0 构建基线</td>
+<td>pom.xml、Main、RootCommand、最薄 CliRunner、只读 seed 资源配置</td>
+<td><code>mvn -B -ntp package</code>；<code>java -jar ./target/contentops.jar --help</code></td>
+<td>目标依赖可解析；JAR 可启动；help 不创建状态或访问网络；记录工具版本/依赖树</td>
+<td class="align-right">1h</td>
+</tr>
+<tr>
+<td>S1 模型与状态</td>
+<td>model、ContentGateway、GatewayFailure、JsonSupport、AppConfig、JsonStateStore</td>
+<td><code>mvn -B -ntp '-Dtest=JsonStateStoreTest' test</code></td>
+<td>同目录原子替换探测与锁可用；状态可持久化；损坏不回 seed；原始数据不变</td>
+<td class="align-right">3h</td>
+</tr>
+<tr>
+<td>S2 Mock 与读取</td>
+<td>JsonMockGateway、ReadCommands、必要读取服务/输出</td>
+<td>Mock 契约测试；JAR list/get/history/tags list</td>
+<td>待审核查询、详情、倒序历史和标签库真实取自 seed/工作副本；JSON/表格可用</td>
+<td class="align-right">1.5h</td>
+</tr>
+<tr>
+<td>S3 单条业务</td>
+<td>ContentService、TagPlanner、OperationRejected、结果判定；先用可控 Gateway 测</td>
+<td><code>mvn -B -ntp '-Dtest=TagPlannerTest,ContentServiceTest' test</code></td>
+<td>单条审核、标签 add 与 process 的顺序/完整数组/核对正确；所有写入保护生效</td>
+<td class="align-right">4h</td>
+</tr>
+<tr>
+<td>S4 写命令与打包运行</td>
+<td>WriteCommands、授权检查、统一 renderer/handler、contentops.cmd</td>
+<td>package 后实际运行 preview 与 execute；保存 LASTEXITCODE</td>
+<td>缺授权不写、execute+yes 真修改，CLI 输出/进程码一致；错误不污染 JSON</td>
+<td class="align-right">2h</td>
+</tr>
+<tr>
+<td>S5 故障与跨 JVM</td>
+<td>FaultInjectingGateway、RecordingGateway、CliProcessIT、必要契约回归</td>
+<td><code>mvn -B -ntp verify</code></td>
+<td>正常流程、部分失败、提交后丢响应、核对失败、重复审核拒绝、第二 JVM 状态与 SHA 均有证据</td>
+<td class="align-right">3h</td>
+</tr>
+<tr>
+<td>S6 评审交付</td>
+<td>demo/index.html、运行说明、AI 协作记录、evidence 索引</td>
+<td>照运行说明从新状态目录重放；检查 HTML 与已支持参数一致</td>
+<td>HTML 明示模拟，不代替真实 CLI；文档可复制；AI 记录来源和缺口明确</td>
+<td class="align-right">2.5h</td>
+</tr>
+<tr>
+<td>机动</td>
+<td>只修核心构建/写入/验证问题</td>
+<td>失败项定向回归，最后 verify</td>
+<td>不引入 P1、HTTP 实装或更多页面</td>
+<td class="align-right">3h</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td></td>
+<td></td>
+<td><strong>约 20h 有效工作，分布在 48h 日历时间内</strong></td>
+<td class="align-right"><strong>20h</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>S1/S2/S3 过程中的测试可先按类运行；S5 必须实际启动打包产物，不能以 service 方法测试替代。依赖下载或文件系统原子替换受阻时，先解决并记录，不通过换成预设输出绕过。</p>
+<p>时间不足时先删 HTML 动画/场景交互、额外帮助修饰和非必要筛选；HTML 最少保留单页说明及真实结果摘录/明确标记的故障预设。不能删实际写入、回读、持久化或未知结果报告。若核心仍未通过，交付说明明确缺口，不宣布 48 小时目标完成。</p>
+<h3 id="section-123-最小真实运行链路">12.3 最小真实运行链路</h3>
+<p>在未来实现和打包后，从新状态目录按顺序执行。approve 和新增轻松仅是假设人工明确给定的演示决定，不是本方案自动判断内容应该通过：</p>
+<pre><code class="language-powershell">$env:CONTENTOPS_STATE_DIR = Join-Path (Get-Location).Path ('.contentops/demo-' + [guid]::NewGuid().ToString('N'))
+java -jar ./target/contentops.jar --env mock content list --review-status pending --page 1
+java -jar ./target/contentops.jar --env mock content get ct_000004
+java -jar ./target/contentops.jar --env mock content history ct_000004
+java -jar ./target/contentops.jar --env mock tags list --status active
+java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason &quot;演示：人工明确给定的决定&quot; --add &quot;轻松&quot;
+java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason &quot;演示：人工明确给定的决定&quot; --add &quot;轻松&quot; --execute --yes
+$executeExit = $LASTEXITCODE
+java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+java -jar ./target/contentops.jar --env mock content history ct_000004
+</code></pre>
+<p>要求未来的实际结果证明：预览不改变 state；执行返回 0 且两步 matched；独立 JVM 查询为 approved、标签保留恋爱/校园/武侠并含轻松，审核日志只增加一条；原始附件校验不变。state revision 通常从无工作快照开始经两次成功 API 提交到 2，可作为辅助证据，但不代替业务读取。</p>
+<p>故障演示每个场景使用独立的新目录；设置 CONTENTOPS_MOCK_SCENARIO 后执行，保存结果与真实退出码；核查/恢复前清除该场景配置，防止再次注入。操作说明中写清如何清除进程环境变量，不添加绕过保护的 force 参数。</p>
+<h3 id="section-124-html-与完整-ai-协作记录">12.4 HTML 与完整 AI 协作记录</h3>
+<p>HTML 沿用 02 的轻量单页定位：展示已支持命令、预览/成功/部分失败/未知结果；读取或摘录真实运行证据时标明环境和来源，预设示例标“模拟”。不通过浏览器运行 Java、不放令牌、不宣称点击页面等同真实执行 API。</p>
+<p>完整 AI 协作记录要保存<strong>真实原始输入、回复、关键工具/修改/验证结果和用户决策</strong>，并用索引关联到 01/02/03、后续实现阶段与证据。重要决策包括已确认的业务限制、48h 切片、非事务/未知结果边界、发现问题后的修正理由；不能只交一份结果摘要就称完整记录。</p>
+<p>如能取得客户端原始对话导出，保留原件并提供脱敏提交副本；如当前工具无法取得完整历史，明确请用户补充其保存记录，后续阶段逐次保存真实记录。无法取得的历史必须列缺口，不能凭记忆补写成逐字对话，也不能虚构 AI、测试或真实后台结果。记录中删除凭据，保留脱敏说明。</p>
+<h2 id="section-13-两周补齐与已知限制">13. 两周补齐与已知限制</h2>
+<p>两周工程仍按 02 的 10 个工作日总量约束执行，48 小时原型是其中的先行切片，不能把后续补齐再称同一名工程师的额外零成本工作。后续优先级是：完整标签 remove/set 与边界 → 人工确认及 P0 筛选 → HTTP 六项适配/协议测试 → 文件中断/并发与全量验收 → 交付复核。P1、更多 API 和批量 Agent 均不挤入必做。</p>
+<p>主要限制与边界如下：</p>
+<ol>
+<li>HTTP 缺可用服务和业务错误码表。协议 fixture 通过不等于真实联调通过；错误分类、读后可见延迟、真实权限和审计仍须上游确认。</li>
+<li>JSON + 文件锁面向本地、小规模、遵守同一锁协议的进程；不能防任意外部编辑、所有文件系统故障或断电。检测损坏后失败，不承诺自动修复。</li>
+<li>写前重读和局部文件锁不消除同一内容的并发检查/写入窗口，也不提供跨进程幂等；顺序重复调用被 CLI 拒绝不等于并发永不重复。active 校验依据本次读取的标签库，库状态在计划后变化也没有版本条件可保护。</li>
+<li>审核/标签分两次提交；partial、unknown、verification_failed 是产品必须接受的真实结果，不是靠本地数据库事务可消除的问题。</li>
+<li>JDK 17 仅是编译兼容目标，当前实测运行环境是 JDK 21；HTTP 内部重发、PowerShell 5.1、其他磁盘和平台均需实际测试后才能扩大声明。</li>
+<li>模拟聚合字段、历史时序、旧标签等保留原始样例口径。Mock 的确定性顺序、模拟操作人和故障都不是生产事实。</li>
+<li>后续 Agent 100 条需要独立设计固定目标、逐项结果持久化、恢复和身份授权；本期只保留稳定单条合同，不预建任务平台。</li>
+</ol>
+<p>当前技术方案可按上述顺序实施。进一步需要明确的是第 11 节的解析失败 nullable 信封边界，以及“完整 AI 协作记录”的原始历史如何取得；其余技术选型与持久化方案已有可执行基线，不需要先增加框架或数据平台。</p>
+</article>
+      <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 docs/03-Java技术架构与实施方案.md</span></footer>
+    </main>
+  </div>
+</body>
+</html>

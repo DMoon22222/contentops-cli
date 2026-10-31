@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="source-sha256" content="106ae887a3692104827882640b448f1f44306ff5756e3da43441cb55ea753dc6">
+  <title>第一阶段 MVP 与 CLI 产品方案 · ContentOps 文档</title>
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body id="document-top">
+  <a class="skip-link" href="#document-body">跳至正文</a>
+  <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
+  <div class="reading-layout">
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-1-评审结论与交付边界">1. 评审结论与交付边界</a></li>
+<li class="toc-level-3"><a href="#section-11-两个时间约束">1.1 两个时间约束</a></li>
+<li class="toc-level-3"><a href="#section-12-人工脚本与未来-agent-的边界">1.2 人工、脚本与未来 Agent 的边界</a></li>
+<li class="toc-level-2"><a href="#section-2-p0p1-与暂不实现">2. P0、P1 与暂不实现</a></li>
+<li class="toc-level-3"><a href="#section-21-p0完整两周-mvp-必须验收">2.1 P0：完整两周 MVP 必须验收</a></li>
+<li class="toc-level-3"><a href="#section-22-p1有余量才做可不进入首次交付">2.2 P1：有余量才做，可不进入首次交付</a></li>
+<li class="toc-level-3"><a href="#section-23-暂不实现">2.3 暂不实现</a></li>
+<li class="toc-level-2"><a href="#section-3-为什么选择独立命令与组合命令并存">3. 为什么选择独立命令与组合命令并存</a></li>
+<li class="toc-level-2"><a href="#section-4-命令体系与调用示例">4. 命令体系与调用示例</a></li>
+<li class="toc-level-3"><a href="#section-41-总览与公共参数">4.1 总览与公共参数</a></li>
+<li class="toc-level-3"><a href="#section-42-查询待审核内容及分页content-list">4.2 查询待审核内容及分页：content list</a></li>
+<li class="toc-level-3"><a href="#section-43-查看详情查询实际状态content-get">4.3 查看详情、查询实际状态：content get</a></li>
+<li class="toc-level-3"><a href="#section-44-查看审核历史content-history">4.4 查看审核历史：content history</a></li>
+<li class="toc-level-3"><a href="#section-45-查询可用标签tags-list">4.5 查询可用标签：tags list</a></li>
+<li class="toc-level-3"><a href="#section-46-独立审核content-review">4.6 独立审核：content review</a></li>
+<li class="toc-level-3"><a href="#section-47-独立标签变更content-tags-update">4.7 独立标签变更：content tags update</a></li>
+<li class="toc-level-3"><a href="#section-48-单条组合content-process">4.8 单条组合：content process</a></li>
+<li class="toc-level-2"><a href="#section-5-交互校验与执行规则">5. 交互、校验与执行规则</a></li>
+<li class="toc-level-3"><a href="#section-51-默认预览与明确执行">5.1 默认预览与明确执行</a></li>
+<li class="toc-level-3"><a href="#section-52-参数和业务前置校验">5.2 参数和业务前置校验</a></li>
+<li class="toc-level-3"><a href="#section-53-标签覆盖与并发变化">5.3 标签覆盖与并发变化</a></li>
+<li class="toc-level-3"><a href="#section-54-process-的固定执行流程">5.4 process 的固定执行流程</a></li>
+<li class="toc-level-3"><a href="#section-55-错误回读与结果未知">5.5 错误、回读与结果未知</a></li>
+<li class="toc-level-2"><a href="#section-6-输出合同与退出码">6. 输出合同与退出码</a></li>
+<li class="toc-level-3"><a href="#section-61-统一-json-信封">6.1 统一 JSON 信封</a></li>
+<li class="toc-level-3"><a href="#section-62-标准输出与错误输出">6.2 标准输出与错误输出</a></li>
+<li class="toc-level-3"><a href="#section-63-退出码">6.3 退出码</a></li>
+<li class="toc-level-2"><a href="#section-7-典型使用流程">7. 典型使用流程</a></li>
+<li class="toc-level-3"><a href="#section-71-人工从待审核查询到闭环">7.1 人工从待审核查询到闭环</a></li>
+<li class="toc-level-3"><a href="#section-72-误输入非法标签与部分失败">7.2 误输入、非法标签与部分失败</a></li>
+<li class="toc-level-3"><a href="#section-73-脚本非交互调用">7.3 脚本非交互调用</a></li>
+<li class="toc-level-2"><a href="#section-8-可验证验收标准">8. 可验证验收标准</a></li>
+<li class="toc-level-3"><a href="#section-81-验收证据与数据前提">8.1 验收证据与数据前提</a></li>
+<li class="toc-level-3"><a href="#section-82-产品验收">8.2 产品验收</a></li>
+<li class="toc-level-3"><a href="#section-83-研发验收可转为-java-测试用例">8.3 研发验收，可转为 Java 测试用例</a></li>
+<li class="toc-level-2"><a href="#section-9-一名-java-后端的十个工作日计划">9. 一名 Java 后端的十个工作日计划</a></li>
+<li class="toc-level-3"><a href="#section-91-两周完整-mvp">9.1 两周完整 MVP</a></li>
+<li class="toc-level-3"><a href="#section-92-48-小时试炼交付切片与完整-mvp-的差别">9.2 48 小时试炼：交付切片与完整 MVP 的差别</a></li>
+<li class="toc-level-2"><a href="#section-10-为后续-agent-预留什么">10. 为后续 Agent 预留什么</a></li>
+<li class="toc-level-3"><a href="#section-101-第一阶段必须打好的基础">10.1 第一阶段必须打好的基础</a></li>
+<li class="toc-level-3"><a href="#section-102-放到后续-agent-100-条阶段">10.2 放到后续 Agent / 100 条阶段</a></li>
+<li class="toc-level-2"><a href="#section-11-当前决定与仍需确认的业务政策">11. 当前决定与仍需确认的业务政策</a></li></ul></nav></details></aside>
+    <main id="document-body" tabindex="-1">
+      <div class="document-meta"><span>产品评审</span><a href="../../docs/02-%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5MVP%E4%B8%8ECLI%E4%BA%A7%E5%93%81%E6%96%B9%E6%A1%88.md">原始 Markdown 文件</a></div>
+<p class="stage-note">本文保留对应阶段的设计与决策记录；当前实现情况请以<a href="../index.html#product">产品概览</a>和<a href="readme.html">README</a>为准。</p>
+      <article class="markdown-body"><h1 id="section-第一阶段-mvp-与-cli-产品方案">第一阶段 MVP 与 CLI 产品方案</h1>
+<h2 id="section-1-评审结论与交付边界">1. 评审结论与交付边界</h2>
+<p>第一阶段选择上一轮的<strong>方案 A：运营人员的单条审核与标签更新闭环</strong>。只使用内容列表、详情、审核历史、审核提交、标签库、标签更新这 6 个现有 API 操作，兼顾脚本单条调用。</p>
+<p>命令入口选择本轮比较中的 <strong>C：独立命令 + 受限组合命令</strong>：日常使用 <code>content process</code> 完成一个内容的审核和标签变更；使用 <code>content review</code>、<code>content tags update</code> 进行独立操作和局部恢复。这里的 C 是命令组织方式，<strong>不是上一轮“增加创作者、举报和操作日志”的范围方案 C</strong>。</p>
+<p>第一阶段的核心承诺是：明确处理一个 ID，先预览再执行，分别报告两次写入及其回读结果；不能确定执行结果时停止。组合命令不提供服务端事务，也不自动回滚或重试写入。</p>
+<h3 id="section-11-两个时间约束">1.1 两个时间约束</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>约束</th>
+<th>本方案的解释与交付</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>业务题目的两周研发周期</strong></td>
+<td>1 名 Java 后端、10 个工作日，完成本文 P0、必要测试、Mock 演示、轻量 HTML Demo、文档和验收；P1 不承诺全部完成</td>
+</tr>
+<tr>
+<td><strong>本次 48 小时试炼</strong></td>
+<td>用户已确认最低目标为“评审文档 + HTML 演示 + Mock 上可运行的最小 Java CLI”。交付一个可证明核心闭环的切片，明确标注尚未完成的两周 P0，不将两周工程压缩宣称为 48 小时全部完成</td>
+</tr>
+<tr>
+<td><strong>当前这一轮</strong></td>
+<td>只交付本产品方案。命令及结果均为设计示例；没有生成 Java 实现、HTML 文件或执行审核，没有修改题目、OpenAPI、Mock 数据</td>
+</tr>
+</tbody>
+</table></div>
+<p>接口事实和数据核查引用 <a href="01-requirements.html">01-需求与接口分析.md</a>，不在此重复完整接口清单和统计。现有能力以附件 <a href="../../%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5%E5%90%8E%E5%8F%B0%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/content-ops-admin-openapi.json">OpenAPI</a> 为准；命令、确认规则、输出和退出码均为<strong>新增 CLI 产品合同</strong>。</p>
+<h3 id="section-12-人工脚本与未来-agent-的边界">1.2 人工、脚本与未来 Agent 的边界</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>调用者</th>
+<th>第一阶段提供</th>
+<th>第一阶段不承诺</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运营人员</td>
+<td>查询和阅读；自行给出审核决定；预览变更；确认执行；根据逐步骤结果恢复</td>
+<td>自动判断内容是否合规、自动修复样例矛盾、强制覆盖已审核内容</td>
+</tr>
+<tr>
+<td>脚本</td>
+<td>对一个明确 ID 提交调用方给定的决定；非交互执行；JSON、退出码和当前状态核对</td>
+<td>100 条任务管理、失败自动重放、断点续跑或跨进程去重</td>
+</tr>
+<tr>
+<td>未来 Agent</td>
+<td>可以复用同一套单条命令和结构化结果；明确知道预览、成功、部分失败和未知</td>
+<td>本期不验收 Agent 自主审核、自动连续处理 100 条或无人值守恢复。自动调用命令不等于取得审核业务授权</td>
+</tr>
+</tbody>
+</table></div>
+<p>所有写命令只接收<strong>一个内容 ID</strong>，不接收通配符、筛选结果、ID 数组或输入文件。只读列表不会直接触发写入。客户端不提供白名单、上下架、限流、分发、通知等旁路动作；现有管理员令牌仍然没有服务端角色隔离，不能把“CLI 少暴露命令”当作真正的权限隔离。</p>
+<h2 id="section-2-p0p1-与暂不实现">2. P0、P1 与暂不实现</h2>
+<h3 id="section-21-p0完整两周-mvp-必须验收">2.1 P0：完整两周 MVP 必须验收</h3>
+<p>下表估算按一人有效工作日计，包含对应功能的基本验证；专门列出的自动化测试为跨功能故障与回归验证，不重复计算开发工作。各行合计 9.5 人日，另留 0.5 日缓冲。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>具体功能与业务价值</th>
+<th class="align-right">工作量</th>
+<th>取舍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范围与合同确认</td>
+<td>固定命令语义、确认规则、退出码和验收场景，减少开发中反复改接口</td>
+<td class="align-right">0.75 日</td>
+<td>本期不确定 Java 框架；下一阶段再决定实现方式</td>
+</tr>
+<tr>
+<td>4 个只读入口</td>
+<td>内容列表、详情、历史、标签库；支持单页、详情正文和实际状态核对；表格/JSON</td>
+<td class="align-right">1.25 日</td>
+<td>列表 P0 仅开放 <code>content-id / review-status / keyword / tag / page</code>；不做交互分页器或自动扫全量</td>
+</tr>
+<tr>
+<td>独立审核</td>
+<td>单 ID 通过/驳回；仅处理当前 pending；驳回必须填写原因</td>
+<td class="align-right">1.00 日</td>
+<td>上游虽是批量接口，本期固定传一项，以计数关联单条结果；不做重复审核覆盖</td>
+</tr>
+<tr>
+<td>独立标签更新</td>
+<td>新增、移除、非空替换；完整差异预览；基于当前标签计算全量数组</td>
+<td class="align-right">1.25 日</td>
+<td>不新增标签库标签，不清空全部标签；存量废弃标签可保留或移除</td>
+</tr>
+<tr>
+<td>共享执行规则</td>
+<td>默认预览、执行确认、非交互校验、错误分类、写后读取、变化检测、超时停止</td>
+<td class="align-right">1.25 日</td>
+<td>这是可信写入的必要成本，不能为了压缩工期删去结果未知处理</td>
+</tr>
+<tr>
+<td>单条组合命令</td>
+<td>对一个 ID 先审核、后更新标签，共享前述校验、执行和输出；失败即停止后续步骤</td>
+<td class="align-right">0.75 日</td>
+<td>只支持固定两步，不做可配置工作流、自动回滚或 resume 命令</td>
+</tr>
+<tr>
+<td>Mock 与受控故障</td>
+<td>从只读附件初始化工作副本，跨 CLI 进程保留演示变更；模拟六项 API、审核计数、明确失败和超时</td>
+<td class="align-right">1.00 日</td>
+<td>新增故障场景单独标记；不实现其余后台模块；不改原始 JSON</td>
+</tr>
+<tr>
+<td>自动化验证</td>
+<td>正常闭环、写请求次数、边界校验、部分失败、未知结果、stdout/JSON/退出码一致性</td>
+<td class="align-right">1.00 日</td>
+<td>覆盖有业务风险的行为；不追求测试数量或复杂测试平台</td>
+</tr>
+<tr>
+<td>HTML Demo</td>
+<td>单页说明目标、命令、预览、成功/部分失败/未知三类结果，支持复制命令或切换预设场景</td>
+<td class="align-right">0.50 日</td>
+<td>明示模拟结果，不连接真实后台、不执行 Java CLI、不做第二套管理后台</td>
+</tr>
+<tr>
+<td>操作说明与验收</td>
+<td>人工和脚本说明、复现步骤、证据整理、已知边界和交付检查</td>
+<td class="align-right">0.75 日</td>
+<td>Mock 通过与真实服务联调的结论分开记录</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td></td>
+<td class="align-right"><strong>9.50 日</strong></td>
+<td><strong>另留 0.50 日缓冲，总容量 10 日</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>实现需要具备六项 API 的适配能力，并在 Mock 合同上验证；附件地址不可访问，不能将真实服务联调通过作为目前可证明的结论。真实环境接入条件在技术设计阶段明确，不能自动回退到 Mock 后冒充真实成功。</p>
+<h3 id="section-22-p1有余量才做可不进入首次交付">2.2 P1：有余量才做，可不进入首次交付</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>价值</th>
+<th class="align-right">增量工作量</th>
+<th>推迟理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列表增加 creator、quality、visibility、created-from/to 筛选</td>
+<td>更方便定位特定运营队列</td>
+<td class="align-right">0.25–0.50 日</td>
+<td>复用同一 API，但带来日期校验与说明；不影响待审核单条闭环</td>
+</tr>
+<tr>
+<td>Shell 补全与更精细的终端排版</td>
+<td>降低手工输入成本</td>
+<td class="align-right">0.25–0.50 日</td>
+<td><code>--help</code>、完整 ID、基本表格和 JSON 已满足 P0；不做多 Shell 兼容扩张</td>
+</tr>
+<tr>
+<td>可选本地结果文件输出</td>
+<td>避免手工重定向，便于保存证据</td>
+<td class="align-right">0.25 日</td>
+<td>P0 已可用 Shell 重定向保存 JSON；不是服务端审计，也不实现持久化任务状态</td>
+</tr>
+</tbody>
+</table></div>
+<p>P1 合计可能超过缓冲，<strong>不排入十日必做清单</strong>。尤其不能为了做补全或更多筛选挤掉写入验证和异常测试。</p>
+<h3 id="section-23-暂不实现">2.3 暂不实现</h3>
+<ul>
+<li>100 条批处理、按筛选条件直接写入、自动翻页后执行、并行写入、任务队列、断点续跑、自动重试写入、幂等保证。</li>
+<li>非 pending 的重新审核、<code>--force</code> 绕过保护、自动批准、自动生成审核依据。</li>
+<li>标签库创建/编辑、默认新增废弃或未知标签、清空全部标签。清空规则在材料中未明确，本期也没有业务必要性证据。</li>
+<li>创作者、举报、操作日志、分发、限流、上下架、通知、推荐位、导出、日报等额外 API。</li>
+<li>保存/签名审批计划、跨次调用锁定预览、可信身份审计、跨接口事务，以及为这些能力建立的新平台。</li>
+</ul>
+<h2 id="section-3-为什么选择独立命令与组合命令并存">3. 为什么选择独立命令与组合命令并存</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>运营体验</th>
+<th>开发成本</th>
+<th>部分失败与恢复</th>
+<th>后续脚本 / Agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A：只有独立命令</strong></td>
+<td>能完成任务，但要自己串联两次写入、两次确认和结果</td>
+<td>最低；可少做组合结果汇总</td>
+<td>容易只重做标签；但操作者可能遗漏第二步或错用另一个 ID</td>
+<td>能组合调用，调用方要自行维护步骤关系</td>
+</tr>
+<tr>
+<td><strong>B：只有组合命令</strong></td>
+<td>正常路径简短</td>
+<td>表面入口少，实际仍需要分别处理两项 API</td>
+<td>审核成功、标签失败后，重跑组合会面临重复审核；若再增加“只做标签/跳过审核”等分支，反而隐藏了独立命令</td>
+<td>单条入口统一，但局部恢复含义不清晰</td>
+</tr>
+<tr>
+<td><strong>C：独立命令 + 单条组合命令</strong></td>
+<td>正常路径用一条命令；特殊情况有直接入口</td>
+<td>比 A 多约 0.75 日固定顺序编排与结果汇总；不增加 API</td>
+<td>审核已完成时明确改用独立标签命令；不需要恢复引擎</td>
+<td>日常单条和局部恢复都能复用现有语义</td>
+</tr>
+</tbody>
+</table></div>
+<p>选择 <strong>C</strong>。必要条件是组合命令保持克制：<strong>一个 ID、一个审核决定、一组标签变更、固定先审核后标签</strong>。它不是把任意动作拼装在一起的工作流。</p>
+<p>先审核的理由是：审核失败时不先改变标签，且“审核已成功后补标签”的恢复方式直接明确。所有标签参数必须在审核前校验并完成预览，减少审核成功后才发现标签写错的情况。这一顺序不意味着审核会自动上架、解除限流或产生其他未声明联动。</p>
+<p><code>process</code> 必须同时给出审核动作和标签操作。只审核用 <code>review</code>，只改标签用 <code>tags update</code>；不再提供 <code>--skip-review</code>、<code>--resume</code> 或多套别名。</p>
+<h2 id="section-4-命令体系与调用示例">4. 命令体系与调用示例</h2>
+<h3 id="section-41-总览与公共参数">4.1 总览与公共参数</h3>
+<pre><code class="language-text">contentops [公共参数] content list
+contentops [公共参数] content get &lt;content-id&gt;
+contentops [公共参数] content history &lt;content-id&gt;
+contentops [公共参数] tags list
+contentops [公共参数] content review &lt;content-id&gt; --action approve|reject
+contentops [公共参数] content tags update &lt;content-id&gt; &lt;标签操作&gt;
+contentops [公共参数] content process &lt;content-id&gt; --action approve|reject &lt;标签操作&gt;
+</code></pre>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>公共参数</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`--env mock</td>
+<td>api`</td>
+</tr>
+<tr>
+<td>`--output table</td>
+<td>json`</td>
+</tr>
+<tr>
+<td><code>--non-interactive</code></td>
+<td>禁止任何输入提示；JSON 模式也自动禁止提示。写入时仍必须显式给出 <code>--execute --yes</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>列出参数、示例、默认预览和退出码；不调用写接口</td>
+</tr>
+</tbody>
+</table></div>
+<p>只在写命令上提供 <code>--execute</code> 和 <code>--yes</code>。<code>--yes</code> 只表示调用者明确授权执行本次输入，不代表业务审批、幂等、强制覆盖或忽略校验。为了避免多套执行开关，P0 不另加 <code>--dry-run</code>、<code>--apply</code> 等同义参数。</p>
+<p>以下命令和输出是<strong>拟定合同示例，并未执行</strong>。每个独立示例都以初始 Mock 副本为起点；第 7 节的流程示例才按顺序接续状态。通过/驳回均是假设人工已给出该演示决定，不是根据附件自动得出的审核结论。</p>
+<p>除特别展示完整信封外，下列 JSON 块标明为 <strong>data 字段示例</strong>；实际输出一律包在第 6 节的完整信封里，不会裸输出不同结构。</p>
+<h3 id="section-42-查询待审核内容及分页content-list">4.2 查询待审核内容及分页：<code>content list</code></h3>
+<pre><code class="language-text">contentops --env mock content list --review-status pending --page 1
+contentops --env mock content list --review-status pending --page 2
+contentops --env mock content list --review-status pending --keyword &quot;灯塔&quot; --tag &quot;科幻&quot; --page 1
+contentops --env mock --output json content list --review-status pending --content-id ct_000004 --page 1
+</code></pre>
+<p>参数：<code>--review-status pending|approved|rejected</code> 可选，不传表示不限制审核状态；<code>--page</code> 为大于等于 1 的整数，默认 1；<code>--keyword</code> 匹配标题与正文，<code>--tag</code> 为单个标签，<code>--content-id</code> 精确筛选。各条件 AND。不支持 page-size、排序或 all。</p>
+<p>对应 API：<code>GET /admin/contents</code>，CLI 的连字符参数名映射为 <code>review_status / content_id</code> 等上游参数；单次只读一页，固定最多 20 条。</p>
+<p>第一条查询的表格可显示页码、total=132、总页数=7；具体行顺序不在现有合同中保证。页码大于当前总页数时，如果上游正常返回空 items，CLI 按空结果展示，不猜测并跳回第一页。</p>
+<p>第四条精确筛选的 <strong>data 字段示例</strong>：</p>
+<pre><code class="language-json">{
+  &quot;page&quot;: 1,
+  &quot;page_size&quot;: 20,
+  &quot;total&quot;: 1,
+  &quot;items&quot;: [
+    {
+      &quot;content_id&quot;: &quot;ct_000004&quot;,
+      &quot;title&quot;: &quot;无人剧场·第12话：逆流而上&quot;,
+      &quot;creator_id&quot;: &quot;cr_00002&quot;,
+      &quot;review_status&quot;: &quot;pending&quot;,
+      &quot;quality_status&quot;: &quot;normal&quot;,
+      &quot;visibility&quot;: &quot;online&quot;,
+      &quot;tags&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;],
+      &quot;created_at&quot;: &quot;2026-07-04T05:19:06Z&quot;
+    }
+  ]
+}
+</code></pre>
+<p>这里的 page、page_size 是 CLI 补充的分页元信息；不是上游可调页大小。筛选条件没有任何匹配时，items=[]、total=0、退出码 0，不自动换筛选条件。超出末页但存在匹配内容时，不将空页的 total 擅自改成 0。</p>
+<h3 id="section-43-查看详情查询实际状态content-get">4.3 查看详情、查询实际状态：<code>content get</code></h3>
+<pre><code class="language-text">contentops --env mock content get ct_000004
+contentops --env mock --output json content get ct_000004
+</code></pre>
+<p>参数：一个必填 ID，无标题模糊选取、无“最近一次操作对象”隐式状态。对应 API：<code>GET /admin/contents/{content_id}</code>，每次重新读取，不使用旧预览冒充当前值。</p>
+<p><strong>data 字段示例（初始状态）</strong>：</p>
+<pre><code class="language-json">{
+  &quot;content_id&quot;: &quot;ct_000004&quot;,
+  &quot;title&quot;: &quot;无人剧场·第12话：逆流而上&quot;,
+  &quot;creator_id&quot;: &quot;cr_00002&quot;,
+  &quot;review_status&quot;: &quot;pending&quot;,
+  &quot;quality_status&quot;: &quot;normal&quot;,
+  &quot;visibility&quot;: &quot;online&quot;,
+  &quot;tags&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;],
+  &quot;created_at&quot;: &quot;2026-07-04T05:19:06Z&quot;,
+  &quot;body&quot;: &quot;赛琳娜在灯塔下做出了一个反常的决定，故事从这里开始分岔……&quot;,
+  &quot;source&quot;: &quot;app&quot;,
+  &quot;channels&quot;: [&quot;search_only&quot;],
+  &quot;category_id&quot;: &quot;cat_03&quot;
+}
+</code></pre>
+<p>操作后仍用同一命令看 review_status 和 tags，没有必要再做一个重复的 status 命令。表格列表允许截断长标题；详情和 JSON 必须保留完整中文、emoji、正文和标签。空正文显示“正文为空”，不自动判定通过或驳回。</p>
+<h3 id="section-44-查看审核历史content-history">4.4 查看审核历史：<code>content history</code></h3>
+<pre><code class="language-text">contentops --env mock content history ct_000004
+contentops --env mock --output json content history ct_000003
+</code></pre>
+<p>参数：一个必填 ID。对应 API：<code>GET /admin/contents/{content_id}/review-logs</code>。CLI 按 created_at 倒序展示和输出；保留所有动作，不将 limit、take_down 当成 approve/reject。相同时间保留来源顺序，不推断先后。</p>
+<p><strong>第二条的 data 字段示例</strong>：</p>
+<pre><code class="language-json">{
+  &quot;content_id&quot;: &quot;ct_000003&quot;,
+  &quot;items&quot;: [
+    {&quot;action&quot;: &quot;approve&quot;, &quot;operator_id&quot;: &quot;op_06&quot;, &quot;reason&quot;: &quot;复核通过&quot;, &quot;created_at&quot;: &quot;2026-06-15T05:39:59Z&quot;},
+    {&quot;action&quot;: &quot;approve&quot;, &quot;operator_id&quot;: &quot;op_05&quot;, &quot;reason&quot;: &quot;&quot;, &quot;created_at&quot;: &quot;2026-06-12T09:49:54Z&quot;}
+  ]
+}
+</code></pre>
+<p>这是 CLI 针对附件排序冲突做的显式规范化，不表示原始数组本来就倒序。ct_000004 初始没有历史，返回 items=[]、退出码 0；空历史不能被用于证明一个未知 ID 一定存在，需要读详情确认。</p>
+<h3 id="section-45-查询可用标签tags-list">4.5 查询可用标签：<code>tags list</code></h3>
+<pre><code class="language-text">contentops --env mock tags list
+contentops --env mock tags list --status all
+contentops --env mock --output json tags list --status active --keyword &quot;轻松&quot;
+</code></pre>
+<p>参数：<code>--status active|deprecated|all</code> 默认 active；<code>--keyword</code> 可选，按标签名包含匹配。对应 API：<code>GET /admin/tags</code> 一次取全量，<strong>status 和 keyword 为 CLI 本地过滤，不是新增上游参数</strong>。</p>
+<p><strong>第三条的 data 字段示例</strong>：</p>
+<pre><code class="language-json">{
+  &quot;total&quot;: 1,
+  &quot;items&quot;: [
+    {&quot;tag&quot;: &quot;轻松&quot;, &quot;group&quot;: &quot;风格&quot;, &quot;usage_count&quot;: 650, &quot;status&quot;: &quot;active&quot;}
+  ]
+}
+</code></pre>
+<p>默认初始可用标签为 23 个；all 可看到废弃标签。展示 usage_count 但不将其解释为当前 300 条样例中的使用次数。本期没有创建标签命令。</p>
+<h3 id="section-46-独立审核content-review">4.6 独立审核：<code>content review</code></h3>
+<pre><code class="language-text">contentops --env mock content review ct_000004 --action approve --reason &quot;演示：人工已给出通过决定&quot;
+contentops --env mock content review ct_000004 --action approve --reason &quot;演示：人工已给出通过决定&quot; --execute
+contentops --env mock content review ct_000005 --action reject --reason &quot;演示：人工提供的驳回理由&quot; --execute
+</code></pre>
+<p>第一条只预览；后两条在交互终端要求输入完整 ID 后才写入，它们是独立的替代示例，不应依次用于重复审核同一份初始状态。</p>
+<p>参数：<code>--action approve|reject</code> 必填；<code>--reason</code> 在 reject 时由 <strong>CLI 强制非空</strong>，approve 时可选。只允许当前 pending，没有 force。对应 API：先读详情检查，再调用 <code>POST /admin/content-reviews</code>，<code>items</code> 固定只含一项。</p>
+<p>预览表格示例：</p>
+<pre><code class="language-text">环境       mock
+内容       ct_000004  无人剧场·第12话：逆流而上
+审核状态   pending -&gt; approved
+原因       演示：人工已给出通过决定
+标签       不在本命令的写入范围
+执行       未提交；使用 --execute 进入执行确认
+</code></pre>
+<p>假设人工确认、API 返回计数 1/0 且回读匹配，<strong>data 字段示例</strong>：</p>
+<pre><code class="language-json">{
+  &quot;plan&quot;: {&quot;review&quot;: {&quot;before&quot;: &quot;pending&quot;, &quot;action&quot;: &quot;approve&quot;, &quot;reason&quot;: &quot;演示：人工已给出通过决定&quot;}},
+  &quot;steps&quot;: {&quot;review&quot;: {&quot;write&quot;: &quot;acknowledged&quot;, &quot;verification&quot;: &quot;matched&quot;, &quot;api_result&quot;: {&quot;success_count&quot;: 1, &quot;failed_count&quot;: 0}}},
+  &quot;observed&quot;: {&quot;review_status&quot;: &quot;approved&quot;, &quot;quality_status&quot;: &quot;normal&quot;, &quot;visibility&quot;: &quot;online&quot;, &quot;tags&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;]}
+}
+</code></pre>
+<p>成功后的状态是预期示例，不是已执行结果。驳回也不自动下架、限流或发通知。</p>
+<h3 id="section-47-独立标签变更content-tags-update">4.7 独立标签变更：<code>content tags update</code></h3>
+<pre><code class="language-text">contentops --env mock content tags update ct_000004 --add &quot;轻松&quot;
+contentops --env mock content tags update ct_000004 --remove &quot;武侠&quot;
+contentops --env mock content tags update ct_000004 --add &quot;轻松&quot; --remove &quot;武侠&quot;
+contentops --env mock content tags update ct_000004 --set &quot;恋爱&quot; --set &quot;校园&quot; --set &quot;轻松&quot;
+contentops --env mock content tags update ct_000004 --add &quot;轻松&quot; --execute
+</code></pre>
+<p>这些模式均支持显式执行；未传 execute 均只预览。标签变更参数可在 process 中原样使用。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>参数模式</th>
+<th>语义与校验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--add TAG</code> / <code>--remove TAG</code></td>
+<td>可重复，也可搭配；根据读取的完整标签生成目标数组。同一标签同时出现在 add 和 remove 中拒绝执行</td>
+</tr>
+<tr>
+<td><code>--set TAG</code></td>
+<td>可重复，表示完整替换为这些标签；与 add/remove 互斥。必须至少一个非空标签，不提供隐式清空</td>
+</tr>
+<tr>
+<td>未提供标签操作</td>
+<td>参数错误，不提交任何写入</td>
+</tr>
+</tbody>
+</table></div>
+<p>新增轻松时的预览示例：</p>
+<pre><code class="language-text">模式       全量写回（CLI 计算增量后的结果）
+原标签     恋爱、校园、武侠
+新增       轻松
+移除       无
+目标标签   恋爱、校园、武侠、轻松
+执行       未提交
+</code></pre>
+<p>对应 API：<code>GET /admin/contents/{id}</code> + <code>GET /admin/tags</code> 用于计算与校验，实际写入仍为 <code>PUT /admin/contents/{id}/tags</code>，请求必须为完整目标数组。<strong>上游没有增量 add/remove 接口</strong>。</p>
+<p>假设最后一条确认执行并核对成功，<strong>data 字段示例</strong>：</p>
+<pre><code class="language-json">{
+  &quot;plan&quot;: {&quot;tags&quot;: {&quot;before&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;], &quot;after&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;, &quot;轻松&quot;]}},
+  &quot;steps&quot;: {&quot;tags&quot;: {&quot;write&quot;: &quot;acknowledged&quot;, &quot;verification&quot;: &quot;matched&quot;, &quot;api_result&quot;: {&quot;result&quot;: &quot;ok&quot;}}},
+  &quot;observed&quot;: {&quot;review_status&quot;: &quot;pending&quot;, &quot;quality_status&quot;: &quot;normal&quot;, &quot;visibility&quot;: &quot;online&quot;, &quot;tags&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;, &quot;轻松&quot;]}
+}
+</code></pre>
+<p>本命令不要求 pending，允许在审核已成功后独立补标签。移除已不存在的标签、新增已存在的标签，若最终集合无变化，执行模式返回 no_change，不发 PUT；仍返回当前标签。参数本身仍须通过校验，不能用 no_change 绕过非法输入检查。</p>
+<h3 id="section-48-单条组合content-process">4.8 单条组合：<code>content process</code></h3>
+<pre><code class="language-text">contentops --env mock content process ct_000004 --action approve --reason &quot;演示：人工已给出通过决定&quot; --add &quot;轻松&quot;
+contentops --env mock content process ct_000004 --action approve --reason &quot;演示：人工已给出通过决定&quot; --add &quot;轻松&quot; --execute
+contentops --env mock --output json --non-interactive content process ct_000004 --action approve --reason &quot;演示：人工已给出通过决定&quot; --add &quot;轻松&quot; --execute --yes
+</code></pre>
+<p>参数是 review 与 tags update 的同一套规则，必须同时有 action 和标签操作。读取用 <code>GET /admin/contents/{content_id}</code> 和 <code>GET /admin/tags</code>，写入用 <code>POST /admin/content-reviews</code> 与 <code>PUT /admin/contents/{content_id}/tags</code>，回读仍用详情 GET；没有新增服务端 process 接口。</p>
+<p>预览表格示例：</p>
+<pre><code class="language-text">环境       mock
+内容       ct_000004  无人剧场·第12话：逆流而上
+步骤 1     审核 pending -&gt; approved
+步骤 2     标签 [恋爱, 校园, 武侠] -&gt; [恋爱, 校园, 武侠, 轻松]
+执行顺序   审核成功并回读匹配后，才更新标签
+失败边界   两次独立写入；可能部分完成，不自动回滚
+执行       未提交
+</code></pre>
+<p>完整 JSON 成功示例见第 6 节；部分失败示例见第 7 节。process 的标签计划如果合法但无实际变化，只跳过标签 PUT，仍可提交审核，输出明确标为 skipped；不把“标签没有发请求”伪造为“标签写入成功”。</p>
+<h2 id="section-5-交互校验与执行规则">5. 交互、校验与执行规则</h2>
+<h3 id="section-51-默认预览与明确执行">5.1 默认预览与明确执行</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>调用方式</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>写命令不带 execute</td>
+<td>读取所需数据、校验并显示预览，<strong>零写请求</strong>；mode=preview、status=previewed、退出码 0；不继续询问是否执行</td>
+</tr>
+<tr>
+<td>带 execute，交互终端、table 输出、未带 yes</td>
+<td>先显示本次计划，再要求输入完整内容 ID。完全匹配才执行；取消、EOF、输入不匹配均不写入，cancelled / 7</td>
+</tr>
+<tr>
+<td>带 execute 和 yes</td>
+<td>显示/返回实际执行结果，不再提示；业务和前置条件校验仍然生效</td>
+</tr>
+<tr>
+<td>JSON、non-interactive 或非交互终端中的执行</td>
+<td>必须同时有 execute、yes；缺 yes 返回 rejected / 2，不弹提示、不等待 stdin，也不自动接受</td>
+</tr>
+<tr>
+<td>仅有 yes，没有 execute</td>
+<td>参数冲突，rejected / 2，防止把 yes 误当成执行开关</td>
+</tr>
+</tbody>
+</table></div>
+<p>人工交互时，中途预览和确认提示写 stderr，stdout 只保留最终结果；默认的“只预览”本身就是最终结果，写 stdout。交互确认前的计划只属于本次调用。此前另一次调用显示的预览没有保存或锁定，第二次调用必须重新计划，不能保证与之前展示完全相同。</p>
+<h3 id="section-52-参数和业务前置校验">5.2 参数和业务前置校验</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>P0 规则及错误提示要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参数语法</td>
+<td>未知参数、缺 ID、重复 action、非法枚举、page 非正整数均拒绝。ID 作为不透明字符串，只接收一个非空且不含空白/控制字符的值；不自行宣称 <code>ct_</code> 加固定位数是上游强制格式</td>
+</tr>
+<tr>
+<td>目标读取</td>
+<td>写入前必须成功读到指定详情，核对返回 ID；错误或缺少必要状态/标签字段时停止，不把缺字段当空值</td>
+</tr>
+<tr>
+<td>审核状态</td>
+<td>review / process 仅允许 pending；approved 或 rejected 均提示重新查看，不能强制提交。它是新增 CLI 限制，不是已声明的服务端状态机</td>
+</tr>
+<tr>
+<td>审核理由</td>
+<td>reject 的 reason 去除首尾空白后不能为空；approve 可选。理由仍由调用方提供，不自动编造</td>
+</tr>
+<tr>
+<td>标签参数</td>
+<td>去除参数首尾空白后不得为空；不改大小写、全半角或做相似标签替换；重复输入去重并提示；同一标签 add/remove 冲突、set 与增删混用均拒绝</td>
+</tr>
+<tr>
+<td>标签库</td>
+<td>新增到当前集合中的标签必须存在且 active；废弃或未知的存量标签允许原样保留、允许移除，并给出警告；不能借 set 新增一个当前没有的废弃/未知标签</td>
+</tr>
+<tr>
+<td>清空</td>
+<td>计算后目标为空时拒绝执行，提示本期不支持清空；不提交 tags=[]。这属于产品范围限制，不宣称上游一定禁止空数组</td>
+</tr>
+<tr>
+<td>原有异常</td>
+<td>正文为空、质量 limited、其他字段异常要展示；不自动生成审核结论，不暗改质量/可见性。写入必需字段不可用时才阻断对应操作</td>
+</tr>
+<tr>
+<td>环境与凭据</td>
+<td>mock 与 api 明示；api 缺地址/令牌或使用占位地址时拒绝，令牌不作为命令示例明文参数，不进入输出和错误日志。具体配置载体留待技术设计</td>
+</tr>
+</tbody>
+</table></div>
+<p>预览同样执行这些校验。因此非法标签在 process 中会在审核之前被发现，而不是等审核成功后再报错。</p>
+<h3 id="section-53-标签覆盖与并发变化">5.3 标签覆盖与并发变化</h3>
+<p>CLI 将标签当作集合比较，不将顺序变化当成业务变更；展示时保留存量顺序，新增标签按参数出现顺序追加，set 按参数顺序去重。上游是否保存顺序没有保证，验收不要求排序一致。</p>
+<p>执行前重新读详情，并对照本次预览所依据的标签集合；review / process 还对照审核状态。若变化，<strong>不静默重算后继续执行</strong>：</p>
+<ul>
+<li>还未发出任何写入：rejected / 2，提示状态已变化，重新查看和预览。</li>
+<li>process 审核已核对成功，但审核后的读取发现标签被别人改变：不发 PUT，partial / 4，提示审核已完成、标签步骤未执行，重新做独立标签计划。</li>
+</ul>
+<p>这样可减少覆盖旧快照的风险，但 GET 与写入之间仍有窗口。没有版本条件或服务端锁，<strong>不能保证并发安全，也不能阻止绕过 CLI 的重复审核</strong>。</p>
+<h3 id="section-54-process-的固定执行流程">5.4 process 的固定执行流程</h3>
+<ol>
+<li>校验全部参数，读取当前详情和标签库，生成审核与完整标签目标。任一输入不合法，零写入。</li>
+<li>按执行模式完成确认；再次读取详情，检查状态和标签是否与本次计划一致。</li>
+<li>提交一个审核 item。只有响应计数恰为 <code>success_count=1, failed_count=0</code>，才记录审核已获确认。</li>
+<li>重新 GET 详情：审核状态应为目标值；同时检查标签仍为原集合。审核核对不通过时停止；标签已变化时按部分完成停止。</li>
+<li>标签计划有变化才 PUT 完整目标数组；无变化标 skipped。</li>
+<li>PUT 后重新 GET，核对<strong>本次要求的审核状态与目标标签集合</strong>，并返回 observed。最终不匹配或读失败不能报告全部成功。</li>
+</ol>
+<p>顺序固定，没有自动补偿。一次正常的“两项都发生变更”调用约为 4 次详情 GET、1 次标签库 GET、1 次审核 POST、1 次标签 PUT；这是上述简单流程的请求预算，不是性能承诺。历史不自动成为每次写入的依赖，调用者可另读 history 辅助核查。</p>
+<h3 id="section-55-错误回读与结果未知">5.5 错误、回读与结果未知</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>处理与后续</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单条审核返回 1/0</td>
+<td>记录写入 acknowledged，随后读取状态；计数确认与状态核对缺一不可</td>
+</tr>
+<tr>
+<td>单条审核返回 0/1</td>
+<td>按上游明确的单项失败处理，不更新标签。因为只有一个 item，可关联该 ID；不能从计数编造具体失败原因</td>
+</tr>
+<tr>
+<td>审核计数缺失、为其他组合或响应不能解析</td>
+<td>写入结果 unknown，不继续、不重发。不能把 HTTP 200 当作成功</td>
+</tr>
+<tr>
+<td>标签更新返回成功响应及合规结果对象</td>
+<td>记录 acknowledged，必须回读核对。result 是字符串，不能因示例为 ok 就宣称 schema 只允许 ok</td>
+</tr>
+<tr>
+<td>明确拒绝写入</td>
+<td>只有确认属于未执行的校验/鉴权拒绝或明确业务失败，才标 failed；保留真实 HTTP 与业务 code/message。无法判断是否执行的 5xx、异常体等不能一律当作可重试失败</td>
+</tr>
+<tr>
+<td>写入调用超时、连接中断、响应丢失</td>
+<td>除非能够确认请求尚未发出，否则标 unknown / 5；后续写步骤不执行；不自动重试 POST 或 PUT</td>
+</tr>
+<tr>
+<td>写入已获确认，回读失败或值不匹配</td>
+<td>标 verification_failed / 6，保留已获确认的写入信息；不撤销、不自动再写，也不把“核对失败”伪装成“写入肯定没发生”</td>
+</tr>
+<tr>
+<td>只读或写入前读取失败</td>
+<td>failed / 3，说明未提交写入；没有资料就不生成假预览</td>
+</tr>
+</tbody>
+</table></div>
+<p>P0 不做自动网络重试或轮询核对；一次回读不符合预期时，用户可以另行 get / history。接口没有声明读写立即一致，所以“不匹配”也可能是延迟或其他人改写，提示中不擅自归因。</p>
+<p>写入 unknown 后，即使补读已经看到 approved 或目标标签，也仍不能证明是本次调用执行，原调用继续保持 unknown。自动重放尤其可能追加审核记录。后续只能核查并由有权限的人决定是否另起独立操作；本期没有自动消除歧义的恢复命令。</p>
+<h2 id="section-6-输出合同与退出码">6. 输出合同与退出码</h2>
+<h3 id="section-61-统一-json-信封">6.1 统一 JSON 信封</h3>
+<p>所有正常受控的 JSON 结果（包括错误）输出<strong>一个 JSON 对象</strong>，UTF-8。所有命令共用字段：</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td>初始字符串 <code>1</code>；后续兼容新增字段，调用者不依赖字段顺序</td>
+</tr>
+<tr>
+<td><code>invocation_id</code></td>
+<td>CLI 为本次调用生成的本地关联标识；不是上游幂等键，不会使同一请求去重，也不能关联服务端审计身份</td>
+</tr>
+<tr>
+<td><code>environment, command, mode</code></td>
+<td>mock/api；规范命令名；read/preview/execute</td>
+</tr>
+<tr>
+<td><code>status, exit_code</code></td>
+<td>本次整体结果和预期进程退出码，二者必须一致</td>
+</tr>
+<tr>
+<td><code>content_id</code></td>
+<td>单条命令的 ID；列表/标签库为 null</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>读取结果，或 plan / steps / observed。observed 是最近一次实际读取的值，可为 null，不把计划写成当前值</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>无错误为 null；否则含稳定 CLI code、message、step 及可得的 upstream 信息；upstream 缺失时为 null，不伪造 HTTP/业务码</td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>数组，保存存量废弃标签、数据异常等提示；不能用一条 warning 掩盖未知结果</td>
+</tr>
+</tbody>
+</table></div>
+<p>假设在 Mock 副本上确认执行并核对成功，<strong>完整设计示例</strong>：</p>
+<pre><code class="language-json">{
+  &quot;schema_version&quot;: &quot;1&quot;,
+  &quot;invocation_id&quot;: &quot;local-demo-001&quot;,
+  &quot;environment&quot;: &quot;mock&quot;,
+  &quot;command&quot;: &quot;content.process&quot;,
+  &quot;mode&quot;: &quot;execute&quot;,
+  &quot;status&quot;: &quot;succeeded&quot;,
+  &quot;exit_code&quot;: 0,
+  &quot;content_id&quot;: &quot;ct_000004&quot;,
+  &quot;data&quot;: {
+    &quot;plan&quot;: {
+      &quot;review&quot;: {&quot;before&quot;: &quot;pending&quot;, &quot;action&quot;: &quot;approve&quot;, &quot;reason&quot;: &quot;演示：人工已给出通过决定&quot;},
+      &quot;tags&quot;: {&quot;before&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;], &quot;after&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;, &quot;轻松&quot;]}
+    },
+    &quot;steps&quot;: {
+      &quot;review&quot;: {&quot;write&quot;: &quot;acknowledged&quot;, &quot;verification&quot;: &quot;matched&quot;, &quot;api_result&quot;: {&quot;success_count&quot;: 1, &quot;failed_count&quot;: 0}},
+      &quot;tags&quot;: {&quot;write&quot;: &quot;acknowledged&quot;, &quot;verification&quot;: &quot;matched&quot;, &quot;api_result&quot;: {&quot;result&quot;: &quot;ok&quot;}}
+    },
+    &quot;observed&quot;: {&quot;review_status&quot;: &quot;approved&quot;, &quot;quality_status&quot;: &quot;normal&quot;, &quot;visibility&quot;: &quot;online&quot;, &quot;tags&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;, &quot;轻松&quot;]}
+  },
+  &quot;error&quot;: null,
+  &quot;warnings&quot;: []
+}
+</code></pre>
+<p>步骤 write 的取值为 <code>not_sent / acknowledged / failed / unknown / skipped</code>；verification 为 <code>not_checked / matched / mismatched / unavailable</code>。acknowledged 表示收到合规成功响应，不单独等于端到端成功。failed 仅表示已明确失败；未提交是 not_sent，不能混为失败。</p>
+<p>plan.review.reason=null 只表示调用方未提供理由；构造上游审核请求时省略 reason，不能把 null 当成接口声明接受的字符串值发送。</p>
+<p>预览的 mode 为 preview、status 为 previewed，所有待写步骤为 not_sent；即使退出码为 0，也不表示执行过。读取命令的 succeeded 只表示读取成功。脚本必须同时检查 mode、status、exit_code 和必要步骤，不只判断“JSON 能解析”。</p>
+<h3 id="section-62-标准输出与错误输出">6.2 标准输出与错误输出</h3>
+<ul>
+<li>stdout：唯一结果。table 模式为可读摘要/字段块；JSON 模式为一个完整对象，不混入进度条、提示符或日志。</li>
+<li>stderr：交互预览/确认提示、简短诊断；JSON 模式不产生确认提示，错误详情也必须体现在 stdout 的 error 中，不能要求脚本解析 stderr 文案。</li>
+<li>令牌、认证头和含凭据的配置不输出；上游诊断脱敏，不能把原始 HTTP dump 当作安全日志。</li>
+<li><code>--help</code> 是面向人的帮助文本，不属于结果信封。进程被杀死、输出被截断、无法输出 JSON 时，不承诺有完整信封；调用方应视为没有可信结果，不能据此自动重放写入。</li>
+</ul>
+<h3 id="section-63-退出码">6.3 退出码</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th class="align-right">码</th>
+<th>status</th>
+<th>含义与调用方动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="align-right">0</td>
+<td><code>succeeded / no_change / previewed</code></td>
+<td>读取成功、执行且核对成功、无需变更或有效预览。必须结合 mode，不能把 previewed 当作已执行</td>
+</tr>
+<tr>
+<td class="align-right">1</td>
+<td><code>failed</code></td>
+<td>未分类的本地内部错误；如可能已有写入，结果应优先按 5/6 报告；拿不到可信结果时也不得自动重放</td>
+</tr>
+<tr>
+<td class="align-right">2</td>
+<td><code>rejected</code></td>
+<td>参数、配置、前置条件或执行确认方式不满足；无已提交写入时使用，修正后重新预览</td>
+</tr>
+<tr>
+<td class="align-right">3</td>
+<td><code>failed</code></td>
+<td>只读/前置读取失败，或无成功写步骤时的明确上游失败；保留真实错误，不自动重试写入</td>
+</tr>
+<tr>
+<td class="align-right">4</td>
+<td><code>partial</code></td>
+<td>审核已确认并核对成功，但标签明确失败或尚未提交即被阻断；只对未完成的标签重新计划</td>
+</tr>
+<tr>
+<td class="align-right">5</td>
+<td><code>unknown</code></td>
+<td>任一步写入结果未知；停止，核查，不自动重放。即使另一项已成功，也优先报告 5</td>
+</tr>
+<tr>
+<td class="align-right">6</td>
+<td><code>verification_failed</code></td>
+<td>已获成功响应，但核对失败或不可读；停止，核查，不能据此直接再写</td>
+</tr>
+<tr>
+<td class="align-right">7</td>
+<td><code>cancelled</code></td>
+<td>人工未确认或取消；零写入</td>
+</tr>
+</tbody>
+</table></div>
+<p>结果优先级：写入 unknown 优先于 partial；已获确认的写入无法核对时用 6；其余存在审核已核对成功而标签未完成时用 4。下游步骤不因整体结果为非零而被伪装为全部失败。</p>
+<p>“可信执行成功”的最低条件：环境正确、mode=execute、status=succeeded 或 no_change、退出码 0，所需写步骤 acknowledged 且核对 matched，或明确 skipped。这个结论只表示按当前响应与观测完成了目标，不表示具有强幂等、永久状态或真实操作者身份审计。</p>
+<h2 id="section-7-典型使用流程">7. 典型使用流程</h2>
+<h3 id="section-71-人工从待审核查询到闭环">7.1 人工从待审核查询到闭环</h3>
+<p>以下是一条<strong>计划中的 Mock 演示流程</strong>。先重置工作副本；不改原始附件。人工是否通过及选什么标签由评审者明确给定。</p>
+<pre><code class="language-text">contentops --env mock content list --review-status pending --page 1
+contentops --env mock content list --review-status pending --content-id ct_000004 --page 1
+contentops --env mock content get ct_000004
+contentops --env mock content history ct_000004
+contentops --env mock tags list --status active
+</code></pre>
+<p>第一条用于浏览；第二条用于精确定位，不依赖未声明的分页排序。详情能看到正文和原标签，历史为空只说明附件中没有该 ID 的日志组。</p>
+<p>假设人工明确给出“演示通过，新增轻松”的决定：</p>
+<pre><code class="language-text">contentops --env mock content process ct_000004 --action approve --reason &quot;演示：人工已给出通过决定&quot; --add &quot;轻松&quot;
+contentops --env mock content process ct_000004 --action approve --reason &quot;演示：人工已给出通过决定&quot; --add &quot;轻松&quot; --execute
+</code></pre>
+<p>第二条在交互终端显示本次计划并要求输入 <code>ct_000004</code>。假设全部执行和核对成功，表格摘要应类似：</p>
+<pre><code class="language-text">整体结果   succeeded / 0
+审核       acknowledged；回读 approved，与目标匹配
+标签       acknowledged；回读 恋爱、校园、武侠、轻松，与目标匹配
+质量/可见  normal / online（仅展示当前值）
+</code></pre>
+<p>然后用独立读取核对，而不是只截图“提交成功”：</p>
+<pre><code class="language-text">contentops --env mock --output json content get ct_000004
+contentops --env mock content history ct_000004
+contentops --env mock content list --review-status pending --content-id ct_000004 --page 1
+</code></pre>
+<p>Mock 的预期证据是：详情 approved 且标签四个；审核历史比初始增加一条本次模拟审核记录；pending 精确筛选为空。真实 API 的历史和状态时间可能存在附件所示矛盾，不能仅靠“最新一条看起来通过”覆盖当前详情。</p>
+<p>也可用两条独立写命令完成同一流程：先 review，再 tags update，每条独立确认和核对。日常操作推荐 process；审核后补标签用独立入口。</p>
+<h3 id="section-72-误输入非法标签与部分失败">7.2 误输入、非法标签与部分失败</h3>
+<p><strong>误输入 ID</strong>：</p>
+<pre><code class="language-text">contentops --env mock content process &quot;ct_000004 ct_000005&quot; --action approve --add &quot;轻松&quot; --execute --yes
+contentops --env mock content get ct_999999
+</code></pre>
+<p>第一条违反单 ID 规则，本地 rejected / 2、零写入。第二条 ID 形式可接受但不在附件中；由 Mock 的“目标不存在”场景返回明确读取失败，failed / 3，不自动改成相似 ID。材料没有给真实不存在错误码，产品示例不虚构其 HTTP 状态或业务 code。</p>
+<p><strong>非法标签，在审核前阻断</strong>：</p>
+<pre><code class="language-text">contentops --env mock content process ct_000004 --action approve --add &quot;轻松松&quot; --execute --yes
+</code></pre>
+<p>“轻松松”不在附件标签库，CLI 返回 rejected / 2、error.code=TAG_NOT_AVAILABLE，并提示先查 tags list；review、tags 都是 not_sent。可以提示核对名称，但不得自动替换为“轻松”。</p>
+<p><strong>受控部分失败</strong>：测试场景让审核成功并可回读，但标签写入在落库前被明确拒绝。这是后续新增的故障场景，不是声称附件接口必然有此故障或已发生过。</p>
+<pre><code class="language-text">contentops --env mock --output json --non-interactive content process ct_000004 --action approve --add &quot;轻松&quot; --execute --yes
+</code></pre>
+<p>该场景的完整结果示例：</p>
+<pre><code class="language-json">{
+  &quot;schema_version&quot;: &quot;1&quot;,
+  &quot;invocation_id&quot;: &quot;local-demo-002&quot;,
+  &quot;environment&quot;: &quot;mock&quot;,
+  &quot;command&quot;: &quot;content.process&quot;,
+  &quot;mode&quot;: &quot;execute&quot;,
+  &quot;status&quot;: &quot;partial&quot;,
+  &quot;exit_code&quot;: 4,
+  &quot;content_id&quot;: &quot;ct_000004&quot;,
+  &quot;data&quot;: {
+    &quot;plan&quot;: {
+      &quot;review&quot;: {&quot;before&quot;: &quot;pending&quot;, &quot;action&quot;: &quot;approve&quot;, &quot;reason&quot;: null},
+      &quot;tags&quot;: {&quot;before&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;], &quot;after&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;, &quot;轻松&quot;]}
+    },
+    &quot;steps&quot;: {
+      &quot;review&quot;: {&quot;write&quot;: &quot;acknowledged&quot;, &quot;verification&quot;: &quot;matched&quot;, &quot;api_result&quot;: {&quot;success_count&quot;: 1, &quot;failed_count&quot;: 0}},
+      &quot;tags&quot;: {&quot;write&quot;: &quot;failed&quot;, &quot;verification&quot;: &quot;not_checked&quot;, &quot;api_result&quot;: null}
+    },
+    &quot;observed&quot;: {&quot;review_status&quot;: &quot;approved&quot;, &quot;quality_status&quot;: &quot;normal&quot;, &quot;visibility&quot;: &quot;online&quot;, &quot;tags&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;]}
+  },
+  &quot;error&quot;: {&quot;code&quot;: &quot;TAG_WRITE_REJECTED&quot;, &quot;message&quot;: &quot;Mock 故障场景：标签未写入；审核已完成，请仅重新计划标签操作&quot;, &quot;step&quot;: &quot;tags&quot;, &quot;upstream&quot;: null},
+  &quot;warnings&quot;: []
+}
+</code></pre>
+<p>这里 observed 来自审核后的那次读取，<strong>不是失败后新读到的状态</strong>；因此先重新 get，再恢复：</p>
+<pre><code class="language-text">contentops --env mock content get ct_000004
+contentops --env mock content tags update ct_000004 --add &quot;轻松&quot;
+contentops --env mock content tags update ct_000004 --add &quot;轻松&quot; --execute
+contentops --env mock content get ct_000004
+</code></pre>
+<p>不重跑 process。若重跑，本期的 pending 前置检查会拒绝，但这不是服务端幂等保证。恢复标签不能增加审核记录。</p>
+<p><strong>写入超时</strong>：若审核 POST 可能已经落库但响应丢失，返回 unknown / 5，review.write=unknown、tags.write=not_sent。若是标签 PUT 超时，则保留审核 acknowledged/matched，tags.write=unknown，整体仍为 5。后续只先核查：</p>
+<pre><code class="language-text">contentops --env mock content get ct_000004
+contentops --env mock content history ct_000004
+</code></pre>
+<p>这两个读取是线索，不能自动解除原调用的未知结果。API 写入操作者无法可靠区分时，不能承诺识别出哪一条记录一定属于这次超时调用。</p>
+<h3 id="section-73-脚本非交互调用">7.3 脚本非交互调用</h3>
+<p>以下是 <strong>PowerShell 使用示例</strong>，用于后续运行 CLI；本轮没有执行它，也不是 Java 实现。</p>
+<p>先预览并保存结果：</p>
+<pre><code class="language-powershell">contentops --env mock --output json --non-interactive content process ct_000004 --action approve --reason &quot;演示：调用方明确给定的决定&quot; --add &quot;轻松&quot; | Set-Content -LiteralPath './preview-result.json' -Encoding utf8
+</code></pre>
+<p>预览成功应为 mode=preview、status=previewed、exit_code=0；不能据此给业务任务标记“已审核”。经调用方确认后，另发明确执行调用：</p>
+<pre><code class="language-powershell">$jsonResult = &amp; contentops --env mock --output json --non-interactive content process ct_000004 --action approve --reason &quot;演示：调用方明确给定的决定&quot; --add &quot;轻松&quot; --execute --yes 2&gt; process-error.log
+$commandExit = $LASTEXITCODE
+$jsonResult | Set-Content -LiteralPath './process-result.json' -Encoding utf8
+$result = $jsonResult | ConvertFrom-Json
+$result.mode
+$result.status
+$result.data.steps
+</code></pre>
+<p>立即保存 LASTEXITCODE，避免被后续命令覆盖；结果文件显式按 UTF-8 保存，避免依赖 Shell 的重定向编码默认值。示例文件是运行时的结果文件，不是输入审批单；预览和执行仍是重新读取的两次调用。</p>
+<p>脚本按以下规则判断，不自动循环重发写入：</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>判断条件</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>退出 0，信封 exit_code=0，environment=mock，mode=execute，status=succeeded，review acknowledged/matched，tags acknowledged/matched 或 skipped/matched</td>
+<td>此次 Mock 任务可标完成；生产调用应检查预期的 api 环境，而不是照搬 mock</td>
+</tr>
+<tr>
+<td>退出 0，但 mode=preview</td>
+<td>只保存计划，不计为执行完成</td>
+</tr>
+<tr>
+<td>退出 2 / 3</td>
+<td>保存错误并停止；由调用方修正输入或处理明确错误，不自动扩大范围</td>
+</tr>
+<tr>
+<td>退出 4</td>
+<td>保存逐步结果，交由运营重新查看并仅处理标签；不重放整个 process</td>
+</tr>
+<tr>
+<td>退出 5 / 6</td>
+<td>标记待核查，停止后续写入并通知任务负责人；不因回读目标状态相同而盲目重试</td>
+</tr>
+<tr>
+<td>JSON 缺失、解析失败、字段与进程退出码矛盾、环境不符，或意外非零退出</td>
+<td>不能信任本次结果；保存可得证据并停止，不自动重放</td>
+</tr>
+</tbody>
+</table></div>
+<p>P0 无论人还是脚本都不凭退出码 0 单独推断执行成功；也不把客户端 invocation_id 当作重试令牌。</p>
+<h2 id="section-8-可验证验收标准">8. 可验证验收标准</h2>
+<h3 id="section-81-验收证据与数据前提">8.1 验收证据与数据前提</h3>
+<p>每个独立测试从可重置的 Mock 工作副本开始；串联流程单独标注。初始来源仍是只读附件；新增故障场景与原始数据分开。</p>
+<p>至少保存：输入命令、环境、stdout、stderr、真实退出码、调用的 API 与次数、操作前后详情、必要的审核日志。令牌不进入证据。能够看到状态变了，还应能证明 CLI 没有偷偷重放审核或调用范围外接口。</p>
+<p>以下是两周 P0 的验收目标，不是本轮已经跑过的测试结果。真实 API 若有可用环境，再增加联调证据；不能用 Mock 的故障行为推定真实服务的错误码或一致性。</p>
+<h3 id="section-82-产品验收">8.2 产品验收</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>条件与操作</th>
+<th>通过标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P-01</td>
+<td>首次使用，仅阅读 help 和操作说明</td>
+<td>能找到“查询 → 详情/历史 → 标签 → 预览 → 执行 → 核对”的完整路径；明确当前环境和单 ID 限制</td>
+</tr>
+<tr>
+<td>P-02</td>
+<td>用 pending、page、keyword/tag 筛选</td>
+<td>条件含义与 AND 一致；知道当前页、固定每页 20 和匹配总量；无结果不被报成服务故障</td>
+</tr>
+<tr>
+<td>P-03</td>
+<td>get ct_000004、history ct_000003、读取空正文和长标题样本</td>
+<td>正文/完整标签可阅读；历史倒序且不丢动作；空正文有提示，长文本/emoji 不导致错行或 JSON 数据丢失</td>
+</tr>
+<tr>
+<td>P-04</td>
+<td>对 ct_000004 执行 process，人工指定 approve + 新增轻松</td>
+<td>默认预览不写；确认后审核和标签均实际改变并核对；独立 get 能看到 approved 与四个标签</td>
+</tr>
+<tr>
+<td>P-05</td>
+<td>重置后独立 reject ct_000005</td>
+<td>CLI 要求有效理由；只完成审核，标签不被 CLI 改动；不附加下架/限流/通知请求</td>
+</tr>
+<tr>
+<td>P-06</td>
+<td>独立新增、移除、替换标签</td>
+<td>三种语义与预览一致；新增/移除保留未涉及标签；替换明确展示将删除哪些存量标签</td>
+</tr>
+<tr>
+<td>P-07</td>
+<td>误 ID、非法标签、拒绝确认</td>
+<td>提示具体对象或参数、说明是否提交、给出可执行的查看/修正方向；不选相似 ID、不自动改标签名称</td>
+</tr>
+<tr>
+<td>P-08</td>
+<td>审核成功、标签明确失败</td>
+<td>清楚显示审核已完成和标签未完成；退出 4；运营能按说明仅补标签，不要求重做审核</td>
+</tr>
+<tr>
+<td>P-09</td>
+<td>模拟写入超时和核对失败</td>
+<td>分别呈现 unknown / verification_failed，而非统一“失败请重试”；说明哪些步骤未执行及下一步核查命令</td>
+</tr>
+<tr>
+<td>P-10</td>
+<td>脚本执行、HTML Demo、文档交叉检查</td>
+<td>命令名、参数、状态和退出码一致；Demo 明示预设模拟，Mock 成功不被标成真实后台已成功</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-83-研发验收可转为-java-测试用例">8.3 研发验收，可转为 Java 测试用例</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>给定 / 操作</th>
+<th>必须验证的结果与副作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-01</td>
+<td>初始 Mock，pending 分别查询 page=1/7，另做 ID 精确筛选</td>
+<td>pending total=132；在稳定且无写入的测试中第 1 页 20、第 7 页 12；精确筛选 ct_000004 得 1 条；不把具体排序写成真实 API 保证</td>
+</tr>
+<tr>
+<td>R-02</td>
+<td>过滤无匹配、page=0、page=abc、非法状态、未知选项</td>
+<td>无匹配为成功空集合；其余 rejected / 2；参数错误不发写请求；上游报错不被擅自改成空集合</td>
+</tr>
+<tr>
+<td>R-03</td>
+<td>history ct_000003 与 ct_000004</td>
+<td>前者输出 6 月 15 日在前、6 月 12 日在后，原因空串保留；后者为空。所有原始动作保留</td>
+</tr>
+<tr>
+<td>R-04</td>
+<td>tags list 默认、status=all、keyword=轻松</td>
+<td>默认 23、all 25、关键词结果 1；只调用 GET /admin/tags，本地过滤不被发送成未声明参数</td>
+</tr>
+<tr>
+<td>R-05</td>
+<td>对任一合法写命令不带 execute</td>
+<td>退出 0、mode=preview、status=previewed；POST/PUT 次数为 0；前后工作副本完全相同</td>
+</tr>
+<tr>
+<td>R-06</td>
+<td>execute 的交互确认、取消/EOF、JSON 未带 yes、仅带 yes</td>
+<td>正确完整 ID 才执行；取消为 7；非交互缺 yes 和 yes 无 execute 为 2；未确认时零写入、无 stdin 等待</td>
+</tr>
+<tr>
+<td>R-07</td>
+<td>review approve / reject，返回 1/0</td>
+<td>每次审核 POST 的 items 长度严格为 1；action/reason 正确；省略理由时不传 null；回读匹配后才为成功；Mock 审核记录只新增 1 条</td>
+</tr>
+<tr>
+<td>R-08</td>
+<td>review 返回 0/1、2/0、缺计数或不可解析响应</td>
+<td>0/1 为明确失败；其余为 unknown；process 均不调用标签 PUT；没有自动第二次 POST</td>
+</tr>
+<tr>
+<td>R-09</td>
+<td>reject 缺/空理由，或 review/process 对当前非 pending 内容执行</td>
+<td>rejected / 2；零写入；对已完成内容再次执行 process 不重复追加记录</td>
+</tr>
+<tr>
+<td>R-10</td>
+<td>process 同时带 approve 与未知标签轻松松</td>
+<td>TAG_NOT_AVAILABLE、退出 2；审核 POST 与标签 PUT 均为 0，证明全量前置校验有效</td>
+</tr>
+<tr>
+<td>R-11</td>
+<td>初始 ct_000004，分别 add 轻松、remove 武侠、set 恋爱/校园/轻松</td>
+<td>PUT 数组分别为四标签、恋爱/校园、恋爱/校园/轻松；回读按集合核对；不能只发送增量标签</td>
+</tr>
+<tr>
+<td>R-12</td>
+<td>add 已有标签、remove 不存在标签、set 相同集合不同顺序</td>
+<td>合法且无变化时 no_change / 0、零 PUT，返回实际集合；process 中标签为 skipped，审核仍按需执行</td>
+</tr>
+<tr>
+<td>R-13</td>
+<td>add/remove 同一标签、混用 set、空标签、移除最后一个标签</td>
+<td>rejected / 2、零写入；最后一种明确说明不支持清空；不发送空数组</td>
+</tr>
+<tr>
+<td>R-14</td>
+<td>ct_000077 保留/移除旧版-悬疑；对其他内容新增旧版-悬疑</td>
+<td>存量可保留/移除并警告；新增废弃标签拒绝。另用标注的新样本验证未知存量标签可保留/移除</td>
+</tr>
+<tr>
+<td>R-15</td>
+<td>在预览读取和执行前检查之间改动审核状态/标签</td>
+<td>尚未写入时 rejected / 2；若审核已核对成功才发现标签变化，则 partial / 4、零标签 PUT；不静默重算并继续</td>
+</tr>
+<tr>
+<td>R-16</td>
+<td>process 正常完成两项变更</td>
+<td>严格先 POST、审核回读匹配，再 PUT、最终回读；各写接口恰调用 1 次；真实退出码与 JSON 一致</td>
+</tr>
+<tr>
+<td>R-17</td>
+<td>受控故障：审核成功，标签落库前明确拒绝；随后只补标签</td>
+<td>首次 partial / 4，保留审核 acknowledged/matched；恢复只调用标签相关写入；审核记录总共只增加 1 条</td>
+</tr>
+<tr>
+<td>R-18</td>
+<td>受控故障：审核已落库但响应丢失；另测标签已落库但响应丢失</td>
+<td>整体 unknown / 5；审核未知时标签 not_sent；标签未知时保留审核成功；每次都无写入重试，即使回读已是目标值仍不抹去 unknown</td>
+</tr>
+<tr>
+<td>R-19</td>
+<td>收到写入成功响应后，回读失败或返回旧值/并发新值</td>
+<td>verification_failed / 6，分别标 unavailable/mismatched；保留 acknowledged；审核核对失败时不做标签；不自动回滚</td>
+</tr>
+<tr>
+<td>R-20</td>
+<td>前置读取失败、响应缺必需字段、ID 对不上；API 鉴权错误</td>
+<td>无法计划时零写入，按错误分类返回；保留可得的上游 code/message，不伪造“内容不存在”或“可重试”</td>
+</tr>
+<tr>
+<td>R-21</td>
+<td>JSON 成功/预览/拒绝/部分失败/未知/核对失败各执行一次</td>
+<td>stdout 恰为一个可解析对象；schema_version、mode、status、exit_code 与实际退出一致；错误含稳定 CLI code；stderr 文案不作为解析依赖</td>
+</tr>
+<tr>
+<td>R-22</td>
+<td>mock/api 环境检查、缺 api 配置、含令牌的故障诊断</td>
+<td>缺配置拒绝且不回退；环境标识准确；stdout、stderr、HTML 和结果文件均不泄露凭据</td>
+</tr>
+<tr>
+<td>R-23</td>
+<td>两个独立 CLI 进程：前一个变更，后一个 get；重置工作副本</td>
+<td>后一进程读到已保存的 Mock 状态；重置可复现初始状态；原始题目/OpenAPI/Mock 文件校验值不变</td>
+</tr>
+<tr>
+<td>R-24</td>
+<td>检查调用范围与无可信输出情况</td>
+<td>全流程只调用六项 API；不发送通知/处置；输出截断、进程中断等在调用方说明中明确不能自动重放，不承诺跨进程恢复</td>
+</tr>
+</tbody>
+</table></div>
+<p>所有 P0 场景通过才可称完整 MVP 验收完成。未接入真实环境、并发窗口、不可判定超时和 op_api 身份局限须保留在交付说明中，不能通过修改测试期望隐藏。</p>
+<h2 id="section-9-一名-java-后端的十个工作日计划">9. 一名 Java 后端的十个工作日计划</h2>
+<h3 id="section-91-两周完整-mvp">9.1 两周完整 MVP</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>工作日</th>
+<th>具体安排</th>
+<th>当日可检查产出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>0.75 日确认产品合同/验收和下一阶段技术选择，0.25 日搭通读取路径</td>
+<td>范围冻结、错误/输出合同清晰；能证明附件只读、环境隔离。框架选择在技术设计阶段完成，不在本文预定</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>1 日完成四个只读入口、基本表格/JSON、分页与本地标签过滤</td>
+<td>列表/详情/历史/标签库可演示，ct_000004 状态与附件一致</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>1 日完成单条审核与基本校验</td>
+<td>approve/reject、理由校验、单 item 计数解释、日志追加可验证</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>1 日完成标签增删/替换与完整数组计算</td>
+<td>三种预览与实际 PUT 正确，存量废弃标签处理明确</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>0.25 日收尾标签边界，0.75 日统一预览/确认/非交互和结果处理</td>
+<td>非交互不阻塞；错误输出和标签无变化处理统一</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>0.50 日完善共享核对/未知结果，0.50 日做组合命令</td>
+<td>两步固定顺序、失败停止，不能回读时不报全成功</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>0.25 日收尾组合，0.75 日完善可持久化 Mock 和故障场景</td>
+<td>正常闭环、标签明确失败、响应丢失均可重复演示；不更改原始附件</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>0.25 日 Mock 收尾，0.75 日集中自动化回归</td>
+<td>重点覆盖零写入、写入次数、部分失败和未知分支；问题可定位</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>0.25 日测试收尾，0.50 日 HTML Demo，0.25 日操作文档</td>
+<td>Demo 与 CLI 命令/JSON 一致；明确模拟与真实状态区别</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>0.50 日评审验收、证据与已知限制，0.50 日缓冲修复</td>
+<td>产品/研发验收记录、重置/演示说明、缺口清单；仅在无阻塞问题且有余量时考虑 P1</td>
+</tr>
+</tbody>
+</table></div>
+<p>Mock 和基础验证随核心开发先做；D7 是完善故障与跨进程演示能力，不能等到 D7 才第一次测试写入。D8–D9 的测试预算用于集中回归和故障验证。</p>
+<p>计划已用满 10 日，余量只有 0.5 日。超时恢复、可配置流程、更多 API、复杂终端体验都不能追加为必做。若 D6 仍未有可信的正常闭环，则冻结 P1、将 HTML 限制为静态预设展示，优先修正写入和结果；若 P0 仍无法按期完成，应明确标记未通过项目，不能用演示页面代替实际 CLI 验收。</p>
+<h3 id="section-92-48-小时试炼交付切片与完整-mvp-的差别">9.2 48 小时试炼：交付切片与完整 MVP 的差别</h3>
+<p>用户已确认需要可运行的最小 Java CLI，因此单有方案文档或 HTML 不能完成试炼目标。建议按两天合计约 <strong>18 小时有效工作 + 日历时间中的休息/机动</strong> 安排，避免把 48 小时理解为一个人连续研发 48 小时；实际预算在下一阶段技术选择后复核。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>交付项</th>
+<th>48 小时最低切片</th>
+<th>两周完整 MVP 补齐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文档</td>
+<td>复用 01、完成本 02；下一阶段给出足以落地的技术说明、运行/操作/边界说明</td>
+<td>完整评审、验收与全部 P0 证据</td>
+</tr>
+<tr>
+<td>只读 CLI</td>
+<td>Mock 的 list/get/history/tags list；列表先满足 pending/page/content-id</td>
+<td>所有 P0 筛选、完整帮助与排版边界</td>
+</tr>
+<tr>
+<td>写入 CLI</td>
+<td>单条 review 与 process；标签先满足 add，独立 tags update 能补标签；可跨进程 get 核对</td>
+<td>标签 remove/set、完整存量/并发变化校验和所有 P0 边界</td>
+</tr>
+<tr>
+<td>安全和输出</td>
+<td>默认预览；实际执行显式 execute+yes；基础表格/统一 JSON；禁止写入自动重试；单项结果、部分失败 4、未知 5 和核对失败 6 的基本区分</td>
+<td>交互输入完整 ID、各种受控退出与全面校验/回归</td>
+</tr>
+<tr>
+<td>环境</td>
+<td>仅验收 Mock 工作副本；所有输出标 mock</td>
+<td>六项 API 的适配及可得的真实环境联调，不承诺占位地址可用</td>
+</tr>
+<tr>
+<td>演示</td>
+<td>一次真实运行最小 CLI 的闭环证据；明确失败/超时的少量受控证据；HTML 单页展示</td>
+<td>R-01 至 R-24 完整通过和异常覆盖</td>
+</tr>
+</tbody>
+</table></div>
+<p>这是<strong>48 小时可运行切片的收缩</strong>，不是把两周 P0 的标签移除/替换等要求降成 P1。若试炼只实现部分命令参数，help 和 HTML 都必须准确标记支持情况，未实现参数明确拒绝，不能展示成可执行功能。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>时间分配</th>
+<th class="align-right">有效工作估算</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一天：范围/最小技术说明</td>
+<td class="align-right">2 小时</td>
+<td>复用已有分析，冻结最小切片和安全底线，不再扩 API</td>
+</tr>
+<tr>
+<td>第一天：Mock 工作副本与四个读取入口</td>
+<td class="align-right">4 小时</td>
+<td>可运行、可查询、环境有标识</td>
+</tr>
+<tr>
+<td>第一天：最小单条审核/标签新增闭环</td>
+<td class="align-right">3 小时</td>
+<td>能显式执行，返回 JSON，第二个进程能读到变更</td>
+</tr>
+<tr>
+<td>第二天：回读、局部失败/未知处理、冒烟验证</td>
+<td class="align-right">3 小时</td>
+<td>正常闭环、零写入预览、部分失败和超时不重放有证据</td>
+</tr>
+<tr>
+<td>第二天：HTML 轻量展示</td>
+<td class="align-right">2 小时</td>
+<td>使用已验证结果或明确预设的模拟，不再开发后台页面</td>
+</tr>
+<tr>
+<td>第二天：操作说明和演示复核</td>
+<td class="align-right">2 小时</td>
+<td>命令可复制、结果可复现，列出未完成 P0</td>
+</tr>
+<tr>
+<td>第二天：机动修复</td>
+<td class="align-right">2 小时</td>
+<td>优先修核心路径，不加入 P1</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td class="align-right"><strong>18 小时</strong></td>
+<td><strong>试炼切片，不声称等于十日完整 MVP</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>如果下一阶段确认该切片仍无法在时间内完成，应进一步减少展示和过滤参数，保留“可执行审核 + 实际标签变更 + 回读证据 + 明示未知结果”的底线；不能删掉实际写入只留下模拟成功文字。此时须明确暴露交付缺口，而不是默认已完成用户确认的最低目标。</p>
+<h2 id="section-10-为后续-agent-预留什么">10. 为后续 Agent 预留什么</h2>
+<h3 id="section-101-第一阶段必须打好的基础">10.1 第一阶段必须打好的基础</h3>
+<ul>
+<li>稳定命令语义、schema_version、明确的 read/preview/execute，以及不阻塞的显式非交互执行。</li>
+<li>单个 ID 贯穿计划、步骤与实际观测；审核与标签分别报告，不把局部成功压成一个布尔值。</li>
+<li>部分失败、未知、核对失败和未提交的区别；调用方知道什么时候停止，未来不会被错误成功信号驱动重试。</li>
+<li>预览与完整标签目标、写前变化检查、写后核对；承认其不能替代服务端版本校验。</li>
+<li>invocation_id 用于客户端关联和保存 stdout，凭据脱敏；不预先引入幂等键假语义。</li>
+<li>单条业务判断由调用方提供；历史和正文按数据处理，不能被内容中的文字变成额外操作指令。</li>
+</ul>
+<h3 id="section-102-放到后续-agent-100-条阶段">10.2 放到后续 Agent / 100 条阶段</h3>
+<p>目标文件与固定 ID 清单、批内去重、目标快照说明、逐项审批/预览、批次结果持久化、限速与并发、任务暂停和恢复、未知项人工对账、审计身份增强，以及 Agent 审核判断的授权/质量标准。</p>
+<p>现有审核 API 最多 20 项且只有计数，后续必须重新选择“每项单独请求”还是“分批提交并承认不可逐项确认”，并评估是否需要上游补逐项结果、幂等和版本条件。不能把现有单条调用简单循环 100 次就宣称完成了可靠批量方案。</p>
+<p>第一阶段不预建消息队列、任务调度平台、分布式工作流或数据库任务中心。等批量的执行、恢复与审计需求具体化后再决定是否需要持久化和其他组件。</p>
+<h2 id="section-11-当前决定与仍需确认的业务政策">11. 当前决定与仍需确认的业务政策</h2>
+<p>本稿确定用于后续技术设计的产品基线为：<strong>方案 A 的六项 API 范围；C 型命令组织；单条 process；默认预览；人工显式确认；脚本 execute+yes；先审核后标签；分别回读；不自动重试或回滚</strong>。本次 48 小时交付目标已由用户确认，不再作为悬而未决的问题。</p>
+<p>以下两组规则在本文按推荐值写成了可测试合同，属于比上游更严格的 CLI 业务政策，仍值得产品确认；它们不阻止本轮文档完成：</p>
+<ol>
+<li><strong>审核政策</strong>：P0 只处理 pending，驳回强制填写理由，不开放 force 或重复审核。</li>
+<li><strong>标签政策</strong>：只允许新增 active 标签，存量废弃/未知标签可保留或移除；P0 不支持清空全部标签。</li>
+</ol>
+<p>上述政策若调整，需要同步修改示例、校验和验收。真实服务地址、令牌配置方式、运行平台和 Java 框架由下一阶段技术设计确定；本文不推断材料外的服务能力。</p>
+</article>
+      <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 docs/02-第一阶段MVP与CLI产品方案.md</span></footer>
+    </main>
+  </div>
+</body>
+</html>

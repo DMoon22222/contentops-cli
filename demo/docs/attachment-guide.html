@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="source-sha256" content="e289f0daaa91feecce1b4ce3bd28440b43ab29f33932d6d7e66008c2b28e3d60">
+  <title>附件说明（题目：内容运营后台 CLI 化） · ContentOps 文档</title>
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body id="document-top">
+  <a class="skip-link" href="#document-body">跳至正文</a>
+  <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
+  <div class="reading-layout">
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-1-content-ops-admin-openapijson内容运营后台接口">1. content-ops-admin-openapi.json（内容运营后台接口）</a></li>
+<li class="toc-level-2"><a href="#section-2-mock_datajson样例数据">2. mock_data.json（样例数据）</a></li></ul></nav></details></aside>
+    <main id="document-body" tabindex="-1">
+      <div class="document-meta"><span>原始附件说明</span><a href="../../%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5%E5%90%8E%E5%8F%B0%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/README.md">原始 Markdown 文件</a></div>
+
+      <article class="markdown-body"><h1 id="section-附件说明题目内容运营后台-cli-化">附件说明（题目：内容运营后台 CLI 化）</h1>
+<p>本题共两份附件：</p>
+<h2 id="section-1-content-ops-admin-openapijson内容运营后台接口">1. content-ops-admin-openapi.json（内容运营后台接口）</h2>
+<p>从现有系统导出的接口文档（OpenAPI 3.0 格式）。共 21 个接口路径、23 个操作，覆盖内容查询、审核、标签、分发、状态调整、创作者与白名单、用户举报、站内通知、推荐位、异步导出、统计与操作日志。每个接口带请求示例（<code>x-request-example</code> 字段）与响应示例。</p>
+<p>说明：</p>
+<ul>
+<li>接口基本可用，但并不是为 CLI 或 Agent 调用专门设计的；文档中描述的行为即当前系统的真实行为。</li>
+<li><code>servers</code> 中的地址为示例占位，不可访问。</li>
+</ul>
+<h2 id="section-2-mock_datajson样例数据">2. mock_data.json（样例数据）</h2>
+<p>与接口字段口径一致的样例数据，可作为本地假数据源驱动你的方案（例如 mock 接口返回、驱动演示或验证）。不要求真实联网调用。</p>
+<p>包含七部分：</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>键</th>
+<th>内容</th>
+<th>规模</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contents</code></td>
+<td>内容列表（含详情字段）</td>
+<td>300 条</td>
+</tr>
+<tr>
+<td><code>creators</code></td>
+<td>创作者列表</td>
+<td>40 位</td>
+</tr>
+<tr>
+<td><code>review_logs</code></td>
+<td>内容审核记录，按 content_id 索引</td>
+<td>174 组</td>
+</tr>
+<tr>
+<td><code>reports</code></td>
+<td>用户举报</td>
+<td>30 条</td>
+</tr>
+<tr>
+<td><code>promo_slots</code></td>
+<td>推荐位占用</td>
+<td>6 条</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>标签库</td>
+<td>25 个</td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>分发栏目与可用渠道</td>
+<td>3 个</td>
+</tr>
+</tbody>
+</table></div>
+<p>数据为虚构样例，分布与真实系统近似，但不保证每条记录都干净、一致。</p>
+</article>
+      <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 内容运营后台接口数据/README.md</span></footer>
+    </main>
+  </div>
+</body>
+</html>

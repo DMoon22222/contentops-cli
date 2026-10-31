@@ -3,3 +3,9 @@
 /docs/*.md -text
 /内容运营后台接口数据/** -text
 "/题目：内容运营后台 CLI 化.md" -text
+
+# Static reading pages and their mapped sources use byte-stable SHA manifests.
+/README.md -text
+/evidence/task2/README.md -text
+/evidence/s5/README.md -text
+/demo/docs/** -text

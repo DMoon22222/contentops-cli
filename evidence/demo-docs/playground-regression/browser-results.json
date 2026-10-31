@@ -1,0 +1,2586 @@
+{
+  "captured_at": "2026-10-31T16:58:04.969Z",
+  "passed": true,
+  "check_count": 636,
+  "browser": "156.0.8078.74",
+  "playwright": "1.64.0-alpha-1790635538000",
+  "url": "file:///F:/AI_TESTEXAM/demo/index.html",
+  "offline": true,
+  "browser_plugin": "Absent; used existing local Playwright + Chrome for offline file:// checks.",
+  "viewports": [
+    "1440x1000",
+    "1366x768",
+    "1024x768",
+    "390x844"
+  ],
+  "unique_source_links": 84,
+  "console_errors": [],
+  "dialogs": [],
+  "requests": [
+    "file:///F:/AI_TESTEXAM/demo/index.html",
+    "file:///F:/AI_TESTEXAM/demo/style.css",
+    "file:///F:/AI_TESTEXAM/demo/data.js",
+    "file:///F:/AI_TESTEXAM/demo/seed.js",
+    "file:///F:/AI_TESTEXAM/demo/cli-engine.js",
+    "file:///F:/AI_TESTEXAM/demo/playground.js",
+    "file:///F:/AI_TESTEXAM/demo/docs/links.js",
+    "file:///F:/AI_TESTEXAM/demo/app.js",
+    "file:///F:/AI_TESTEXAM/demo/index.html",
+    "file:///F:/AI_TESTEXAM/demo/style.css",
+    "file:///F:/AI_TESTEXAM/demo/data.js",
+    "file:///F:/AI_TESTEXAM/demo/seed.js",
+    "file:///F:/AI_TESTEXAM/demo/cli-engine.js",
+    "file:///F:/AI_TESTEXAM/demo/playground.js",
+    "file:///F:/AI_TESTEXAM/demo/docs/links.js",
+    "file:///F:/AI_TESTEXAM/demo/app.js"
+  ],
+  "checks": [
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/summary.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/tags-reject-before-write/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-09-recovered-query.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-09-recovered-query.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-09-recovered-query.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-10-recovered-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-10-recovered-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-10-recovered-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/review-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/tags-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/review-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/tags-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/after/snapshot-facts.json",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/15-after-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/15-after-history",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-09-recovered-query",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-09-recovered-query",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-10-recovered-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-10-recovered-history",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "initial pending total",
+      "passed": true
+    },
+    {
+      "name": "page size and selected second row",
+      "passed": true
+    },
+    {
+      "name": "task2 after tags are distinct from S5",
+      "passed": true
+    },
+    {
+      "name": "task2 history 0 to 1",
+      "passed": true
+    },
+    {
+      "name": "task2 pending 131 / revision 2",
+      "passed": true
+    },
+    {
+      "name": "historical evidence payload unchanged",
+      "passed": true
+    },
+    {
+      "name": "complete browser seed equals original",
+      "passed": true
+    },
+    {
+      "name": "browser seed source SHA",
+      "passed": true
+    },
+    {
+      "name": "three main modules",
+      "passed": true
+    },
+    {
+      "name": "product still first",
+      "passed": true
+    },
+    {
+      "name": "existing MVP scope remains",
+      "passed": true
+    },
+    {
+      "name": "required browser-only label",
+      "passed": true
+    },
+    {
+      "name": "full original dataset",
+      "passed": true
+    },
+    {
+      "name": "initial ct4 snapshot",
+      "passed": true
+    },
+    {
+      "name": "real evidence initially hidden",
+      "passed": true
+    },
+    {
+      "name": "write shortcut only fills",
+      "passed": true
+    },
+    {
+      "name": "native input clipboard",
+      "passed": true
+    },
+    {
+      "name": "help shortcut only fills",
+      "passed": true
+    },
+    {
+      "name": "help output",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "human-readable query",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "all300/page20",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "page7 last12",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "AND exact id",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "AND excludes mismatched state",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "complete current detail matches seed",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "initial browser audit empty",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "active23",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "all25/deprecated2",
+      "passed": true
+    },
+    {
+      "name": "ArrowUp latest",
+      "passed": true
+    },
+    {
+      "name": "ArrowUp earlier",
+      "passed": true
+    },
+    {
+      "name": "ArrowDown restores draft",
+      "passed": true
+    },
+    {
+      "name": "IME confirmation does not submit",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "preview no writes",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "bad command rejected without write",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "unknown ID read failure",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "default process output explains actual changes",
+      "passed": true
+    },
+    {
+      "name": "summary reflects approved and four tags",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "browser-generated audit",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "repeat review rejected",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "duplicate tag no_change",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "HTTP future remains",
+      "passed": true
+    },
+    {
+      "name": "Agent remains design",
+      "passed": true
+    },
+    {
+      "name": "route change preserves browser business state",
+      "passed": true
+    },
+    {
+      "name": "clear only clears output",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "state remains after clear",
+      "passed": true
+    },
+    {
+      "name": "dirty reset confirmation appears",
+      "passed": true
+    },
+    {
+      "name": "cancel reset preserves state",
+      "passed": true
+    },
+    {
+      "name": "reset restores pending132",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "reset removes browser audit",
+      "passed": true
+    },
+    {
+      "name": "reset restores original tags",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "JSON process succeeded and ordered",
+      "passed": true
+    },
+    {
+      "name": "no simulated backend API counts",
+      "passed": true
+    },
+    {
+      "name": "reset restores pending132",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "reject simulated with quote parsing",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "literal untrusted reason preserved",
+      "passed": true
+    },
+    {
+      "name": "no HTML/script injection",
+      "passed": true
+    },
+    {
+      "name": "fault shortcut opens independent real records",
+      "passed": true
+    },
+    {
+      "name": "Java case stays approved despite browser rejection",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "real process exit tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "real stderr tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "reading Java faults does not change browser state",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "real process exit review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "real stderr review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "reading Java faults does not change browser state",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "real process exit tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "real stderr tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "reading Java faults does not change browser state",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "real process exit review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "real stderr review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "reading Java faults does not change browser state",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "real process exit tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "real stderr tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "reading Java faults does not change browser state",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON Java tag-only recovery",
+      "passed": true
+    },
+    {
+      "name": "real process exit Java tag-only recovery",
+      "passed": true
+    },
+    {
+      "name": "original Java partial intact",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "real process exit 10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "real stderr 10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "real process exit 13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "real process exit 14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "real Java JSON stays mock",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "real process exit 03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "real process exit 05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "real process exit 07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "real process exit 08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 15-after-history",
+      "passed": true
+    },
+    {
+      "name": "real process exit 15-after-history",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "real process exit 16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON 17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "real process exit 17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "actual JAR command clipboard 0",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON JAR command 0",
+      "passed": true
+    },
+    {
+      "name": "real process exit JAR command 0",
+      "passed": true
+    },
+    {
+      "name": "actual JAR command clipboard 1",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON JAR command 1",
+      "passed": true
+    },
+    {
+      "name": "real process exit JAR command 1",
+      "passed": true
+    },
+    {
+      "name": "actual JAR command clipboard 2",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON JAR command 2",
+      "passed": true
+    },
+    {
+      "name": "real process exit JAR command 2",
+      "passed": true
+    },
+    {
+      "name": "actual JAR command clipboard 3",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON JAR command 3",
+      "passed": true
+    },
+    {
+      "name": "real process exit JAR command 3",
+      "passed": true
+    },
+    {
+      "name": "actual JAR command clipboard 4",
+      "passed": true
+    },
+    {
+      "name": "standalone JAR example not faked 4",
+      "passed": true
+    },
+    {
+      "name": "actual JAR command clipboard 5",
+      "passed": true
+    },
+    {
+      "name": "standalone JAR example not faked 5",
+      "passed": true
+    },
+    {
+      "name": "actual JAR command clipboard 6",
+      "passed": true
+    },
+    {
+      "name": "real complete JSON JAR command 6",
+      "passed": true
+    },
+    {
+      "name": "real process exit JAR command 6",
+      "passed": true
+    },
+    {
+      "name": "real stderr JAR command 6",
+      "passed": true
+    },
+    {
+      "name": "evidence browsing retained simulation",
+      "passed": true
+    },
+    {
+      "name": "refresh resets simulation and input history",
+      "passed": true
+    },
+    {
+      "name": "fresh history empty",
+      "passed": true
+    },
+    {
+      "name": "input copy fallback",
+      "passed": true
+    },
+    {
+      "name": "manual copy fallback",
+      "passed": true
+    },
+    {
+      "name": "manual selection complete",
+      "passed": true
+    },
+    {
+      "name": "bounded terminal output",
+      "passed": true
+    },
+    {
+      "name": "clean reset needs no confirmation",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1440 product",
+      "passed": true
+    },
+    {
+      "name": "one h1 1440 product",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1440 demo",
+      "passed": true
+    },
+    {
+      "name": "one h1 1440 demo",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1440 technical",
+      "passed": true
+    },
+    {
+      "name": "one h1 1440 technical",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "terminal font 1440",
+      "passed": true
+    },
+    {
+      "name": "input and run fit 1440",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "long JSON layout 1440",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "input within initial viewport 1440",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1366 product",
+      "passed": true
+    },
+    {
+      "name": "one h1 1366 product",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1366 demo",
+      "passed": true
+    },
+    {
+      "name": "one h1 1366 demo",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1366 technical",
+      "passed": true
+    },
+    {
+      "name": "one h1 1366 technical",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "terminal font 1366",
+      "passed": true
+    },
+    {
+      "name": "input and run fit 1366",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "long JSON layout 1366",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "input within initial viewport 1366",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1024 product",
+      "passed": true
+    },
+    {
+      "name": "one h1 1024 product",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1024 demo",
+      "passed": true
+    },
+    {
+      "name": "one h1 1024 demo",
+      "passed": true
+    },
+    {
+      "name": "route/layout 1024 technical",
+      "passed": true
+    },
+    {
+      "name": "one h1 1024 technical",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "terminal font 1024",
+      "passed": true
+    },
+    {
+      "name": "input and run fit 1024",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "long JSON layout 1024",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "input within initial viewport 1024",
+      "passed": true
+    },
+    {
+      "name": "route/layout 390 product",
+      "passed": true
+    },
+    {
+      "name": "one h1 390 product",
+      "passed": true
+    },
+    {
+      "name": "route/layout 390 demo",
+      "passed": true
+    },
+    {
+      "name": "one h1 390 demo",
+      "passed": true
+    },
+    {
+      "name": "route/layout 390 technical",
+      "passed": true
+    },
+    {
+      "name": "one h1 390 technical",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "terminal font 390",
+      "passed": true
+    },
+    {
+      "name": "input and run fit 390",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "simulation origin explicitly browser",
+      "passed": true
+    },
+    {
+      "name": "long JSON layout 390",
+      "passed": true
+    },
+    {
+      "name": "command echo uses input text",
+      "passed": true
+    },
+    {
+      "name": "input ready after command",
+      "passed": true
+    },
+    {
+      "name": "latest output scrolled into view",
+      "passed": true
+    },
+    {
+      "name": "input within initial viewport 390",
+      "passed": true
+    },
+    {
+      "name": "narrow real evidence fits",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown clearly labeled",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/10-process-preview.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/10-process-preview.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/10-process-preview.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/13-process-execute.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/13-process-execute.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/13-process-execute.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/14-after-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/14-after-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/14-after-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/preview/zero-write-validation.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/after/snapshot-facts.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/validation/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source docs/task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "local source docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/03-pending-page1-json.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/03-pending-page1-json.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/03-pending-page1-json.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/05-candidate-ct000004-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/05-candidate-ct000004-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/05-candidate-ct000004-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/07-candidate-ct000004-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/07-candidate-ct000004-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/07-candidate-ct000004-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/08-active-tags.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/08-active-tags.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/08-active-tags.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/15-after-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/15-after-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/15-after-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/16-after-pending-exact.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/16-after-pending-exact.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/16-after-pending-exact.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/17-after-pending-total.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/17-after-pending-total.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/17-after-pending-total.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/tags-reject-before-write/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/review-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/tags-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/review-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/tags-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-10-recovered-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-09-recovered-query.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "local source docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "local source docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "local source docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "local source docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "local source docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/01-需求与接口分析.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/02-第一阶段MVP与CLI产品方案.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/03-Java技术架构与实施方案.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/04-交付物规划与验收清单.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/06-实际操作记录.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/07-Agent批量处理方案.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../README.md",
+      "passed": true
+    },
+    {
+      "name": "previous77 source paths retained or mapped to HTML",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no browser dialogs or XSS",
+      "passed": true
+    },
+    {
+      "name": "console healthy",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "offline file resources only",
+      "passed": true,
+      "detail": "[\"file:///F:/AI_TESTEXAM/demo/index.html\",\"file:///F:/AI_TESTEXAM/demo/style.css\",\"file:///F:/AI_TESTEXAM/demo/data.js\",\"file:///F:/AI_TESTEXAM/demo/seed.js\",\"file:///F:/AI_TESTEXAM/demo/cli-engine.js\",\"file:///F:/AI_TESTEXAM/demo/playground.js\",\"file:///F:/AI_TESTEXAM/demo/docs/links.js\",\"file:///F:/AI_TESTEXAM/demo/app.js\",\"file:///F:/AI_TESTEXAM/demo/index.html\",\"file:///F:/AI_TESTEXAM/demo/style.css\",\"file:///F:/AI_TESTEXAM/demo/data.js\",\"file:///F:/AI_TESTEXAM/demo/seed.js\",\"file:///F:/AI_TESTEXAM/demo/cli-engine.js\",\"file:///F:/AI_TESTEXAM/demo/playground.js\",\"file:///F:/AI_TESTEXAM/demo/docs/links.js\",\"file:///F:/AI_TESTEXAM/demo/app.js\"]"
+    },
+    {
+      "name": "real evidence object unchanged",
+      "passed": true
+    },
+    {
+      "name": "global seed object unchanged",
+      "passed": true
+    },
+    {
+      "name": "no browser business persistence",
+      "passed": true
+    }
+  ]
+}

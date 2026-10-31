@@ -1,0 +1,160 @@
+{
+  "captured_at": "2026-10-31T16:43:08.965Z",
+  "source": "browser_simulator",
+  "scope": "Actual browser-input simulation, not Java evidence. Includes rejected invalid/repeated commands and a no_change check; one successful process. Clear only removed display.",
+  "before": {
+    "schema_version": "1",
+    "invocation_id": "browser-6",
+    "environment": "browser",
+    "source": "browser_simulator",
+    "command": "content.get",
+    "mode": "read",
+    "status": "succeeded",
+    "exit_code": 0,
+    "content_id": "ct_000004",
+    "data": {
+      "content_id": "ct_000004",
+      "title": "无人剧场·第12话：逆流而上",
+      "creator_id": "cr_00002",
+      "review_status": "pending",
+      "quality_status": "normal",
+      "visibility": "online",
+      "tags": [
+        "恋爱",
+        "校园",
+        "武侠"
+      ],
+      "created_at": "2026-07-04T05:19:06Z",
+      "body": "赛琳娜在灯塔下做出了一个反常的决定，故事从这里开始分岔……",
+      "source": "app",
+      "channels": [
+        "search_only"
+      ],
+      "category_id": "cat_03"
+    },
+    "error": null,
+    "warnings": []
+  },
+  "preview": {
+    "schema_version": "1",
+    "invocation_id": "browser-10",
+    "environment": "browser",
+    "source": "browser_simulator",
+    "command": "content.process",
+    "mode": "preview",
+    "status": "previewed",
+    "exit_code": 0,
+    "content_id": "ct_000004",
+    "data": {
+      "plan": {
+        "review": {
+          "before": "pending",
+          "action": "approve",
+          "reason": "中文 English 审核理由"
+        },
+        "tags": {
+          "before": [
+            "恋爱",
+            "校园",
+            "武侠"
+          ],
+          "after": [
+            "恋爱",
+            "校园",
+            "武侠",
+            "悬疑"
+          ]
+        }
+      },
+      "steps": {
+        "review": {
+          "write": "not_sent",
+          "verification": "not_checked",
+          "api_result": null
+        },
+        "tags": {
+          "write": "not_sent",
+          "verification": "not_checked",
+          "api_result": null
+        }
+      },
+      "observed": {
+        "content_id": "ct_000004",
+        "review_status": "pending",
+        "quality_status": "normal",
+        "visibility": "online",
+        "tags": [
+          "恋爱",
+          "校园",
+          "武侠"
+        ]
+      },
+      "events": []
+    },
+    "error": null,
+    "warnings": []
+  },
+  "execution": {
+    "command": "content process ct_000004 --action approve --reason \"中文 English 审核理由\" --add \"悬疑\" --execute --yes",
+    "text": "审核成功：ct_000004 已通过审核，状态已核对。\n标签已更新并核对，原有标签已保留。\n当前标签：恋爱、校园、武侠、悬疑"
+  },
+  "after": {
+    "schema_version": "1",
+    "invocation_id": "browser-34",
+    "environment": "browser",
+    "source": "browser_simulator",
+    "command": "content.get",
+    "mode": "read",
+    "status": "succeeded",
+    "exit_code": 0,
+    "content_id": "ct_000004",
+    "data": {
+      "content_id": "ct_000004",
+      "title": "无人剧场·第12话：逆流而上",
+      "creator_id": "cr_00002",
+      "review_status": "approved",
+      "quality_status": "normal",
+      "visibility": "online",
+      "tags": [
+        "恋爱",
+        "校园",
+        "武侠",
+        "悬疑"
+      ],
+      "created_at": "2026-07-04T05:19:06Z",
+      "body": "赛琳娜在灯塔下做出了一个反常的决定，故事从这里开始分岔……",
+      "source": "app",
+      "channels": [
+        "search_only"
+      ],
+      "category_id": "cat_03"
+    },
+    "error": null,
+    "warnings": []
+  },
+  "history": {
+    "schema_version": "1",
+    "invocation_id": "browser-30",
+    "environment": "browser",
+    "source": "browser_simulator",
+    "command": "content.history",
+    "mode": "read",
+    "status": "succeeded",
+    "exit_code": 0,
+    "content_id": "ct_000004",
+    "data": {
+      "content_id": "ct_000004",
+      "items": [
+        {
+          "action": "approve",
+          "reason": "中文 English 审核理由",
+          "operator_id": "op_browser_demo",
+          "created_at": "2026-10-31T16:43:08.740Z"
+        }
+      ]
+    },
+    "error": null,
+    "warnings": []
+  },
+  "pending_after": 131
+}

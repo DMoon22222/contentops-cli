@@ -28,6 +28,8 @@ java -jar ./target/contentops.jar --env mock --output json content list --review
 
 直接双击 [demo/index.html](demo/index.html)，保留整个 `demo/` 目录。不需要 Java、Node、服务、网络或 CDN。页面保留三个入口：**产品方案 → CLI 交互体验 → 技术设计与演进**。
 
+产品首页先展示已实现的内容查询、内容审核和标签维护，再用任务二案例说明效果；当前 Mock 原型、完整两周 MVP 待补齐项及未来 Agent 扩展分组呈现。点击“打开 CLI 交互体验”即可进入第二部分。
+
 第二部分现在是可输入命令的浏览器终端。输入后按 Enter 或点击“运行”；↑↓ 浏览历史，`help` 查看七条命令及参数，`clear` 只清屏。快捷按钮只填入命令，不会自动执行。“复制”复制当前输入或最近一条命令。右侧摘要随当前模拟状态更新。
 
 推荐在**网页输入框**中依次体验（以下短命令不代表 Windows 已安装 `contentops` 启动器）：
@@ -45,7 +47,20 @@ content history ct_000004
 
 网页新生成的模拟结果与真实记录分开。“查看真实 Java CLI 运行记录”保留任务二的独立 Mock 实测（新增“悬疑”）和 S5 故障/恢复记录（新增“轻松”）；它们不随网页操作或重置改变。Agent 仍是未来设计，未实现批次执行器。网页不调用 JAR、不连接 API，也不模拟生产网络故障。真正运行 Java CLI 仍使用下文的 `java -jar ./target/contentops.jar ...`，网页还保留了独立的 JAR 命令参考。
 
-“技术说明”和“Agent 方案”仍在页面内展开 HTML；完整原稿放在明确标注的“原始资料（Markdown）”。真实记录保留完整 JSON、stderr、实际退出码及来源链接。剪贴板不可用时有兼容复制和手动 Ctrl+C 降级。若要在 PowerShell 中试用真正的写命令，先按下文设置新的独立状态目录。
+“技术说明”和“Agent 方案”保留简短说明；完整方案默认打开预先排版的 [HTML 文档目录](demo/docs/index.html)。重点入口为 [产品方案](demo/docs/02-product-plan.html)、[技术架构](demo/docs/03-architecture.html)、[实际操作记录](demo/docs/06-operation-record.html)、[Agent 批量方案](demo/docs/07-agent-plan.html) 和 [运行说明](demo/docs/readme.html)。共 11 份阅读版，另包括 01/04、任务二/S5 证据索引、原题和附件说明；不转换全部历史日志。原始 Markdown 保留在根目录、`docs/` 及证据原位置，网页资料区的原稿链接明确标为“原始 Markdown 文件”。历史设计阅读页有阶段提示，未修改原文来覆盖过去的状态。
+
+阅读版使用真正的标题、表格、目录锚点和代码块；表格与长代码可横向滚动。跨文档链接优先指向对应 HTML，代码和证据链接按源位置重算。Mermaid 围栏保留完整源码，不联网加载图表库。真实记录继续保留完整 JSON、stderr、实际退出码及来源链接。若要在 PowerShell 中试用真正的写命令，先按下文设置新的独立状态目录。
+
+只有维护者重新生成阅读版时需要 Python 3.12 和锁定的构建依赖（当前环境已有 markdown-it-py 4.2.0 / mdurl 0.1.2）；首次安装需要可用包源。打开生成 HTML 不需要这些工具：
+
+```powershell
+python -m pip install -r scripts/requirements-docs.txt
+python scripts/render-docs.py
+python scripts/render-docs.py --check
+python scripts/test-render-docs.py
+```
+
+源文件映射与 SHA 见 [manifest.json](demo/docs/manifest.json)。修改源 Markdown、转换脚本或模板后重新生成；`--check` 只检测生成件是否过期。转换关闭原生 HTML、禁用自动图片加载，阅读页无 JavaScript/CDN。当前首页与文档阅读验收见 [demo-docs](evidence/demo-docs/README.md)。
 
 本轮实现和实际验证见 [Playground 验收记录](evidence/demo-playground/README.md)，包括独立 JavaScript 引擎测试与真实浏览器操作。历史 [精简版](evidence/demo-simplified/README.md)、[571 项评审版](evidence/demo-review/README.md)、[407 项 S6 原版](evidence/demo/README.md)及截图未覆盖。`evidence/demo/verify.cjs` 的新结果写入 `evidence/demo-playground/`。Java、原始材料、`demo/data.js`、任务二/S5 工作副本与证据不变；`demo/seed.js` 是另外导出的只读模拟器输入。
 

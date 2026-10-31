@@ -8,7 +8,10 @@
   const task = key => D.task[key];
   const before = task('05-candidate-ct000004-detail').result.data;
   const after = task('14-after-detail').result.data;
-  const link = (path, label) => `<a href="../${esc(path)}">${esc(path.endsWith('.md')?'原始 Markdown 文档 · '+label:label)} ↗</a>`;
+  const link = (path, label, raw=false) => {
+    const reading = raw ? null : window.REVIEW_DOCUMENTS[path];
+    return `<a href="${esc(reading?'docs/'+reading:'../'+path)}">${esc(path.endsWith('.md')&&!reading?'原始 Markdown 文件 · '+label:label)} ↗</a>`;
+  };
   const tags = (values, added=[]) => `<div class="tagrow">${values.map(t => `<span class="tag ${added.includes(t)?'added':''}">${esc(t)}</span>`).join('')}</div>`;
   const sourcebar = (type, text, path, label='查看原始证据') => `<div class="sourcebar ${type}"><strong>${esc(text)}</strong>${link(path,label)}</div>`;
   const sources = entries => `<div class="source-links">${entries.map(([p,l])=>link(p,l)).join('')}</div>`;
@@ -63,14 +66,21 @@
     ['审核并更新标签','通过并新增标签','一条命令完成审核与标签新增。','先核对审核结果，再改标签；两项分别提交。']
   ];
   function productPage(){
-    return header('用命令完成内容查询、审核和标签维护。','把已有后台操作封装为命令行工具（CLI），运营人员可以逐条使用，脚本复用同样的参数和结果。')+`
-      <div class="constraints"><div><strong>1 名后端</strong><span>Java 开发</span></div><div><strong>2 周 MVP</strong><span>10 个工作日</span></div><div><strong>6 项 API</strong><span>复用现有接口</span></div></div>
-      <div class="product-columns"><section><h2>为什么增加 CLI</h2><p>网页后台适合浏览内容和手动操作。</p><p>CLI 为相同操作提供统一命令、标准参数和可供程序读取的结果，方便脚本调用，也为以后 Agent 调用提供基础。</p></section><section><h2>先完成三件事</h2><ul class="capabilities"><li><strong>查询</strong><span>找到内容，阅读详情和历史。</span></li><li><strong>审核</strong><span>提交通过或驳回的决定。</span></li><li><strong>标签</strong><span>维护标签，并核对修改结果。</span></li></ul></section></div>
-      <p class="scope-reason">这些操作经常连在一起。第一阶段先做好单条处理，分发、上下架和复杂批处理暂不纳入。</p>
-      <section class="compact-plan"><h2>两周怎样安排</h2><div class="timeline">${[['D1–2','需求与查询'],['D3–4','审核与标签'],['D5–6','确认与组合操作'],['D7–8','Mock 与回归测试'],['D9–10','演示与验收']].map(([d,t])=>`<div><strong>${d}</strong><span>${t}</span></div>`).join('')}</div></section>
-      <section class="current-scope"><h2>当前原型已能运行</h2><p>本地 Java CLI 已支持四个查询命令、单条审核、标签新增及组合操作，任务二已实际完成一次处理。</p><p class="muted">完整 MVP 仍需补齐真实后台接入（HTTP）、标签移除/替换、人工交互确认等功能。</p></section>
-      <div class="page-actions"><a class="link-button" href="#demo">打开 CLI 交互体验 →</a></div>
-      <details id="product-notes"${openAttrs('product-notes')}><summary>范围与验收说明</summary><div class="reading-note"><h3>为什么同时保留独立命令和组合命令</h3><p>日常处理可以用 process 一次完成两项操作。若审核完成但标签失败，用独立标签命令补齐，避免再次审核。</p><h3>怎样验收</h3><p>能查询到明确内容；预览不修改数据；执行后能重新查询到结果；无法确认的写入要明确报告；脚本能解析输出。</p><p>上方时间轴摘自已确认的十日计划。Mock 与测试随开发进行，集中回归安排在后半程，最后保留半日修复缓冲。</p></div></details>`;
+    return header('内容运营后台 CLI 工具','将内容查询、审核和标签维护封装为统一命令，供运营人员使用，也便于脚本和未来 Agent 复用。')+`
+      <section class="product-capabilities" aria-label="已实现的三项核心能力">
+        <article><span class="capability-number">01</span><h2>内容查询</h2><p>查询内容列表，查看完整详情和审核历史。</p></article>
+        <article><span class="capability-number">02</span><h2>内容审核</h2><p>通过或驳回指定内容，先预览、明确授权，再核对结果。</p></article>
+        <article><span class="capability-number">03</span><h2>标签维护</h2><p>查询可用标签，为内容新增标签，保留原有标签。</p></article>
+      </section>
+      <section class="implemented-features"><h2>现在可以怎样用</h2><ul><li><strong>4 条查询命令</strong>：列表、详情、审核历史、标签库。</li><li><strong>3 条写命令</strong>：单条审核、标签新增、审核与标签组合处理。</li><li>默认预览、显式执行；结构化 JSON、退出码和结果核对。</li><li>Java CLI 已在独立 Mock 副本完成审核与标签更新的实际验证。</li></ul><p class="environment-pair">Java CLI 读写本地 Mock；网页 Playground 只模拟命令，不运行 Java、不连接真实后台。</p></section>
+      <section class="product-example" aria-label="审核与标签维护案例"><div><h2>审核一条内容，并新增标签</h2><p><code>${esc(before.content_id)}</code> · ${esc(before.title)}</p><div class="example-change"><span>待审核 → 审核通过</span><span>原标签 ${before.tags.map(esc).join('、')}<b>＋${esc(after.tags.find(t=>!before.tags.includes(t)))}</b></span></div><p class="example-origin">来自任务二已保存的 Java Mock 实测；审核决定用于流程演示。</p></div><div class="example-actions"><a class="link-button" href="#demo">打开 CLI 交互体验 →</a>${link('docs/06-实际操作记录.md','阅读实际操作记录')}</div></section>
+      <section class="product-progress"><h2>当前完成度与后续范围</h2><dl>
+        <div><dt>已完成的 48 小时原型</dt><dd>查询、单条审核、标签新增、组合命令、Mock 跨进程持久化、故障验证和 HTML 演示。</dd></div>
+        <div><dt>完整两周 MVP 尚需补充</dt><dd>真实 HTTP Gateway、标签移除/替换、人工交互确认、keyword/tag 等 P0 筛选及完整 P0 验收；真实联调需可用环境。</dd></div>
+        <div><dt>未来 Agent 扩展</dt><dd>批次计划、人工审批绑定、任务账本与中断恢复。已有设计，尚未实现 100 条执行器。</dd></div>
+      </dl></section>
+      <section class="compact-plan"><h2>2 周 MVP · 10 个工作日</h2><p class="muted">1 名 Java 后端，第一阶段只覆盖 6 项 API。以下沿用已确认的十日计划，Mock 与基础测试随开发进行。</p><div class="timeline">${[['D1–2','需求确认与四项查询'],['D3–4','单条审核与标签增删/替换'],['D5–6','确认、核对与组合操作'],['D7–8','完善 Mock 故障与回归'],['D9–10','HTML、文档与验收；半日缓冲']].map(([d,t])=>`<div><strong>${d}</strong><span>${t}</span></div>`).join('')}</div>${sources([['docs/02-第一阶段MVP与CLI产品方案.md','阅读完整产品方案'],['README.md','构建与运行说明']])}</section>
+      <details id="product-notes"${openAttrs('product-notes')}><summary>范围与验收说明</summary><div class="reading-note"><h3>为什么保留独立命令和组合命令</h3><p>日常处理用 process；若审核完成但标签失败，独立补标签，避免再次审核。两项是独立提交，不提供联合事务。</p><h3>怎样判断执行结果可信</h3><p>实际状态、逐步骤核对、JSON 与进程退出码一致；未知结果先停下核查，不自动重试。浏览器模拟不能代替 JAR 验收。</p></div></details>`;
   }
   function selectedExample(){
     const c=commands[state.command];
@@ -106,7 +116,8 @@
       '<details id="jar-examples"'+openAttrs('jar-examples')+'><summary>真正 Java CLI 的命令参考</summary><p>以下命令在 PowerShell 中通过 java -jar 运行；网页中的短命令不代表 Windows 已安装 contentops 启动器。</p>'+commandExamples()+'</details>';
   }
   function originalMaterials(){
-    return `<details id="original-materials"${openAttrs('original-materials')}><summary>原始资料（Markdown）</summary><p class="muted">这里保留完整原稿，浏览器可能显示源码或下载文件。主要产品与技术说明已在本页面排版。</p>${sources([['docs/01-需求与接口分析.md','需求与接口分析'],['docs/02-第一阶段MVP与CLI产品方案.md','MVP 产品方案'],['docs/03-Java技术架构与实施方案.md','Java 技术架构'],['docs/04-交付物规划与验收清单.md','交付与验收清单'],['docs/06-实际操作记录.md','实际操作记录'],['docs/07-Agent批量处理方案.md','Agent 批量方案'],['README.md','构建与运行说明']])}</details>`;
+    const entries=[['docs/01-需求与接口分析.md','需求与接口分析'],['docs/02-第一阶段MVP与CLI产品方案.md','MVP 产品方案'],['docs/03-Java技术架构与实施方案.md','Java 技术架构'],['docs/04-交付物规划与验收清单.md','交付与验收清单'],['docs/06-实际操作记录.md','实际操作记录'],['docs/07-Agent批量处理方案.md','Agent 批量方案'],['README.md','构建与运行说明']];
+    return `<section class="review-materials"><h2>完整评审文档</h2><p class="muted">以下为预先排版的 HTML 阅读版，可离线阅读标题、表格与命令。</p>${sources(entries)}</section><details id="original-materials"${openAttrs('original-materials')}><summary>原始资料（Markdown）</summary><p class="muted">研发原稿保留在原位置；以下明确打开原始 Markdown 文件。</p><div class="source-links">${entries.map(([p,l])=>link(p,l,true)).join('')}</div></details>`;
   }
   function technicalPage(){
     const decisions=[
@@ -118,8 +129,8 @@
     ];
     return header('技术设计与后续扩展','把命令解析、业务校验和接口访问分开处理。')+`
       <section class="architecture"><h2>Java 如何处理一条命令</h2><div class="architecture-flow"><div><strong>CLI</strong><span>解析参数、确认授权</span></div><b>→</b><div><strong>ContentService / TagPlanner</strong><span>检查规则、计算标签、安排调用</span></div><b>→</b><div><strong>ContentGateway</strong><span>统一接口调用</span></div><b>→</b><div class="adapters"><div><strong>Mock</strong><span>当前本地实现</span></div><div class="future-adapter"><strong>HTTP Gateway</strong><span>待实现</span></div></div></div></section>
-      <section class="design-decisions"><h2>几项关键选择</h2><dl>${decisions.map(([q,a])=>`<div><dt>${q}</dt><dd>${a}</dd></div>`).join('')}</dl><details id="technical-notes"${openAttrs('technical-notes')}><summary>技术说明</summary><div class="reading-note"><h3>标签先算完整数组</h3><p>新增标签必须存在且在用。先读取原标签，将新增项合入，再提交完整数组；不会因为只新增一项而丢掉其他标签。读与写之间仍有竞争窗口，需要服务端版本条件才能防止覆盖。</p><h3>确认响应后再读一次</h3><p>收到成功响应，还要重新查询业务状态。若写入结果未知，即使之后查到目标值，原调用也保留 unknown，不自动改报成功。</p><h3>Mock 只改工作副本</h3><p>原始 seed 只读，每次读取最新工作快照。文件锁协调本地进程，临时文件与原子替换保护写入；损坏状态明确报错。这不让审核和标签变成一个事务。</p></div></details></section>
-      <section class="agent-summary"><h2>如果以后一次处理 100 条 <small>后续设计</small></h2><p>现在由人工或脚本单条调用；以后由执行器按批准的清单逐条处理。</p><div class="flow">${['固定目标 ID','生成计划','人工审批','可信执行器','逐条执行','记录与恢复'].map((s,i)=>`${i?'<b>→</b>':''}<span>${s}</span>`).join('')}</div><p>需要新增批次账本、审批计划绑定和恢复能力；上游要能识别重复请求，并检查标签版本。</p><details id="agent-notes"${openAttrs('agent-notes')}><summary>Agent 方案</summary><div class="reading-note"><h3>固定对象，再开始写入</h3><p>先收集并冻结目标 ID。不能边审核 pending 边翻页，队列减少后可能跳过内容；现有分页也没有时点快照保证。</p><h3>批准哪份计划，就执行哪份计划</h3><p>需要新增审批与计划绑定，写入前持久化执行意图，用批次账本保存每次输出和退出码。当前独立预览不会强绑定后续执行，--yes 也不是审批身份。</p><h3>恢复时只处理未确认的步骤</h3><p>部分成功后只补标签；未知结果先暂停核查，不能自动重放。服务端幂等用于避免重复写入，版本检查用于发现并发修改；这些都不能靠本地账本单独保证。</p><p>这部分是演进方案，批次执行器、审批绑定和恢复能力尚未实现，也没有执行 100 条。</p></div></details></section>${originalMaterials()}`;
+      <section class="design-decisions"><h2>几项关键选择</h2><dl>${decisions.map(([q,a])=>`<div><dt>${q}</dt><dd>${a}</dd></div>`).join('')}</dl><details id="technical-notes"${openAttrs('technical-notes')}><summary>技术说明</summary><div class="reading-note"><h3>标签先算完整数组</h3><p>新增标签必须存在且在用。先读取原标签，将新增项合入，再提交完整数组；不会因为只新增一项而丢掉其他标签。读与写之间仍有竞争窗口，需要服务端版本条件才能防止覆盖。</p><h3>确认响应后再读一次</h3><p>收到成功响应，还要重新查询业务状态。若写入结果未知，即使之后查到目标值，原调用也保留 unknown，不自动改报成功。</p><h3>Mock 只改工作副本</h3><p>原始 seed 只读，每次读取最新工作快照。文件锁协调本地进程，临时文件与原子替换保护写入；损坏状态明确报错。这不让审核和标签变成一个事务。</p>${sources([['docs/03-Java技术架构与实施方案.md','阅读技术架构']])}</div></details></section>
+      <section class="agent-summary"><h2>如果以后一次处理 100 条 <small>后续设计</small></h2><p>现在由人工或脚本单条调用；以后由执行器按批准的清单逐条处理。</p><div class="flow">${['固定目标 ID','生成计划','人工审批','可信执行器','逐条执行','记录与恢复'].map((s,i)=>`${i?'<b>→</b>':''}<span>${s}</span>`).join('')}</div><p>需要新增批次账本、审批计划绑定和恢复能力；上游要能识别重复请求，并检查标签版本。</p><details id="agent-notes"${openAttrs('agent-notes')}><summary>Agent 方案</summary><div class="reading-note"><h3>固定对象，再开始写入</h3><p>先收集并冻结目标 ID。不能边审核 pending 边翻页，队列减少后可能跳过内容；现有分页也没有时点快照保证。</p><h3>批准哪份计划，就执行哪份计划</h3><p>需要新增审批与计划绑定，写入前持久化执行意图，用批次账本保存每次输出和退出码。当前独立预览不会强绑定后续执行，--yes 也不是审批身份。</p><h3>恢复时只处理未确认的步骤</h3><p>部分成功后只补标签；未知结果先暂停核查，不能自动重放。服务端幂等用于避免重复写入，版本检查用于发现并发修改；这些都不能靠本地账本单独保证。</p><p>这部分是演进方案，批次执行器、审批绑定和恢复能力尚未实现，也没有执行 100 条。</p>${sources([['docs/07-Agent批量处理方案.md','阅读 Agent 批量方案']])}</div></details></section>${originalMaterials()}`;
   }
   function toast(text){const el=document.querySelector('#toast');el.textContent=text;el.classList.add('visible');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('visible'),4500);}
   async function copy(text,button){

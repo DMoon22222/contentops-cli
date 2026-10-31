@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="source-sha256" content="539ae951c3587c051b348f3d9bc7c0398d392942e918816bb1576b8352177c05">
+  <title>S5 受控故障、跨 JVM 与恢复证据 · ContentOps 文档</title>
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body id="document-top">
+  <a class="skip-link" href="#document-body">跳至正文</a>
+  <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
+  <div class="reading-layout">
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-实际运行与索引">实际运行与索引</a></li>
+<li class="toc-level-2"><a href="#section-每个场景的真实结果">每个场景的真实结果</a></li>
+<li class="toc-level-2"><a href="#section-独立恢复与未知结果核查">独立恢复与未知结果核查</a></li>
+<li class="toc-level-2"><a href="#section-实现与测试边界">实现与测试边界</a></li></ul></nav></details></aside>
+    <main id="document-body" tabindex="-1">
+      <div class="document-meta"><span>S5 · 受控故障证据索引</span><a href="../../evidence/s5/README.md">原始 Markdown 文件</a></div>
+
+      <article class="markdown-body"><h1 id="section-s5-受控故障跨-jvm-与恢复证据">S5 受控故障、跨 JVM 与恢复证据</h1>
+<p>2026-10-31，起点 master <code>850877082e83a3f74031aa5b8eddc9f518ddb0b5</code>，工作区干净。仅验证本地 Mock；所有审核决定均为用户提供的开发演示选择，不是自动合规判断、真实后台联调或任务二正式操作。原题、附件、docs/01–04、AGENTS.md、S0–S2/S3–S4 历史证据未修改。</p>
+<h2 id="section-实际运行与索引">实际运行与索引</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>实际命令</th>
+<th>结果</th>
+<th>文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开发前 <code>mvn -B -ntp test</code></td>
+<td>122 项通过，退出 0</td>
+<td><code>validation/baseline-test.*</code></td>
+</tr>
+<tr>
+<td><code>mvn -B -ntp '-Dtest=FaultInjectingGatewayTest,AppConfigTest' test</code></td>
+<td>30 项通过，退出 0</td>
+<td><code>validation/targeted-01.*</code></td>
+</tr>
+<tr>
+<td><code>mvn -B -ntp test</code></td>
+<td>156 项通过，失败/错误/跳过均 0，退出 0</td>
+<td><code>validation/maven-test-01.*</code></td>
+</tr>
+<tr>
+<td><code>mvn -B -ntp verify</code></td>
+<td>156 项单元/契约 + 36 项独立 JVM 集成，失败/错误/跳过均 0，退出 0</td>
+<td><code>validation/maven-verify-01.*</code></td>
+</tr>
+<tr>
+<td><code>./scripts/verify-s5.ps1</code></td>
+<td>47 次真实 JAR 调用；全部断言通过，退出 0</td>
+<td><code>validation/jar-script-01.*</code>、<code>summary.json</code></td>
+</tr>
+<tr>
+<td>再次指定已有证据目录</td>
+<td><strong>预期拒绝</strong>，脚本退出 1，旧 summary SHA 未变</td>
+<td><code>validation/overwrite-guard.*</code>；这是保护条件的正向验证，不是开发失败</td>
+</tr>
+</tbody>
+</table></div>
+<p>最终 192 个不同 JUnit 实例，test/verify 中重复执行的单元测试不重复计数；<code>validation/test-summary.json</code> 保存逐类统计，<code>validation/junit/</code> 为真实文本报告。环境见 <code>validation/environment.txt</code>：JDK 21.0.7、Maven 3.9.4、PowerShell 7.6.5，编译 release 17。</p>
+<p><code>commands/</code> 按场景和顺序保存命令的 stdout、stderr、实际进程退出码。完整参数数组、场景环境值和独立状态目录在 <code>summary.json</code>；空 stderr 文件表示实际为空。<code>scenarios/&lt;场景&gt;/</code> 保存开始/执行后（恢复场景还有恢复后）的快照事实和结果索引。这些是从磁盘读取的选定内容、日志、revision、SHA，不是可用于运行的完整 state.json。完整工作副本仅留在忽略目录 <code>.contentops/s5-validation/&lt;运行 UUID&gt;/</code>。</p>
+<h2 id="section-每个场景的真实结果">每个场景的真实结果</h2>
+<p>各场景均从独立的新目录开始：ct_000004=pending，原标签恋爱/校园/武侠，历史 0 条。所有场景的真实审核都持久化为 approved，历史均增至 <strong>1 条</strong>。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>JSON status / 实际退出码</th>
+<th>review write/verification</th>
+<th>tags write/verification</th>
+<th>磁盘标签</th>
+<th>revision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>normal（无故障配置）</td>
+<td>succeeded / 0</td>
+<td>acknowledged/matched</td>
+<td>acknowledged/matched</td>
+<td>原三项 + 轻松</td>
+<td>2</td>
+</tr>
+<tr>
+<td>tags-reject-before-write</td>
+<td>partial / 4</td>
+<td>acknowledged/matched</td>
+<td>failed/not_checked</td>
+<td>原三项</td>
+<td>1</td>
+</tr>
+<tr>
+<td>review-commit-response-lost</td>
+<td>unknown / 5</td>
+<td>unknown/not_checked</td>
+<td>not_sent/not_checked</td>
+<td>原三项</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tags-commit-response-lost</td>
+<td>unknown / 5</td>
+<td>acknowledged/matched</td>
+<td>unknown/not_checked</td>
+<td>原三项 + 轻松</td>
+<td>2</td>
+</tr>
+<tr>
+<td>review-readback-mismatch</td>
+<td>verification_failed / 6</td>
+<td>acknowledged/mismatched</td>
+<td>not_sent/not_checked</td>
+<td>原三项</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tags-readback-mismatch</td>
+<td>verification_failed / 6</td>
+<td>acknowledged/matched</td>
+<td>acknowledged/mismatched</td>
+<td>原三项 + 轻松</td>
+<td>2</td>
+</tr>
+</tbody>
+</table></div>
+<p>计数取自每个故障调用的实际 <code>MOCK_CALL_COUNTS</code> warning，不用 revision 推算调用次数。attempt 表示调用包装器，delegate 表示真正进入底层 Mock；不是成功提交次数。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>故障场景</th>
+<th>审核 attempt/delegate</th>
+<th>标签 attempt/delegate</th>
+<th>详情调用/详情 delegate</th>
+<th>注入旧视图次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tags-reject-before-write</td>
+<td>1/1</td>
+<td>1/0</td>
+<td>3/3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>review-commit-response-lost</td>
+<td>1/1</td>
+<td>0/0</td>
+<td>2/2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>tags-commit-response-lost</td>
+<td>1/1</td>
+<td>1/1</td>
+<td>3/3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>review-readback-mismatch</td>
+<td>1/1</td>
+<td>0/0</td>
+<td>3/4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tags-readback-mismatch</td>
+<td>1/1</td>
+<td>1/1</td>
+<td>4/5</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div>
+<p>旧视图捕获额外读取一次详情，所以相应 delegate 读取数多 1。触发依据是成功写入和目标 ID 的待回读标记，不是 GET 次数。默认正常环境不输出计数诊断；正常的 1 POST/1 PUT 顺序及次数由已有 RecordingGateway 测试验证，实际正常 JAR 另有两次快照提交和一条日志证据，不把它们冒充直接计数。</p>
+<h2 id="section-独立恢复与未知结果核查">独立恢复与未知结果核查</h2>
+<p>每个场景的 <code>01</code>/<code>02</code> 为初始详情/历史，<code>03</code> 为预览，<code>04</code> 为实际 process，<code>05</code>/<code>06</code> 是清除故障后新 JVM 的详情/历史，<code>07</code> 是清除故障后重复 process 的拒绝。JSON、实际进程码和磁盘事实均已自动比较。</p>
+<ul>
+<li>所有预览未创建业务快照，两个步骤均 not_sent。实际核查均取消场景配置，读到真实 approved 和相应标签；未污染其他案例。</li>
+<li>两个 response-lost 场景先由真实 JsonMockGateway 持久化，再在返回 Application 前抛 WRITE_UNKNOWN。首次调用只尝试一次审核、最多一次标签。后续独立查询看到已提交值，原输出 SHA 和 unknown 状态仍保持，未自动提升成功。</li>
+<li>每个场景重新运行 process 均退出 2、REVIEW_NOT_PENDING；工作快照 SHA 不变。单元测试还断言该顺序重复计划不增加写方法调用次数。这是 CLI 的前置保护，非服务端幂等，也不排除并发竞态。</li>
+<li>部分失败案例额外的 <code>08</code> 仅执行独立 tags update，返回 succeeded/0；<code>09</code>/<code>10</code> 核查标签补齐、审核仍 approved、历史与恢复前完全相同（1 条），revision 从 1 变为 2。恢复结果没有 review 步骤，没有再次审核或回滚。</li>
+<li>两个回读不匹配案例的旧值仅存在于返回视图。磁盘没有被改回；核对失败保留 acknowledged，标签核对失败时保留审核先前已核对成功的事实。</li>
+</ul>
+<p><code>scenarios/*/result.json</code> 保存原调用结果/计数与实际磁盘事实的区别；<code>protected-files.json</code> 保存原始材料、设计和旧证据的前后 SHA。脚本显式断言父进程环境变量未改变，不修改用户或系统永久环境变量。</p>
+<h2 id="section-实现与测试边界">实现与测试边界</h2>
+<p>新增 MockScenario 和 FaultInjectingGateway，在 Main 的 mock 分支装配；AppConfig 拒绝非法场景/任何 api+场景组合。ContentService 只新增通用诊断 supplier，业务计划、执行顺序和状态判定未改。CliRunner 将活动标识与包装器计数合入现有 warnings，参数/授权提前拒绝时也保留合法 Mock 场景标识，未构造 Gateway 时不伪造调用计数。</p>
+<p>包装器测试使用真实临时 JsonStateStore，检查 delegate 提交后的状态/日志、单次旧视图、无成功写响应不注入、NONE 无故障和预览零写入。Application 的五场景矩阵同时核对步骤、observed、磁盘事实和次数。独立 JVM 测试覆盖五场景、独立标签恢复、配置拒绝以及两个不同内容先后写入不丢失；原有 28 项进程回归保留。</p>
+<p>本轮各次编译/JUnit/脚本验收均通过，没有意外失败或修复需要补造。开发前发现需隔离外部故障环境，因此原有进程测试默认清除该变量，只有场景测试显式设置。脚本在第一次运行前复核了证据覆盖保护和父进程环境隔离。Shade 重复 Manifest 常规告警延续已有构建，JAR 启动验证通过。</p>
+<p>未发现需修改 docs/02、03 的产品冲突；调用计数是本地 Mock 诊断，沿用 warnings，不新增业务参数、命令或状态码。没有实现 HTTP、HTML、Agent 批处理、remove/set、resume 或任务二正式演示。真实网络超时/重发、写后读不可用的 HTTP 版本和断电保证仍不在本期声明范围；当前 Mock 正常闭环及本轮要求无已知验收阻塞。完整 AI 原始对话需按交付规划另行保存，本文件不是完整对话记录。</p>
+</article>
+      <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 evidence/s5/README.md</span></footer>
+    </main>
+  </div>
+</body>
+</html>

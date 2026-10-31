@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="source-sha256" content="d28d344ce23b490146cbc5eef75a8e04bdf71be5a22bbdc8f96a6b2efb720aae">
+  <title>任务二：实际审核与标签更新记录 · ContentOps 文档</title>
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body id="document-top">
+  <a class="skip-link" href="#document-body">跳至正文</a>
+  <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
+  <div class="reading-layout">
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-1-任务目标与运行声明">1. 任务目标与运行声明</a></li>
+<li class="toc-level-2"><a href="#section-2-环境版本与工作副本">2. 环境、版本与工作副本</a></li>
+<li class="toc-level-2"><a href="#section-3-查询一批待审核内容与选择过程">3. 查询一批待审核内容与选择过程</a></li>
+<li class="toc-level-2"><a href="#section-4-操作对象演示决定与标签计划">4. 操作对象、演示决定与标签计划</a></li>
+<li class="toc-level-2"><a href="#section-5-实际预览及零写入证据">5. 实际预览及零写入证据</a></li>
+<li class="toc-level-2"><a href="#section-6-仅一次授权执行与真实结果">6. 仅一次授权执行与真实结果</a></li>
+<li class="toc-level-2"><a href="#section-7-操作后的跨-jvm-核查">7. 操作后的跨 JVM 核查</a></li>
+<li class="toc-level-2"><a href="#section-8-异常处理与本次问题">8. 异常处理与本次问题</a></li>
+<li class="toc-level-2"><a href="#section-9-结论复现与边界">9. 结论、复现与边界</a></li></ul></nav></details></aside>
+    <main id="document-body" tabindex="-1">
+      <div class="document-meta"><span>任务二 · Java Mock 实测</span><a href="../../docs/06-%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95.md">原始 Markdown 文件</a></div>
+
+      <article class="markdown-body"><h1 id="section-任务二实际审核与标签更新记录">任务二：实际审核与标签更新记录</h1>
+<h2 id="section-1-任务目标与运行声明">1. 任务目标与运行声明</h2>
+<p>本次从实际待审核队列中选取一条内容，使用已经打包的 Java CLI 完成审核、标签新增和独立进程核查。<strong>闭环已在新的本地 Mock 工作副本中完成，不是真实生产后台审核。</strong></p>
+<p>题目未给出完整审核标准。本次 approve 是用户授权的流程演示决定，不能理解为内容已被认定合规；选择内容的技术条件、演示操作意图与真实审核结论分别说明。</p>
+<ul>
+<li>操作时间：2026-10-31 17:23:41～17:28:00，UTC+08:00；只读汇总校验于 17:29:40 完成。</li>
+<li>Run ID：<code>a20c72c2-74c1-4130-af99-8d17452424b6</code>。</li>
+<li>共启动 <strong>18 个实际 CLI 进程，仅第 13 次为授权写入</strong>；没有重放 process，没有注入故障。</li>
+<li><a href="task2-evidence.html">完整证据入口</a>；所有原始 stdout、stderr、进程码位于 <code>evidence/task2/commands/</code>。</li>
+</ul>
+<h2 id="section-2-环境版本与工作副本">2. 环境、版本与工作副本</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>本次实际使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作目录</td>
+<td><code>F:\AI_TESTEXAM</code></td>
+</tr>
+<tr>
+<td>操作系统 / Shell</td>
+<td>Windows 11，10.0.22631.0 / PowerShell 7.6.5</td>
+</tr>
+<tr>
+<td>Java / Maven</td>
+<td>Temurin 21.0.7 / Maven 3.9.4</td>
+</tr>
+<tr>
+<td>CLI</td>
+<td><code>contentops 0.1.0</code>，<code>java -jar ./target/contentops.jar</code></td>
+</tr>
+<tr>
+<td>源码基线</td>
+<td><code>a726f317e321236107bf9a44480f647bb6ef54ea</code>；开始时工作区干净</td>
+</tr>
+<tr>
+<td>数据源</td>
+<td><code>--env mock</code>；父进程未启用 <code>CONTENTOPS_MOCK_SCENARIO</code>，子进程显式移除该变量</td>
+</tr>
+<tr>
+<td>本次独立状态目录</td>
+<td><code>F:\AI_TESTEXAM\.contentops\task2\a20c72c2-74c1-4130-af99-8d17452424b6</code></td>
+</tr>
+<tr>
+<td>JAR SHA-256</td>
+<td><code>16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2</code></td>
+</tr>
+<tr>
+<td>原始 Mock / 内嵌 seed SHA-256</td>
+<td><code>44BA17CBE95432547A8FE380F81E0416AE51404957ED0C87DE5CED7F8E3939B0</code>，二者一致</td>
+</tr>
+</tbody>
+</table></div>
+<p>本次 JAR 与 S5 已验证产物 SHA 相同，实际 help/version 均正常退出 0。没有复用 S3～S5 副本或默认用户状态；首次查询前该状态目录没有业务快照。环境原始输出见 <a href="../../evidence/task2/validation/environment.txt">environment.txt</a>，运行标识见 <a href="../../evidence/task2/manifest.json">manifest.json</a>。</p>
+<p>本轮没有改 Java 或资源，也没有重新执行 Maven test/verify；S5 的 192 项通过结果是此前验证记录，不冒充本轮新测试。本轮验证依靠实际 JAR 操作和只读证据校验。</p>
+<h2 id="section-3-查询一批待审核内容与选择过程">3. 查询一批待审核内容与选择过程</h2>
+<p>首先实际运行题目要求的列表命令，并另取 JSON 便于精确核对：</p>
+<pre><code class="language-powershell">java -jar ./target/contentops.jar --env mock content list --review-status pending --page 1
+java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1
+</code></pre>
+<p>本次返回 <code>total=132</code>、<code>page=1</code>、<code>page_size=20</code>、20 个 items，均退出 0。完整 20 行见 <a href="../../evidence/task2/commands/02-pending-page1-table.stdout.txt">02 表格原文</a> 和 <a href="../../evidence/task2/commands/03-pending-page1-json.stdout.txt">03 JSON 原文</a>，不是复制以前的测试报告。</p>
+<p>本次实际第一页的前两项为 ct_000002、ct_000004。<strong>没有预设 ct_000004 一定在第一页；本次实测的确在第二项。</strong> 为排除只依赖列表位置，又执行了 AND 精确筛选：</p>
+<pre><code class="language-powershell">java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --content-id ct_000004 --page 1
+</code></pre>
+<p>结果为 <code>total=1</code>，唯一 item 为 pending 的 ct_000004，<a href="../../evidence/task2/commands/09-selected-pending-exact.stdout.txt">09 原始证据</a>。因此无需继续翻页就已证明该候选属于本次队列。</p>
+<p>对两个候选均实际读取完整详情和历史：</p>
+<pre><code class="language-powershell">java -jar ./target/contentops.jar --env mock --output json content get ct_000002
+java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+java -jar ./target/contentops.jar --env mock --output json content history ct_000002
+java -jar ./target/contentops.jar --env mock --output json content history ct_000004
+java -jar ./target/contentops.jar --env mock --output json tags list --status active
+</code></pre>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>实测候选</th>
+<th>正文与字段</th>
+<th>原标签 / 历史</th>
+<th>本次选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ct_000002，长夜灯塔·第8话：最后一班渡船</td>
+<td>正文非空；category_id 为空串</td>
+<td>科幻、治愈 / 0 条</td>
+<td>也满足基本条件；保留原数据，不额外修改</td>
+</tr>
+<tr>
+<td>ct_000004，无人剧场·第12话：逆流而上</td>
+<td>正文非空；category_id=cat_03</td>
+<td>恋爱、校园、武侠 / 0 条</td>
+<td>选中；可清楚展示三项原标签保留后再新增，且展示字段较完整</td>
+</tr>
+</tbody>
+</table></div>
+<p>栏目 ID 非空只是展示完整性的取舍，不证明分类正确；本任务未额外调用栏目 API。两条的详情与历史原文为 commands/04～07，选择依据另见 <a href="../../evidence/task2/before/selection.json">selection.json</a>。</p>
+<h2 id="section-4-操作对象演示决定与标签计划">4. 操作对象、演示决定与标签计划</h2>
+<p>选中内容的实际正文全文为：</p>
+<blockquote>
+<p>赛琳娜在灯塔下做出了一个反常的决定，故事从这里开始分岔……</p>
+</blockquote>
+<p>来自 <a href="../../evidence/task2/commands/05-candidate-ct000004-detail.stdout.txt">05 详情原文</a>，该输出保留全部 12 个详情字段。active 标签库实际返回 23 项，“悬疑”存在、status=active、group=题材，且选中内容当前没有此标签，<a href="../../evidence/task2/commands/08-active-tags.stdout.txt">08 标签库原文</a>。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>计划项</th>
+<th>本次意图（执行前记录）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容 ID / 初始审核</td>
+<td>ct_000004 / pending</td>
+</tr>
+<tr>
+<td>原标签</td>
+<td><code>[&quot;恋爱&quot;,&quot;校园&quot;,&quot;武侠&quot;]</code></td>
+</tr>
+<tr>
+<td>审核动作</td>
+<td>approve，仅演示 Mock 审核流程</td>
+</tr>
+<tr>
+<td>审核原因</td>
+<td><code>本地Mock审核流程演示，不代表真实业务合规结论</code></td>
+</tr>
+<tr>
+<td>新增标签</td>
+<td>悬疑，active 且当前尚未包含</td>
+</tr>
+<tr>
+<td>目标审核状态</td>
+<td>approved</td>
+</tr>
+<tr>
+<td>完整目标标签</td>
+<td><code>[&quot;恋爱&quot;,&quot;校园&quot;,&quot;武侠&quot;,&quot;悬疑&quot;]</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>“反常的决定、故事分岔”有弱悬念关联，因此选“悬疑”演示新增。但只有一句样例正文，缺少标签判定规则与完整情节，不能据此认定真实题材；原有恋爱/校园/武侠也不自动清洗。approve 不来自“正文必然合规”的推断。计划先保存于 <a href="../../evidence/task2/before/operation-plan.json">operation-plan.json</a>，再进行 CLI 预览。</p>
+<h2 id="section-5-实际预览及零写入证据">5. 实际预览及零写入证据</h2>
+<pre><code class="language-powershell">java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason '本地Mock审核流程演示，不代表真实业务合规结论' --add '悬疑'
+</code></pre>
+<p><a href="../../evidence/task2/commands/10-process-preview.stdout.txt">10 原始 stdout</a>：<code>mode=preview</code>、<code>status=previewed</code>、<code>exit_code=0</code>；实际进程码也为 0。review/tags 均为 <code>not_sent/not_checked</code>，api_result=null。stderr 仅提示“预览未执行；实际写入需同时提供 --execute --yes。”</p>
+<p>之后又分别启动新 JVM get/history（commands/11、12），与 commands/05、07 比较，完整详情和历史相同：pending、原三项标签、历史 0 条。预览前后的 snapshot 均 <code>exists=false</code>，之后仍没有业务 state.json；查询可能创建的 state.lock 属于协调元数据。</p>
+<p><a href="../../evidence/task2/preview/zero-write-validation.json">零写入校验</a> 保存实际步骤、数据来源和前后快照情况。零写入证据来自步骤状态、详情/历史及业务快照检查；本次未启用故障计数诊断，不捏造写方法计数。预览成功不能作为已审核的结论。</p>
+<h2 id="section-6-仅一次授权执行与真实结果">6. 仅一次授权执行与真实结果</h2>
+<p>预览通过后，保持相同 ID、动作、原因和标签，实际运行：</p>
+<pre><code class="language-powershell">java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason '本地Mock审核流程演示，不代表真实业务合规结论' --add '悬疑' --execute --yes
+</code></pre>
+<p>执行于 2026-10-31 17:26:03（UTC+08:00）；<strong>实际进程退出码 0，stderr 为空</strong>。以下是 <a href="../../evidence/task2/commands/13-process-execute.stdout.txt">13 原始 stdout</a> 的缩进排版，值未替换：</p>
+<pre><code class="language-json">{
+  &quot;schema_version&quot;: &quot;1&quot;,
+  &quot;invocation_id&quot;: &quot;87d52d34-050a-42b3-a20c-451da52c9548&quot;,
+  &quot;environment&quot;: &quot;mock&quot;,
+  &quot;command&quot;: &quot;content.process&quot;,
+  &quot;mode&quot;: &quot;execute&quot;,
+  &quot;status&quot;: &quot;succeeded&quot;,
+  &quot;exit_code&quot;: 0,
+  &quot;content_id&quot;: &quot;ct_000004&quot;,
+  &quot;data&quot;: {
+    &quot;plan&quot;: {
+      &quot;review&quot;: {&quot;before&quot;: &quot;pending&quot;, &quot;action&quot;: &quot;approve&quot;, &quot;reason&quot;: &quot;本地Mock审核流程演示，不代表真实业务合规结论&quot;},
+      &quot;tags&quot;: {&quot;before&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;], &quot;after&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;, &quot;悬疑&quot;]}
+    },
+    &quot;steps&quot;: {
+      &quot;review&quot;: {&quot;write&quot;: &quot;acknowledged&quot;, &quot;verification&quot;: &quot;matched&quot;, &quot;api_result&quot;: {&quot;success_count&quot;: 1, &quot;failed_count&quot;: 0}},
+      &quot;tags&quot;: {&quot;write&quot;: &quot;acknowledged&quot;, &quot;verification&quot;: &quot;matched&quot;, &quot;api_result&quot;: {&quot;result&quot;: &quot;ok&quot;}}
+    },
+    &quot;observed&quot;: {&quot;content_id&quot;: &quot;ct_000004&quot;, &quot;review_status&quot;: &quot;approved&quot;, &quot;quality_status&quot;: &quot;normal&quot;, &quot;visibility&quot;: &quot;online&quot;, &quot;tags&quot;: [&quot;恋爱&quot;, &quot;校园&quot;, &quot;武侠&quot;, &quot;悬疑&quot;]}
+  },
+  &quot;error&quot;: null,
+  &quot;warnings&quot;: []
+}
+</code></pre>
+<p>审核计数 1/0、标签 result=ok 是收到的接口结果，两步还分别回读 matched。随后又做独立进程查询，不能只根据写入响应宣布完成。采集器在启动写进程前保存 execution.started 标记和精确参数，只允许这一项写入；执行后没有重新运行审核来补证据。</p>
+<h2 id="section-7-操作后的跨-jvm-核查">7. 操作后的跨 JVM 核查</h2>
+<pre><code class="language-powershell">java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+java -jar ./target/contentops.jar --env mock --output json content history ct_000004
+java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --content-id ct_000004
+java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1
+</code></pre>
+<p>以上 commands/14～17 均为新的 Java 进程，实际退出码均 0。执行 PID 为 55100，独立详情/历史/精确筛选 PID 分别为 23204、7280、58560；启动/结束时间与 PID 保存在各命令 started/finished 文件中。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>核对项</th>
+<th>操作前实测</th>
+<th>操作后实测</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>review_status</td>
+<td>pending</td>
+<td>approved</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>恋爱、校园、武侠</td>
+<td>恋爱、校园、武侠、悬疑，原三项完整保留</td>
+</tr>
+<tr>
+<td>审核历史数量</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>当前 pending＋ID 精确匹配</td>
+<td>1 条</td>
+<td>0 条，items=[]</td>
+</tr>
+<tr>
+<td>全部待审核数量</td>
+<td>132</td>
+<td>131</td>
+</tr>
+<tr>
+<td>quality_status / visibility</td>
+<td>normal / online</td>
+<td>normal / online</td>
+</tr>
+<tr>
+<td>标题、正文、创作者、创建时间、来源、渠道、栏目</td>
+<td>原始值</td>
+<td>全部相同</td>
+</tr>
+<tr>
+<td>业务快照</td>
+<td>不存在</td>
+<td>revision=2，格式版本 1</td>
+</tr>
+</tbody>
+</table></div>
+<p>新增审核记录的真实字段为 approve、op_mock_cli、上述演示原因，以及 <code>2026-10-31T09:26:03.496047300Z</code>，<a href="../../evidence/task2/commands/15-after-history.stdout.txt">15 原文</a>。op_mock_cli 是本地模拟操作人，不证明真实权限身份。</p>
+<p>只读校验还比较了工作快照与原始 seed 的全部业务数据：<a href="../../evidence/task2/validation/business-diff.json">business-diff.json</a> 显示只改 ct_000004 的 review_status、tags，且只追加该 ID 的历史；其他 299 条内容和所有非本期集合保持原样。标签 usage_count 等聚合字段保留源数据口径，不作为“已更新统计”的证据。</p>
+<p>最终快照 SHA-256 为 <code>0E72B6DFC455B59F87EA7D9FB7C29F379680540DF39056397E15C911C36A8790</code>。所有执行后只读查询前后 SHA 一致。<a href="../../evidence/task2/validation/result.json">只读校验汇总</a> 的全部断言通过；原题、OpenAPI、Mock、原 Java 源码和 S0～S5 证据的前后哈希一致。</p>
+<h2 id="section-8-异常处理与本次问题">8. 异常处理与本次问题</h2>
+<p>本次没有 partial、unknown、verification_failed、超时或程序缺陷，没有恢复性写入，也没有修改 Java。已有命名规划中采用过其他 06/task-2 路径，本轮按用户指定落地到本文件和 evidence/task2，不另存重复副本。</p>
+<p>若审核完成但标签失败，应保留 partial/4，查询详情与历史后用独立 tags update 重新计划，仅补标签；不要重做审核。若 unknown/5，可能已经持久化，先独立 get/history 核查，不能把读到目标值变成本次调用成功，更不能盲目重试。若 verification_failed/6，保留 acknowledged，不自动回滚。对应真实受控验证引用 <a href="s5-evidence.html">S5 证据</a>，不在本次正式工作副本制造故障。</p>
+<h2 id="section-9-结论复现与边界">9. 结论、复现与边界</h2>
+<p>任务二要求的“查一批 → 选一条 → 预览 → 审核及标签新增 → 新 JVM 回读”已在本次独立 Mock 副本完成，真实输出与进程码一致。审核与标签仍为两个独立 API 提交，不存在跨接口事务；此结果不证明生产权限、服务端幂等、并发安全、真实 HTTP 联调或完整业务合规。</p>
+<p>复现业务时，在新终端或保存当前配置后设置全新的绝对状态目录，清除故障变量，再依次运行本文件中的列表、详情/历史、标签查询、预览、一次执行和回读命令；不要复用本次已审核副本。新 invocation_id、PID、日志时间和文件 SHA 会不同，应核对业务变化与步骤语义。JAR 构建/启动见 <a href="readme.html">README</a>。</p>
+<p>本次的完整可写状态目录不作为提交证据；所需事实与哈希均已保存。<code>scripts/record-task2.ps1</code> 是 Git 开发工作区的逐条采集工具，不是面试官运行 CLI 的前置依赖。<code>scripts/validate-task2.ps1</code> 只读核查本机仍保留的本次工作副本和已存输出，不启动 CLI 或修改状态；跨环境复现请新建副本，不能盲目重放本次 execution。</p>
+</article>
+      <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 docs/06-实际操作记录.md</span></footer>
+    </main>
+  </div>
+</body>
+</html>

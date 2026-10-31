@@ -7,6 +7,10 @@
 /.mvn/.cache/
 *.class
 
+# Python documentation build cache
+__pycache__/
+*.py[cod]
+
 # Mock runtime files accidentally placed at the project root
 /state.json
 /state.lock

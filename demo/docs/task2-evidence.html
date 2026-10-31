@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="source-sha256" content="f61352ea326a78893386582fc5830bb79849ab4ffd76df2d604a91539c8a52e7">
+  <title>任务二实际操作证据 · ContentOps 文档</title>
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body id="document-top">
+  <a class="skip-link" href="#document-body">跳至正文</a>
+  <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
+  <div class="reading-layout">
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-本次结果">本次结果</a></li>
+<li class="toc-level-2"><a href="#section-文件与原始命令索引">文件与原始命令索引</a></li>
+<li class="toc-level-2"><a href="#section-采集校验与复现边界">采集、校验与复现边界</a></li></ul></nav></details></aside>
+    <main id="document-body" tabindex="-1">
+      <div class="document-meta"><span>任务二 · 原始证据索引</span><a href="../../evidence/task2/README.md">原始 Markdown 文件</a></div>
+
+      <article class="markdown-body"><h1 id="section-任务二实际操作证据">任务二实际操作证据</h1>
+<p>操作说明：<a href="06-operation-record.html">docs/06-实际操作记录.md</a>。Run ID <code>a20c72c2-74c1-4130-af99-8d17452424b6</code>；源码基线 <code>a726f317e321236107bf9a44480f647bb6ef54ea</code>，JAR/状态目录与初始声明见 <a href="../../evidence/task2/manifest.json">manifest.json</a>。</p>
+<p>这是本次正式任务二的本地 Mock 操作记录，与 S0～S5 开发验证分开；不是生产审核。审核决定与“悬疑”标签均为已说明限制的流程演示。没有注入故障，18 个实际 CLI 进程均退出 0，仅 commands/13 执行一次写操作。</p>
+<h2 id="section-本次结果">本次结果</h2>
+<p>实际第一页：132 条 pending 中返回 20 条；ct_000004 在第二项，另用 AND 精确筛选得到 1 条，未虚构列表位置。读取 ct_000002/ct_000004 的完整详情与历史后，选择 ct_000004。active 标签库确认“悬疑”可新增。</p>
+<p>预览前后完整详情/历史相同，没有创建业务快照。一次 process 执行得到 succeeded/0，审核与标签均 acknowledged/matched。新 JVM 核查为 approved，原恋爱/校园/武侠保留并新增悬疑；审核历史从 0 增至 1；pending 精确筛选变为 0，总数从 132 减至 131。revision=2。没有异常或第二次审核。</p>
+<h2 id="section-文件与原始命令索引">文件与原始命令索引</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="可横向滚动的文档表格"><table>
+<thead>
+<tr>
+<th>编号/目录</th>
+<th>来源与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>commands/01、18</td>
+<td>实际 JAR help/version</td>
+</tr>
+<tr>
+<td>commands/02、03</td>
+<td>第一页 pending 表格原文与 JSON 原文</td>
+</tr>
+<tr>
+<td>commands/04～07</td>
+<td>两条候选的详情/历史</td>
+</tr>
+<tr>
+<td>commands/08、09</td>
+<td>active 标签库、选中 ID 的 pending 精确匹配</td>
+</tr>
+<tr>
+<td>commands/10</td>
+<td>process 预览；stdout JSON，stderr 是未执行提示</td>
+</tr>
+<tr>
+<td>commands/11、12</td>
+<td>预览后独立 get/history，证明未变更</td>
+</tr>
+<tr>
+<td>commands/13</td>
+<td>唯一授权 process 执行；真实 stdout、空 stderr、退出 0</td>
+</tr>
+<tr>
+<td>commands/14～17</td>
+<td>执行后独立 get/history/pending 精确查询/总数查询</td>
+</tr>
+<tr>
+<td>before/</td>
+<td>从原始命令输出提取的详情、历史、标签库；另有选择理由与执行前意图</td>
+</tr>
+<tr>
+<td>preview/</td>
+<td>已读取的预览计划、预览后详情/历史及零写入校验</td>
+</tr>
+<tr>
+<td>after/</td>
+<td>从新 JVM 输出提取的详情/历史/标签，以及磁盘快照元数据</td>
+</tr>
+<tr>
+<td>validation/environment.txt</td>
+<td>本轮实际版本信息；没有将 S5 测试标成新运行</td>
+</tr>
+<tr>
+<td>validation/execution-plan.json</td>
+<td>对应成功预览的精确执行参数与执行前快照</td>
+</tr>
+<tr>
+<td>validation/execution.started/finished.json</td>
+<td>写入前意图标记及实际完成码；中断后禁止盲目重放</td>
+</tr>
+<tr>
+<td>validation/result.json</td>
+<td>全部断言、逐条命令/参数、PID/时间、前后业务状态、SHA 与结果</td>
+</tr>
+<tr>
+<td>validation/business-diff.json</td>
+<td>只读比较完整业务数据，证明只改审核、标签并追加一条目标历史</td>
+</tr>
+<tr>
+<td>validation/protected-before/after.json</td>
+<td>原始材料、源码、旧证据的真实前后哈希</td>
+</tr>
+<tr>
+<td>validation/validate.*</td>
+<td>只读校验器的真实 stdout/stderr/退出码；本次为 PASS/空/0</td>
+</tr>
+</tbody>
+</table></div>
+<p>每条 commands 记录都有 <code>.started.json</code>（完整参数数组、可读命令、状态目录、JAR SHA）、<code>.stdout.txt</code>、<code>.stderr.txt</code>、<code>.exit-code.txt</code>、<code>.finished.json</code>（实际 PID/时间/退出码）及 snapshot-before/after 元数据。空文件表示该流实际为空。before/preview/after 为带来源路径的 JSON 摘录，PowerShell 可能规范化时间字符串格式；程序原文始终以 commands/*.stdout.txt 为准。</p>
+<h2 id="section-采集校验与复现边界">采集、校验与复现边界</h2>
+<p>本次实际使用 <code>scripts/record-task2.ps1</code> 逐条采集。它固定 mock 和 manifest 中的新目录，移除子进程的故障变量，不修改父进程永久配置；不覆盖已有调用名；写入必须匹配成功预览后的执行计划，且只有一次写入机会。初始 SHA 与 S5 已验证 JAR 一致，当前内嵌 seed 也与原始附件字节校验一致。</p>
+<p>随后实际运行 <code>./scripts/validate-task2.ps1 -SaveReports</code>，没有启动新业务命令。它读取工作副本和原始 stdout，核验 JSON/进程码、完整数据差异、历史增量、独立 PID、执行后读取 SHA 不变，以及材料保护。仅 ct_000004 的 review_status/tags 和对应历史发生业务变化，其他 299 条内容和非本期集合保持不变。</p>
+<p>没有重新运行 Maven test/verify，没有新增 Java 功能；S5 的 192 项通过结果是此前事实。本轮新证据是上述 18 次真实 CLI 调用及只读校验。</p>
+<p>本机完整可写副本位于 <code>.contentops/task2/&lt;run-id&gt;/</code>，不纳入 Git/提交包。不要为了复现而沿用已审核副本或重新运行整份捕获历史；业务复现请按 06 的命令使用新目录。校验脚本在保留本机副本时可只读重跑，不带 SaveReports 不写报告；采集器依赖本开发 Git 工作区，不是普通 CLI 运行的前置条件。</p>
+<p>本轮文件名/目录遵循用户最新指定：docs/06-实际操作记录.md 与 evidence/task2；docs/04 中早期规划的其他命名不另建重复副本。未执行异常演示；异常处理证据引用 <a href="s5-evidence.html">S5</a>，不混入本次成功副本。本文件与汇总不是完整 AI 会话导出。</p>
+<p>编辑过程说明：更新根 README 阶段措辞时，一次 apply_patch 因仅匹配长段落的前半句而被拒绝，文件未改变；读取整段后已按完整原文修正。该工具结果保留在当前会话中，不是 CLI 失败，也没有因此重跑任何写操作。</p>
+</article>
+      <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 evidence/task2/README.md</span></footer>
+    </main>
+  </div>
+</body>
+</html>

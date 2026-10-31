@@ -1,0 +1,1344 @@
+{
+  "generator": "scripts/render-docs.py",
+  "markdown_it_py": "4.2.0",
+  "mdurl": "0.1.2",
+  "documents": [
+    {
+      "source": "docs/01-需求与接口分析.md",
+      "html": "01-requirements.html",
+      "kind": "需求与接口",
+      "historical": true,
+      "source_sha256": "f2c2eeb5e4f25dbed54bd767d332f5b0010d70b9e537ca3c88db6d1d3e7c9941",
+      "html_sha256": "5e0287dc3f2f58f7fde254168e0e2d5c49ebf4bb162abf2cf2d32049cdca15fc",
+      "headings": [
+        {
+          "level": 1,
+          "title": "内容运营后台 CLI 化：需求与接口分析",
+          "id": "section-内容运营后台-cli-化需求与接口分析"
+        },
+        {
+          "level": 2,
+          "title": "0. 分析范围与依据",
+          "id": "section-0-分析范围与依据"
+        },
+        {
+          "level": 2,
+          "title": "1. 主要结论",
+          "id": "section-1-主要结论"
+        },
+        {
+          "level": 2,
+          "title": "2. 业务需求理解",
+          "id": "section-2-业务需求理解"
+        },
+        {
+          "level": 3,
+          "title": "2.1 现有后台的业务场景",
+          "id": "section-21-现有后台的业务场景"
+        },
+        {
+          "level": 3,
+          "title": "2.2 CLI 化要解决的问题",
+          "id": "section-22-cli-化要解决的问题"
+        },
+        {
+          "level": 3,
+          "title": "2.3 对原题三项任务的映射",
+          "id": "section-23-对原题三项任务的映射"
+        },
+        {
+          "level": 2,
+          "title": "3. 接口梳理",
+          "id": "section-3-接口梳理"
+        },
+        {
+          "level": 3,
+          "title": "3.1 全局合同与返回对象",
+          "id": "section-31-全局合同与返回对象"
+        },
+        {
+          "level": 3,
+          "title": "3.2 重点：查询、审核与标签闭环（6 个操作）",
+          "id": "section-32-重点查询审核与标签闭环6-个操作"
+        },
+        {
+          "level": 4,
+          "title": "3.2.1 GET /admin/contents：筛选内容列表",
+          "id": "section-321-get-admincontents筛选内容列表"
+        },
+        {
+          "level": 4,
+          "title": "3.2.2 GET /admin/contents/{content_id}：读取内容详情",
+          "id": "section-322-get-admincontentscontent_id读取内容详情"
+        },
+        {
+          "level": 4,
+          "title": "3.2.3 GET /admin/contents/{content_id}/review-logs：读取历史记录",
+          "id": "section-323-get-admincontentscontent_idreview-logs读取历史记录"
+        },
+        {
+          "level": 4,
+          "title": "3.2.4 POST /admin/content-reviews：提交审核",
+          "id": "section-324-post-admincontent-reviews提交审核"
+        },
+        {
+          "level": 4,
+          "title": "3.2.5 GET /admin/tags：读取标签库",
+          "id": "section-325-get-admintags读取标签库"
+        },
+        {
+          "level": 4,
+          "title": "3.2.6 PUT /admin/contents/{content_id}/tags：替换内容标签",
+          "id": "section-326-put-admincontentscontent_idtags替换内容标签"
+        },
+        {
+          "level": 3,
+          "title": "3.3 分发与内容状态（3 个操作）",
+          "id": "section-33-分发与内容状态3-个操作"
+        },
+        {
+          "level": 3,
+          "title": "3.4 标签库与栏目（另 2 个操作）",
+          "id": "section-34-标签库与栏目另-2-个操作"
+        },
+        {
+          "level": 3,
+          "title": "3.5 创作者与白名单（3 个操作）",
+          "id": "section-35-创作者与白名单3-个操作"
+        },
+        {
+          "level": 3,
+          "title": "3.6 举报与创作者通知（3 个操作）",
+          "id": "section-36-举报与创作者通知3-个操作"
+        },
+        {
+          "level": 3,
+          "title": "3.7 推荐位（2 个操作）",
+          "id": "section-37-推荐位2-个操作"
+        },
+        {
+          "level": 3,
+          "title": "3.8 日志、导出与统计（4 个操作）",
+          "id": "section-38-日志导出与统计4-个操作"
+        },
+        {
+          "level": 2,
+          "title": "4. 哪些现有接口不适合直接暴露给 CLI / Agent",
+          "id": "section-4-哪些现有接口不适合直接暴露给-cli-agent"
+        },
+        {
+          "level": 3,
+          "title": "4.1 批量操作：容量与可恢复性是两个问题",
+          "id": "section-41-批量操作容量与可恢复性是两个问题"
+        },
+        {
+          "level": 3,
+          "title": "4.2 幂等性：相同最终状态不等于没有重复副作用",
+          "id": "section-42-幂等性相同最终状态不等于没有重复副作用"
+        },
+        {
+          "level": 3,
+          "title": "4.3 数据一致性与并发修改",
+          "id": "section-43-数据一致性与并发修改"
+        },
+        {
+          "level": 3,
+          "title": "4.4 错误处理与输出合同",
+          "id": "section-44-错误处理与输出合同"
+        },
+        {
+          "level": 3,
+          "title": "4.5 权限与高影响动作",
+          "id": "section-45-权限与高影响动作"
+        },
+        {
+          "level": 3,
+          "title": "4.6 审计与责任归属",
+          "id": "section-46-审计与责任归属"
+        },
+        {
+          "level": 3,
+          "title": "4.7 其他不能静默忽略的行为",
+          "id": "section-47-其他不能静默忽略的行为"
+        },
+        {
+          "level": 2,
+          "title": "5. mock_data.json 全量分析",
+          "id": "section-5-mock_datajson-全量分析"
+        },
+        {
+          "level": 3,
+          "title": "5.1 结构、数量与基本完整性",
+          "id": "section-51-结构数量与基本完整性"
+        },
+        {
+          "level": 3,
+          "title": "5.2 内容数量与状态分布",
+          "id": "section-52-内容数量与状态分布"
+        },
+        {
+          "level": 3,
+          "title": "5.3 其他对象分布",
+          "id": "section-53-其他对象分布"
+        },
+        {
+          "level": 3,
+          "title": "5.4 异常、口径差异与待确认项",
+          "id": "section-54-异常口径差异与待确认项"
+        },
+        {
+          "level": 3,
+          "title": "5.5 能支持的演示与验证",
+          "id": "section-55-能支持的演示与验证"
+        },
+        {
+          "level": 3,
+          "title": "5.6 不能仅凭现有数据验证的能力",
+          "id": "section-56-不能仅凭现有数据验证的能力"
+        },
+        {
+          "level": 2,
+          "title": "6. 需求边界",
+          "id": "section-6-需求边界"
+        },
+        {
+          "level": 3,
+          "title": "6.1 题目明确要求的内容",
+          "id": "section-61-题目明确要求的内容"
+        },
+        {
+          "level": 3,
+          "title": "6.2 可以自行设计，但需要明确标注为新设计的内容",
+          "id": "section-62-可以自行设计但需要明确标注为新设计的内容"
+        },
+        {
+          "level": 3,
+          "title": "6.3 材料无法确定的内容",
+          "id": "section-63-材料无法确定的内容"
+        },
+        {
+          "level": 2,
+          "title": "7. 第一阶段功能范围候选",
+          "id": "section-7-第一阶段功能范围候选"
+        },
+        {
+          "level": 3,
+          "title": "7.1 比较口径",
+          "id": "section-71-比较口径"
+        },
+        {
+          "level": 3,
+          "title": "7.2 三种完整候选",
+          "id": "section-72-三种完整候选"
+        },
+        {
+          "level": 3,
+          "title": "7.3 可作为前置增量、但不能独立交卷的范围",
+          "id": "section-73-可作为前置增量但不能独立交卷的范围"
+        },
+        {
+          "level": 3,
+          "title": "7.4 本轮范围比较暂不加入的扩展",
+          "id": "section-74-本轮范围比较暂不加入的扩展"
+        }
+      ],
+      "tables": 22,
+      "code_blocks": 0
+    },
+    {
+      "source": "docs/02-第一阶段MVP与CLI产品方案.md",
+      "html": "02-product-plan.html",
+      "kind": "产品评审",
+      "historical": true,
+      "source_sha256": "106ae887a3692104827882640b448f1f44306ff5756e3da43441cb55ea753dc6",
+      "html_sha256": "3727f205d8d79e97b7db2a3c9258011d84f648490d22bc9d4bb561ed72013064",
+      "headings": [
+        {
+          "level": 1,
+          "title": "第一阶段 MVP 与 CLI 产品方案",
+          "id": "section-第一阶段-mvp-与-cli-产品方案"
+        },
+        {
+          "level": 2,
+          "title": "1. 评审结论与交付边界",
+          "id": "section-1-评审结论与交付边界"
+        },
+        {
+          "level": 3,
+          "title": "1.1 两个时间约束",
+          "id": "section-11-两个时间约束"
+        },
+        {
+          "level": 3,
+          "title": "1.2 人工、脚本与未来 Agent 的边界",
+          "id": "section-12-人工脚本与未来-agent-的边界"
+        },
+        {
+          "level": 2,
+          "title": "2. P0、P1 与暂不实现",
+          "id": "section-2-p0p1-与暂不实现"
+        },
+        {
+          "level": 3,
+          "title": "2.1 P0：完整两周 MVP 必须验收",
+          "id": "section-21-p0完整两周-mvp-必须验收"
+        },
+        {
+          "level": 3,
+          "title": "2.2 P1：有余量才做，可不进入首次交付",
+          "id": "section-22-p1有余量才做可不进入首次交付"
+        },
+        {
+          "level": 3,
+          "title": "2.3 暂不实现",
+          "id": "section-23-暂不实现"
+        },
+        {
+          "level": 2,
+          "title": "3. 为什么选择独立命令与组合命令并存",
+          "id": "section-3-为什么选择独立命令与组合命令并存"
+        },
+        {
+          "level": 2,
+          "title": "4. 命令体系与调用示例",
+          "id": "section-4-命令体系与调用示例"
+        },
+        {
+          "level": 3,
+          "title": "4.1 总览与公共参数",
+          "id": "section-41-总览与公共参数"
+        },
+        {
+          "level": 3,
+          "title": "4.2 查询待审核内容及分页：content list",
+          "id": "section-42-查询待审核内容及分页content-list"
+        },
+        {
+          "level": 3,
+          "title": "4.3 查看详情、查询实际状态：content get",
+          "id": "section-43-查看详情查询实际状态content-get"
+        },
+        {
+          "level": 3,
+          "title": "4.4 查看审核历史：content history",
+          "id": "section-44-查看审核历史content-history"
+        },
+        {
+          "level": 3,
+          "title": "4.5 查询可用标签：tags list",
+          "id": "section-45-查询可用标签tags-list"
+        },
+        {
+          "level": 3,
+          "title": "4.6 独立审核：content review",
+          "id": "section-46-独立审核content-review"
+        },
+        {
+          "level": 3,
+          "title": "4.7 独立标签变更：content tags update",
+          "id": "section-47-独立标签变更content-tags-update"
+        },
+        {
+          "level": 3,
+          "title": "4.8 单条组合：content process",
+          "id": "section-48-单条组合content-process"
+        },
+        {
+          "level": 2,
+          "title": "5. 交互、校验与执行规则",
+          "id": "section-5-交互校验与执行规则"
+        },
+        {
+          "level": 3,
+          "title": "5.1 默认预览与明确执行",
+          "id": "section-51-默认预览与明确执行"
+        },
+        {
+          "level": 3,
+          "title": "5.2 参数和业务前置校验",
+          "id": "section-52-参数和业务前置校验"
+        },
+        {
+          "level": 3,
+          "title": "5.3 标签覆盖与并发变化",
+          "id": "section-53-标签覆盖与并发变化"
+        },
+        {
+          "level": 3,
+          "title": "5.4 process 的固定执行流程",
+          "id": "section-54-process-的固定执行流程"
+        },
+        {
+          "level": 3,
+          "title": "5.5 错误、回读与结果未知",
+          "id": "section-55-错误回读与结果未知"
+        },
+        {
+          "level": 2,
+          "title": "6. 输出合同与退出码",
+          "id": "section-6-输出合同与退出码"
+        },
+        {
+          "level": 3,
+          "title": "6.1 统一 JSON 信封",
+          "id": "section-61-统一-json-信封"
+        },
+        {
+          "level": 3,
+          "title": "6.2 标准输出与错误输出",
+          "id": "section-62-标准输出与错误输出"
+        },
+        {
+          "level": 3,
+          "title": "6.3 退出码",
+          "id": "section-63-退出码"
+        },
+        {
+          "level": 2,
+          "title": "7. 典型使用流程",
+          "id": "section-7-典型使用流程"
+        },
+        {
+          "level": 3,
+          "title": "7.1 人工从待审核查询到闭环",
+          "id": "section-71-人工从待审核查询到闭环"
+        },
+        {
+          "level": 3,
+          "title": "7.2 误输入、非法标签与部分失败",
+          "id": "section-72-误输入非法标签与部分失败"
+        },
+        {
+          "level": 3,
+          "title": "7.3 脚本非交互调用",
+          "id": "section-73-脚本非交互调用"
+        },
+        {
+          "level": 2,
+          "title": "8. 可验证验收标准",
+          "id": "section-8-可验证验收标准"
+        },
+        {
+          "level": 3,
+          "title": "8.1 验收证据与数据前提",
+          "id": "section-81-验收证据与数据前提"
+        },
+        {
+          "level": 3,
+          "title": "8.2 产品验收",
+          "id": "section-82-产品验收"
+        },
+        {
+          "level": 3,
+          "title": "8.3 研发验收，可转为 Java 测试用例",
+          "id": "section-83-研发验收可转为-java-测试用例"
+        },
+        {
+          "level": 2,
+          "title": "9. 一名 Java 后端的十个工作日计划",
+          "id": "section-9-一名-java-后端的十个工作日计划"
+        },
+        {
+          "level": 3,
+          "title": "9.1 两周完整 MVP",
+          "id": "section-91-两周完整-mvp"
+        },
+        {
+          "level": 3,
+          "title": "9.2 48 小时试炼：交付切片与完整 MVP 的差别",
+          "id": "section-92-48-小时试炼交付切片与完整-mvp-的差别"
+        },
+        {
+          "level": 2,
+          "title": "10. 为后续 Agent 预留什么",
+          "id": "section-10-为后续-agent-预留什么"
+        },
+        {
+          "level": 3,
+          "title": "10.1 第一阶段必须打好的基础",
+          "id": "section-101-第一阶段必须打好的基础"
+        },
+        {
+          "level": 3,
+          "title": "10.2 放到后续 Agent / 100 条阶段",
+          "id": "section-102-放到后续-agent-100-条阶段"
+        },
+        {
+          "level": 2,
+          "title": "11. 当前决定与仍需确认的业务政策",
+          "id": "section-11-当前决定与仍需确认的业务政策"
+        }
+      ],
+      "tables": 18,
+      "code_blocks": 30
+    },
+    {
+      "source": "docs/03-Java技术架构与实施方案.md",
+      "html": "03-architecture.html",
+      "kind": "技术评审",
+      "historical": true,
+      "source_sha256": "1395249857d11cc6ab5e9819a64d5b8fd5a897b3826feaab0376d9ab25a78697",
+      "html_sha256": "b0855e09722e56802ea2316bb503e92b41ddef1e82e673c6dc3f45401581097e",
+      "headings": [
+        {
+          "level": 1,
+          "title": "Java 技术架构与实施方案",
+          "id": "section-java-技术架构与实施方案"
+        },
+        {
+          "level": 2,
+          "title": "1. 设计结论、依据与实现状态",
+          "id": "section-1-设计结论依据与实现状态"
+        },
+        {
+          "level": 3,
+          "title": "1.1 已有、待实现与不实现",
+          "id": "section-11-已有待实现与不实现"
+        },
+        {
+          "level": 3,
+          "title": "1.2 已确认的产品合同",
+          "id": "section-12-已确认的产品合同"
+        },
+        {
+          "level": 2,
+          "title": "2. 技术选型与具体版本",
+          "id": "section-2-技术选型与具体版本"
+        },
+        {
+          "level": 3,
+          "title": "2.1 本机环境事实",
+          "id": "section-21-本机环境事实"
+        },
+        {
+          "level": 3,
+          "title": "2.2 三种 CLI 方案比较",
+          "id": "section-22-三种-cli-方案比较"
+        },
+        {
+          "level": 3,
+          "title": "2.3 JDK 选择：21 开发验收，release 17",
+          "id": "section-23-jdk-选择21-开发验收release-17"
+        },
+        {
+          "level": 3,
+          "title": "2.4 固定依赖与构建插件",
+          "id": "section-24-固定依赖与构建插件"
+        },
+        {
+          "level": 3,
+          "title": "2.5 构建与打包合同",
+          "id": "section-25-构建与打包合同"
+        },
+        {
+          "level": 2,
+          "title": "3. 整体架构与项目目录",
+          "id": "section-3-整体架构与项目目录"
+        },
+        {
+          "level": 3,
+          "title": "3.1 依赖方向",
+          "id": "section-31-依赖方向"
+        },
+        {
+          "level": 3,
+          "title": "3.2 拟定目录（本轮不创建）",
+          "id": "section-32-拟定目录本轮不创建"
+        },
+        {
+          "level": 3,
+          "title": "3.3 关键类职责",
+          "id": "section-33-关键类职责"
+        },
+        {
+          "level": 2,
+          "title": "4. 六项 Gateway、DTO 与 API 契约",
+          "id": "section-4-六项-gatewaydto-与-api-契约"
+        },
+        {
+          "level": 3,
+          "title": "4.1 方法映射",
+          "id": "section-41-方法映射"
+        },
+        {
+          "level": 3,
+          "title": "4.2 必要模型",
+          "id": "section-42-必要模型"
+        },
+        {
+          "level": 2,
+          "title": "5. Mock：真实修改工作副本，而不是预设成功输出",
+          "id": "section-5-mock真实修改工作副本而不是预设成功输出"
+        },
+        {
+          "level": 3,
+          "title": "5.1 JSON 与 SQLite 的比较",
+          "id": "section-51-json-与-sqlite-的比较"
+        },
+        {
+          "level": 3,
+          "title": "5.2 状态路径与格式",
+          "id": "section-52-状态路径与格式"
+        },
+        {
+          "level": 3,
+          "title": "5.3 初始化、读取与重置",
+          "id": "section-53-初始化读取与重置"
+        },
+        {
+          "level": 3,
+          "title": "5.4 写入与并发控制",
+          "id": "section-54-写入与并发控制"
+        },
+        {
+          "level": 3,
+          "title": "5.5 Mock 六方法的行为",
+          "id": "section-55-mock-六方法的行为"
+        },
+        {
+          "level": 2,
+          "title": "6. HTTP Gateway 与配置安全",
+          "id": "section-6-http-gateway-与配置安全"
+        },
+        {
+          "level": 3,
+          "title": "6.1 实现边界",
+          "id": "section-61-实现边界"
+        },
+        {
+          "level": 3,
+          "title": "6.2 序列化与响应",
+          "id": "section-62-序列化与响应"
+        },
+        {
+          "level": 3,
+          "title": "6.3 超时与防重发",
+          "id": "section-63-超时与防重发"
+        },
+        {
+          "level": 3,
+          "title": "6.4 配置与敏感信息",
+          "id": "section-64-配置与敏感信息"
+        },
+        {
+          "level": 2,
+          "title": "7. 三项写操作的代码级协作",
+          "id": "section-7-三项写操作的代码级协作"
+        },
+        {
+          "level": 3,
+          "title": "7.1 先计划、再授权、再执行",
+          "id": "section-71-先计划再授权再执行"
+        },
+        {
+          "level": 3,
+          "title": "7.2 计划计算",
+          "id": "section-72-计划计算"
+        },
+        {
+          "level": 3,
+          "title": "7.3 process 流程图",
+          "id": "section-73-process-流程图"
+        },
+        {
+          "level": 3,
+          "title": "7.4 ContentService 的执行伪代码",
+          "id": "section-74-contentservice-的执行伪代码"
+        },
+        {
+          "level": 3,
+          "title": "7.5 独立命令如何复用",
+          "id": "section-75-独立命令如何复用"
+        },
+        {
+          "level": 2,
+          "title": "8. 结果模型、异常与退出码",
+          "id": "section-8-结果模型异常与退出码"
+        },
+        {
+          "level": 3,
+          "title": "8.1 统一 Java 结果形状",
+          "id": "section-81-统一-java-结果形状"
+        },
+        {
+          "level": 3,
+          "title": "8.2 异常只表达事实，service 按进度判定整体",
+          "id": "section-82-异常只表达事实service-按进度判定整体"
+        },
+        {
+          "level": 3,
+          "title": "8.3 结果判定表（保持 02）",
+          "id": "section-83-结果判定表保持-02"
+        },
+        {
+          "level": 2,
+          "title": "9. Picocli、PowerShell 与进程接口",
+          "id": "section-9-picoclipowershell-与进程接口"
+        },
+        {
+          "level": 3,
+          "title": "9.1 命令树与参数处理",
+          "id": "section-91-命令树与参数处理"
+        },
+        {
+          "level": 3,
+          "title": "9.2 解析错误也要有 JSON",
+          "id": "section-92-解析错误也要有-json"
+        },
+        {
+          "level": 3,
+          "title": "9.3 确认、流和退出码",
+          "id": "section-93-确认流和退出码"
+        },
+        {
+          "level": 3,
+          "title": "9.4 Windows 调用与中文",
+          "id": "section-94-windows-调用与中文"
+        },
+        {
+          "level": 2,
+          "title": "10. 测试架构与 02 验收映射",
+          "id": "section-10-测试架构与-02-验收映射"
+        },
+        {
+          "level": 3,
+          "title": "10.1 三层测试，不依赖真实后台",
+          "id": "section-101-三层测试不依赖真实后台"
+        },
+        {
+          "level": 3,
+          "title": "10.2 受控故障怎样真正发生",
+          "id": "section-102-受控故障怎样真正发生"
+        },
+        {
+          "level": 3,
+          "title": "10.3 独立 JVM 与文件故障验证",
+          "id": "section-103-独立-jvm-与文件故障验证"
+        },
+        {
+          "level": 3,
+          "title": "10.4 R-01～R-24 的可执行测试落点",
+          "id": "section-104-r-01r-24-的可执行测试落点"
+        },
+        {
+          "level": 3,
+          "title": "10.5 验证命令及证据",
+          "id": "section-105-验证命令及证据"
+        },
+        {
+          "level": 2,
+          "title": "11. 与 02 产品合同的补充、冲突与建议",
+          "id": "section-11-与-02-产品合同的补充冲突与建议"
+        },
+        {
+          "level": 2,
+          "title": "12. 48 小时最小实施路径与 Codex 分阶段任务",
+          "id": "section-12-48-小时最小实施路径与-codex-分阶段任务"
+        },
+        {
+          "level": 3,
+          "title": "12.1 最小原型必须保留的能力",
+          "id": "section-121-最小原型必须保留的能力"
+        },
+        {
+          "level": 3,
+          "title": "12.2 分阶段文件范围、验证与完成条件",
+          "id": "section-122-分阶段文件范围验证与完成条件"
+        },
+        {
+          "level": 3,
+          "title": "12.3 最小真实运行链路",
+          "id": "section-123-最小真实运行链路"
+        },
+        {
+          "level": 3,
+          "title": "12.4 HTML 与完整 AI 协作记录",
+          "id": "section-124-html-与完整-ai-协作记录"
+        },
+        {
+          "level": 2,
+          "title": "13. 两周补齐与已知限制",
+          "id": "section-13-两周补齐与已知限制"
+        }
+      ],
+      "tables": 19,
+      "code_blocks": 16
+    },
+    {
+      "source": "docs/04-交付物规划与验收清单.md",
+      "html": "04-delivery-plan.html",
+      "kind": "交付计划",
+      "historical": true,
+      "source_sha256": "dca6d8f3c4279c62a98f15dc3c83596e6147a897d2cf0a896aba6850805d5510",
+      "html_sha256": "a0090416af835baa08d6f7af8a505584f14cedb9c2ab461ac0bb9372e42d8482",
+      "headings": [
+        {
+          "level": 1,
+          "title": "交付物规划与验收清单",
+          "id": "section-交付物规划与验收清单"
+        },
+        {
+          "level": 2,
+          "title": "1. 依据、当前状态与交付原则",
+          "id": "section-1-依据当前状态与交付原则"
+        },
+        {
+          "level": 3,
+          "title": "1.1 本轮核查结果",
+          "id": "section-11-本轮核查结果"
+        },
+        {
+          "level": 2,
+          "title": "2. 最终交付物清单与阅读入口",
+          "id": "section-2-最终交付物清单与阅读入口"
+        },
+        {
+          "level": 3,
+          "title": "2.1 必交清单",
+          "id": "section-21-必交清单"
+        },
+        {
+          "level": 3,
+          "title": "2.2 README 的建议内容",
+          "id": "section-22-readme-的建议内容"
+        },
+        {
+          "level": 2,
+          "title": "3. 开发工作区与提交包目录",
+          "id": "section-3-开发工作区与提交包目录"
+        },
+        {
+          "level": 3,
+          "title": "3.1 推荐工作区（保留现有文件位置）",
+          "id": "section-31-推荐工作区保留现有文件位置"
+        },
+        {
+          "level": 3,
+          "title": "3.2 推荐最终本地交付布局",
+          "id": "section-32-推荐最终本地交付布局"
+        },
+        {
+          "level": 3,
+          "title": "3.3 打包白名单与排除项",
+          "id": "section-33-打包白名单与排除项"
+        },
+        {
+          "level": 2,
+          "title": "4. HTML Demo 的范围与页面规划",
+          "id": "section-4-html-demo-的范围与页面规划"
+        },
+        {
+          "level": 3,
+          "title": "4.1 选型定位",
+          "id": "section-41-选型定位"
+        },
+        {
+          "level": 3,
+          "title": "4.2 页面结构与必要交互",
+          "id": "section-42-页面结构与必要交互"
+        },
+        {
+          "level": 3,
+          "title": "4.3 数据和结果来源标记",
+          "id": "section-43-数据和结果来源标记"
+        },
+        {
+          "level": 3,
+          "title": "4.4 HTML 验收",
+          "id": "section-44-html-验收"
+        },
+        {
+          "level": 2,
+          "title": "5. 任务二真实操作记录的结构",
+          "id": "section-5-任务二真实操作记录的结构"
+        },
+        {
+          "level": 3,
+          "title": "5.1 docs/06-任务二操作记录.md 的章节",
+          "id": "section-51-docs06-任务二操作记录md-的章节"
+        },
+        {
+          "level": 3,
+          "title": "5.2 每次运行的最小证据目录",
+          "id": "section-52-每次运行的最小证据目录"
+        },
+        {
+          "level": 3,
+          "title": "5.3 完成任务二的门槛",
+          "id": "section-53-完成任务二的门槛"
+        },
+        {
+          "level": 2,
+          "title": "6. 任务三 Agent 文档的章节提纲",
+          "id": "section-6-任务三-agent-文档的章节提纲"
+        },
+        {
+          "level": 2,
+          "title": "7. AI 协作记录的保存与完整性核对",
+          "id": "section-7-ai-协作记录的保存与完整性核对"
+        },
+        {
+          "level": 3,
+          "title": "7.1 当前工具边界",
+          "id": "section-71-当前工具边界"
+        },
+        {
+          "level": 3,
+          "title": "7.2 保存方式与内容",
+          "id": "section-72-保存方式与内容"
+        },
+        {
+          "level": 3,
+          "title": "7.3 完整性与安全验收",
+          "id": "section-73-完整性与安全验收"
+        },
+        {
+          "level": 2,
+          "title": "8. 最终验收检查表",
+          "id": "section-8-最终验收检查表"
+        },
+        {
+          "level": 3,
+          "title": "8.1 十个交付问题的映射",
+          "id": "section-81-十个交付问题的映射"
+        },
+        {
+          "level": 3,
+          "title": "8.2 本次原型和两周范围表",
+          "id": "section-82-本次原型和两周范围表"
+        },
+        {
+          "level": 3,
+          "title": "8.3 最终本地打包门槛",
+          "id": "section-83-最终本地打包门槛"
+        },
+        {
+          "level": 2,
+          "title": "9. 后续开发顺序与阶段门槛",
+          "id": "section-9-后续开发顺序与阶段门槛"
+        },
+        {
+          "level": 3,
+          "title": "9.1 对原顺序的调整",
+          "id": "section-91-对原顺序的调整"
+        },
+        {
+          "level": 3,
+          "title": "9.2 建议阶段",
+          "id": "section-92-建议阶段"
+        },
+        {
+          "level": 3,
+          "title": "9.3 下一轮开始 Java 开发时的重点",
+          "id": "section-93-下一轮开始-java-开发时的重点"
+        },
+        {
+          "level": 2,
+          "title": "10. 本轮交付说明",
+          "id": "section-10-本轮交付说明"
+        }
+      ],
+      "tables": 10,
+      "code_blocks": 3
+    },
+    {
+      "source": "docs/06-实际操作记录.md",
+      "html": "06-operation-record.html",
+      "kind": "任务二 · Java Mock 实测",
+      "historical": false,
+      "source_sha256": "d28d344ce23b490146cbc5eef75a8e04bdf71be5a22bbdc8f96a6b2efb720aae",
+      "html_sha256": "e85504b4fee75a08a806fe56398cbe295c5481a40da01b376d94fb3ec53e43bd",
+      "headings": [
+        {
+          "level": 1,
+          "title": "任务二：实际审核与标签更新记录",
+          "id": "section-任务二实际审核与标签更新记录"
+        },
+        {
+          "level": 2,
+          "title": "1. 任务目标与运行声明",
+          "id": "section-1-任务目标与运行声明"
+        },
+        {
+          "level": 2,
+          "title": "2. 环境、版本与工作副本",
+          "id": "section-2-环境版本与工作副本"
+        },
+        {
+          "level": 2,
+          "title": "3. 查询一批待审核内容与选择过程",
+          "id": "section-3-查询一批待审核内容与选择过程"
+        },
+        {
+          "level": 2,
+          "title": "4. 操作对象、演示决定与标签计划",
+          "id": "section-4-操作对象演示决定与标签计划"
+        },
+        {
+          "level": 2,
+          "title": "5. 实际预览及零写入证据",
+          "id": "section-5-实际预览及零写入证据"
+        },
+        {
+          "level": 2,
+          "title": "6. 仅一次授权执行与真实结果",
+          "id": "section-6-仅一次授权执行与真实结果"
+        },
+        {
+          "level": 2,
+          "title": "7. 操作后的跨 JVM 核查",
+          "id": "section-7-操作后的跨-jvm-核查"
+        },
+        {
+          "level": 2,
+          "title": "8. 异常处理与本次问题",
+          "id": "section-8-异常处理与本次问题"
+        },
+        {
+          "level": 2,
+          "title": "9. 结论、复现与边界",
+          "id": "section-9-结论复现与边界"
+        }
+      ],
+      "tables": 4,
+      "code_blocks": 7
+    },
+    {
+      "source": "docs/07-Agent批量处理方案.md",
+      "html": "07-agent-plan.html",
+      "kind": "任务三 · 未来设计",
+      "historical": false,
+      "source_sha256": "c687c5a36ba22f9b5bb8084996b75349beb201683d544b76651185af413a2522",
+      "html_sha256": "680017252c6d0bd866bca8b6a425fd807e91a8cc018a9da28bf99fcce79c1466",
+      "headings": [
+        {
+          "level": 1,
+          "title": "任务三：Agent 调用与 100 条内容处理方案",
+          "id": "section-任务三agent-调用与-100-条内容处理方案"
+        },
+        {
+          "level": 2,
+          "title": "1. 结论与适用边界",
+          "id": "section-1-结论与适用边界"
+        },
+        {
+          "level": 2,
+          "title": "2. 可复用的现状与新增要求",
+          "id": "section-2-可复用的现状与新增要求"
+        },
+        {
+          "level": 3,
+          "title": "2.1 当前真实能力",
+          "id": "section-21-当前真实能力"
+        },
+        {
+          "level": 3,
+          "title": "2.2 三类职责不能混淆",
+          "id": "section-22-三类职责不能混淆"
+        },
+        {
+          "level": 2,
+          "title": "3. 两条实现路线与阶段推荐",
+          "id": "section-3-两条实现路线与阶段推荐"
+        },
+        {
+          "level": 2,
+          "title": "4. 先固定 100 个目标，不能边审核边翻页",
+          "id": "section-4-先固定-100-个目标不能边审核边翻页"
+        },
+        {
+          "level": 3,
+          "title": "4.1 分页漂移的具体错误",
+          "id": "section-41-分页漂移的具体错误"
+        },
+        {
+          "level": 3,
+          "title": "4.2 近期目标选择步骤",
+          "id": "section-42-近期目标选择步骤"
+        },
+        {
+          "level": 3,
+          "title": "4.3 何时需要上游改造",
+          "id": "section-43-何时需要上游改造"
+        },
+        {
+          "level": 2,
+          "title": "5. 审核按一项还是每批 20 项",
+          "id": "section-5-审核按一项还是每批-20-项"
+        },
+        {
+          "level": 2,
+          "title": "6. 轻量账本：计划、执行事实与处置分开保存",
+          "id": "section-6-轻量账本计划执行事实与处置分开保存"
+        },
+        {
+          "level": 3,
+          "title": "6.1 建议数据模型（均待实现）",
+          "id": "section-61-建议数据模型均待实现"
+        },
+        {
+          "level": 3,
+          "title": "6.2 状态与 CLI 映射",
+          "id": "section-62-状态与-cli-映射"
+        },
+        {
+          "level": 3,
+          "title": "6.3 写前、写后与崩溃窗口",
+          "id": "section-63-写前写后与崩溃窗口"
+        },
+        {
+          "level": 3,
+          "title": "6.4 JSON 与 SQLite，以及多个 Agent",
+          "id": "section-64-json-与-sqlite以及多个-agent"
+        },
+        {
+          "level": 2,
+          "title": "7. 业务审批、权限与不可信内容",
+          "id": "section-7-业务审批权限与不可信内容"
+        },
+        {
+          "level": 3,
+          "title": "7.1 谁决定、谁执行",
+          "id": "section-71-谁决定谁执行"
+        },
+        {
+          "level": 3,
+          "title": "7.2 审批后状态变化与计划绑定",
+          "id": "section-72-审批后状态变化与计划绑定"
+        },
+        {
+          "level": 3,
+          "title": "7.3 防止正文指挥 Agent",
+          "id": "section-73-防止正文指挥-agent"
+        },
+        {
+          "level": 2,
+          "title": "8. 标签覆盖和一致性",
+          "id": "section-8-标签覆盖和一致性"
+        },
+        {
+          "level": 2,
+          "title": "9. 架构和完整执行流程",
+          "id": "section-9-架构和完整执行流程"
+        },
+        {
+          "level": 2,
+          "title": "10. 五条设计示例与批次返回",
+          "id": "section-10-五条设计示例与批次返回"
+        },
+        {
+          "level": 2,
+          "title": "11. 请求预算、限速与停止策略",
+          "id": "section-11-请求预算限速与停止策略"
+        },
+        {
+          "level": 3,
+          "title": "11.1 不把 100 条当成 100 次请求",
+          "id": "section-111-不把-100-条当成-100-次请求"
+        },
+        {
+          "level": 3,
+          "title": "11.2 初始策略与何时增加并发",
+          "id": "section-112-初始策略与何时增加并发"
+        },
+        {
+          "level": 3,
+          "title": "11.3 单项异常是否影响整批",
+          "id": "section-113-单项异常是否影响整批"
+        },
+        {
+          "level": 2,
+          "title": "12. 分阶段实施、成本与验收",
+          "id": "section-12-分阶段实施成本与验收"
+        },
+        {
+          "level": 3,
+          "title": "12.1 已有、近期新增、长期依赖",
+          "id": "section-121-已有近期新增长期依赖"
+        },
+        {
+          "level": 3,
+          "title": "12.2 后续可执行验收条件（本轮不运行）",
+          "id": "section-122-后续可执行验收条件本轮不运行"
+        }
+      ],
+      "tables": 11,
+      "code_blocks": 4
+    },
+    {
+      "source": "README.md",
+      "html": "readme.html",
+      "kind": "当前实现与运行说明",
+      "historical": false,
+      "source_sha256": "72688a850726c636f79f68dac1764ef50a9d9ac5cc116e08c07d5c91cbb176cf",
+      "html_sha256": "2e99f382133d90cd4f218da9d3c50c0191971a37fba5787e3e373cd0d0dbedbe",
+      "headings": [
+        {
+          "level": 1,
+          "title": "Contentops CLI · S0–S6",
+          "id": "section-contentops-cli-s0s6"
+        },
+        {
+          "level": 2,
+          "title": "从 GitHub 获取并运行",
+          "id": "section-从-github-获取并运行"
+        },
+        {
+          "level": 2,
+          "title": "离线 HTML Demo",
+          "id": "section-离线-html-demo"
+        },
+        {
+          "level": 2,
+          "title": "构建与运行",
+          "id": "section-构建与运行"
+        },
+        {
+          "level": 2,
+          "title": "查询命令",
+          "id": "section-查询命令"
+        },
+        {
+          "level": 2,
+          "title": "写命令：默认预览，显式授权后执行",
+          "id": "section-写命令默认预览显式授权后执行"
+        },
+        {
+          "level": 2,
+          "title": "脚本读取结果",
+          "id": "section-脚本读取结果"
+        },
+        {
+          "level": 2,
+          "title": "Mock 状态与原始材料",
+          "id": "section-mock-状态与原始材料"
+        },
+        {
+          "level": 2,
+          "title": "显式 Mock 故障与恢复",
+          "id": "section-显式-mock-故障与恢复"
+        },
+        {
+          "level": 2,
+          "title": "验证与阶段边界",
+          "id": "section-验证与阶段边界"
+        }
+      ],
+      "tables": 2,
+      "code_blocks": 9
+    },
+    {
+      "source": "evidence/task2/README.md",
+      "html": "task2-evidence.html",
+      "kind": "任务二 · 原始证据索引",
+      "historical": false,
+      "source_sha256": "f61352ea326a78893386582fc5830bb79849ab4ffd76df2d604a91539c8a52e7",
+      "html_sha256": "0eb45a3663e6eeef92733a08b7abc0e239e0f30c3a3b763efd3d5ff8ffdd9b75",
+      "headings": [
+        {
+          "level": 1,
+          "title": "任务二实际操作证据",
+          "id": "section-任务二实际操作证据"
+        },
+        {
+          "level": 2,
+          "title": "本次结果",
+          "id": "section-本次结果"
+        },
+        {
+          "level": 2,
+          "title": "文件与原始命令索引",
+          "id": "section-文件与原始命令索引"
+        },
+        {
+          "level": 2,
+          "title": "采集、校验与复现边界",
+          "id": "section-采集校验与复现边界"
+        }
+      ],
+      "tables": 1,
+      "code_blocks": 0
+    },
+    {
+      "source": "evidence/s5/README.md",
+      "html": "s5-evidence.html",
+      "kind": "S5 · 受控故障证据索引",
+      "historical": false,
+      "source_sha256": "539ae951c3587c051b348f3d9bc7c0398d392942e918816bb1576b8352177c05",
+      "html_sha256": "e9f3ef2f6b64b2384072c0c39a70447dfbb60ba957878fd212a406c3037e4417",
+      "headings": [
+        {
+          "level": 1,
+          "title": "S5 受控故障、跨 JVM 与恢复证据",
+          "id": "section-s5-受控故障跨-jvm-与恢复证据"
+        },
+        {
+          "level": 2,
+          "title": "实际运行与索引",
+          "id": "section-实际运行与索引"
+        },
+        {
+          "level": 2,
+          "title": "每个场景的真实结果",
+          "id": "section-每个场景的真实结果"
+        },
+        {
+          "level": 2,
+          "title": "独立恢复与未知结果核查",
+          "id": "section-独立恢复与未知结果核查"
+        },
+        {
+          "level": 2,
+          "title": "实现与测试边界",
+          "id": "section-实现与测试边界"
+        }
+      ],
+      "tables": 3,
+      "code_blocks": 0
+    },
+    {
+      "source": "题目：内容运营后台 CLI 化.md",
+      "html": "assignment.html",
+      "kind": "原始题目",
+      "historical": false,
+      "source_sha256": "511036c3c832e5e6823db517a33129f06fbfa2bcedf3a0bf21eec1f374c0a337",
+      "html_sha256": "09fd1347f1f3c4522755fa20d0227d40d369a996cb330c9a12916b0671413bf3",
+      "headings": [
+        {
+          "level": 1,
+          "title": "题目：内容运营后台 CLI 化",
+          "id": "section-题目内容运营后台-cli-化"
+        }
+      ],
+      "tables": 0,
+      "code_blocks": 0
+    },
+    {
+      "source": "内容运营后台接口数据/README.md",
+      "html": "attachment-guide.html",
+      "kind": "原始附件说明",
+      "historical": false,
+      "source_sha256": "e289f0daaa91feecce1b4ce3bd28440b43ab29f33932d6d7e66008c2b28e3d60",
+      "html_sha256": "13566dfcd4dfb435fea2ac2de971e5e8c3a7386ac7f980477e42167f7c516976",
+      "headings": [
+        {
+          "level": 1,
+          "title": "附件说明（题目：内容运营后台 CLI 化）",
+          "id": "section-附件说明题目内容运营后台-cli-化"
+        },
+        {
+          "level": 2,
+          "title": "1. content-ops-admin-openapi.json（内容运营后台接口）",
+          "id": "section-1-content-ops-admin-openapijson内容运营后台接口"
+        },
+        {
+          "level": 2,
+          "title": "2. mock_data.json（样例数据）",
+          "id": "section-2-mock_datajson样例数据"
+        }
+      ],
+      "tables": 1,
+      "code_blocks": 0
+    }
+  ]
+}

@@ -1,0 +1,635 @@
+test_all_real_documents_preserve_headings_and_every_code_block (__main__.RendererTest.test_all_real_documents_preserve_headings_and_every_code_block) ... ERROR
+test_build_check_detects_stale_output (__main__.RendererTest.test_build_check_detects_stale_output) ... ERROR
+test_code_and_evidence_rebased_to_source (__main__.RendererTest.test_code_and_evidence_rebased_to_source) ... ERROR
+test_code_is_escaped_without_losing_text (__main__.RendererTest.test_code_is_escaped_without_losing_text) ... ERROR
+test_commonmark_and_table_structure (__main__.RendererTest.test_commonmark_and_table_structure) ... ERROR
+test_cross_document_anchor (__main__.RendererTest.test_cross_document_anchor) ... ERROR
+test_dangerous_destinations_rejected (__main__.RendererTest.test_dangerous_destinations_rejected) ... ERROR
+test_duplicate_and_chinese_heading_ids (__main__.RendererTest.test_duplicate_and_chinese_heading_ids) ... ERROR
+test_every_real_local_link_and_fragment_resolves (__main__.RendererTest.test_every_real_local_link_and_fragment_resolves) ... ERROR
+test_explicit_external_links_remain_hyperlinks (__main__.RendererTest.test_explicit_external_links_remain_hyperlinks) ... ERROR
+test_no_html_script_or_remote_image_execution (__main__.RendererTest.test_no_html_script_or_remote_image_execution) ... ERROR
+test_raw_unselected_markdown_is_labeled (__main__.RendererTest.test_raw_unselected_markdown_is_labeled) ... ERROR
+test_render_deterministic_and_source_unchanged (__main__.RendererTest.test_render_deterministic_and_source_unchanged) ... ERROR
+test_same_document_anchor (__main__.RendererTest.test_same_document_anchor) ... ERROR
+test_toc_and_history_note_once (__main__.RendererTest.test_toc_and_history_note_once) ... ERROR
+
+======================================================================
+ERROR: test_all_real_documents_preserve_headings_and_every_code_block (__main__.RendererTest.test_all_real_documents_preserve_headings_and_every_code_block)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp_hy8mx6h\\docs'
+
+======================================================================
+ERROR: test_build_check_detects_stale_output (__main__.RendererTest.test_build_check_detects_stale_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpix85dm7r\\docs'
+
+======================================================================
+ERROR: test_code_and_evidence_rebased_to_source (__main__.RendererTest.test_code_and_evidence_rebased_to_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpbxcubinv\\docs'
+
+======================================================================
+ERROR: test_code_is_escaped_without_losing_text (__main__.RendererTest.test_code_is_escaped_without_losing_text)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpevyq87py\\docs'
+
+======================================================================
+ERROR: test_commonmark_and_table_structure (__main__.RendererTest.test_commonmark_and_table_structure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpj8afeez3\\docs'
+
+======================================================================
+ERROR: test_cross_document_anchor (__main__.RendererTest.test_cross_document_anchor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpdxgrpthq\\docs'
+
+======================================================================
+ERROR: test_dangerous_destinations_rejected (__main__.RendererTest.test_dangerous_destinations_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpyn6d5wy_\\docs'
+
+======================================================================
+ERROR: test_duplicate_and_chinese_heading_ids (__main__.RendererTest.test_duplicate_and_chinese_heading_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpojwcveev\\docs'
+
+======================================================================
+ERROR: test_every_real_local_link_and_fragment_resolves (__main__.RendererTest.test_every_real_local_link_and_fragment_resolves)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp2jbslr5f\\docs'
+
+======================================================================
+ERROR: test_explicit_external_links_remain_hyperlinks (__main__.RendererTest.test_explicit_external_links_remain_hyperlinks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpamysao_e\\docs'
+
+======================================================================
+ERROR: test_no_html_script_or_remote_image_execution (__main__.RendererTest.test_no_html_script_or_remote_image_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpm7huw99r\\docs'
+
+======================================================================
+ERROR: test_raw_unselected_markdown_is_labeled (__main__.RendererTest.test_raw_unselected_markdown_is_labeled)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpziscyz0j\\docs'
+
+======================================================================
+ERROR: test_render_deterministic_and_source_unchanged (__main__.RendererTest.test_render_deterministic_and_source_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmppvl6mm1v\\docs'
+
+======================================================================
+ERROR: test_same_document_anchor (__main__.RendererTest.test_same_document_anchor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpzodh5rzy\\docs'
+
+======================================================================
+ERROR: test_toc_and_history_note_once (__main__.RendererTest.test_toc_and_history_note_once)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\AI_TESTEXAM\scripts\test-render-docs.py", line 59, in setUp
+    (self.root / "docs").mkdir()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp5om__m51\\docs'
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.013s
+
+FAILED (errors=15)
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp5om__m51'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp5om__m51'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpzodh5rzy'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpzodh5rzy'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmppvl6mm1v'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmppvl6mm1v'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpziscyz0j'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpziscyz0j'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpm7huw99r'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpm7huw99r'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpamysao_e'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpamysao_e'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp2jbslr5f'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp2jbslr5f'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpojwcveev'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpojwcveev'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpyn6d5wy_'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpyn6d5wy_'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpdxgrpthq'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpdxgrpthq'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpj8afeez3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpj8afeez3'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpevyq87py'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpevyq87py'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpbxcubinv'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpbxcubinv'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpix85dm7r'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmpix85dm7r'
+Traceback (most recent call last):
+  File "<frozen os>", line 366, in walk
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp_hy8mx6h'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 666, in _exitfunc
+    f()
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 935, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 623, in _rmtree_unsafe
+    for dirpath, dirnames, filenames in results:
+  File "<frozen os>", line 369, in walk
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 621, in onerror
+    onexc(os.scandir, err.filename, err)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 902, in onexc
+    _resetperms(path)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 286, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+  File "C:\Users\15614\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 277, in _dont_follow_symlinks
+    func(path, *args)
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\15614\\AppData\\Local\\Temp\\tmp_hy8mx6h'
