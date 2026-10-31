@@ -1,0 +1,553 @@
+{
+  "captured_at": "2026-10-31T17:29:40.7469988+08:00",
+  "run_id": "a20c72c2-74c1-4130-af99-8d17452424b6",
+  "source_commit": "a726f317e321236107bf9a44480f647bb6ef54ea",
+  "jar_sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2",
+  "seed_sha256": "44BA17CBE95432547A8FE380F81E0416AE51404957ED0C87DE5CED7F8E3939B0",
+  "command_count": 18,
+  "commands": [
+    {
+      "name": "01-help",
+      "command": "java -jar ./target/contentops.jar --env mock --help",
+      "arguments": [
+        "--env",
+        "mock",
+        "--help"
+      ],
+      "started_at": "2026-10-31T17:23:41.8612859+08:00",
+      "finished_at": "2026-10-31T17:23:42.2447862+08:00",
+      "pid": 3440,
+      "actual_exit_code": 0,
+      "mode": null,
+      "status": null,
+      "may_write": false,
+      "stdout": "commands/01-help.stdout.txt",
+      "stderr": "commands/01-help.stderr.txt"
+    },
+    {
+      "name": "02-pending-page1-table",
+      "command": "java -jar ./target/contentops.jar --env mock content list --review-status pending --page 1",
+      "arguments": [
+        "--env",
+        "mock",
+        "content",
+        "list",
+        "--review-status",
+        "pending",
+        "--page",
+        "1"
+      ],
+      "started_at": "2026-10-31T17:23:56.9559543+08:00",
+      "finished_at": "2026-10-31T17:23:57.5679388+08:00",
+      "pid": 48552,
+      "actual_exit_code": 0,
+      "mode": null,
+      "status": null,
+      "may_write": false,
+      "stdout": "commands/02-pending-page1-table.stdout.txt",
+      "stderr": "commands/02-pending-page1-table.stderr.txt"
+    },
+    {
+      "name": "03-pending-page1-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "list",
+        "--review-status",
+        "pending",
+        "--page",
+        "1"
+      ],
+      "started_at": "2026-10-31T17:23:56.9560382+08:00",
+      "finished_at": "2026-10-31T17:23:57.6438228+08:00",
+      "pid": 55636,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/03-pending-page1-json.stdout.txt",
+      "stderr": "commands/03-pending-page1-json.stderr.txt"
+    },
+    {
+      "name": "04-candidate-ct000002-detail",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000002",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000002"
+      ],
+      "started_at": "2026-10-31T17:24:21.061148+08:00",
+      "finished_at": "2026-10-31T17:24:21.8362676+08:00",
+      "pid": 66836,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/04-candidate-ct000002-detail.stdout.txt",
+      "stderr": "commands/04-candidate-ct000002-detail.stderr.txt"
+    },
+    {
+      "name": "05-candidate-ct000004-detail",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "started_at": "2026-10-31T17:24:21.063798+08:00",
+      "finished_at": "2026-10-31T17:24:21.838929+08:00",
+      "pid": 58256,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/05-candidate-ct000004-detail.stdout.txt",
+      "stderr": "commands/05-candidate-ct000004-detail.stderr.txt"
+    },
+    {
+      "name": "06-candidate-ct000002-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000002",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000002"
+      ],
+      "started_at": "2026-10-31T17:24:21.0713124+08:00",
+      "finished_at": "2026-10-31T17:24:21.8355268+08:00",
+      "pid": 16004,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/06-candidate-ct000002-history.stdout.txt",
+      "stderr": "commands/06-candidate-ct000002-history.stderr.txt"
+    },
+    {
+      "name": "07-candidate-ct000004-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "started_at": "2026-10-31T17:24:21.1138594+08:00",
+      "finished_at": "2026-10-31T17:24:21.880698+08:00",
+      "pid": 45456,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/07-candidate-ct000004-history.stdout.txt",
+      "stderr": "commands/07-candidate-ct000004-history.stderr.txt"
+    },
+    {
+      "name": "08-active-tags",
+      "command": "java -jar ./target/contentops.jar --env mock --output json tags list --status active",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "tags",
+        "list",
+        "--status",
+        "active"
+      ],
+      "started_at": "2026-10-31T17:24:21.1636259+08:00",
+      "finished_at": "2026-10-31T17:24:21.9490274+08:00",
+      "pid": 70456,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/08-active-tags.stdout.txt",
+      "stderr": "commands/08-active-tags.stderr.txt"
+    },
+    {
+      "name": "09-selected-pending-exact",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --content-id ct_000004 --page 1",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "list",
+        "--review-status",
+        "pending",
+        "--content-id",
+        "ct_000004",
+        "--page",
+        "1"
+      ],
+      "started_at": "2026-10-31T17:25:02.055672+08:00",
+      "finished_at": "2026-10-31T17:25:02.5928183+08:00",
+      "pid": 27728,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/09-selected-pending-exact.stdout.txt",
+      "stderr": "commands/09-selected-pending-exact.stderr.txt"
+    },
+    {
+      "name": "10-process-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason 本地Mock审核流程演示，不代表真实业务合规结论 --add 悬疑",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "本地Mock审核流程演示，不代表真实业务合规结论",
+        "--add",
+        "悬疑"
+      ],
+      "started_at": "2026-10-31T17:25:24.7390273+08:00",
+      "finished_at": "2026-10-31T17:25:25.3318424+08:00",
+      "pid": 14128,
+      "actual_exit_code": 0,
+      "mode": "preview",
+      "status": "previewed",
+      "may_write": false,
+      "stdout": "commands/10-process-preview.stdout.txt",
+      "stderr": "commands/10-process-preview.stderr.txt"
+    },
+    {
+      "name": "11-after-preview-detail",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "started_at": "2026-10-31T17:25:25.7387508+08:00",
+      "finished_at": "2026-10-31T17:25:26.3520854+08:00",
+      "pid": 10428,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/11-after-preview-detail.stdout.txt",
+      "stderr": "commands/11-after-preview-detail.stderr.txt"
+    },
+    {
+      "name": "12-after-preview-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "started_at": "2026-10-31T17:25:25.7815188+08:00",
+      "finished_at": "2026-10-31T17:25:26.4015185+08:00",
+      "pid": 69892,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/12-after-preview-history.stdout.txt",
+      "stderr": "commands/12-after-preview-history.stderr.txt"
+    },
+    {
+      "name": "13-process-execute",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason 本地Mock审核流程演示，不代表真实业务合规结论 --add 悬疑 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "本地Mock审核流程演示，不代表真实业务合规结论",
+        "--add",
+        "悬疑",
+        "--execute",
+        "--yes"
+      ],
+      "started_at": "2026-10-31T17:26:03.0336234+08:00",
+      "finished_at": "2026-10-31T17:26:03.8240414+08:00",
+      "pid": 55100,
+      "actual_exit_code": 0,
+      "mode": "execute",
+      "status": "succeeded",
+      "may_write": true,
+      "stdout": "commands/13-process-execute.stdout.txt",
+      "stderr": "commands/13-process-execute.stderr.txt"
+    },
+    {
+      "name": "14-after-detail",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "started_at": "2026-10-31T17:26:51.064977+08:00",
+      "finished_at": "2026-10-31T17:26:52.2619048+08:00",
+      "pid": 23204,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/14-after-detail.stdout.txt",
+      "stderr": "commands/14-after-detail.stderr.txt"
+    },
+    {
+      "name": "15-after-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "started_at": "2026-10-31T17:26:51.0061628+08:00",
+      "finished_at": "2026-10-31T17:26:52.1566463+08:00",
+      "pid": 7280,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/15-after-history.stdout.txt",
+      "stderr": "commands/15-after-history.stderr.txt"
+    },
+    {
+      "name": "16-after-pending-exact",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --content-id ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "list",
+        "--review-status",
+        "pending",
+        "--content-id",
+        "ct_000004"
+      ],
+      "started_at": "2026-10-31T17:26:50.9433514+08:00",
+      "finished_at": "2026-10-31T17:26:52.0903276+08:00",
+      "pid": 58560,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/16-after-pending-exact.stdout.txt",
+      "stderr": "commands/16-after-pending-exact.stderr.txt"
+    },
+    {
+      "name": "17-after-pending-total",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "list",
+        "--review-status",
+        "pending",
+        "--page",
+        "1"
+      ],
+      "started_at": "2026-10-31T17:26:51.0572772+08:00",
+      "finished_at": "2026-10-31T17:26:52.2494917+08:00",
+      "pid": 40696,
+      "actual_exit_code": 0,
+      "mode": "read",
+      "status": "succeeded",
+      "may_write": false,
+      "stdout": "commands/17-after-pending-total.stdout.txt",
+      "stderr": "commands/17-after-pending-total.stderr.txt"
+    },
+    {
+      "name": "18-version",
+      "command": "java -jar ./target/contentops.jar --env mock --version",
+      "arguments": [
+        "--env",
+        "mock",
+        "--version"
+      ],
+      "started_at": "2026-10-31T17:27:59.8251482+08:00",
+      "finished_at": "2026-10-31T17:28:00.231033+08:00",
+      "pid": 23284,
+      "actual_exit_code": 0,
+      "mode": null,
+      "status": null,
+      "may_write": false,
+      "stdout": "commands/18-version.stdout.txt",
+      "stderr": "commands/18-version.stderr.txt"
+    }
+  ],
+  "write_invocation_count": 1,
+  "selected_content_id": "ct_000004",
+  "action": "approve",
+  "add": "悬疑",
+  "preview_zero_write": {
+    "captured_at": "2026-10-31T17:25:51.9264346+08:00",
+    "preview_source": "commands/10-process-preview.stdout.txt",
+    "actual_exit_code": 0,
+    "mode": "preview",
+    "status": "previewed",
+    "steps": {
+      "review": {
+        "write": "not_sent",
+        "verification": "not_checked",
+        "api_result": null
+      },
+      "tags": {
+        "write": "not_sent",
+        "verification": "not_checked",
+        "api_result": null
+      }
+    },
+    "detail_before_source": "commands/05-candidate-ct000004-detail.stdout.txt",
+    "detail_after_source": "commands/11-after-preview-detail.stdout.txt",
+    "history_before_source": "commands/07-candidate-ct000004-history.stdout.txt",
+    "history_after_source": "commands/12-after-preview-history.stdout.txt",
+    "full_detail_unchanged": true,
+    "full_history_unchanged": true,
+    "snapshot_before": {
+      "exists": false,
+      "sha256": null,
+      "revision": null
+    },
+    "snapshot_after": {
+      "exists": false,
+      "sha256": null,
+      "revision": null
+    },
+    "business_snapshot_created": false,
+    "all_assertions_passed": true
+  },
+  "execute_invocation_id": "87d52d34-050a-42b3-a20c-451da52c9548",
+  "execute_actual_exit_code": 0,
+  "steps": {
+    "review": {
+      "write": "acknowledged",
+      "verification": "matched",
+      "api_result": {
+        "success_count": 1,
+        "failed_count": 0
+      }
+    },
+    "tags": {
+      "write": "acknowledged",
+      "verification": "matched",
+      "api_result": {
+        "result": "ok"
+      }
+    }
+  },
+  "before": {
+    "content_id": "ct_000004",
+    "title": "无人剧场·第12话：逆流而上",
+    "creator_id": "cr_00002",
+    "review_status": "pending",
+    "quality_status": "normal",
+    "visibility": "online",
+    "tags": [
+      "恋爱",
+      "校园",
+      "武侠"
+    ],
+    "created_at": "2026-07-04T05:19:06Z",
+    "body": "赛琳娜在灯塔下做出了一个反常的决定，故事从这里开始分岔……",
+    "source": "app",
+    "channels": [
+      "search_only"
+    ],
+    "category_id": "cat_03"
+  },
+  "after": {
+    "content_id": "ct_000004",
+    "title": "无人剧场·第12话：逆流而上",
+    "creator_id": "cr_00002",
+    "review_status": "approved",
+    "quality_status": "normal",
+    "visibility": "online",
+    "tags": [
+      "恋爱",
+      "校园",
+      "武侠",
+      "悬疑"
+    ],
+    "created_at": "2026-07-04T05:19:06Z",
+    "body": "赛琳娜在灯塔下做出了一个反常的决定，故事从这里开始分岔……",
+    "source": "app",
+    "channels": [
+      "search_only"
+    ],
+    "category_id": "cat_03"
+  },
+  "history_before_count": 0,
+  "history_after_count": 1,
+  "new_history": {
+    "action": "approve",
+    "operator_id": "op_mock_cli",
+    "reason": "本地Mock审核流程演示，不代表真实业务合规结论",
+    "created_at": "2026-10-31T09:26:03.496047300Z"
+  },
+  "pending_total_before": 132,
+  "pending_total_after": 131,
+  "selected_pending_total_after": 0,
+  "snapshot_revision": 2,
+  "snapshot_sha256": "0E72B6DFC455B59F87EA7D9FB7C29F379680540DF39056397E15C911C36A8790",
+  "write_pid": 55100,
+  "verification_pids": [
+    23204,
+    7280,
+    58560
+  ],
+  "cross_jvm_verified": true,
+  "unauthorized_business_changes": false,
+  "fault_enabled": false,
+  "all_assertions_passed": true
+}

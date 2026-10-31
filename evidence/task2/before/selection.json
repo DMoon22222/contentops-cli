@@ -1,0 +1,19 @@
+{
+  "selected_content_id": "ct_000004",
+  "query_source": "commands/03-pending-page1-json.stdout.txt",
+  "page": 1,
+  "row_one_based": 2,
+  "exact_pending_source": "commands/09-selected-pending-exact.stdout.txt",
+  "inspected_candidates": [
+    "ct_000002",
+    "ct_000004"
+  ],
+  "selection_reason": "两条均为 pending、正文非空且无审核历史；选定内容现有三项标签可见，category_id 非空，适合演示保留原标签再新增。实际第一页第二项和 AND 精确查询均已证明其在当前队列。",
+  "tag_reason": "正文中的“反常的决定、故事分岔”提供弱悬念关联；样例只有一句话，没有正式分类规则，新增悬疑仅为本地 Mock 标签维护演示，不认定真实题材。",
+  "selected_tag": {
+    "tag": "悬疑",
+    "group": "题材",
+    "usage_count": 1448,
+    "status": "active"
+  }
+}

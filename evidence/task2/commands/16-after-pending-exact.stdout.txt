@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"e8ddf594-e1ff-41a5-b351-03efd32c9325","environment":"mock","command":"content.list","mode":"read","status":"succeeded","exit_code":0,"content_id":null,"data":{"page":1,"page_size":20,"total":0,"items":[]},"error":null,"warnings":[]}

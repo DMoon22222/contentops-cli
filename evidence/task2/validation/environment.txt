@@ -1,0 +1,15 @@
+Captured: 2026-10-31T17:28:00.5586568+08:00
+Workspace: F:\AI_TESTEXAM
+PowerShell: 7.6.5
+OS: Microsoft Windows NT 10.0.22631.0
+Timezone: Asia/Shanghai (UTC+08:00)
+openjdk version "21.0.7" 2025-04-15 LTS
+OpenJDK Runtime Environment Temurin-21.0.7+6 (build 21.0.7+6-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.7+6 (build 21.0.7+6-LTS, mixed mode, sharing)
+Apache Maven 3.9.4 (dfbb324ad4a7c8fb0bf182e6d91b0ae20e3d2dd9)
+Maven home: F:\Develop\apache-maven-3.9.4-bin\apache-maven-3.9.4
+Java version: 21.0.7, vendor: Eclipse Adoptium, runtime: C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+Parent CONTENTOPS_MOCK_SCENARIO present: False
+No Maven test/verify run in task two; prior S5 reports are referenced without rerunning or relabeling them.

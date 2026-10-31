@@ -1,0 +1,23 @@
+{
+  "started_at": "2026-10-31T17:26:03.0198013+08:00",
+  "name": "13-process-execute",
+  "arguments": [
+    "--env",
+    "mock",
+    "--output",
+    "json",
+    "--non-interactive",
+    "content",
+    "process",
+    "ct_000004",
+    "--action",
+    "approve",
+    "--reason",
+    "本地Mock审核流程演示，不代表真实业务合规结论",
+    "--add",
+    "悬疑",
+    "--execute",
+    "--yes"
+  ],
+  "note": "Write may have occurred even if later capture is interrupted. Never replay automatically."
+}

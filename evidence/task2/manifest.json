@@ -1,0 +1,11 @@
+{
+  "run_id": "a20c72c2-74c1-4130-af99-8d17452424b6",
+  "created_at": "2026-10-31T17:23:41.7361423+08:00",
+  "source_commit": "a726f317e321236107bf9a44480f647bb6ef54ea",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\task2\\a20c72c2-74c1-4130-af99-8d17452424b6",
+  "jar_sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2",
+  "environment": "mock",
+  "fault_enabled": false,
+  "original_parent_fault_present": false,
+  "scope": "Task two formal local Mock operation; demonstration decision, not production moderation."
+}

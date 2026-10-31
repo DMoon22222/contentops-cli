@@ -1,0 +1,35 @@
+{
+  "source": "commands/10-process-preview.stdout.txt",
+  "plan": {
+    "review": {
+      "before": "pending",
+      "action": "approve",
+      "reason": "本地Mock审核流程演示，不代表真实业务合规结论"
+    },
+    "tags": {
+      "before": [
+        "恋爱",
+        "校园",
+        "武侠"
+      ],
+      "after": [
+        "恋爱",
+        "校园",
+        "武侠",
+        "悬疑"
+      ]
+    }
+  },
+  "steps": {
+    "review": {
+      "write": "not_sent",
+      "verification": "not_checked",
+      "api_result": null
+    },
+    "tags": {
+      "write": "not_sent",
+      "verification": "not_checked",
+      "api_result": null
+    }
+  }
+}

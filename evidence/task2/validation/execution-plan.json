@@ -1,0 +1,27 @@
+{
+  "content_id": "ct_000004",
+  "preview_stdout": "commands/10-process-preview.stdout.txt",
+  "preview_invocation_id": "6c07adc9-84cb-44dd-b529-c4e254ec0148",
+  "snapshot_before_execute": {
+    "exists": false,
+    "sha256": null,
+    "revision": null
+  },
+  "execute_cli_arguments": [
+    "--output",
+    "json",
+    "--non-interactive",
+    "content",
+    "process",
+    "ct_000004",
+    "--action",
+    "approve",
+    "--reason",
+    "本地Mock审核流程演示，不代表真实业务合规结论",
+    "--add",
+    "悬疑",
+    "--execute",
+    "--yes"
+  ],
+  "decision_scope": "Explicit local Mock demonstration authorized by the task; not production moderation."
+}

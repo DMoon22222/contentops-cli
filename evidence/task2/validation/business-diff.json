@@ -1,0 +1,32 @@
+{
+  "source": "Original seed compared read-only with actual working snapshot",
+  "content_changes": [
+    {
+      "content_id": "ct_000004",
+      "field": "review_status",
+      "before": "pending",
+      "after": "approved"
+    },
+    {
+      "content_id": "ct_000004",
+      "field": "tags",
+      "before": [
+        "恋爱",
+        "校园",
+        "武侠"
+      ],
+      "after": [
+        "恋爱",
+        "校园",
+        "武侠",
+        "悬疑"
+      ]
+    }
+  ],
+  "changed_history_keys": [
+    "ct_000004"
+  ],
+  "unrelated_content_count": 299,
+  "changed_unrelated_collections": [],
+  "all_assertions_passed": true
+}

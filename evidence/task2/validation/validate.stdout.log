@@ -1,0 +1,1 @@
+PASS: 18 actual CLI invocations, one process execution; zero-write preview, approved + 悬疑, one audit log, cross-JVM persistence, no unrelated changes.

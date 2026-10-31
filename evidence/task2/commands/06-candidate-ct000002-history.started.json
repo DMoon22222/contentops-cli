@@ -1,0 +1,19 @@
+{
+  "name": "06-candidate-ct000002-history",
+  "started_at": "2026-10-31T17:24:21.0713124+08:00",
+  "run_id": "a20c72c2-74c1-4130-af99-8d17452424b6",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\task2\\a20c72c2-74c1-4130-af99-8d17452424b6",
+  "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000002",
+  "arguments": [
+    "--env",
+    "mock",
+    "--output",
+    "json",
+    "content",
+    "history",
+    "ct_000002"
+  ],
+  "fault_enabled": false,
+  "may_write": false,
+  "jar_sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2"
+}

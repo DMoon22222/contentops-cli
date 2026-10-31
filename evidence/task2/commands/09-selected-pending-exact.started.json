@@ -1,0 +1,24 @@
+{
+  "name": "09-selected-pending-exact",
+  "started_at": "2026-10-31T17:25:02.0556720+08:00",
+  "run_id": "a20c72c2-74c1-4130-af99-8d17452424b6",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\task2\\a20c72c2-74c1-4130-af99-8d17452424b6",
+  "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --content-id ct_000004 --page 1",
+  "arguments": [
+    "--env",
+    "mock",
+    "--output",
+    "json",
+    "content",
+    "list",
+    "--review-status",
+    "pending",
+    "--content-id",
+    "ct_000004",
+    "--page",
+    "1"
+  ],
+  "fault_enabled": false,
+  "may_write": false,
+  "jar_sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2"
+}

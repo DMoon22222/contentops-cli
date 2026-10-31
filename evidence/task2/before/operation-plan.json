@@ -1,0 +1,20 @@
+{
+  "content_id": "ct_000004",
+  "before_review_status": "pending",
+  "before_tags": [
+    "恋爱",
+    "校园",
+    "武侠"
+  ],
+  "action": "approve",
+  "reason": "本地Mock审核流程演示，不代表真实业务合规结论",
+  "add": "悬疑",
+  "expected_review_status": "approved",
+  "expected_complete_tags": [
+    "恋爱",
+    "校园",
+    "武侠",
+    "悬疑"
+  ],
+  "decision_scope": "User-authorized local Mock workflow demonstration; not a real moderation conclusion."
+}

@@ -1,0 +1,28 @@
+{
+  "name": "13-process-execute",
+  "started_at": "2026-10-31T17:26:03.0336234+08:00",
+  "run_id": "a20c72c2-74c1-4130-af99-8d17452424b6",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\task2\\a20c72c2-74c1-4130-af99-8d17452424b6",
+  "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason 本地Mock审核流程演示，不代表真实业务合规结论 --add 悬疑 --execute --yes",
+  "arguments": [
+    "--env",
+    "mock",
+    "--output",
+    "json",
+    "--non-interactive",
+    "content",
+    "process",
+    "ct_000004",
+    "--action",
+    "approve",
+    "--reason",
+    "本地Mock审核流程演示，不代表真实业务合规结论",
+    "--add",
+    "悬疑",
+    "--execute",
+    "--yes"
+  ],
+  "fault_enabled": false,
+  "may_write": true,
+  "jar_sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2"
+}
