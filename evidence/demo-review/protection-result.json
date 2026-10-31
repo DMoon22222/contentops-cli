@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-31T21:23:06.8375851+08:00",
+  "baseline_commit": "d6aaddb04ddcb5e233b3292966b3c0f836833f04",
+  "preexisting_file_count": 564,
+  "allowed_changes": [
+    "README.md",
+    "demo/index.html",
+    "demo/app.js",
+    "demo/style.css",
+    "evidence/demo/verify.cjs"
+  ],
+  "actual_changes": [
+    "evidence/demo/verify.cjs",
+    "demo/style.css",
+    "demo/index.html",
+    "demo/app.js",
+    "README.md"
+  ],
+  "unexpected_changes": [],
+  "data_js_unchanged": true,
+  "old_demo_evidence_unchanged_except_test_script": true,
+  "task2_state": [
+    {
+      "path": "F:\\AI_TESTEXAM\\.contentops\\task2\\a20c72c2-74c1-4130-af99-8d17452424b6\\state.json",
+      "before": "0E72B6DFC455B59F87EA7D9FB7C29F379680540DF39056397E15C911C36A8790",
+      "after": "0E72B6DFC455B59F87EA7D9FB7C29F379680540DF39056397E15C911C36A8790",
+      "unchanged": true
+    }
+  ],
+  "passed": true
+}

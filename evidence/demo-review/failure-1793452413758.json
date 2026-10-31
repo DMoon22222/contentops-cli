@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-31T13:13:33.758Z",
+  "error": "locator.textContent: Error: strict mode violation: locator('.inspector') resolved to 2 elements:\n    1) <aside class=\"panel inspector\">…</aside> aka getByText('已记录的内容快照ct_000004无人剧场·第12')\n    2) <aside class=\"panel inspector\">…</aside> aka getByText('调用观测 ≠ 磁盘事实调用结束时最后一次成功读取')\n\nCall log:\n\u001b[2m  - waiting for locator('.inspector')\u001b[22m\n\n    at run (F:\\AI_TESTEXAM\\evidence\\demo\\verify.cjs:102:70)",
+  "passed_checks": 197
+}

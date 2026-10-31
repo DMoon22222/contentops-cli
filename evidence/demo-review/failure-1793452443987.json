@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-31T13:14:03.987Z",
+  "error": "AssertionError [ERR_ASSERTION]: stderr preserved representative partial: \n    at check (F:\\AI_TESTEXAM\\evidence\\demo\\verify.cjs:16:49)\n    at jsonMatches (F:\\AI_TESTEXAM\\evidence\\demo\\verify.cjs:63:31)\n    at async run (F:\\AI_TESTEXAM\\evidence\\demo\\verify.cjs:172:7)",
+  "passed_checks": 287
+}

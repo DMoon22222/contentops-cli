@@ -1,3 +1,4 @@
+// Review edition (three routes). Writes only evidence/demo-review/; S6 reports stay immutable.
 // Optional development QA only; not needed to open demo/index.html.
 // node evidence/demo/verify.cjs --playwright-module <existing playwright package directory>
 const fs=require('node:fs');
@@ -29,157 +30,246 @@ async function run(){
   check('task2 after tags are distinct from S5',D.task['14-after-detail'].result.data.tags.join('|')==='恋爱|校园|武侠|悬疑');
   check('task2 history 0 to 1',D.task['07-candidate-ct000004-history'].result.data.items.length===0&&D.task['15-after-history'].result.data.items.length===1);
   check('task2 pending 131 / revision 2',D.task['17-after-pending-total'].result.data.total===131&&D.taskFacts.revision===2);
+  const out=path.join(root,'evidence/demo-review');
+  const integrity=JSON.parse(fs.readFileSync(path.join(out,'integrity.json'),'utf8'));
+  check('embedded payload unchanged since review baseline',sha(path.join(root,'demo/data.js'))===integrity.data_js_sha256);
+  const planDoc=fs.readFileSync(path.join(root,'docs/02-第一阶段MVP与CLI产品方案.md'),'utf8');
   const browser=await chromium.launch({channel:'chrome',headless:true});
   try{
     const context=await browser.newContext({viewport:{width:1440,height:1000},locale:'zh-CN',permissions:['clipboard-read','clipboard-write']});
     await context.setOffline(true);
     const page=await context.newPage();
-    const navigate=async route=>{
-      await page.locator(`nav a[href="#${route}"]`).click();
-      await page.waitForFunction(key=>document.querySelector('nav a[aria-current="page"]')?.getAttribute('href')==='#'+key,route);
-    };
     page.on('pageerror',e=>errors.push(e.message));
     page.on('console',m=>{if(['error','warning'].includes(m.type()))errors.push(m.type()+': '+m.text());});
     page.on('request',r=>requests.push(r.url()));
     const url=pathToFileURL(path.join(root,'demo/index.html')).href;
-    await page.goto(url);
-    await page.locator('h1').waitFor();
-    check('identity / local file',page.url()===url&&(await page.title()).includes('内容运营 CLI'));
-    check('meaningful first screen',(await page.locator('h1').textContent()).includes('一次审核'));
-    check('default preview / no execution',(await page.locator('.status').textContent())==='previewed');
-    await page.screenshot({path:path.join(__dirname,'desktop-task2.png')});
-    await page.setViewportSize({width:1505,height:1045});
-    await page.screenshot({path:path.join(__dirname,'concept-size-task2.png')});
-    await page.setViewportSize({width:1440,height:1000});
-    const raw=page.locator('main > .two-col > section .raw-details');
-    await raw.locator('summary').click();
-    const preview=JSON.parse(await raw.locator('.json-view').textContent());
-    check('preview JSON full fields',preview.data.steps.review.write==='not_sent'&&preview.data.steps.tags.write==='not_sent'&&preview.exit_code===0);
-    await raw.locator('summary').click();
-    for(let i=0;i<5;i++){
-      await page.locator(`[data-step="${i}"]`).click();
-      check('task step '+(i+1),await page.locator(`[data-step="${i}"]`).getAttribute('aria-pressed')==='true');
-      const expected=['succeeded','succeeded','previewed','succeeded','succeeded'][i];
-      check('task step result '+(i+1),await page.locator('.status').textContent()===expected);
-      if(i===0){check('queue 20 actual rows',await page.locator('.queue-table tbody tr').count()===20);check('ct4 actual second row',(await page.locator('.queue-table tbody tr').nth(1).textContent()).includes('ct_000004'));}
-    }
-    await page.getByRole('button',{name:'操作后',exact:true}).click();
-    check('after snapshot approved and four tags',(await page.locator('.inspector .state-label').textContent())==='approved'&&await page.locator('.inspector .tag').count()===4);
-    await page.getByRole('button',{name:'操作前',exact:true}).click();
-    check('before snapshot pending and three tags',(await page.locator('.inspector .state-label').textContent())==='pending'&&await page.locator('.inspector .tag').count()===3);
-    for(const route of ['overview','commands','task2','faults','agent']){
-      await navigate(route);
-      check('navigation '+route,await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#'+route);
-    }
-    await navigate('commands');
-    for(let i=0;i<7;i++){
-      await page.locator(`[data-command="${i}"]`).click();
-      check('command '+i+' selection',await page.locator(`[data-command="${i}"]`).getAttribute('aria-pressed')==='true');
-      const copy=page.getByRole('button',{name:'复制命令',exact:true});
-      const command=await copy.getAttribute('data-copy');
-      check('command '+i+' valid prefix',command.startsWith('java -jar ./target/contentops.jar --env mock --output json'));
-      if(i===4||i===5)check('independent templates are labeled unexecuted',(await page.locator('main').textContent()).includes('本页没有执行此命令'));
-    }
-    const copyButton=page.getByRole('button',{name:'复制命令',exact:true});
-    const command=await copyButton.getAttribute('data-copy');
-    await copyButton.click();
-    check('native clipboard copy',(await page.evaluate(()=>navigator.clipboard.readText()))===command);
-    check('copy does not execute',(await page.locator('#toast').textContent()).includes('没有执行'));
-    // Explicitly force both fallback branches. These are test-only browser overrides.
-    await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:undefined}));
-    await copyButton.click();
-    check('compatibility copy fallback',(await page.locator('#toast').textContent()).includes('兼容模式'));
-    await page.evaluate(()=>document.execCommand=()=>false);
-    await copyButton.click();
-    check('manual copy fallback visible',await page.locator('textarea.manual-copy').isVisible());
-    check('manual copy complete selection',await page.locator('textarea.manual-copy').evaluate(e=>e.value.length>0&&e.selectionStart===0&&e.selectionEnd===e.value.length));
-    await page.keyboard.press('Control+c');
-    check('manual fallback has clear instructions',(await page.locator('#toast').textContent()).includes('Ctrl+C'));
-    await page.reload();
-    await navigate('faults');
-    for(const [name,f]of Object.entries(D.faults)){
-      await page.locator('#fault-select').selectOption(name);
-      check('fault status '+name,(await page.locator('.status').textContent())===f.process.result.status);
-      check('fault exit '+name,(await page.locator('.exit').textContent())==='exit '+f.process.exit);
-      const details=page.locator('section .raw-details');
-      await details.locator('summary').click();
-      const actual=JSON.parse(await details.locator('.json-view').textContent());
-      check('fault JSON '+name,JSON.stringify(actual)===JSON.stringify(f.process.result));
-      check('steps '+name,(await page.locator('.steps-table').textContent()).includes(f.process.result.data.steps.review.write));
-      check('disk facts '+name,(await page.locator('.inspector').textContent()).includes('revision '+f.facts.disk_revision_after_process));
-    }
-    await page.locator('#fault-select').selectOption('tags-reject-before-write');
-    await page.getByRole('button',{name:'查看独立补标签回放'}).click();
-    check('recovery result real succeeded',(await page.locator('.status').textContent())==='succeeded'&&(await page.locator('.exit').textContent())==='exit 0');
-    check('recovery never re-audits',(await page.locator('.steps-table').textContent()).includes('tags')&&!(await page.locator('.steps-table tbody').textContent()).includes('review'));
-    await page.getByRole('button',{name:'查看部分失败',exact:true}).click();
-    check('original partial unchanged',(await page.locator('.status').textContent())==='partial');
-    await page.locator('#fault-select').selectOption('tags-commit-response-lost');
-    await page.screenshot({path:path.join(__dirname,'desktop-unknown.png')});
-    await navigate('agent');
-    for(const k of ['current','future','upstream']){
-      await page.locator(`[data-capability="${k}"]`).click();
-      check('Agent capability '+k,await page.locator(`[data-capability="${k}"]`).getAttribute('aria-pressed')==='true');
-      check('Agent always marked future',(await page.locator('.sourcebar').textContent()).includes('未实现 / 未执行 100 条'));
-    }
-    // Native buttons remain keyboard-operable after redraw.
-    await page.locator('[data-capability="future"]').focus();
-    await page.keyboard.press('Enter');
-    check('keyboard Enter changes capability',await page.locator('[data-capability="future"]').getAttribute('aria-pressed')==='true');
-    check('focus restored after rendering',await page.evaluate(()=>document.activeElement.dataset.capability==='future'));
-    await page.keyboard.press('Tab');
-    check('keyboard Tab reaches next control',await page.evaluate(()=>document.activeElement.dataset.capability==='upstream'));
     const links=new Set();
-    const captureLinks=async()=>{
-      for(const href of await page.locator('a[href]').evaluateAll(a=>a.map(x=>x.getAttribute('href'))))if(href&&!href.startsWith('#'))links.add(href);
+    const collect=async()=>{
+      for(const h of await page.locator('a[href]').evaluateAll(els=>els.map(e=>e.getAttribute('href'))))if(h&&!h.startsWith('#'))links.add(h);
       check('no accidental undefined text',!(await page.locator('main').textContent()).includes('undefined'));
     };
-    for(const route of ['overview','commands','task2','faults','agent']){
-      await navigate(route);
-      await captureLinks();
+    const navigate=async route=>{
+      await page.locator(`nav a[href="#${route}"]`).click();
+      await page.waitForFunction(key=>document.querySelector('nav a[aria-current="page"]')?.getAttribute('href')==='#'+key,route);
+    };
+    const open=async id=>{const el=page.locator('#'+id);if(!await el.evaluate(e=>e.open))await el.locator(':scope > summary').click();return el;};
+    const close=async id=>{const el=page.locator('#'+id);if(await el.evaluate(e=>e.open))await el.locator(':scope > summary').click();};
+    const primary=()=>page.locator('#walkthrough .workflow-primary');
+    const jsonMatches=async(container,record,label)=>{
+      const details=container.locator(':scope > .raw-details');
+      if(!await details.evaluate(e=>e.open))await details.locator(':scope > summary').click();
+      const actual=JSON.parse(await details.locator('.json-view').textContent());
+      check('complete JSON '+label,JSON.stringify(actual)===JSON.stringify(record.result));
+      check('actual exit '+label,(await container.locator(':scope > .statusline .exit').textContent())==='exit '+record.exit);
+      if(record.stderr.trim())check('stderr preserved '+label,(await details.textContent()).includes(record.stderr.trim().replace(/\r\n/g,'\n')));
+      await collect();
+    };
+    await page.goto(url);
+    await page.locator('h1').waitFor();
+    check('local file page identity',page.url()===url&&(await page.title()).includes('CLI 评审台'));
+    check('three main routes',await page.locator('nav a').count()===3);
+    check('default product review',await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#product');
+    check('first screen product positioning',(await page.locator('h1').textContent()).includes('封装为可复用的 CLI'));
+    for(const fact of ['1 名 Java 后端','2 周 MVP','6 项现有 API'])check('resource constraint '+fact,(await page.locator('.constraints').textContent()).includes(fact));
+    check('planned vs implemented scopes',(await page.locator('.scope-plan').textContent()).includes('两周 MVP')&&(await page.locator('.scope-now').textContent()).includes('48 小时'));
+    check('HTTP/remove/set/human confirm remain unimplemented',(await page.locator('.scope-now').textContent()).includes('HTTP、标签 remove/set、人工输入 ID 确认及完整筛选尚未实现'));
+    check('five workflow stages',await page.locator('.workflow-strip li').count()===5);
+    await page.screenshot({path:path.join(out,'desktop-product.png')});
+    await page.setViewportSize({width:1505,height:1045});
+    await page.screenshot({path:path.join(out,'concept-size-product.png')});
+    await page.setViewportSize({width:1440,height:1000});
+    await open('api-scope');
+    check('six APIs and combination row',await page.locator('#api-scope tbody tr').count()===7);
+    await open('full-plan');
+    check('all ten days retained',await page.locator('.day-plan tbody tr').count()===10);
+    for(const row of await page.locator('.day-plan tbody tr').all()){
+      const cells=await row.locator('td').allTextContents();
+      check('schedule verbatim '+cells[0],planDoc.includes('| '+cells[0]+' | '+cells[1]+' |'));
     }
-    await navigate('task2');
-    for(let i=0;i<5;i++){await page.locator(`[data-step="${i}"]`).click();await captureLinks();}
-    await page.locator('[data-snapshot="after"]').click();await captureLinks();
-    await navigate('commands');
-    for(let i=0;i<7;i++){await page.locator(`[data-command="${i}"]`).click();await captureLinks();}
-    await navigate('faults');
-    for(const name of Object.keys(D.faults)){await page.locator('#fault-select').selectOption(name);await captureLinks();}
-    await page.locator('#fault-select').selectOption('tags-reject-before-write');
-    await page.locator('[data-recovery="true"]').click();await captureLinks();
-    for(const href of links){check('local link '+href,!/^https?:/.test(href)&&fs.existsSync(path.resolve(root,'demo',decodeURI(href.split('#')[0]))));}
-    for(const viewport of [{width:1366,height:768},{width:1024,height:768},{width:390,height:844}]){
-      await page.setViewportSize(viewport);
-      for(const route of ['overview','commands','task2','faults','agent']){
-        await navigate(route);
-        check(`no document overflow ${viewport.width} ${route}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-        check(`visible heading ${viewport.width} ${route}`,await page.locator('h1').isVisible());
-        if(route==='commands')for(let i=0;i<7;i++){
-          await page.locator(`[data-command="${i}"]`).click();
-          check(`command layout ${viewport.width} ${i}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-        }
-        if(route==='faults')for(const name of Object.keys(D.faults)){
-          await page.locator('#fault-select').selectOption(name);
-          check(`fault layout ${viewport.width} ${name}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-        }
+    await collect();
+    await close('full-plan');await close('api-scope');
+    await page.getByRole('link',{name:'体验一次 CLI 操作'}).click();
+    await page.waitForFunction(()=>document.querySelector('nav a[aria-current="page"]')?.hash==='#demo');
+    check('review flow CTA enters demo',await page.locator('#walkthrough').isVisible());
+    check('auxiliary command reference collapsed',!await page.locator('#command-reference').evaluate(e=>e.open));
+    check('all fault evidence collapsed',!await page.locator('#all-faults').evaluate(e=>e.open));
+    check('initial queue full page',await page.locator('.queue-table tbody tr').count()===20);
+    check('initial 132 and 20 actual results',(await page.locator('.queue-summary').textContent()).includes('132')&&(await page.locator('.queue-summary').textContent()).includes('20'));
+    check('real target is second row',(await page.locator('.queue-table tbody tr').nth(1).textContent()).includes('ct_000004'));
+    check('previous disabled at start',await page.locator('[data-move="-1"]').isDisabled());
+    await jsonMatches(primary(),D.task['03-pending-page1-json'],'initial queue');
+    await page.locator('[data-select-content="ct_000004"]').click();
+    check('select target moves to detail',await page.locator('[data-step="1"]').getAttribute('aria-pressed')==='true');
+    check('actual title/body/tags',(await page.locator('#walkthrough .inspector').textContent()).includes(D.task['05-candidate-ct000004-detail'].result.data.body)&&await page.locator('#walkthrough .inspector .tag').count()===3);
+    await page.locator('[data-step="0"]').click();
+    check('target stays highlighted',await page.locator('.queue-table tr.selected').count()===1);
+    await page.locator('[data-step="1"]').click();
+    await jsonMatches(primary(),D.task['05-candidate-ct000004-detail'],'before detail');
+    for(let i=2;i<5;i++){
+      await page.locator('[data-move="1"]').click();
+      check('next step '+i,await page.locator(`[data-step="${i}"]`).getAttribute('aria-pressed')==='true');
+      if(i===2){
+        await jsonMatches(primary(),D.task['10-process-preview'],'default preview');
+        check('not_sent review and tags',(await primary().locator('.steps-table').textContent()).match(/not_sent/g).length===2);
+        check('preview plan labels target uncommitted',(await page.locator('.plan-panel').textContent()).includes('计划，尚未写入'));
+        await primary().locator(':scope > .raw-details > summary').click();
+        await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
+        await page.screenshot({path:path.join(out,'desktop-preview.png')});
+        await page.setViewportSize({width:1505,height:1045});
+        await page.screenshot({path:path.join(out,'concept-size-preview.png')});
+        await page.setViewportSize({width:1440,height:1000});
       }
-      await navigate('task2');
-      await page.locator('[data-step="2"]').click();
-      await page.locator('[data-snapshot="before"]').click();
-      if(viewport.width===1366)await page.screenshot({path:path.join(__dirname,'laptop-task2.png')});
-      if(viewport.width===390)await page.screenshot({path:path.join(__dirname,'narrow-task2.png'),fullPage:true});
+      if(i===3){
+        check('execution result initially explicit disclosure',await primary().locator(':scope > .statusline').count()===0);
+        check('execution command includes both permissions',(await primary().locator('[data-copy]').getAttribute('data-copy')).endsWith('--execute --yes'));
+        await page.locator('[data-show-execution]').click();
+        await jsonMatches(primary(),D.task['13-process-execute'],'recorded execution');
+        check('two acknowledged matched steps',(await primary().locator('.steps-table').textContent()).match(/acknowledged/g).length===2&&(await primary().locator('.steps-table').textContent()).match(/matched/g).length===2);
+      }
+      if(i===4){
+        await jsonMatches(primary(),D.task['14-after-detail'],'new JVM readback');
+        check('side by side comparison states',(await page.locator('.comparison-grid').textContent()).includes('pending')&&(await page.locator('.comparison-grid').textContent()).includes('approved'));
+        check('comparison retains original tags then suspense',await page.locator('.comparison-grid > div').nth(0).locator('.tag').count()===3&&await page.locator('.comparison-grid > div').nth(1).locator('.tag').count()===4);
+        check('business metrics 132 to131/history0to1/revision2',(await page.locator('.metrics').textContent()).includes('132 → 131')&&(await page.locator('.metrics').textContent()).includes('0 → 1')&&(await page.locator('.metrics').textContent()).includes('revision 2'));
+        check('next disabled at end',await page.locator('[data-move="1"]').isDisabled());
+        await primary().locator(':scope > .raw-details > summary').click();
+        await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
+        await page.screenshot({path:path.join(out,'desktop-comparison.png')});
+      }
     }
+    await page.locator('[data-move="-1"]').click();
+    check('previous step works',await page.locator('[data-step="3"]').getAttribute('aria-pressed')==='true');
+    await page.locator('[data-step="4"]').click();
+    for(const snapshot of ['after','before']){
+      await page.locator(`[data-snapshot="${snapshot}"]`).click();
+      check('snapshot '+snapshot,(await page.locator('#walkthrough .inspector .state-label').textContent())===(snapshot==='after'?'approved':'pending'));
+      check('snapshot tags '+snapshot,await page.locator('#walkthrough .inspector .tag').count()===(snapshot==='after'?4:3));
+    }
+    await open('command-reference');
+    check('process default in command reference',await page.locator('[data-command="6"]').getAttribute('aria-pressed')==='true');
+    for(let i=0;i<7;i++){
+      await page.locator(`[data-command="${i}"]`).click();
+      check('command reference remains open '+i,await page.locator('#command-reference').evaluate(e=>e.open));
+      const scope=page.locator('#command-reference .command-layout > section');
+      const button=scope.locator('[data-copy]');const cmd=await button.getAttribute('data-copy');
+      check('complete Java command '+i,cmd.startsWith('java -jar ./target/contentops.jar --env mock --output json'));
+      await button.click();check('native clipboard roundtrip '+i,await page.evaluate(()=>navigator.clipboard.readText())===cmd);
+      if([0,1,2,3,6].includes(i)){
+        const key=['03-pending-page1-json','05-candidate-ct000004-detail','07-candidate-ct000004-history','08-active-tags',null,null,'10-process-preview'][i];
+        await jsonMatches(scope,D.task[key],'command '+i);
+      }else check('unexecuted template and structure '+i,(await scope.textContent()).includes('本页没有执行此命令')&&(await scope.textContent()).includes('data.steps.'+(i===4?'review':'tags')));
+      await collect();
+    }
+    const copyButton=page.locator('#command-reference [data-copy]');
+    await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:undefined}));
+    await copyButton.click();check('compatibility fallback',(await page.locator('#toast').textContent()).includes('兼容模式'));
+    await page.evaluate(()=>document.execCommand=()=>false);
+    await copyButton.click();check('manual copy available',await page.locator('.manual-copy').isVisible());
+    check('manual full selection',await page.locator('.manual-copy').evaluate(e=>e.selectionStart===0&&e.selectionEnd===e.value.length&&e.value.length>0));
+    await page.keyboard.press('Control+c');check('manual copy instructions',(await page.locator('#toast').textContent()).includes('Ctrl+C'));
+    await page.reload();
+    await page.locator('[data-step="2"]').click();
+    const representatives={normal:D.task['13-process-execute'],partial:D.faults['tags-reject-before-write'].process,unknown:D.faults['tags-commit-response-lost'].process};
+    for(const [name,record]of Object.entries(representatives)){
+      await page.locator(`[data-outcome="${name}"]`).click();
+      await jsonMatches(page.locator('.outcome-view'),record,'representative '+name);
+      check('source split '+name,(await page.locator('.outcome-view .source-label').textContent()).includes(name==='normal'?'悬疑':'轻松'));
+      check('representative never changes core preview',(await primary().locator('.status').textContent())==='previewed');
+    }
+    await open('all-faults');
+    for(const [name,f]of Object.entries(D.faults)){
+      await page.locator('#fault-select').selectOption(name);
+      await jsonMatches(page.locator('#all-faults .two-col > section'),f.process,'S5 '+name);
+      check('S5 disk revision '+name,(await page.locator('#all-faults .inspector').textContent()).includes('revision '+f.facts.disk_revision_after_process));
+      check('all fault evidence stays open '+name,await page.locator('#all-faults').evaluate(e=>e.open));
+    }
+    await page.locator('[data-outcome="partial"]').click();
+    await page.locator('[data-show-recovery]').click();
+    await jsonMatches(page.locator('#all-faults .two-col > section'),D.faults['tags-reject-before-write'].recovery,'tag-only recovery');
+    check('recovery tags only',!(await page.locator('#all-faults .steps-table tbody').textContent()).includes('review'));
+    check('recovery history still one',(await page.locator('#all-faults .inspector').textContent()).includes('历史 1 条'));
+    await page.locator('[data-recovery="false"]').click();
+    check('original partial retained',(await page.locator('#all-faults .status').textContent())==='partial');
+    await close('all-faults');
+    await page.locator('main .page-actions a[href="#technical"]').click();
+    await page.waitForFunction(()=>document.querySelector('nav a[aria-current="page"]')?.hash==='#technical');
+    check('next review CTA technical',await page.locator('.architecture').isVisible());
+    check('HTTP is visibly future',(await page.locator('.future-adapter').textContent()).includes('HTTP · 尚未实现'));
+    check('five design choices',await page.locator('.technical-choices tbody tr').count()===5);
+    for(const name of ['current','future','upstream']){
+      await page.locator(`[data-capability="${name}"]`).click();
+      check('Agent boundary '+name,await page.locator(`[data-capability="${name}"]`).getAttribute('aria-pressed')==='true');
+      check('Agent always unexecuted',(await page.locator('.future-label').textContent()).includes('未执行'));
+      await collect();
+    }
+    await open('technical-details');await collect();await close('technical-details');
+    await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
+    await page.screenshot({path:path.join(out,'desktop-technical.png'),fullPage:true});
+    await page.locator('[data-capability="future"]').focus();await page.keyboard.press('Enter');
+    check('keyboard Enter activates capability',await page.locator('[data-capability="future"]').getAttribute('aria-pressed')==='true');
+    check('focus retained',await page.evaluate(()=>document.activeElement.dataset.capability==='future'));
+    await page.keyboard.press('Tab');check('keyboard Tab next',await page.evaluate(()=>document.activeElement.dataset.capability==='upstream'));
+    await navigate('demo');await page.locator('#command-reference > summary').focus();await page.keyboard.press('Enter');
+    check('keyboard disclosure toggles',await page.locator('#command-reference').evaluate(e=>e.open));await close('command-reference');
+    await page.locator('.skip-link').focus();await page.keyboard.press('Enter');
+    await page.waitForFunction(()=>document.activeElement.id==='workspace');
+    check('skip link keeps current review module',await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#demo');
+    check('skip link focuses main content',await page.locator('main').evaluate(e=>e===document.activeElement));
+    for(const viewport of [{width:1440,height:1000},{width:1366,height:768},{width:1024,height:768},{width:390,height:844}]){
+      await page.setViewportSize(viewport);
+      for(const route of ['product','demo','technical']){
+        await navigate(route);await collect();
+        check(`main route ${viewport.width} ${route}`,await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#'+route);
+        check(`no page overflow ${viewport.width} ${route}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+        check(`single h1 ${viewport.width} ${route}`,await page.locator('h1').count()===1);
+      }
+      await navigate('demo');
+      for(let i=0;i<5;i++){
+        await page.locator(`[data-step="${i}"]`).click();
+        check(`step layout ${viewport.width} ${i}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+      }
+      await open('command-reference');
+      for(let i=0;i<7;i++){
+        await page.locator(`[data-command="${i}"]`).click();
+        check(`command layout ${viewport.width} ${i}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+      }
+      await close('command-reference');await open('all-faults');
+      for(const name of Object.keys(D.faults)){
+        await page.locator('#fault-select').selectOption(name);
+        check(`fault layout ${viewport.width} ${name}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+        await collect();
+      }
+      await close('all-faults');await page.locator('[data-step="2"]').click();
+      await page.locator('[data-outcome="normal"]').click();
+      check(`readable command type ${viewport.width}`,await primary().locator('.terminal pre').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=14));
+      check(`prominent status type ${viewport.width}`,await primary().locator('.status').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=22));
+      await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
+      if(viewport.width===1366)await page.screenshot({path:path.join(out,'laptop-preview.png')});
+      if(viewport.width===390){
+        await page.screenshot({path:path.join(out,'narrow-preview.png'),fullPage:true});
+        await navigate('product');await page.screenshot({path:path.join(out,'narrow-product.png'),fullPage:true});
+      }
+    }
+    for(const href of links)check('local source link '+href,!/^https?:/.test(href)&&fs.existsSync(path.resolve(root,'demo',decodeURI(href.split('#')[0]))));
     check('console healthy',errors.length===0,JSON.stringify(errors));
-    check('offline resources / no network',requests.every(u=>u.startsWith('file:')),JSON.stringify(requests));
-    check('no overlay',await page.locator('vite-error-overlay,nextjs-portal').count()===0);
-    const sizes=await page.locator('h1, button').evaluateAll(els=>els.slice(0,10).map(e=>({text:e.textContent.trim(),size:getComputedStyle(e).fontSize,lineHeight:getComputedStyle(e).lineHeight})));
+    check('file resources only while offline',requests.every(r=>r.startsWith('file:')),JSON.stringify(requests));
+    check('no framework overlay',await page.locator('vite-error-overlay,nextjs-portal').count()===0);
+    const unchanged=await page.evaluate(()=>JSON.stringify(window.DEMO_DATA));
+    check('browser interactions do not mutate embedded evidence',unchanged===JSON.stringify(D));
+    await page.emulateMedia({reducedMotion:'reduce'});
+    check('larger type also with reduced motion',await page.evaluate(()=>getComputedStyle(document.body).fontSize==='16px'));
+    const sizes=await page.locator('h1,.intro,.constraints strong').evaluateAll(els=>els.map(e=>({text:e.textContent,size:getComputedStyle(e).fontSize})));
     const report={captured_at:new Date().toISOString(),passed:true,check_count:checks.length,
-      browser:browser.version(),channel:'local Chrome / headless / Playwright',playwright:require((moduleArg<0?'playwright':process.argv[moduleArg+1])+'/package.json').version,
+      browser:browser.version(),playwright:require((moduleArg<0?'playwright':process.argv[moduleArg+1])+'/package.json').version,
       url,offline:true,viewports:['1440x1000','1505x1045','1366x768','1024x768','390x844'],
-      browser_plugin:'Absent; Browser plugin not available. MCP Playwright file navigation was blocked, so used existing local Playwright + Chrome.',
-      console_errors:errors,resource_requests:requests,computed_mobile_typography:sizes,checks};
-    fs.writeFileSync(path.join(__dirname,'browser-results.json'),JSON.stringify(report,null,2)+'\n');
-    console.log(`PASS: ${checks.length} assertions, local file offline, ${browser.version()}, zero console errors.`);
+      browser_plugin:'Absent; Browser plugin not available. Existing MCP Playwright blocks file navigation; used existing local Playwright and Chrome.',
+      console_errors:errors,requests,unique_source_links:links.size,computed_mobile_type:sizes,checks};
+    fs.writeFileSync(path.join(out,'browser-results.json'),JSON.stringify(report,null,2)+'\n');
+    console.log(`PASS: ${checks.length} assertions; three review modules; ${links.size} links; offline file; Chrome ${browser.version()}.`);
   }finally{await browser.close();}
 }
-run().catch(e=>{fs.writeFileSync(path.join(__dirname,'last-failure.json'),JSON.stringify({at:new Date().toISOString(),error:e.stack,passed_checks:checks.length},null,2)+'\n');console.error(e);process.exitCode=1;});
+run().catch(e=>{
+  const p=path.join(root,'evidence/demo-review','failure-'+Date.now()+'.json');
+  fs.writeFileSync(p,JSON.stringify({at:new Date().toISOString(),error:e.stack,passed_checks:checks.length},null,2)+'\n');
+  console.error(e);process.exitCode=1;
+});

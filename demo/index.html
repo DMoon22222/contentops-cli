@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="color-scheme" content="dark">
-  <title>contentops · 内容运营 CLI 演示台</title>
+  <title>contentops · 内容运营 CLI 评审台</title>
   <link rel="stylesheet" href="style.css">
   <script defer src="data.js"></script>
   <script defer src="app.js"></script>
@@ -13,19 +13,17 @@
 <body>
   <a class="skip-link" href="#workspace">跳到演示内容</a>
   <aside class="sidebar">
-    <a class="brand" href="#task2" aria-label="contentops 任务二回放"><span class="brand-mark" aria-hidden="true">&gt;_</span> contentops</a>
-    <p class="sidebar-caption">内容运营 / CLI</p>
+    <a class="brand" href="#product" aria-label="contentops 产品方案"><span class="brand-mark" aria-hidden="true">&gt;_</span> contentops</a>
+    <p class="sidebar-caption">内容运营 / CLI 评审台</p>
     <nav aria-label="演示模块">
-      <a href="#overview"><span class="nav-number">01</span>产品概览</a>
-      <a href="#commands"><span class="nav-number">02</span>命令手册</a>
-      <a href="#task2"><span class="nav-number">03</span>任务二回放</a>
-      <a href="#faults"><span class="nav-number">04</span>异常结果</a>
-      <a href="#agent"><span class="nav-number">05</span>Agent 方案</a>
+      <a href="#product"><span class="nav-number">01</span>产品方案</a>
+      <a href="#demo"><span class="nav-number">02</span>CLI 交互演示</a>
+      <a href="#technical"><span class="nav-number">03</span>技术方案与演进</a>
     </nav>
     <div class="sidebar-bottom"><span class="offline-dot" aria-hidden="true"></span> 离线 · 无运行权限<p>浏览器只切换已保存的证据。<br>不调用 Java，不修改状态。</p><a href="../README.md">项目运行说明 ↗</a></div>
   </aside>
   <div class="shell">
-    <header class="topbar"><div><strong>内容运营 CLI 演示台</strong><p>离线证据回放，不执行命令。</p></div><span class="version">Mock 原型 · v0.1.0</span></header>
+    <header class="topbar"><div><strong>内容运营 CLI 评审台</strong><p>浏览器仅回放，不执行命令。</p></div><span class="version">离线展示 / Mock 原型 v0.1.0</span></header>
     <main id="workspace" tabindex="-1"></main>
     <footer>contentops / HTML Demo<span>单条能力已实现 · 批次能力仅设计</span></footer>
   </div>
