@@ -1,0 +1,77 @@
+# Maven build output, delivery staging, and local caches
+/target/
+/dist/
+/.m2/
+/.maven-repo/
+/.contentops/
+/.mvn/.cache/
+*.class
+
+# Mock runtime files accidentally placed at the project root
+/state.json
+/state.lock
+/state.*.tmp
+/state.json.bak
+
+# Temporary files and diagnostics
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+*.hprof
+hs_err_pid*
+replay_pid*
+# Reviewed evidence logs remain eligible for explicit staging
+!/evidence/**/*.log
+
+# IDE and operating-system local files
+.idea/
+.vscode/
+.settings/
+*.iml
+.classpath
+.project
+.factorypath
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Secrets and machine-local configuration; review templates before staging
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.local.properties
+*.local.yaml
+*.local.yml
+*.local.json
+/config/local.properties
+/config/local.yaml
+/config/local.yml
+/config/local.json
+/config/secrets.*
+/secrets/
+/credentials/
+credentials.json
+tokens.json
+api-key.txt
+token.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+/.aws/
+/.ssh/
+/.codex/
+
+# Unreviewed AI exports are private; reviewed submission records are not ignored
+/ai-records/source/
+
+# The extracted source materials are tracked; keep the duplicate archive locally
+/内容运营后台接口数据.zip

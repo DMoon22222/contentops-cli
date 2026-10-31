@@ -1,0 +1,5 @@
+# Preserve supplied materials and approved documents byte-for-byte.
+/AGENTS.md -text
+/docs/*.md -text
+/内容运营后台接口数据/** -text
+"/题目：内容运营后台 CLI 化.md" -text

@@ -1,0 +1,937 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "内容运营后台接口（试炼版）",
+    "version": "1.2.0",
+    "description": "从现有内容运营后台导出的接口文档。接口基本可用，但并不是为 CLI 或 Agent 调用专门设计的。错误统一返回 {\"code\": int, \"message\": string}，具体错误码表未整理。所有接口需要在请求头携带 X-Admin-Token（管理员令牌，不区分角色权限）。"
+  },
+  "servers": [
+    {
+      "url": "https://api.example.invalid",
+      "description": "示例占位地址，不可访问；样例数据见随题附件 mock_data.json"
+    }
+  ],
+  "security": [
+    {"AdminToken": []}
+  ],
+  "paths": {
+    "/admin/contents": {
+      "get": {
+        "summary": "查询内容列表",
+        "description": "分页固定每页 20 条，无 page_size 参数。多个筛选条件之间为 AND 关系。",
+        "parameters": [
+          {"name": "content_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "creator_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "keyword", "in": "query", "description": "匹配标题与正文", "schema": {"type": "string"}},
+          {"name": "tag", "in": "query", "schema": {"type": "string"}},
+          {"name": "review_status", "in": "query", "schema": {"type": "string", "enum": ["pending", "approved", "rejected"]}},
+          {"name": "quality_status", "in": "query", "schema": {"type": "string", "enum": ["normal", "limited"]}},
+          {"name": "visibility", "in": "query", "schema": {"type": "string", "enum": ["online", "taken_down"]}},
+          {"name": "created_from", "in": "query", "schema": {"type": "string", "format": "date-time"}},
+          {"name": "created_to", "in": "query", "schema": {"type": "string", "format": "date-time"}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}}
+        ],
+        "responses": {
+          "200": {
+            "description": "内容列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {"type": "array", "items": {"$ref": "#/components/schemas/ContentSummary"}},
+                    "total": {"type": "integer"}
+                  }
+                },
+                "example": {
+                  "items": [
+                    {
+                      "content_id": "ct_000101",
+                      "title": "深海信标·第2话：无声的求救",
+                      "creator_id": "cr_00012",
+                      "review_status": "pending",
+                      "quality_status": "normal",
+                      "visibility": "online",
+                      "tags": ["科幻", "悬疑"],
+                      "created_at": "2026-07-14T09:21:33Z"
+                    }
+                  ],
+                  "total": 137
+                }
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/contents?review_status=pending&page=1'"
+      }
+    },
+    "/admin/contents/{content_id}": {
+      "get": {
+        "summary": "查看内容详情",
+        "parameters": [
+          {"name": "content_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "内容详情",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/ContentDetail"},
+                "example": {
+                  "content_id": "ct_000101",
+                  "title": "深海信标·第2话：无声的求救",
+                  "creator_id": "cr_00012",
+                  "review_status": "pending",
+                  "quality_status": "normal",
+                  "visibility": "online",
+                  "tags": ["科幻", "悬疑"],
+                  "created_at": "2026-07-14T09:21:33Z",
+                  "body": "潜航器与母船失联的第三天，艾尔文在声呐里听到了不属于任何已知生物的敲击节奏……",
+                  "source": "app",
+                  "channels": ["recommend", "category_page"],
+                  "category_id": "cat_02"
+                }
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/contents/ct_000101'"
+      }
+    },
+    "/admin/contents/{content_id}/review-logs": {
+      "get": {
+        "summary": "查看内容审核记录",
+        "description": "按时间倒序返回全部记录，无分页。",
+        "parameters": [
+          {"name": "content_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "审核记录",
+            "content": {
+              "application/json": {
+                "schema": {"type": "array", "items": {"$ref": "#/components/schemas/ReviewLog"}},
+                "example": [
+                  {"action": "reject", "operator_id": "op_03", "reason": "标题党，与正文不符", "created_at": "2026-07-10T15:02:11Z"},
+                  {"action": "approve", "operator_id": "op_01", "reason": "复核通过", "created_at": "2026-07-11T10:44:09Z"}
+                ]
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/contents/ct_000101/review-logs'"
+      }
+    },
+    "/admin/content-reviews": {
+      "post": {
+        "summary": "批量审核内容",
+        "description": "单次 items 上限 20 条，超出返回 400。响应仅返回成功/失败计数，不含逐条结果。重复提交同一 content_id 会追加审核记录。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["items"],
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "maxItems": 20,
+                    "items": {
+                      "type": "object",
+                      "required": ["content_id", "action"],
+                      "properties": {
+                        "content_id": {"type": "string"},
+                        "action": {"type": "string", "enum": ["approve", "reject"]},
+                        "reason": {"type": "string", "description": "action=reject 时建议填写，非强制"}
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "items": [
+                  {"content_id": "ct_000101", "action": "approve"},
+                  {"content_id": "ct_000102", "action": "reject", "reason": "题材与标签严重不符"}
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "处理结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success_count": {"type": "integer"},
+                    "failed_count": {"type": "integer"}
+                  }
+                },
+                "example": {"success_count": 2, "failed_count": 0}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"items\":[{\"content_id\":\"ct_000101\",\"action\":\"approve\"}]}' 'https://api.example.invalid/admin/content-reviews'"
+      }
+    },
+    "/admin/contents/{content_id}/tags": {
+      "put": {
+        "summary": "更新内容标签",
+        "description": "全量覆盖写入（不是增量追加）。标签不校验是否存在于标签库。",
+        "parameters": [
+          {"name": "content_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["tags"],
+                "properties": {
+                  "tags": {"type": "array", "items": {"type": "string"}}
+                }
+              },
+              "example": {"tags": ["科幻", "悬疑", "深海"]}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"result": {"type": "string"}}},
+                "example": {"result": "ok"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X PUT -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"tags\":[\"科幻\",\"悬疑\"]}' 'https://api.example.invalid/admin/contents/ct_000101/tags'"
+      }
+    },
+    "/admin/contents/{content_id}/distribution": {
+      "post": {
+        "summary": "配置内容分发",
+        "description": "channels 取值见 /admin/categories 返回的 channels_allowed；传入未开放的渠道会整单失败。",
+        "parameters": [
+          {"name": "content_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["channels"],
+                "properties": {
+                  "channels": {"type": "array", "items": {"type": "string"}},
+                  "category_id": {"type": "string"},
+                  "notify_creator": {"type": "boolean", "default": false},
+                  "note": {"type": "string"}
+                }
+              },
+              "example": {"channels": ["recommend", "category_page"], "category_id": "cat_02", "notify_creator": false}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "配置结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"result": {"type": "string"}}},
+                "example": {"result": "ok"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"channels\":[\"recommend\"],\"category_id\":\"cat_02\"}' 'https://api.example.invalid/admin/contents/ct_000101/distribution'"
+      }
+    },
+    "/admin/contents/{content_id}/quality-status": {
+      "post": {
+        "summary": "调整内容质量状态（加权/限流）",
+        "description": "limited 状态会显著降低内容分发量。调整不通知创作者。",
+        "parameters": [
+          {"name": "content_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {
+                  "status": {"type": "string", "enum": ["normal", "limited"]},
+                  "reason": {"type": "string"}
+                }
+              },
+              "example": {"status": "limited", "reason": "用户举报涉嫌搬运，待核实"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "处理结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"result": {"type": "string"}}},
+                "example": {"result": "ok"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"status\":\"limited\",\"reason\":\"待核实\"}' 'https://api.example.invalid/admin/contents/ct_000101/quality-status'"
+      }
+    },
+    "/admin/contents/{content_id}/visibility": {
+      "post": {
+        "summary": "内容下架 / 恢复上架",
+        "description": "take_down 后内容对用户不可见。reason 必填。操作即时生效，无二次确认。",
+        "parameters": [
+          {"name": "content_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["action", "reason"],
+                "properties": {
+                  "action": {"type": "string", "enum": ["take_down", "restore"]},
+                  "reason": {"type": "string"}
+                }
+              },
+              "example": {"action": "take_down", "reason": "确认搬运他人作品"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "处理结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"result": {"type": "string"}}},
+                "example": {"result": "ok"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"action\":\"take_down\",\"reason\":\"确认搬运\"}' 'https://api.example.invalid/admin/contents/ct_000150/visibility'"
+      }
+    },
+    "/admin/creators": {
+      "get": {
+        "summary": "查询创作者列表",
+        "description": "分页固定每页 20 条。",
+        "parameters": [
+          {"name": "creator_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "keyword", "in": "query", "description": "匹配昵称", "schema": {"type": "string"}},
+          {"name": "whitelist", "in": "query", "schema": {"type": "boolean"}},
+          {"name": "level", "in": "query", "schema": {"type": "string", "enum": ["L1", "L2", "L3", "L4", "L5"]}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}}
+        ],
+        "responses": {
+          "200": {
+            "description": "创作者列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {"type": "array", "items": {"$ref": "#/components/schemas/CreatorSummary"}},
+                    "total": {"type": "integer"}
+                  }
+                },
+                "example": {
+                  "items": [
+                    {"creator_id": "cr_00012", "nickname": "深蓝物语", "level": "L4", "whitelist": true, "violation_count": 0}
+                  ],
+                  "total": 40
+                }
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/creators?whitelist=true'"
+      }
+    },
+    "/admin/creators/{creator_id}": {
+      "get": {
+        "summary": "查看创作者详情",
+        "parameters": [
+          {"name": "creator_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "创作者详情",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/CreatorDetail"},
+                "example": {
+                  "creator_id": "cr_00012",
+                  "nickname": "深蓝物语",
+                  "level": "L4",
+                  "whitelist": true,
+                  "violation_count": 0,
+                  "content_total": 58,
+                  "content_pending": 3,
+                  "joined_at": "2025-11-02T08:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/creators/cr_00012'"
+      }
+    },
+    "/admin/creators/{creator_id}/whitelist": {
+      "post": {
+        "summary": "设置 / 取消创作者白名单",
+        "description": "白名单创作者的内容进入快速审核通道并豁免部分自动风控。操作即时生效。",
+        "parameters": [
+          {"name": "creator_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["enabled"],
+                "properties": {
+                  "enabled": {"type": "boolean"},
+                  "reason": {"type": "string"}
+                }
+              },
+              "example": {"enabled": true, "reason": "连续 3 个月优质产出，运营例会通过"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "处理结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"result": {"type": "string"}}},
+                "example": {"result": "ok"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"enabled\":true,\"reason\":\"例会通过\"}' 'https://api.example.invalid/admin/creators/cr_00012/whitelist'"
+      }
+    },
+    "/admin/tags": {
+      "get": {
+        "summary": "查询标签库",
+        "description": "返回全部标签，无分页。deprecated 标签仍可能出现在存量内容上。",
+        "responses": {
+          "200": {
+            "description": "标签库",
+            "content": {
+              "application/json": {
+                "schema": {"type": "array", "items": {"$ref": "#/components/schemas/TagItem"}},
+                "example": [
+                  {"tag": "科幻", "group": "题材", "usage_count": 2381, "status": "active"},
+                  {"tag": "旧版-悬疑", "group": "题材", "usage_count": 12, "status": "deprecated"}
+                ]
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/tags'"
+      },
+      "post": {
+        "summary": "新建标签",
+        "description": "同名标签重复创建返回 400。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["tag", "group"],
+                "properties": {
+                  "tag": {"type": "string"},
+                  "group": {"type": "string", "enum": ["题材", "风格", "运营"]}
+                }
+              },
+              "example": {"tag": "深海", "group": "题材"}
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "创建结果"}
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"tag\":\"深海\",\"group\":\"题材\"}' 'https://api.example.invalid/admin/tags'"
+      }
+    },
+    "/admin/categories": {
+      "get": {
+        "summary": "查询分发栏目与可用渠道",
+        "responses": {
+          "200": {
+            "description": "栏目列表",
+            "content": {
+              "application/json": {
+                "schema": {"type": "array", "items": {"$ref": "#/components/schemas/CategoryItem"}},
+                "example": [
+                  {"category_id": "cat_01", "name": "故事", "channels_allowed": ["recommend", "new", "category_page", "search_only"]},
+                  {"category_id": "cat_02", "name": "角色", "channels_allowed": ["recommend", "category_page", "search_only"]}
+                ]
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/categories'"
+      }
+    },
+    "/admin/operation-logs": {
+      "get": {
+        "summary": "查询后台操作日志",
+        "description": "覆盖审核、标签、分发、状态、白名单等全部写操作。分页固定每页 20 条。operator_id 来自网页后台登录态；通过 API 直连调用的写操作统一记录为 op_api。",
+        "parameters": [
+          {"name": "operator_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "action_type", "in": "query", "schema": {"type": "string", "enum": ["review", "tags", "distribution", "quality_status", "visibility", "whitelist"]}},
+          {"name": "target_id", "in": "query", "description": "content_id 或 creator_id", "schema": {"type": "string"}},
+          {"name": "from", "in": "query", "schema": {"type": "string", "format": "date-time"}},
+          {"name": "to", "in": "query", "schema": {"type": "string", "format": "date-time"}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}}
+        ],
+        "responses": {
+          "200": {
+            "description": "操作日志",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {"type": "array", "items": {"$ref": "#/components/schemas/OperationLog"}},
+                    "total": {"type": "integer"}
+                  }
+                },
+                "example": {
+                  "items": [
+                    {"log_id": "lg_88213", "action_type": "visibility", "target_id": "ct_000150", "operator_id": "op_03", "detail": "take_down: 确认搬运", "created_at": "2026-07-12T11:20:41Z"}
+                  ],
+                  "total": 1290
+                }
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/operation-logs?action_type=visibility&from=2026-07-01T00:00:00Z'"
+      }
+    },
+    "/admin/reports": {
+      "get": {
+        "summary": "查询用户举报列表",
+        "description": "分页固定每页 20 条。",
+        "parameters": [
+          {"name": "report_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "content_id", "in": "query", "schema": {"type": "string"}},
+          {"name": "status", "in": "query", "schema": {"type": "string", "enum": ["open", "resolved"]}},
+          {"name": "reason_type", "in": "query", "schema": {"type": "string", "enum": ["copyright", "nsfw", "spam", "abuse", "other"]}},
+          {"name": "created_from", "in": "query", "schema": {"type": "string", "format": "date-time"}},
+          {"name": "created_to", "in": "query", "schema": {"type": "string", "format": "date-time"}},
+          {"name": "page", "in": "query", "schema": {"type": "integer", "default": 1}}
+        ],
+        "responses": {
+          "200": {
+            "description": "举报列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {"type": "array", "items": {"$ref": "#/components/schemas/ReportItem"}},
+                    "total": {"type": "integer"}
+                  }
+                },
+                "example": {
+                  "items": [
+                    {
+                      "report_id": "rp_00018",
+                      "content_id": "ct_000151",
+                      "reporter_id": "u_48213",
+                      "reason_type": "copyright",
+                      "description": "整篇搬运自另一位作者的同名作品",
+                      "status": "open",
+                      "created_at": "2026-07-13T20:11:45Z"
+                    }
+                  ],
+                  "total": 21
+                }
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/reports?status=open&reason_type=copyright'"
+      }
+    },
+    "/admin/reports/{report_id}/resolve": {
+      "post": {
+        "summary": "回销举报",
+        "description": "将举报标记为已处理。回销本身不会对被举报内容做任何处置；如需处置，另行调用内容处置类接口。",
+        "parameters": [
+          {"name": "report_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["result"],
+                "properties": {
+                  "result": {"type": "string", "enum": ["valid", "invalid"]},
+                  "note": {"type": "string"}
+                }
+              },
+              "example": {"result": "valid", "note": "核实为搬运，内容已另行下架"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "回销结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"result": {"type": "string"}}},
+                "example": {"result": "ok"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"result\":\"valid\",\"note\":\"核实为搬运\"}' 'https://api.example.invalid/admin/reports/rp_00018/resolve'"
+      }
+    },
+    "/admin/messages": {
+      "post": {
+        "summary": "发送站内通知给创作者",
+        "description": "站内信即时送达，无发送频率限制。template=custom 时 body 必填；其余模板会引用 content_id 自动生成文案。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["creator_id", "template"],
+                "properties": {
+                  "creator_id": {"type": "string"},
+                  "content_id": {"type": "string"},
+                  "template": {"type": "string", "enum": ["review_rejected", "quality_limited", "take_down", "restore", "custom"]},
+                  "body": {"type": "string"}
+                }
+              },
+              "example": {"creator_id": "cr_00012", "content_id": "ct_000199", "template": "quality_limited"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "发送结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"message_id": {"type": "string"}}},
+                "example": {"message_id": "msg_51027"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"creator_id\":\"cr_00012\",\"content_id\":\"ct_000199\",\"template\":\"quality_limited\"}' 'https://api.example.invalid/admin/messages'"
+      }
+    },
+    "/admin/promo-slots": {
+      "get": {
+        "summary": "查询推荐位占用",
+        "parameters": [
+          {"name": "position", "in": "query", "schema": {"type": "string", "enum": ["home_banner", "home_feed_top", "category_top"]}},
+          {"name": "active_on", "in": "query", "description": "查询该日期有占用的推荐位", "schema": {"type": "string", "format": "date"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "推荐位占用列表",
+            "content": {
+              "application/json": {
+                "schema": {"type": "array", "items": {"$ref": "#/components/schemas/PromoSlot"}},
+                "example": [
+                  {"slot_id": "ps_0071", "position": "home_banner", "content_id": "ct_000018", "start_time": "2026-07-15T00:00:00Z", "end_time": "2026-07-18T00:00:00Z", "operator_id": "op_02"}
+                ]
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/promo-slots?active_on=2026-07-17'"
+      },
+      "post": {
+        "summary": "占用推荐位",
+        "description": "推荐位直接影响线上曝光，操作即时生效。同位置时间段冲突返回 400。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["position", "content_id", "start_time", "end_time"],
+                "properties": {
+                  "position": {"type": "string", "enum": ["home_banner", "home_feed_top", "category_top"]},
+                  "content_id": {"type": "string"},
+                  "start_time": {"type": "string", "format": "date-time"},
+                  "end_time": {"type": "string", "format": "date-time"}
+                }
+              },
+              "example": {"position": "category_top", "content_id": "ct_000101", "start_time": "2026-07-18T00:00:00Z", "end_time": "2026-07-20T00:00:00Z"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "占用结果",
+            "content": {
+              "application/json": {
+                "schema": {"type": "object", "properties": {"slot_id": {"type": "string"}}},
+                "example": {"slot_id": "ps_0072"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"position\":\"category_top\",\"content_id\":\"ct_000101\",\"start_time\":\"2026-07-18T00:00:00Z\",\"end_time\":\"2026-07-20T00:00:00Z\"}' 'https://api.example.invalid/admin/promo-slots'"
+      }
+    },
+    "/admin/content-export-jobs": {
+      "post": {
+        "summary": "创建内容导出任务（异步）",
+        "description": "导出为 CSV。任务异步执行，需轮询任务状态接口获取结果。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "description": "与 /admin/contents 查询参数同构的筛选条件",
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "example": {"filters": {"review_status": "pending", "created_from": "2026-07-01T00:00:00Z"}}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "任务已创建",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/ExportJob"},
+                "example": {"job_id": "ej_20260717_003", "status": "queued"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -X POST -H 'X-Admin-Token: <token>' -H 'Content-Type: application/json' -d '{\"filters\":{\"review_status\":\"pending\"}}' 'https://api.example.invalid/admin/content-export-jobs'"
+      }
+    },
+    "/admin/content-export-jobs/{job_id}": {
+      "get": {
+        "summary": "查询导出任务状态",
+        "description": "done 状态返回 download_url，有效期 1 小时。",
+        "parameters": [
+          {"name": "job_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "任务状态",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/ExportJob"},
+                "example": {"job_id": "ej_20260717_003", "status": "done", "download_url": "https://api.example.invalid/files/ej_20260717_003.csv", "expires_at": "2026-07-17T15:30:00Z"}
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/content-export-jobs/ej_20260717_003'"
+      }
+    },
+    "/admin/stats/review-daily": {
+      "get": {
+        "summary": "审核工作量日报",
+        "description": "按天与操作人汇总审核量。数据 T+1 生成，当天数据不可查。",
+        "parameters": [
+          {"name": "from", "in": "query", "schema": {"type": "string", "format": "date"}},
+          {"name": "to", "in": "query", "schema": {"type": "string", "format": "date"}},
+          {"name": "operator_id", "in": "query", "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "日报数据",
+            "content": {
+              "application/json": {
+                "schema": {"type": "array", "items": {"$ref": "#/components/schemas/ReviewDailyStat"}},
+                "example": [
+                  {"date": "2026-07-15", "operator_id": "op_01", "approved": 214, "rejected": 37, "avg_seconds": 68}
+                ]
+              }
+            }
+          }
+        },
+        "x-request-example": "curl -H 'X-Admin-Token: <token>' 'https://api.example.invalid/admin/stats/review-daily?from=2026-07-10&to=2026-07-16'"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "AdminToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Admin-Token",
+        "description": "管理员令牌，所有接口共用，不区分角色与操作权限"
+      }
+    },
+    "schemas": {
+      "ContentSummary": {
+        "type": "object",
+        "properties": {
+          "content_id": {"type": "string"},
+          "title": {"type": "string"},
+          "creator_id": {"type": "string"},
+          "review_status": {"type": "string", "enum": ["pending", "approved", "rejected"]},
+          "quality_status": {"type": "string", "enum": ["normal", "limited"]},
+          "visibility": {"type": "string", "enum": ["online", "taken_down"]},
+          "tags": {"type": "array", "items": {"type": "string"}},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "ContentDetail": {
+        "allOf": [
+          {"$ref": "#/components/schemas/ContentSummary"},
+          {
+            "type": "object",
+            "properties": {
+              "body": {"type": "string"},
+              "source": {"type": "string", "enum": ["app", "web", "api_import"]},
+              "channels": {"type": "array", "items": {"type": "string"}},
+              "category_id": {"type": "string"}
+            }
+          }
+        ]
+      },
+      "ReviewLog": {
+        "type": "object",
+        "properties": {
+          "action": {"type": "string", "enum": ["approve", "reject", "limit", "restore_quality", "take_down", "restore"]},
+          "operator_id": {"type": "string"},
+          "reason": {"type": "string"},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "CreatorSummary": {
+        "type": "object",
+        "properties": {
+          "creator_id": {"type": "string"},
+          "nickname": {"type": "string"},
+          "level": {"type": "string", "enum": ["L1", "L2", "L3", "L4", "L5"]},
+          "whitelist": {"type": "boolean"},
+          "violation_count": {"type": "integer"}
+        }
+      },
+      "CreatorDetail": {
+        "allOf": [
+          {"$ref": "#/components/schemas/CreatorSummary"},
+          {
+            "type": "object",
+            "properties": {
+              "content_total": {"type": "integer"},
+              "content_pending": {"type": "integer"},
+              "joined_at": {"type": "string", "format": "date-time"}
+            }
+          }
+        ]
+      },
+      "TagItem": {
+        "type": "object",
+        "properties": {
+          "tag": {"type": "string"},
+          "group": {"type": "string", "enum": ["题材", "风格", "运营"]},
+          "usage_count": {"type": "integer"},
+          "status": {"type": "string", "enum": ["active", "deprecated"]}
+        }
+      },
+      "CategoryItem": {
+        "type": "object",
+        "properties": {
+          "category_id": {"type": "string"},
+          "name": {"type": "string"},
+          "channels_allowed": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "OperationLog": {
+        "type": "object",
+        "properties": {
+          "log_id": {"type": "string"},
+          "action_type": {"type": "string"},
+          "target_id": {"type": "string"},
+          "operator_id": {"type": "string"},
+          "detail": {"type": "string"},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "ReportItem": {
+        "type": "object",
+        "properties": {
+          "report_id": {"type": "string"},
+          "content_id": {"type": "string"},
+          "reporter_id": {"type": "string"},
+          "reason_type": {"type": "string", "enum": ["copyright", "nsfw", "spam", "abuse", "other"]},
+          "description": {"type": "string"},
+          "status": {"type": "string", "enum": ["open", "resolved"]},
+          "created_at": {"type": "string", "format": "date-time"},
+          "resolved_at": {"type": "string", "format": "date-time"},
+          "resolver_id": {"type": "string"},
+          "resolve_result": {"type": "string", "enum": ["valid", "invalid"]}
+        }
+      },
+      "PromoSlot": {
+        "type": "object",
+        "properties": {
+          "slot_id": {"type": "string"},
+          "position": {"type": "string", "enum": ["home_banner", "home_feed_top", "category_top"]},
+          "content_id": {"type": "string"},
+          "start_time": {"type": "string", "format": "date-time"},
+          "end_time": {"type": "string", "format": "date-time"},
+          "operator_id": {"type": "string"}
+        }
+      },
+      "ExportJob": {
+        "type": "object",
+        "properties": {
+          "job_id": {"type": "string"},
+          "status": {"type": "string", "enum": ["queued", "running", "done", "failed"]},
+          "download_url": {"type": "string"},
+          "expires_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "ReviewDailyStat": {
+        "type": "object",
+        "properties": {
+          "date": {"type": "string", "format": "date"},
+          "operator_id": {"type": "string"},
+          "approved": {"type": "integer"},
+          "rejected": {"type": "integer"},
+          "avg_seconds": {"type": "integer"}
+        }
+      }
+    }
+  }
+}
