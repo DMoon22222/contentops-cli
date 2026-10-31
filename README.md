@@ -6,6 +6,24 @@
 
 任务三专项设计已完成：[Agent 批量处理方案](docs/07-Agent批量处理方案.md)。推荐冻结 ID、人工审批和轻量账本后逐条复用 CLI；批次执行器仍未实现，也未执行 100 条。
 
+## 从 GitHub 获取并运行
+
+安装 Git、JDK 21 和 Maven 3.9.x（开发验收版本为 3.9.4），确认 `java -version`、`mvn -version` 可用且 Maven 使用 JDK 21。以下命令在 PowerShell 7 中执行：
+
+```powershell
+git clone https://github.com/DMoon22222/contentops-cli.git
+cd contentops-cli
+mvn -B -ntp verify
+if ($LASTEXITCODE -ne 0) { throw '构建或测试失败，请先检查 Maven 输出' }
+java -jar ./target/contentops.jar --help
+
+# 新建独立 Mock 状态目录，进行只读查询
+$env:CONTENTOPS_STATE_DIR = Join-Path $PWD ('.contentops/try-' + [guid]::NewGuid())
+java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1
+```
+
+首次构建需要联网下载 Maven 依赖；构建后的 JAR 包含运行依赖和 Mock seed，可离线运行，无须后台服务、账号或 API Key。源码、测试、Maven 配置、启动/验证脚本、原始接口和虚构样例、设计文档、HTML Demo 及其引用的实测证据均在仓库中。`target/` 产物由构建生成，Maven 缓存、个人配置、运行中的 Mock 状态、重复附件 ZIP、提交包和 AI 会话记录不上传。本仓库是可运行项目源码发布，试炼最终交付状态仍以 [交付清单](docs/04-交付物规划与验收清单.md) 为准。
+
 ## 离线 HTML Demo
 
 直接双击 [demo/index.html](demo/index.html)，或在 Windows Chrome / Edge 中打开该文件。请保留同目录的 `style.css`、`data.js`、`app.js`；不需要 Java、Node、服务、网络或 CDN。页面提供概览、七条命令浏览与复制、任务二五步回放、前后快照切换、五种故障及独立标签修复回放、JSON 展开和 Agent 能力对比。
