@@ -1,0 +1,68 @@
+✔ export retains all original seed data and source SHA (5.2026ms)
+✔ tokenizer supports whitespace, Chinese and both quote styles (0.5837ms)
+✔ quoted empty values remain tokens for business validation (0.0894ms)
+✔ unclosed quotes, input limits and controls rejected (0.2444ms)
+✔ shell features rejected, quoted characters stay literal text (0.1475ms)
+✔ prefix and inherited global options accepted (0.2315ms)
+✔ unknown, unsupported and duplicate single options rejected (2.7395ms)
+✔ missing required values and extra positional arguments rejected (3.1947ms)
+✔ unsupported remove/set, bool values and environments rejected (2.6534ms)
+✔ help and clear never modify business data (5.7126ms)
+✔ full dataset is queryable in fixed 20-item pages (3.435ms)
+✔ pending count 132, final page 12 and AND filters (2.2282ms)
+✔ invalid page/status/ID inputs fail without writes (5.5154ms)
+✔ details preserve full fields, Chinese body and anomalies (5.3391ms)
+✔ unknown get/history fail with read code3 (2.1637ms)
+✔ history sorted on a copy, retains all original actions (5.3624ms)
+✔ tags default23 active, all25 includes two deprecated (1.9806ms)
+✔ all three write previews are zero-write, clock not called (8.3445ms)
+✔ each one-sided authorization rejected before writing (10.1216ms)
+✔ review approve changes only state and one matching browser log (2.0163ms)
+✔ reject requires a nonempty reason, then records correct action (4.552ms)
+✔ invalid action rejected and tags-only rejects reason (1.7599ms)
+✔ tags add keeps all old tags and never changes review status (2.3996ms)
+✔ repeated --add deduplicates requested tags and warns (1.8602ms)
+✔ unknown, deprecated and empty additions block process before review (14.8928ms)
+✖ existing unknown/deprecated tags retained and may be requested unchanged (4.2779ms)
+✔ no_change only on execute; duplicate add never reorders original data (4.6604ms)
+✔ process performs ordered review/verify/tags/verify with one log (2.4416ms)
+✔ process can skip unchanged tags after review (1.9477ms)
+✔ repeated rapid executions cannot add review logs again (2.1161ms)
+✔ tags remain independently editable after approved review (2.1245ms)
+✔ reset restores complete original business state, seed never mutates (5.5732ms)
+✔ results and exported views do not alias engine memory (4.3118ms)
+✔ unrelated collections and the other299 contents remain unchanged (3.2248ms)
+✔ JSON envelope identifies browser simulation and does not invent API acknowledgements (1.9181ms)
+✔ HTML-looking reasons are stored as literal browser text (1.9974ms)
+✔ local preparation errors do not pretend that Java wrote anything (4.9671ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 36
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 151.8745
+
+✖ failing tests:
+
+test at evidence\demo-playground\engine.test.cjs:132:1
+✖ existing unknown/deprecated tags retained and may be requested unchanged (4.2779ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(c)
+  
+      at TestContext.<anonymous> (F:\AI_TESTEXAM\evidence\demo-playground\engine.test.cjs:135:66)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -69,7 +69,7 @@
       <p class="scope-reason">这些操作经常连在一起。第一阶段先做好单条处理，分发、上下架和复杂批处理暂不纳入。</p>
       <section class="compact-plan"><h2>两周怎样安排</h2><div class="timeline">${[['D1–2','需求与查询'],['D3–4','审核与标签'],['D5–6','确认与组合操作'],['D7–8','Mock 与回归测试'],['D9–10','演示与验收']].map(([d,t])=>`<div><strong>${d}</strong><span>${t}</span></div>`).join('')}</div></section>
       <section class="current-scope"><h2>当前原型已能运行</h2><p>本地 Java CLI 已支持四个查询命令、单条审核、标签新增及组合操作，任务二已实际完成一次处理。</p><p class="muted">完整 MVP 仍需补齐真实后台接入（HTTP）、标签移除/替换、人工交互确认等功能。</p></section>
-      <div class="page-actions"><a class="link-button" href="#demo">看看七条命令怎样用 →</a></div>
+      <div class="page-actions"><a class="link-button" href="#demo">打开 CLI 交互体验 →</a></div>
       <details id="product-notes"${openAttrs('product-notes')}><summary>范围与验收说明</summary><div class="reading-note"><h3>为什么同时保留独立命令和组合命令</h3><p>日常处理可以用 process 一次完成两项操作。若审核完成但标签失败，用独立标签命令补齐，避免再次审核。</p><h3>怎样验收</h3><p>能查询到明确内容；预览不修改数据；执行后能重新查询到结果；无法确认的写入要明确报告；脚本能解析输出。</p><p>上方时间轴摘自已确认的十日计划。Mock 与测试随开发进行，集中回归安排在后半程，最后保留半日修复缓冲。</p></div></details>`;
   }
   function selectedExample(){
@@ -100,7 +100,10 @@
     return `<section class="business-outcomes"><h2>遇到异常时怎样处理</h2><div class="outcome-options" role="group" aria-label="处理结果">${Object.entries(businessOutcomes).map(([k,[label]])=>`<button data-outcome="${k}" aria-pressed="${state.outcome===k}">${label}</button>`).join('')}</div><p class="business-advice">${businessOutcomes[state.outcome][1]}</p><details id="developer-evidence"${openAttrs('developer-evidence')}><summary>研发验证详情</summary>${auxiliary(faultsPage())}</details></section>`;
   }
   function demoPage(){
-    return header('七条命令，处理日常查询与审核。','选择一个功能，查看它的用途和完整命令。')+commandExamples()+realCase()+outcomes()+`<div class="page-actions"><a href="#technical">了解技术设计与后续扩展 →</a></div>`;
+    return header('输入一条命令，看看会发生什么。','查询、预览和模拟执行共享当前页面中的数据。')+
+      '<div id="cli-playground"></div>'+
+      '<details id="java-evidence"'+openAttrs('java-evidence')+'><summary>查看真实 Java CLI 运行记录</summary><div class="java-evidence-origin">以下来自已保存的 Java CLI 独立 Mock 工作副本。任务二完成 ct_000004 的 approve 与新增“悬疑”，历史 0→1、pending 132→131，经新 Java 进程重新读取确认。它们不随网页模拟或重置改变。</div>'+realCase()+outcomes()+'</details>'+
+      '<details id="jar-examples"'+openAttrs('jar-examples')+'><summary>真正 Java CLI 的命令参考</summary><p>以下命令在 PowerShell 中通过 java -jar 运行；网页中的短命令不代表 Windows 已安装 contentops 启动器。</p>'+commandExamples()+'</details>';
   }
   function originalMaterials(){
     return `<details id="original-materials"${openAttrs('original-materials')}><summary>原始资料（Markdown）</summary><p class="muted">这里保留完整原稿，浏览器可能显示源码或下载文件。主要产品与技术说明已在本页面排版。</p>${sources([['docs/01-需求与接口分析.md','需求与接口分析'],['docs/02-第一阶段MVP与CLI产品方案.md','MVP 产品方案'],['docs/03-Java技术架构与实施方案.md','Java 技术架构'],['docs/04-交付物规划与验收清单.md','交付与验收清单'],['docs/06-实际操作记录.md','实际操作记录'],['docs/07-Agent批量处理方案.md','Agent 批量方案'],['README.md','构建与运行说明']])}</details>`;
@@ -135,6 +138,7 @@
   function render(){
     rememberExpanded();
     main.innerHTML=({product:productPage,demo:demoPage,technical:technicalPage})[state.route]();
+    if(state.route==='demo')window.ContentOpsTerminal.mount(main.querySelector('#cli-playground'));
     document.querySelectorAll('nav a').forEach(a=>{
       if(a.hash==='#'+state.route)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
     });
@@ -146,8 +150,10 @@
     const aliases={overview:'product',commands:'demo',task2:'demo',faults:'demo',agent:'technical'};
     state.route=['product','demo','technical'].includes(key)?key:(aliases[key]||'product');
     render();
-    if(key==='faults')main.querySelector('#developer-evidence').open=true;
-    main.focus({preventScroll:true});window.scrollTo(0,0);
+    if(key==='faults'){main.querySelector('#java-evidence').open=true;main.querySelector('#developer-evidence').open=true;}
+    main.focus({preventScroll:true});
+    if(state.route==='demo')main.querySelector('#terminal-input').focus({preventScroll:true});
+    window.scrollTo(0,0);
   }
   main.addEventListener('click',event=>{
     const button=event.target.closest('button');if(!button)return;

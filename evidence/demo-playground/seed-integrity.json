@@ -1,0 +1,18 @@
+{
+  "source": "内容运营后台接口数据/mock_data.json",
+  "sha256": "44ba17cbe95432547a8fe380f81e0416ae51404957ed0c87de5ced7f8e3939b0",
+  "root_keys": [
+    "_note",
+    "contents",
+    "creators",
+    "review_logs",
+    "reports",
+    "promo_slots",
+    "tags",
+    "categories"
+  ],
+  "contents": 300,
+  "pending": 132,
+  "tags": 25,
+  "active_tags": 23
+}

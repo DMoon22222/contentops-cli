@@ -26,15 +26,28 @@ java -jar ./target/contentops.jar --env mock --output json content list --review
 
 ## 离线 HTML Demo
 
-直接双击 [demo/index.html](demo/index.html)，或在 Windows Chrome / Edge 中打开该文件。请保留同目录的 `style.css`、`data.js`、`app.js`；不需要 Java、Node、服务、网络或 CDN。页面保留三个入口：**产品方案 → CLI 功能演示 → 技术设计与演进**。
+直接双击 [demo/index.html](demo/index.html)，保留整个 `demo/` 目录。不需要 Java、Node、服务、网络或 CDN。页面保留三个入口：**产品方案 → CLI 交互体验 → 技术设计与演进**。
 
-首页简要说明用途、首期三项能力、一名后端/两周/六项 API 的约束，以及当前原型完成情况。功能页直接展示七条命令的用途与完整示例，支持复制；写命令可切换预览/执行示例。下面直接对比 ct_000004 审核前后状态、标签与历史，不再需要点击五个步骤。实际操作记录、完整 JSON、stderr、退出码及全部五种 S5 故障/独立标签修复按需展开。
+第二部分现在是可输入命令的浏览器终端。输入后按 Enter 或点击“运行”；↑↓ 浏览历史，`help` 查看七条命令及参数，`clear` 只清屏。快捷按钮只填入命令，不会自动执行。“复制”复制当前输入或最近一条命令。右侧摘要随当前模拟状态更新。
 
-三类信息分别标记：任务二是 **Java CLI 的既有 Mock 实测**（新增“悬疑”）；S5 是 **受控 Mock 故障实测**（新增“轻松”，每场景独立副本）；Agent 是 **未实现的未来设计**。浏览器只切换内嵌快照，不执行 Java、不连接 API、不修改 Mock 状态，不能代替 JAR 验收。独立审核/标签命令的预览模板未冒充新增实测。
+推荐在**网页输入框**中依次体验（以下短命令不代表 Windows 已安装 `contentops` 启动器）：
 
-“技术说明”和“Agent 方案”直接在页面内展开排版好的 HTML，不跳到 Markdown 源码。完整原稿保留在“原始资料（Markdown）”中，每个链接明确标注为原始 Markdown 文档。没有新增文档站或渲染依赖。JSON 保留全部字段及原始输出链接。复制不执行命令；剪贴板不可用时提供兼容复制及选中文本后 Ctrl+C 的降级。若要在终端手工试用写命令，先按下文设置新的独立状态目录。
+```text
+content list --review-status pending
+content get ct_000004
+content process ct_000004 --action approve --reason "网页模拟决定" --add 悬疑
+content process ct_000004 --action approve --reason "网页模拟决定" --add 悬疑 --execute --yes
+content get ct_000004 --output json
+content history ct_000004
+```
 
-本次精简版的检查、截图与阅读对照见 [精简版验收记录](evidence/demo-simplified/README.md)。[上一版 571 项记录](evidence/demo-review/README.md)与 [S6 原版 407 项记录](evidence/demo/README.md)均为历史，未被覆盖。`evidence/demo/verify.cjs` 现在验证七命令与直接案例，输出到独立的 `evidence/demo-simplified/`。本轮只改展示层，未重跑 Java 写操作；Java、原始材料、`demo/data.js` 和任务二/S5 证据保持不变。
+写命令默认预览；只有 `--execute --yes` 同时出现才修改网页内存。模拟器使用原始 seed 的完整 300 条内容、25 个标签，初始 pending=132。刷新或点击“重置数据”恢复初始数据；有模拟修改时需再确认重置，命令历史与业务数据分开管理。不使用 localStorage/sessionStorage，不读写 Java 状态目录。JSON 标记 `environment=browser`、`source=browser_simulator`，其中退出码是模拟结果，不是 JVM 进程码。
+
+网页新生成的模拟结果与真实记录分开。“查看真实 Java CLI 运行记录”保留任务二的独立 Mock 实测（新增“悬疑”）和 S5 故障/恢复记录（新增“轻松”）；它们不随网页操作或重置改变。Agent 仍是未来设计，未实现批次执行器。网页不调用 JAR、不连接 API，也不模拟生产网络故障。真正运行 Java CLI 仍使用下文的 `java -jar ./target/contentops.jar ...`，网页还保留了独立的 JAR 命令参考。
+
+“技术说明”和“Agent 方案”仍在页面内展开 HTML；完整原稿放在明确标注的“原始资料（Markdown）”。真实记录保留完整 JSON、stderr、实际退出码及来源链接。剪贴板不可用时有兼容复制和手动 Ctrl+C 降级。若要在 PowerShell 中试用真正的写命令，先按下文设置新的独立状态目录。
+
+本轮实现和实际验证见 [Playground 验收记录](evidence/demo-playground/README.md)，包括独立 JavaScript 引擎测试与真实浏览器操作。历史 [精简版](evidence/demo-simplified/README.md)、[571 项评审版](evidence/demo-review/README.md)、[407 项 S6 原版](evidence/demo/README.md)及截图未覆盖。`evidence/demo/verify.cjs` 的新结果写入 `evidence/demo-playground/`。Java、原始材料、`demo/data.js`、任务二/S5 工作副本与证据不变；`demo/seed.js` 是另外导出的只读模拟器输入。
 
 ## 构建与运行
 

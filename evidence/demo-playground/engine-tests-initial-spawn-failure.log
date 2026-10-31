@@ -1,0 +1,29 @@
+✖ evidence\demo-playground\engine.test.cjs (1.7284ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6.6346
+
+✖ failing tests:
+
+test at evidence\demo-playground\engine.test.cjs:1:1
+✖ evidence\demo-playground\engine.test.cjs (1.7284ms)
+  Error: spawn EPERM
+      at ChildProcess.spawn (node:internal/child_process:421:11)
+      at spawn (node:child_process:796:9)
+      at TestContext.<anonymous> (node:internal/test_runner/runner:398:19)
+      at FileTest.runInAsyncScope (node:async_hooks:214:14)
+      at FileTest.run (node:internal/test_runner/test:1106:25)
+      at FileTest.start (node:internal/test_runner/test:1003:17)
+      at runTestFile (node:internal/test_runner/runner:477:32)
+      at node:internal/test_runner/runner:769:25
+      at node:internal/per_context/primordials:561:37
+      at new Promise (<anonymous>) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'spawn'
+  }
