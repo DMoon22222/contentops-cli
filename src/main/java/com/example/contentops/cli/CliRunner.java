@@ -4,6 +4,7 @@ import com.example.contentops.application.ContentService;
 import com.example.contentops.application.OperationRejected;
 import com.example.contentops.gateway.GatewayFailure;
 import com.example.contentops.infrastructure.AppConfig;
+import com.example.contentops.infrastructure.mock.MockScenario;
 import com.example.contentops.model.ResultModels;
 import com.example.contentops.model.ResultModels.*;
 import com.example.contentops.model.OperationModels.WriteSpec;
@@ -12,6 +13,8 @@ import picocli.CommandLine;
 import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Set;
+import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -91,7 +94,7 @@ public final class CliRunner {
             var application = service();
             var plan = application.plan(spec);
             WriteResult write = execute ? application.execute(plan) : application.preview(plan);
-            result = ResultModels.result(knownEnvironment(), command, mode, spec.contentId(), write.outcome(), write.data(), write.error(), write.warnings());
+            result = ResultModels.result(knownEnvironment(), command, mode, spec.contentId(), write.outcome(), write.data(), write.error(), warnings(write.warnings()));
         } catch (OperationRejected failure) {
             return emitFailure(command, mode, spec.contentId(), Outcome.REJECTED, failure.code(), failure.getMessage());
         } catch (GatewayFailure failure) {
@@ -112,7 +115,7 @@ public final class CliRunner {
                 throw new OperationRejected("INVALID_ENVIRONMENT", "--env 只支持 mock 或 api");
             }
             Object data = query.get();
-            result = ResultModels.result(knownEnvironment(), command, "read", id, Outcome.SUCCEEDED, data, null);
+            result = ResultModels.result(knownEnvironment(), command, "read", id, Outcome.SUCCEEDED, data, null, warnings(List.of()));
         } catch (OperationRejected failure) {
             return emitFailure(command, "read", id, Outcome.REJECTED, failure.code(), failure.getMessage());
         } catch (GatewayFailure failure) {
@@ -132,9 +135,21 @@ public final class CliRunner {
         return Set.of("mock", "api").contains(root.environment) ? root.environment : null;
     }
 
+    private List<String> warnings(List<String> existing) {
+        var result = new LinkedHashSet<>(existing);
+        if ("mock".equals(knownEnvironment())) {
+            try {
+                var scenario = MockScenario.parse(environment.get("CONTENTOPS_MOCK_SCENARIO"));
+                if (scenario.active()) { result.add(scenario.warning()); }
+            } catch (OperationRejected invalid) { /* Invalid configuration never activates a fault. */ }
+        }
+        if (service != null) { result.addAll(service.diagnosticWarnings()); }
+        return List.copyOf(result);
+    }
+
     private int emitFailure(String command, String mode, String id, Outcome outcome, String code, String message) {
         var result = ResultModels.result(knownEnvironment(), command, mode, id, outcome, null,
-                new CliError(code, message, mode == null ? null : "read".equals(mode) ? "read" : "preflight", null));
+                new CliError(code, message, mode == null ? null : "read".equals(mode) ? "read" : "preflight", null), warnings(List.of()));
         return renderer.render(result, root.output);
     }
 }

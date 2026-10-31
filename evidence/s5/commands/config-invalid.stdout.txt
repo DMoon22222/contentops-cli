@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"ab5366fa-02c4-4733-b8b9-70acda716692","environment":"mock","command":"content.get","mode":"read","status":"rejected","exit_code":2,"content_id":"ct_000004","data":null,"error":{"code":"INVALID_MOCK_SCENARIO","message":"CONTENTOPS_MOCK_SCENARIO 不是已支持的场景名；清除变量可关闭故障","step":"read","upstream":null},"warnings":[]}

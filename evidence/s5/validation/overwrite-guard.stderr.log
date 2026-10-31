@@ -1,0 +1,5 @@
+Exception: F:\AI_TESTEXAM\scripts\verify-s5.ps1:11
+Line |
+  11 |  …  $child)) { throw 'Evidence already exists; select a new EvidenceDire …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Evidence already exists; select a new EvidenceDirectory.

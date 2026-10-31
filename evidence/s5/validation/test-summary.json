@@ -1,0 +1,109 @@
+{
+  "captured_at": "2026-10-31T17:10:26.6490361+08:00",
+  "baseline_commit": "850877082e83a3f74031aa5b8eddc9f518ddb0b5",
+  "suites": [
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.application.ContentServiceWriteTest",
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.233
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.application.TagPlannerTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.009
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.cli.CliFaultConfigTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.634
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.cli.CliParsingTest",
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.558
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.cli.CliWriteTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.212
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.gateway.FaultInjectingGatewayTest",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.505
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.gateway.JsonMockGatewayContractTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.104
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.gateway.JsonMockWriteContractTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.104
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.infrastructure.AppConfigTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.031
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.infrastructure.mock.JsonStateStoreTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.13
+    },
+    {
+      "group": "failsafe-reports",
+      "suite": "com.example.contentops.integration.CliProcessIT",
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 66.176
+    }
+  ],
+  "unique_test_count": 192,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

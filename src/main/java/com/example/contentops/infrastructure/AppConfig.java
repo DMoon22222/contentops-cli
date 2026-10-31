@@ -1,6 +1,7 @@
 package com.example.contentops.infrastructure;
 
 import com.example.contentops.application.OperationRejected;
+import com.example.contentops.infrastructure.mock.MockScenario;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -8,14 +9,18 @@ import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.Map;
 
-public record AppConfig(String environment, Path stateDirectory) {
+public record AppConfig(String environment, Path stateDirectory, MockScenario mockScenario) {
     public static AppConfig load(String environment, Map<String, String> variables) {
         if (!"mock".equals(environment) && !"api".equals(environment)) {
             throw new OperationRejected("INVALID_ENVIRONMENT", "--env 只支持 mock 或 api");
         }
         if ("api".equals(environment)) {
-            throw new OperationRejected("API_ENV_NOT_IMPLEMENTED", "S0–S2 尚未实现 HTTP Gateway；不会回退 Mock");
+            if (variables.containsKey("CONTENTOPS_MOCK_SCENARIO")) {
+                throw new OperationRejected("MOCK_SCENARIO_NOT_ALLOWED", "api 环境不允许设置 CONTENTOPS_MOCK_SCENARIO");
+            }
+            throw new OperationRejected("API_ENV_NOT_IMPLEMENTED", "尚未实现 HTTP Gateway；不会回退 Mock");
         }
+        MockScenario scenario = MockScenario.parse(variables.get("CONTENTOPS_MOCK_SCENARIO"));
         String configured = variables.get("CONTENTOPS_STATE_DIR");
         Path path;
         try {
@@ -28,7 +33,7 @@ public record AppConfig(String environment, Path stateDirectory) {
         } catch (IOException | IllegalArgumentException e) {
             throw new OperationRejected("INVALID_STATE_DIRECTORY", "状态目录必须是原始附件目录以外的有效绝对目录");
         }
-        return new AppConfig(environment, path);
+        return new AppConfig(environment, path, scenario);
     }
 
     /** Resolve existing ancestors, including Windows directory junctions, without creating files. */

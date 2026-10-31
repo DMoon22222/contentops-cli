@@ -1,0 +1,51 @@
+{
+  "scenario": null,
+  "status": "succeeded",
+  "actual_exit_code": 0,
+  "steps": {
+    "review": {
+      "write": "acknowledged",
+      "verification": "matched",
+      "api_result": {
+        "success_count": 1,
+        "failed_count": 0
+      }
+    },
+    "tags": {
+      "write": "acknowledged",
+      "verification": "matched",
+      "api_result": {
+        "result": "ok"
+      }
+    }
+  },
+  "observed_during_invocation": {
+    "content_id": "ct_000004",
+    "review_status": "approved",
+    "quality_status": "normal",
+    "visibility": "online",
+    "tags": [
+      "恋爱",
+      "校园",
+      "武侠",
+      "轻松"
+    ]
+  },
+  "calls": null,
+  "calls_source": "Not exposed for default runtime; normal request order/counts covered by JUnit",
+  "disk_revision_after_process": 2,
+  "disk_review_status": "approved",
+  "disk_tags": [
+    "恋爱",
+    "校园",
+    "武侠",
+    "轻松"
+  ],
+  "history_before": 0,
+  "history_after": 1,
+  "repeat_rejected": true,
+  "original_result_sha256": "68002A238F067FE8A7EC27B36DD6B1FF5A7A9FA90DDB5A3D4796AF1FB49005B7",
+  "original_result_unchanged": true,
+  "tag_recovery_succeeded": false,
+  "all_assertions_passed": true
+}

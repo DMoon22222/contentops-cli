@@ -1,0 +1,55 @@
+{
+  "scenario": "tags-reject-before-write",
+  "status": "partial",
+  "actual_exit_code": 4,
+  "steps": {
+    "review": {
+      "write": "acknowledged",
+      "verification": "matched",
+      "api_result": {
+        "success_count": 1,
+        "failed_count": 0
+      }
+    },
+    "tags": {
+      "write": "failed",
+      "verification": "not_checked",
+      "api_result": null
+    }
+  },
+  "observed_during_invocation": {
+    "content_id": "ct_000004",
+    "review_status": "approved",
+    "quality_status": "normal",
+    "visibility": "online",
+    "tags": [
+      "恋爱",
+      "校园",
+      "武侠"
+    ]
+  },
+  "calls": {
+    "content_reads": 3,
+    "delegate_content_reads": 3,
+    "review_attempts": 1,
+    "review_delegate_calls": 1,
+    "tag_attempts": 1,
+    "tag_delegate_calls": 0,
+    "injected_readbacks": 0
+  },
+  "calls_source": "Actual fault wrapper counters in CLI warnings",
+  "disk_revision_after_process": 1,
+  "disk_review_status": "approved",
+  "disk_tags": [
+    "恋爱",
+    "校园",
+    "武侠"
+  ],
+  "history_before": 0,
+  "history_after": 1,
+  "repeat_rejected": true,
+  "original_result_sha256": "26B0E4F08EF58214DAA8E6EF359E6496FC0087DBEACF7D8F27582DC00A989F23",
+  "original_result_unchanged": true,
+  "tag_recovery_succeeded": true,
+  "all_assertions_passed": true
+}

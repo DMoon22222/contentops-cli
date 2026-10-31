@@ -1,0 +1,52 @@
+{
+  "scenario": "review-commit-response-lost",
+  "status": "unknown",
+  "actual_exit_code": 5,
+  "steps": {
+    "review": {
+      "write": "unknown",
+      "verification": "not_checked",
+      "api_result": null
+    },
+    "tags": {
+      "write": "not_sent",
+      "verification": "not_checked",
+      "api_result": null
+    }
+  },
+  "observed_during_invocation": {
+    "content_id": "ct_000004",
+    "review_status": "pending",
+    "quality_status": "normal",
+    "visibility": "online",
+    "tags": [
+      "恋爱",
+      "校园",
+      "武侠"
+    ]
+  },
+  "calls": {
+    "content_reads": 2,
+    "delegate_content_reads": 2,
+    "review_attempts": 1,
+    "review_delegate_calls": 1,
+    "tag_attempts": 0,
+    "tag_delegate_calls": 0,
+    "injected_readbacks": 0
+  },
+  "calls_source": "Actual fault wrapper counters in CLI warnings",
+  "disk_revision_after_process": 1,
+  "disk_review_status": "approved",
+  "disk_tags": [
+    "恋爱",
+    "校园",
+    "武侠"
+  ],
+  "history_before": 0,
+  "history_after": 1,
+  "repeat_rejected": true,
+  "original_result_sha256": "5F6A66D8F15BE53B0BA1AA291E706F60296C08FC237A1F93CF4922970CB8703F",
+  "original_result_unchanged": true,
+  "tag_recovery_succeeded": false,
+  "all_assertions_passed": true
+}

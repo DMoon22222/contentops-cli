@@ -1,0 +1,1370 @@
+{
+  "captured_at": "2026-10-31T17:07:46.9946437+08:00",
+  "scope": "S5 explicit local Mock faults, not task-two final demonstration or HTTP",
+  "state_root": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0",
+  "jar_sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2",
+  "command_count": 47,
+  "commands": [
+    {
+      "name": "normal-01-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\normal",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "normal-02-history-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\normal",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "normal-03-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\normal",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "previewed",
+      "mode": "preview"
+    },
+    {
+      "name": "normal-04-process",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\normal",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "execute"
+    },
+    {
+      "name": "normal-05-query-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\normal",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "normal-06-history-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\normal",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "normal-07-repeat-process-rejected",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\normal",
+      "scenario_environment": null,
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-reject-before-write-01-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-reject-before-write-02-history-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-reject-before-write-03-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": "tags-reject-before-write",
+      "actual_exit_code": 0,
+      "status": "previewed",
+      "mode": "preview"
+    },
+    {
+      "name": "tags-reject-before-write-04-process",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": "tags-reject-before-write",
+      "actual_exit_code": 4,
+      "status": "partial",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-reject-before-write-05-query-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-reject-before-write-06-history-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-reject-before-write-07-repeat-process-rejected",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-reject-before-write-08-tags-only-recovery",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content tags update ct_000004 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "tags",
+        "update",
+        "ct_000004",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-reject-before-write-09-recovered-query",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-reject-before-write-10-recovered-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-reject-before-write",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-commit-response-lost-01-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-commit-response-lost-02-history-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-commit-response-lost-03-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-commit-response-lost",
+      "scenario_environment": "review-commit-response-lost",
+      "actual_exit_code": 0,
+      "status": "previewed",
+      "mode": "preview"
+    },
+    {
+      "name": "review-commit-response-lost-04-process",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-commit-response-lost",
+      "scenario_environment": "review-commit-response-lost",
+      "actual_exit_code": 5,
+      "status": "unknown",
+      "mode": "execute"
+    },
+    {
+      "name": "review-commit-response-lost-05-query-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-commit-response-lost-06-history-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-commit-response-lost-07-repeat-process-rejected",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-commit-response-lost-01-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-commit-response-lost-02-history-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-commit-response-lost-03-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-commit-response-lost",
+      "scenario_environment": "tags-commit-response-lost",
+      "actual_exit_code": 0,
+      "status": "previewed",
+      "mode": "preview"
+    },
+    {
+      "name": "tags-commit-response-lost-04-process",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-commit-response-lost",
+      "scenario_environment": "tags-commit-response-lost",
+      "actual_exit_code": 5,
+      "status": "unknown",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-commit-response-lost-05-query-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-commit-response-lost-06-history-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-commit-response-lost-07-repeat-process-rejected",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-commit-response-lost",
+      "scenario_environment": null,
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "review-readback-mismatch-01-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-readback-mismatch-02-history-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-readback-mismatch-03-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-readback-mismatch",
+      "scenario_environment": "review-readback-mismatch",
+      "actual_exit_code": 0,
+      "status": "previewed",
+      "mode": "preview"
+    },
+    {
+      "name": "review-readback-mismatch-04-process",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-readback-mismatch",
+      "scenario_environment": "review-readback-mismatch",
+      "actual_exit_code": 6,
+      "status": "verification_failed",
+      "mode": "execute"
+    },
+    {
+      "name": "review-readback-mismatch-05-query-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-readback-mismatch-06-history-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "review-readback-mismatch-07-repeat-process-rejected",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\review-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-readback-mismatch-01-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-readback-mismatch-02-history-before",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-readback-mismatch-03-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-readback-mismatch",
+      "scenario_environment": "tags-readback-mismatch",
+      "actual_exit_code": 0,
+      "status": "previewed",
+      "mode": "preview"
+    },
+    {
+      "name": "tags-readback-mismatch-04-process",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-readback-mismatch",
+      "scenario_environment": "tags-readback-mismatch",
+      "actual_exit_code": 6,
+      "status": "verification_failed",
+      "mode": "execute"
+    },
+    {
+      "name": "tags-readback-mismatch-05-query-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-readback-mismatch-06-history-no-fault",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "tags-readback-mismatch-07-repeat-process-rejected",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason S5：人工提供的开发验证决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "S5：人工提供的开发验证决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\tags-readback-mismatch",
+      "scenario_environment": null,
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "config-invalid",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\invalid",
+      "scenario_environment": "invalid",
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "read"
+    },
+    {
+      "name": "config-api-forbidden",
+      "command": "java -jar ./target/contentops.jar --env api --output json content get ct_000004",
+      "arguments": [
+        "--env",
+        "api",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s5-validation\\d0130ef3-3c59-41cf-ac5c-2d328e5b95c0\\api",
+      "scenario_environment": "tags-reject-before-write",
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "read"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": null,
+      "status": "succeeded",
+      "actual_exit_code": 0,
+      "steps": {
+        "review": {
+          "write": "acknowledged",
+          "verification": "matched",
+          "api_result": {
+            "success_count": 1,
+            "failed_count": 0
+          }
+        },
+        "tags": {
+          "write": "acknowledged",
+          "verification": "matched",
+          "api_result": {
+            "result": "ok"
+          }
+        }
+      },
+      "observed_during_invocation": {
+        "content_id": "ct_000004",
+        "review_status": "approved",
+        "quality_status": "normal",
+        "visibility": "online",
+        "tags": [
+          "恋爱",
+          "校园",
+          "武侠",
+          "轻松"
+        ]
+      },
+      "calls": null,
+      "calls_source": "Not exposed for default runtime; normal request order/counts covered by JUnit",
+      "disk_revision_after_process": 2,
+      "disk_review_status": "approved",
+      "disk_tags": [
+        "恋爱",
+        "校园",
+        "武侠",
+        "轻松"
+      ],
+      "history_before": 0,
+      "history_after": 1,
+      "repeat_rejected": true,
+      "original_result_sha256": "68002A238F067FE8A7EC27B36DD6B1FF5A7A9FA90DDB5A3D4796AF1FB49005B7",
+      "original_result_unchanged": true,
+      "tag_recovery_succeeded": false,
+      "all_assertions_passed": true
+    },
+    {
+      "scenario": "tags-reject-before-write",
+      "status": "partial",
+      "actual_exit_code": 4,
+      "steps": {
+        "review": {
+          "write": "acknowledged",
+          "verification": "matched",
+          "api_result": {
+            "success_count": 1,
+            "failed_count": 0
+          }
+        },
+        "tags": {
+          "write": "failed",
+          "verification": "not_checked",
+          "api_result": null
+        }
+      },
+      "observed_during_invocation": {
+        "content_id": "ct_000004",
+        "review_status": "approved",
+        "quality_status": "normal",
+        "visibility": "online",
+        "tags": [
+          "恋爱",
+          "校园",
+          "武侠"
+        ]
+      },
+      "calls": {
+        "content_reads": 3,
+        "delegate_content_reads": 3,
+        "review_attempts": 1,
+        "review_delegate_calls": 1,
+        "tag_attempts": 1,
+        "tag_delegate_calls": 0,
+        "injected_readbacks": 0
+      },
+      "calls_source": "Actual fault wrapper counters in CLI warnings",
+      "disk_revision_after_process": 1,
+      "disk_review_status": "approved",
+      "disk_tags": [
+        "恋爱",
+        "校园",
+        "武侠"
+      ],
+      "history_before": 0,
+      "history_after": 1,
+      "repeat_rejected": true,
+      "original_result_sha256": "26B0E4F08EF58214DAA8E6EF359E6496FC0087DBEACF7D8F27582DC00A989F23",
+      "original_result_unchanged": true,
+      "tag_recovery_succeeded": true,
+      "all_assertions_passed": true
+    },
+    {
+      "scenario": "review-commit-response-lost",
+      "status": "unknown",
+      "actual_exit_code": 5,
+      "steps": {
+        "review": {
+          "write": "unknown",
+          "verification": "not_checked",
+          "api_result": null
+        },
+        "tags": {
+          "write": "not_sent",
+          "verification": "not_checked",
+          "api_result": null
+        }
+      },
+      "observed_during_invocation": {
+        "content_id": "ct_000004",
+        "review_status": "pending",
+        "quality_status": "normal",
+        "visibility": "online",
+        "tags": [
+          "恋爱",
+          "校园",
+          "武侠"
+        ]
+      },
+      "calls": {
+        "content_reads": 2,
+        "delegate_content_reads": 2,
+        "review_attempts": 1,
+        "review_delegate_calls": 1,
+        "tag_attempts": 0,
+        "tag_delegate_calls": 0,
+        "injected_readbacks": 0
+      },
+      "calls_source": "Actual fault wrapper counters in CLI warnings",
+      "disk_revision_after_process": 1,
+      "disk_review_status": "approved",
+      "disk_tags": [
+        "恋爱",
+        "校园",
+        "武侠"
+      ],
+      "history_before": 0,
+      "history_after": 1,
+      "repeat_rejected": true,
+      "original_result_sha256": "5F6A66D8F15BE53B0BA1AA291E706F60296C08FC237A1F93CF4922970CB8703F",
+      "original_result_unchanged": true,
+      "tag_recovery_succeeded": false,
+      "all_assertions_passed": true
+    },
+    {
+      "scenario": "tags-commit-response-lost",
+      "status": "unknown",
+      "actual_exit_code": 5,
+      "steps": {
+        "review": {
+          "write": "acknowledged",
+          "verification": "matched",
+          "api_result": {
+            "success_count": 1,
+            "failed_count": 0
+          }
+        },
+        "tags": {
+          "write": "unknown",
+          "verification": "not_checked",
+          "api_result": null
+        }
+      },
+      "observed_during_invocation": {
+        "content_id": "ct_000004",
+        "review_status": "approved",
+        "quality_status": "normal",
+        "visibility": "online",
+        "tags": [
+          "恋爱",
+          "校园",
+          "武侠"
+        ]
+      },
+      "calls": {
+        "content_reads": 3,
+        "delegate_content_reads": 3,
+        "review_attempts": 1,
+        "review_delegate_calls": 1,
+        "tag_attempts": 1,
+        "tag_delegate_calls": 1,
+        "injected_readbacks": 0
+      },
+      "calls_source": "Actual fault wrapper counters in CLI warnings",
+      "disk_revision_after_process": 2,
+      "disk_review_status": "approved",
+      "disk_tags": [
+        "恋爱",
+        "校园",
+        "武侠",
+        "轻松"
+      ],
+      "history_before": 0,
+      "history_after": 1,
+      "repeat_rejected": true,
+      "original_result_sha256": "109F59FB5DEBA794FB9EEAD7D7D59838E2D63D4FCDF7310572550F0AD3F7375B",
+      "original_result_unchanged": true,
+      "tag_recovery_succeeded": false,
+      "all_assertions_passed": true
+    },
+    {
+      "scenario": "review-readback-mismatch",
+      "status": "verification_failed",
+      "actual_exit_code": 6,
+      "steps": {
+        "review": {
+          "write": "acknowledged",
+          "verification": "mismatched",
+          "api_result": {
+            "success_count": 1,
+            "failed_count": 0
+          }
+        },
+        "tags": {
+          "write": "not_sent",
+          "verification": "not_checked",
+          "api_result": null
+        }
+      },
+      "observed_during_invocation": {
+        "content_id": "ct_000004",
+        "review_status": "pending",
+        "quality_status": "normal",
+        "visibility": "online",
+        "tags": [
+          "恋爱",
+          "校园",
+          "武侠"
+        ]
+      },
+      "calls": {
+        "content_reads": 3,
+        "delegate_content_reads": 4,
+        "review_attempts": 1,
+        "review_delegate_calls": 1,
+        "tag_attempts": 0,
+        "tag_delegate_calls": 0,
+        "injected_readbacks": 1
+      },
+      "calls_source": "Actual fault wrapper counters in CLI warnings",
+      "disk_revision_after_process": 1,
+      "disk_review_status": "approved",
+      "disk_tags": [
+        "恋爱",
+        "校园",
+        "武侠"
+      ],
+      "history_before": 0,
+      "history_after": 1,
+      "repeat_rejected": true,
+      "original_result_sha256": "D22C7A625586A2DB4CAD60C1C786640FACF20E7C3A9EBAD8A965EDB47F1044C0",
+      "original_result_unchanged": true,
+      "tag_recovery_succeeded": false,
+      "all_assertions_passed": true
+    },
+    {
+      "scenario": "tags-readback-mismatch",
+      "status": "verification_failed",
+      "actual_exit_code": 6,
+      "steps": {
+        "review": {
+          "write": "acknowledged",
+          "verification": "matched",
+          "api_result": {
+            "success_count": 1,
+            "failed_count": 0
+          }
+        },
+        "tags": {
+          "write": "acknowledged",
+          "verification": "mismatched",
+          "api_result": {
+            "result": "ok"
+          }
+        }
+      },
+      "observed_during_invocation": {
+        "content_id": "ct_000004",
+        "review_status": "approved",
+        "quality_status": "normal",
+        "visibility": "online",
+        "tags": [
+          "恋爱",
+          "校园",
+          "武侠"
+        ]
+      },
+      "calls": {
+        "content_reads": 4,
+        "delegate_content_reads": 5,
+        "review_attempts": 1,
+        "review_delegate_calls": 1,
+        "tag_attempts": 1,
+        "tag_delegate_calls": 1,
+        "injected_readbacks": 1
+      },
+      "calls_source": "Actual fault wrapper counters in CLI warnings",
+      "disk_revision_after_process": 2,
+      "disk_review_status": "approved",
+      "disk_tags": [
+        "恋爱",
+        "校园",
+        "武侠",
+        "轻松"
+      ],
+      "history_before": 0,
+      "history_after": 1,
+      "repeat_rejected": true,
+      "original_result_sha256": "11A153732EF959AD6C66FFFB368F7DB67A587C1F89CBE9BD7EF78164D99D7B48",
+      "original_result_unchanged": true,
+      "tag_recovery_succeeded": false,
+      "all_assertions_passed": true
+    }
+  ],
+  "protected_file_count": 166,
+  "parent_environment_unchanged": true,
+  "all_assertions_passed": true
+}

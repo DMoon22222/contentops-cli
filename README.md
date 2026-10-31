@@ -1,4 +1,4 @@
-# Contentops CLI · S0–S4
+# Contentops CLI · S0–S5
 
 内容运营后台的 Java CLI。目前已实现 **Mock 数据驱动的四个查询命令与单条审核、标签新增、组合处理**。真实 HTTP 尚未实现。产品合同见 [docs/02](docs/02-第一阶段MVP与CLI产品方案.md)，实施顺序见 [docs/03](docs/03-Java技术架构与实施方案.md)。以下描述当前 48 小时原型，未将完整两周 MVP 的功能标为已完成。
 
@@ -112,17 +112,54 @@ cancelled/7 保留在模型中，本原型没有交互取消场景。PowerShell 
 
 当前没有初始化或重置 CLI。需要初始视图时换一个独立状态目录；损坏工作副本应保留排查，不自动删除。Gateway 保留列表审核语义：最多 20 项、重复调用追加日志，不施加 CLI 的 pending/理由政策。标签 Gateway 接收完整数组，不施加 active 校验；CLI 只开放单条 add，不直接暴露底层宽松能力。
 
+## 显式 Mock 故障与恢复
+
+`CONTENTOPS_MOCK_SCENARIO` 只用于本地开发演示。未设置时不创建故障包装器，正常行为不变；设置空串、未知名称或在 api 环境设置该变量均拒绝。关闭时使用 `Remove-Item Env:\CONTENTOPS_MOCK_SCENARIO`，不要用空串代替清除。`--help` 仍然跳过业务配置和 Gateway。
+
+| 场景值 | 注入位置 | process 结果 | 磁盘中的实际结果 |
+|---|---|---|---|
+| tags-reject-before-write | 标签 delegate 调用前拒绝 | partial/4 | 审核已提交，标签未改 |
+| review-commit-response-lost | 审核 delegate 真正提交后抛未知 | unknown/5 | 审核已提交，标签未执行 |
+| tags-commit-response-lost | 标签 delegate 真正提交后抛未知 | unknown/5 | 审核及标签均已提交 |
+| review-readback-mismatch | 审核成功后的指定内容回读，一次返回旧审核状态 | verification_failed/6 | 审核已提交，标签未执行 |
+| tags-readback-mismatch | 标签成功后的回读，一次返回旧标签 | verification_failed/6 | 审核及标签均已提交 |
+
+回读故障由写入事件和内容 ID 标记触发，不按“第几个 GET”猜测。只改变返回视图，不把旧数据写回磁盘。新 JVM 的普通 get 不会凭场景配置自行触发写后故障；核查与恢复仍应先清除故障变量。
+
+临时复现部分失败（只影响当前 PowerShell 进程环境，不修改永久配置；请使用新的状态目录）：
+
+```powershell
+$env:CONTENTOPS_STATE_DIR = Join-Path $PWD ('.contentops/fault-try-' + [guid]::NewGuid())
+$env:CONTENTOPS_MOCK_SCENARIO = 'tags-reject-before-write'
+java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason '人工提供的本地故障演示决定' --add '轻松' --execute --yes
+$firstExit = $LASTEXITCODE # 应核对实际 JSON，partial 对应 4
+
+Remove-Item Env:\CONTENTOPS_MOCK_SCENARIO
+java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+java -jar ./target/contentops.jar --env mock content history ct_000004
+java -jar ./target/contentops.jar --env mock --output json content tags update ct_000004 --add '轻松' --execute --yes
+$recoveryExit = $LASTEXITCODE
+java -jar ./target/contentops.jar --env mock content history ct_000004
+```
+
+若当前终端已有状态/场景配置，手工演示前保存并在结束后恢复；下面的自动验证脚本直接为子进程指定变量，不改变调用方配置。切换任何故障场景时都换一个新目录，不能复用已审核内容来假装从 pending 开始。
+
+partial 表示已确认部分完成，因此独立补标签即可；重新执行 process 会被 pending 规则拒绝。unknown 表示本次调用没有获得可信确认，尽管另一个 JVM 可能读到目标值，原结果仍为 unknown；不要盲目重试。verification_failed 保留 acknowledged，表示确认后的视图核对不通过，不能反推“没写入”或自动回滚。这些都是受控本地模拟，未验证真实 HTTP 超时、网络重发或生产一致性。
+
+启用场景时 JSON warnings/诊断 stderr 含 `MOCK_FAULT_ACTIVE scenario=...`。Gateway 已实例化时还含 `MOCK_CALL_COUNTS { ... }`，用于保存本次 JVM 的实际计数：review/tag attempts 为 Application 调用包装器次数，delegate_calls 为实际进入底层 Mock 方法次数；不是成功提交次数。回读故障为了捕获旧视图额外调用一次详情 delegate，所以 delegate_content_reads 可能比 content_reads 多 1。injected_readbacks 应为 1。计数只在本次进程内存在，不是服务端审计或幂等机制；普通默认环境不输出这组诊断。
+
 ## 验证与阶段边界
 
-S3–S4 的 `mvn test`：122 项；`mvn verify`：122 项单元/契约测试 + 28 项独立 JVM 集成测试，全部通过，0 失败、0 错误、0 跳过。当前真实 JAR 操作与前后状态见 [S3–S4 证据](evidence/s3-s4/README.md)。[S0–S2 历史证据](evidence/s0-s2/README.md) 保持不变。
+S5 的 `mvn test`：156 项；`mvn verify`：156 项单元/契约测试 + 36 项独立 JVM 集成测试，全部通过，0 失败、0 错误、0 跳过。另有 47 次实际 JAR 调用，覆盖正常基线、五种故障、独立标签恢复、重复审核及配置拒绝，见 [S5 证据](evidence/s5/README.md)。[S3–S4 证据](evidence/s3-s4/README.md) 与 [S0–S2 历史证据](evidence/s0-s2/README.md) 保持不变。
 
 复跑独立 JAR 验证（使用新证据目录；S3–S4 脚本会在专用新 Mock 工作副本执行人工演示审核和标签更新）：
 
 ```powershell
 ./scripts/verify-s0-s2.ps1 -EvidenceDirectory ('evidence/s0-s2/recheck-' + [guid]::NewGuid())
 ./scripts/verify-s3-s4.ps1 -EvidenceDirectory ('evidence/s3-s4/recheck-' + [guid]::NewGuid())
+./scripts/verify-s5.ps1 -EvidenceDirectory ('evidence/s5/recheck-' + [guid]::NewGuid())
 ```
 
-测试状态统一放在被忽略的 `target/test-state` 下；只读手工验证状态位于 `.contentops/manual-validation`，本轮写入验证位于 `.contentops/s3-s4-validation`，与后续任务二正式演示分开。构建缓存、产物、临时业务状态均不纳入 Git。证据是实际开发验证记录，不是任务二正式操作记录，也不替代完整 AI 对话导出。
+测试状态统一放在被忽略的 `target/test-state` 下；只读手工验证状态位于 `.contentops/manual-validation`，S3–S4 状态位于 `.contentops/s3-s4-validation`，S5 状态位于 `.contentops/s5-validation`。每个故障采用新子目录，核查/恢复 JVM 清除场景配置，与后续任务二正式演示分开。脚本保存原始 stdout/stderr/进程退出码、步骤、计数、快照 SHA/revision 及内容/日志事实，任一断言失败返回非零；已存在的命令/场景证据会拒绝覆盖。构建缓存、产物、完整运行状态均不纳入 Git。证据是实际开发验证记录，不是任务二正式操作记录，也不替代完整 AI 对话导出。
 
-本轮止于 S4。S5 尚需实现明确标记来源的受控故障，包括真实持久化后丢响应、跨 JVM 的部分失败与核对失败、恢复与不重试证据；当前异常分支由手写 RecordingGateway 做单元/CLI runner 验证，不能冒充真实服务故障。remove/set、人工交互确认、HTTP、HTML、Agent 100 条完整方案和最终交付仍未实现。
+本轮止于 S5。实际文件提交后丢响应、跨 JVM 的部分失败/核对失败、独立标签恢复与不重试已验证。缺失计数、写后读取不可用等额外分支继续由 RecordingGateway 单元测试覆盖；真实 HTTP 的超时、接收次数与协议行为仍未验证。没有新增自动恢复、resume、幂等键或任务管理；pending 检查只防止顺序重复审核，不消除竞态，也不是服务端强幂等。remove/set、人工交互确认、HTTP、HTML、Agent 100 条完整方案和最终交付仍未实现。

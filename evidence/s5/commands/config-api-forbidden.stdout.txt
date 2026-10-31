@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"aa3c9a69-c55c-4c51-be7a-cf8194a009bc","environment":"api","command":"content.get","mode":"read","status":"rejected","exit_code":2,"content_id":"ct_000004","data":null,"error":{"code":"MOCK_SCENARIO_NOT_ALLOWED","message":"api 环境不允许设置 CONTENTOPS_MOCK_SCENARIO","step":"read","upstream":null},"warnings":[]}

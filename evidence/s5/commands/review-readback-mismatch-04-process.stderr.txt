@@ -1,0 +1,3 @@
+REVIEW_MISMATCH: 审核已获确认，但实际状态未匹配；不继续写入
+提示: MOCK_FAULT_ACTIVE scenario=review-readback-mismatch；本地受控模拟，不代表真实后台故障
+提示: MOCK_CALL_COUNTS {"content_reads":3,"delegate_content_reads":4,"review_attempts":1,"review_delegate_calls":1,"tag_attempts":0,"tag_delegate_calls":0,"injected_readbacks":1}

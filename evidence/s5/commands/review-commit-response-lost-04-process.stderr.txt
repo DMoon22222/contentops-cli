@@ -1,0 +1,3 @@
+MOCK_REVIEW_RESPONSE_LOST: 本步骤写入结果未知；禁止自动重试，后续写入已停止
+提示: MOCK_FAULT_ACTIVE scenario=review-commit-response-lost；本地受控模拟，不代表真实后台故障
+提示: MOCK_CALL_COUNTS {"content_reads":2,"delegate_content_reads":2,"review_attempts":1,"review_delegate_calls":1,"tag_attempts":0,"tag_delegate_calls":0,"injected_readbacks":0}

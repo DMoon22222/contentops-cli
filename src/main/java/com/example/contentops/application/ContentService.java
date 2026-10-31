@@ -9,12 +9,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 import static com.example.contentops.model.OperationModels.sameTags;
 
 public final class ContentService {
     private final ContentGateway gateway;
     private final TagPlanner tagPlanner = new TagPlanner();
-    public ContentService(ContentGateway gateway) { this.gateway = gateway; }
+    private final Supplier<List<String>> diagnostics;
+    public ContentService(ContentGateway gateway) { this(gateway, List::of); }
+    public ContentService(ContentGateway gateway, Supplier<List<String>> diagnostics) {
+        this.gateway = gateway; this.diagnostics = diagnostics;
+    }
+    public List<String> diagnosticWarnings() { return List.copyOf(diagnostics.get()); }
 
     public ContentListView list(String contentId, String reviewStatus, int page) {
         if (page < 1) { throw new OperationRejected("INVALID_PAGE", "--page 必须是大于等于 1 的整数"); }

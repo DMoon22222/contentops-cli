@@ -1,0 +1,3 @@
+MOCK_TAGS_REJECTED: 本步骤明确未提交；保留此前步骤，请核查后单独处理
+提示: MOCK_FAULT_ACTIVE scenario=tags-reject-before-write；本地受控模拟，不代表真实后台故障
+提示: MOCK_CALL_COUNTS {"content_reads":3,"delegate_content_reads":3,"review_attempts":1,"review_delegate_calls":1,"tag_attempts":1,"tag_delegate_calls":0,"injected_readbacks":0}

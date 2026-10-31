@@ -1,0 +1,3 @@
+FINAL_STATE_MISMATCH: 写入已获确认，但最终审核或标签不匹配；不自动重写
+提示: MOCK_FAULT_ACTIVE scenario=tags-readback-mismatch；本地受控模拟，不代表真实后台故障
+提示: MOCK_CALL_COUNTS {"content_reads":4,"delegate_content_reads":5,"review_attempts":1,"review_delegate_calls":1,"tag_attempts":1,"tag_delegate_calls":1,"injected_readbacks":1}

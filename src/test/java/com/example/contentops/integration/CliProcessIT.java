@@ -44,6 +44,7 @@ class CliProcessIT {
     ProcessBuilder builder(List<String> args) throws Exception {
         var builder = new ProcessBuilder(args).directory(project.toFile());
         builder.environment().put("CONTENTOPS_STATE_DIR", state.toString());
+        builder.environment().remove("CONTENTOPS_MOCK_SCENARIO");
         for (String key : List.of("JAVA_TOOL_OPTIONS", "_JAVA_OPTIONS", "JDK_JAVA_OPTIONS")) {
             builder.environment().remove(key);
         }
@@ -53,7 +54,12 @@ class CliProcessIT {
     }
 
     Run execute(List<String> command) throws Exception {
+        return execute(command, null);
+    }
+
+    Run execute(List<String> command, String scenario) throws Exception {
         var builder = builder(command);
+        if (scenario != null) { builder.environment().put("CONTENTOPS_MOCK_SCENARIO", scenario); }
         var process = builder.start();
         try {
             if (!process.waitFor(20, TimeUnit.SECONDS)) {
@@ -68,9 +74,13 @@ class CliProcessIT {
     }
 
     Run run(String... tail) throws Exception {
+        return runScenario(null, tail);
+    }
+
+    Run runScenario(String scenario, String... tail) throws Exception {
         var args = new ArrayList<>(List.of(java, "-Dfile.encoding=UTF-8", "-jar", jar.toString()));
         args.addAll(List.of(tail));
-        return execute(args);
+        return execute(args, scenario);
     }
 
     List<String> probeCommand(String... tail) {
@@ -328,6 +338,95 @@ class CliProcessIT {
                 new String[]{"content", "tags", "update", "--help"})) {
             assertEquals(0, run(args).exit()); assertFalse(Files.exists(state));
         }
+    }
+
+    JsonNode faultCounters(JsonNode result) throws Exception {
+        String prefix = "MOCK_CALL_COUNTS ";
+        for (var warning : result.path("warnings")) {
+            if (warning.asText().startsWith(prefix)) { return JsonSupport.create().readTree(warning.asText().substring(prefix.length())); }
+        }
+        throw new AssertionError("Missing actual invocation counters");
+    }
+    Run processScenario(String scenario) throws Exception {
+        return runScenario(scenario, "--output", "json", "--non-interactive", "content", "process", "ct_000004", "--action", "approve",
+                "--reason", "S5：人工提供的开发验证决定", "--add", "轻松", "--execute", "--yes");
+    }
+    static Stream<Arguments> faultScenarios() {
+        return Stream.of(Arguments.of("tags-reject-before-write", 4, 1, 1, 0, 3, 3),
+                Arguments.of("review-commit-response-lost", 5, 1, 0, 0, 2, 2),
+                Arguments.of("tags-commit-response-lost", 5, 2, 1, 1, 3, 3),
+                Arguments.of("review-readback-mismatch", 6, 1, 0, 0, 3, 4),
+                Arguments.of("tags-readback-mismatch", 6, 2, 1, 1, 4, 5));
+    }
+    @ParameterizedTest @MethodSource("faultScenarios")
+    void realJarFaultsPreserveDiskFactsStepStatesAndExactWriteCounts(String scenario, int code, int revision,
+                                                                 int tagAttempts, int tagDelegates, int reads, int delegateReads) throws Exception {
+        var initial = parsed(runScenario(scenario, "--output", "json", "content", "get", "ct_000004"));
+        assertEquals("pending", initial.at("/data/review_status").asText());
+        assertEquals(0, faultCounters(initial).path("review_attempts").asInt());
+        var preview = parsed(runScenario(scenario, "--output", "json", "content", "process", "ct_000004", "--action", "approve", "--add", "轻松"));
+        assertEquals("previewed", preview.path("status").asText()); assertFalse(Files.exists(state.resolve("state.json")));
+        Run invoked = processScenario(scenario); var result = parsed(invoked);
+        assertEquals(code, invoked.exit()); assertEquals(code == 4 ? "partial" : code == 5 ? "unknown" : "verification_failed", result.path("status").asText());
+        assertTrue(invoked.stderr().contains("MOCK_FAULT_ACTIVE scenario=" + scenario));
+        var calls = faultCounters(result);
+        assertEquals(1, calls.path("review_attempts").asInt()); assertEquals(1, calls.path("review_delegate_calls").asInt());
+        assertEquals(tagAttempts, calls.path("tag_attempts").asInt()); assertEquals(tagDelegates, calls.path("tag_delegate_calls").asInt());
+        assertEquals(reads, calls.path("content_reads").asInt()); assertEquals(delegateReads, calls.path("delegate_content_reads").asInt());
+        assertEquals(code == 6 ? 1 : 0, calls.path("injected_readbacks").asInt());
+        assertEquals(scenario.startsWith("review-commit") ? "unknown" : "acknowledged", result.at("/data/steps/review/write").asText());
+        assertEquals(tagAttempts == 0 ? "not_sent" : code == 4 ? "failed" : code == 5 ? "unknown" : "acknowledged", result.at("/data/steps/tags/write").asText());
+        assertEquals(scenario.startsWith("review-commit") ? "not_checked" : scenario.startsWith("review-readback") ? "mismatched" : "matched", result.at("/data/steps/review/verification").asText());
+        assertEquals(scenario.startsWith("tags-readback") ? "mismatched" : "not_checked", result.at("/data/steps/tags/verification").asText());
+        assertEquals(List.of("恋爱", "校园", "武侠"), JsonSupport.create().convertValue(result.at("/data/observed/tags"), List.class));
+        byte[] committed = Files.readAllBytes(state.resolve("state.json"));
+        assertEquals(revision, JsonSupport.create().readTree(committed).path("revision").asInt());
+        // run() explicitly removes the fault env for every independent verification/recovery JVM.
+        var observed = parsed(run("--output", "json", "content", "get", "ct_000004"));
+        assertEquals(0, observed.path("warnings").size()); assertEquals("approved", observed.at("/data/review_status").asText());
+        assertEquals(revision == 2 ? 4 : 3, observed.at("/data/tags").size());
+        assertEquals(1, parsed(run("--output", "json", "content", "history", "ct_000004")).at("/data/items").size());
+        var repeated = parsed(processScenario(null));
+        assertEquals(2, repeated.path("exit_code").asInt()); assertEquals("REVIEW_NOT_PENDING", repeated.at("/error/code").asText());
+        assertArrayEquals(committed, Files.readAllBytes(state.resolve("state.json")));
+        assertEquals(code == 4 ? "partial" : code == 5 ? "unknown" : "verification_failed", result.path("status").asText());
+    }
+
+    @Test void realJarPartialThenIndependentTagRecoveryNeverReaudits() throws Exception {
+        var partial = parsed(processScenario("tags-reject-before-write"));
+        assertEquals(4, partial.path("exit_code").asInt());
+        assertEquals(0, faultCounters(partial).path("tag_delegate_calls").asInt());
+        var before = parsed(run("--output", "json", "content", "get", "ct_000004"));
+        var history = parsed(run("--output", "json", "content", "history", "ct_000004"));
+        assertEquals("approved", before.at("/data/review_status").asText()); assertEquals(3, before.at("/data/tags").size());
+        var recovery = parsed(run("--output", "json", "--non-interactive", "content", "tags", "update", "ct_000004", "--add", "轻松", "--execute", "--yes"));
+        assertEquals("succeeded", recovery.path("status").asText()); assertFalse(recovery.at("/data/steps").has("review"));
+        assertEquals(0, recovery.path("warnings").size());
+        var after = parsed(run("--output", "json", "content", "get", "ct_000004"));
+        assertEquals(List.of("恋爱", "校园", "武侠", "轻松"), JsonSupport.create().convertValue(after.at("/data/tags"), List.class));
+        assertEquals(history.path("data"), parsed(run("--output", "json", "content", "history", "ct_000004")).path("data"));
+        assertEquals(2, JsonSupport.create().readTree(Files.readAllBytes(state.resolve("state.json"))).path("revision").asInt());
+    }
+
+    @Test void realJarInvalidScenarioAndApiFaultSettingsRejectWithoutStateOrFallback() throws Exception {
+        var invalid = parsed(runScenario("invalid", "--output", "json", "content", "get", "ct_000004"));
+        assertEquals(2, invalid.path("exit_code").asInt()); assertEquals("INVALID_MOCK_SCENARIO", invalid.at("/error/code").asText());
+        var api = parsed(runScenario("tags-reject-before-write", "--env", "api", "--output", "json", "content", "get", "ct_000004"));
+        assertEquals(2, api.path("exit_code").asInt()); assertEquals("MOCK_SCENARIO_NOT_ALLOWED", api.at("/error/code").asText());
+        assertFalse(Files.exists(state));
+    }
+
+    @Test void differentContentsUpdatedBySeparateJvmsRetainBothChanges() throws Exception {
+        var candidates = parsed(run("--output", "json", "content", "list", "--review-status", "pending")).at("/data/items");
+        String first = candidates.get(0).path("content_id").asText(), second = candidates.get(1).path("content_id").asText();
+        assertNotEquals(first, second);
+        for (String id : List.of(first, second)) {
+            assertEquals(0, parsed(run("--output", "json", "content", "review", id, "--action", "approve", "--execute", "--yes")).path("exit_code").asInt());
+        }
+        for (String id : List.of(first, second)) {
+            assertEquals("approved", parsed(run("--output", "json", "content", "get", id)).at("/data/review_status").asText());
+        }
+        assertEquals(2, JsonSupport.create().readTree(Files.readAllBytes(state.resolve("state.json"))).path("revision").asInt());
     }
 
     private static boolean isWindows() { return System.getProperty("os.name").toLowerCase().contains("windows"); }
