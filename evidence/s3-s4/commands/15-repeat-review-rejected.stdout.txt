@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"6936511e-e69f-4ad1-b0a3-91c96f26e5be","environment":"mock","command":"content.review","mode":"execute","status":"rejected","exit_code":2,"content_id":"ct_000004","data":null,"error":{"code":"REVIEW_NOT_PENDING","message":"只允许审核 pending 内容；请重新查看详情，不会重复提交","step":"preflight","upstream":null},"warnings":[]}

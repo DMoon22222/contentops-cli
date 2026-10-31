@@ -2,6 +2,7 @@ package com.example.contentops.cli;
 
 import com.example.contentops.model.ContentModels.*;
 import com.example.contentops.model.ResultModels.CliResult;
+import com.example.contentops.model.ResultModels.WriteData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.PrintWriter;
@@ -19,15 +20,18 @@ public final class ResultRenderer {
             if ("json".equals(output)) {
                 String serialized = json.writeValueAsString(result);
                 out.println(serialized);
-            } else if (result.error() != null) {
-                out.printf("结果: %s / %d%n错误: %s%n说明: %s%n", result.status(), result.exitCode(),
-                        result.error().code(), result.error().message());
             } else {
                 out.printf("环境: %s | 命令: %s | 模式: %s%n", result.environment(), result.command(), result.mode());
                 renderData(result.data());
+                if (result.data() instanceof WriteData || result.error() != null) {
+                    out.printf("结果: %s / %d%n", result.status(), result.exitCode());
+                }
+                if (result.error() != null) { out.printf("错误: %s%n说明: %s%n", result.error().code(), result.error().message()); }
             }
             out.flush();
             if (result.error() != null) { err.printf("%s: %s%n", result.error().code(), result.error().message()); }
+            for (String warning : result.warnings()) { err.println("提示: " + warning); }
+            if ("preview".equals(result.mode()) && result.error() == null) { err.println("预览未执行；实际写入需同时提供 --execute --yes。"); }
             if (out.checkError()) { err.println("结果输出失败；本次输出不可信"); return 1; }
             return result.exitCode();
         } catch (JsonProcessingException failure) {
@@ -37,7 +41,21 @@ public final class ResultRenderer {
     }
 
     private void renderData(Object data) {
-        if (data instanceof ContentListView list) {
+        if (data instanceof WriteData write) {
+            var plan = write.plan();
+            if (plan.review() != null) {
+                out.printf("审核计划: %s -> %s | action=%s%n理由: %s%n", plan.review().before(), plan.review().expectedStatus(),
+                        plan.review().action(), cell(plan.review().reason()));
+            }
+            if (plan.tags() != null) {
+                out.printf("标签 before: %s%n标签 after: %s%n", cell(String.join("、", plan.tags().before())), cell(String.join("、", plan.tags().after())));
+            }
+            out.println("步骤\t写入\t核对\t接口响应");
+            write.steps().forEach((name, step) -> out.printf("%s\t%s\t%s\t%s%n", name, step.write().wire(), step.verification().wire(), step.apiResult()));
+            if (write.observed() != null) {
+                out.printf("最近实际读取: review_status=%s | tags=%s%n", write.observed().reviewStatus(), cell(String.join("、", write.observed().tags())));
+            }
+        } else if (data instanceof ContentListView list) {
             out.printf("第 %d 页 | 每页 %d 条 | 匹配 %d 条%n", list.page(), list.pageSize(), list.total());
             out.println("ID\t审核\t质量\t可见性\t标签\t标题");
             for (var item : list.items()) {

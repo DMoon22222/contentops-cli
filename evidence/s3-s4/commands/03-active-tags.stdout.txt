@@ -1,0 +1,26 @@
+环境: mock | 命令: tags.list | 模式: read
+标签 23 个
+标签	分组	状态	使用量（源数据口径）
+科幻	题材	active	1768
+悬疑	题材	active	1448
+恋爱	题材	active	840
+校园	题材	active	860
+古风	题材	active	864
+冒险	题材	active	320
+治愈	题材	active	1438
+搞笑	题材	active	815
+都市	题材	active	1988
+奇幻	题材	active	1954
+深海	题材	active	2496
+机甲	题材	active	1396
+宫廷	题材	active	2409
+末世	题材	active	2358
+武侠	题材	active	1414
+轻松	风格	active	650
+沉浸	风格	active	326
+高甜	风格	active	448
+虐心	风格	active	356
+烧脑	风格	active	186
+新人扶持	运营	active	58
+夏日活动	运营	active	237
+编辑精选	运营	active	26

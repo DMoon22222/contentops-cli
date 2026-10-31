@@ -108,12 +108,12 @@ class JsonMockGatewayContractTest {
         assertEquals(original.tags(), observed.tags());
     }
 
-    @Test void writeMethodsExplicitlyRejectWithoutAnyBusinessMutation() {
+    @Test void invalidWriteRequestsExplicitlyRejectWithoutAnyBusinessMutation() {
         var before = store.read();
-        assertEquals("WRITE_NOT_IMPLEMENTED", assertThrows(GatewayFailure.class,
-                () -> gateway.submitReviews(List.of())).code());
-        assertEquals("WRITE_NOT_IMPLEMENTED", assertThrows(GatewayFailure.class,
-                () -> gateway.replaceTags("unused", List.of())).code());
+        assertEquals("INVALID_REVIEW_BATCH", assertThrows(GatewayFailure.class,
+                () -> gateway.submitReviews(java.util.Collections.nCopies(21, new ReviewItem("ct_000004", "approve", null)))).code());
+        assertEquals("INVALID_TAG_ARRAY", assertThrows(GatewayFailure.class,
+                () -> gateway.replaceTags("unused", null)).code());
         assertEquals(before, store.read());
         assertFalse(Files.exists(directory.resolve("state.json")));
     }

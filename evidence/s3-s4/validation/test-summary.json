@@ -1,0 +1,91 @@
+{
+  "captured_at": "2026-10-31T14:59:39.6877763+08:00",
+  "baseline_commit": "5d720b8a0ac3e6c6d08464ddf5edbaabc75806fb",
+  "suites": [
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.application.ContentServiceWriteTest",
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.262
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.application.TagPlannerTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.014
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.cli.CliParsingTest",
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.402
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.cli.CliWriteTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.353
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.gateway.JsonMockGatewayContractTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.328
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.gateway.JsonMockWriteContractTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.225
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.infrastructure.AppConfigTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.017
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.infrastructure.mock.JsonStateStoreTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.235
+    },
+    {
+      "group": "failsafe-reports",
+      "suite": "com.example.contentops.integration.CliProcessIT",
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 45.7
+    }
+  ],
+  "unique_test_count": 150,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

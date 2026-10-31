@@ -51,11 +51,21 @@ public final class JsonStateStore {
 
     /** One local snapshot commit, never a transaction across business API calls. */
     public <T> T update(Function<ObjectNode, T> mutation) {
+        return update(mutation, false);
+    }
+
+    /** An all-failed review batch must not create a business snapshot. */
+    public <T> T updateIfChanged(Function<ObjectNode, T> mutation) {
+        return update(mutation, true);
+    }
+
+    private <T> T update(Function<ObjectNode, T> mutation, boolean skipUnchanged) {
         return locked(true, () -> {
             ObjectNode snapshot = load();
             ObjectNode data = snapshot.withObject("data").deepCopy();
             T result = mutation.apply(data);
             validateData(data);
+            if (skipUnchanged && data.equals(snapshot.get("data"))) { return result; }
             snapshot.set("data", data);
             snapshot.put("revision", Math.addExact(snapshot.get("revision").longValue(), 1));
             byte[] bytes = json.writerWithDefaultPrettyPrinter().writeValueAsBytes(snapshot);

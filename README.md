@@ -1,6 +1,6 @@
-# Contentops CLI · S0–S2
+# Contentops CLI · S0–S4
 
-内容运营后台的 Java CLI。目前已实现 **Mock 数据驱动的四个只读命令**，尚未开放审核、标签更新、组合命令或真实 HTTP。产品合同见 [docs/02](docs/02-第一阶段MVP与CLI产品方案.md)，后续实施顺序见 [docs/03](docs/03-Java技术架构与实施方案.md)。
+内容运营后台的 Java CLI。目前已实现 **Mock 数据驱动的四个查询命令与单条审核、标签新增、组合处理**。真实 HTTP 尚未实现。产品合同见 [docs/02](docs/02-第一阶段MVP与CLI产品方案.md)，实施顺序见 [docs/03](docs/03-Java技术架构与实施方案.md)。以下描述当前 48 小时原型，未将完整两周 MVP 的功能标为已完成。
 
 ## 构建与运行
 
@@ -16,7 +16,7 @@ java -jar ./target/contentops.jar --help
 
 依赖固定为 Picocli 4.7.7、Jackson BOM 2.21.8、JUnit Jupiter 5.13.4。没有 Spring Boot、数据库或 Mock HTTP 服务器。`.mvn/maven.config` 将 Maven 缓存放到忽略目录 `.contentops/m2`，解决本机全局缓存的写权限问题；请从项目根目录构建，首次构建需要下载依赖。
 
-## 当前可用命令
+## 查询命令
 
 为试用指定独立的绝对状态目录，避免读取已有演示状态：
 
@@ -33,9 +33,41 @@ java -jar ./target/contentops.jar --env mock tags list --status all
 
 列表固定每页 20 条，筛选条件按 AND 组合；越界空页保留真实匹配总数。历史按时间倒序显示，不重写原始历史。标签默认只显示 active，`all` 包含 deprecated；`--status deprecated` 不在本阶段参数范围内。
 
-公共参数 `--env`、`--output table|json`、`--help` 在各级命令可用，默认为 mock/table。`--non-interactive` 已保留；当前命令均不读取 stdin。各级 `--help` 不实例化 Gateway、不创建状态目录、不调用网络。`--env api` 查询明确返回退出码 2，不会回退 Mock。审核、标签写入和 `process` 均未注册为命令。
+公共参数 `--env`、`--output table|json`、`--help` 在各级命令可用，默认为 mock/table。`--non-interactive` 可用于脚本；当前原型均不读取 stdin。各级 `--help` 不实例化 Gateway、不创建状态目录、不调用网络。`--env api` 明确返回退出码 2，不会回退 Mock。
 
 Windows 也可用 `./scripts/contentops.cmd` 启动，它传递参数并保留 Java 进程退出码。
+
+## 写命令：默认预览，显式授权后执行
+
+继续使用上面新建的独立 Mock 状态目录。以下是可复现的调用方式；审核决定由人工提供，CLI 不判断内容是否应当通过。
+
+```powershell
+# 单独审核：默认预览，reject 必须提供非空理由
+java -jar ./target/contentops.jar --env mock content review ct_000004 --action approve --reason '人工给出的演示决定'
+
+# 单独新增标签：计算完整目标数组，可重复 --add，不按逗号拆分
+java -jar ./target/contentops.jar --env mock content tags update ct_000004 --add '轻松'
+
+# 组合预览：任何标签校验失败都会在审核提交之前阻断
+java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason '演示：人工已给出审核决定' --add '轻松'
+
+# 实际执行：两项授权参数必须同时出现
+java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason '演示：人工已给出审核决定' --add '轻松' --execute --yes
+
+# 新 JVM 重新读取持久化结果
+java -jar ./target/contentops.jar --env mock --output json content get ct_000004
+java -jar ./target/contentops.jar --env mock content history ct_000004
+```
+
+所有写命令不带授权参数时只读取、校验并输出计划，`mode=preview/status=previewed`，零业务写入；预览成功不代表执行成功。`--execute` 缺少 `--yes`，或只给 `--yes`，都返回 rejected/2，不等待 stdin。完整两周 MVP 的输入内容 ID 确认尚未实现。
+
+`--action approve|reject` 和 `--reason` 用于 review/process。tags update 只接受 `--add` 和执行授权；不接受没有实现用途的 reason、remove/set。未知参数、重复的单值参数以及 `--apply/--force/--dry-run` 均拒绝，不静默忽略。
+
+业务约束属于 CLI：只审核 pending；reject 必须有理由；只对真正新增的标签要求存在且 active。保留存量废弃/未知标签并给出警告，原有标签顺序和数据不被自动清洗。已存在标签的独立执行返回 `no_change`、tags=skipped/matched，不发 PUT。默认预览即使目标无变化也返回 previewed。
+
+process 按“全部校验/计划 → 授权 → 重读并检查 → 单 item 审核 → 计数检查及回读 → 检查标签未变化 → 全数组 PUT → 最终回读”执行。标签不变时只跳过标签写入。两项 API 各提交一次完整本地快照，**没有联合事务、回滚或自动重试**。GET 与写入之间仍有竞争窗口，没有服务端版本控制，不能宣称并发安全。
+
+审核成功但标签失败时，用独立标签命令重新计划和修复；不要重做 process 来重复审核。Mock 新日志的操作人固定为 `op_mock_cli`，时间取注入的 Clock；这是本地模拟身份，不是真实认证身份。creators 的计数、tags.usage_count 等原始聚合字段保持原值。
 
 ## 脚本读取结果
 
@@ -53,7 +85,21 @@ $result.data
 
 stdout 在 JSON 模式下只有一个 UTF-8 信封对象，诊断走 stderr。业务数据位于 `data`；详情包含 OpenAPI 中的完整 12 字段，中文正文和 emoji 保留。解析失败时无法确定的 command/mode 等字段允许为 null，不伪造执行上下文。不要使用 `2>&1` 将错误文本混入 JSON。
 
-本阶段使用的退出码：0=读取成功；1=内部或输出失败；2=参数/配置拒绝；3=读取失败（如不存在的 ID、状态损坏、锁超时）。写入相关的 4–7 已在结果模型中预留，尚无执行命令。读取成功不代表执行过审核。PowerShell 请立即保存 `$LASTEXITCODE`。
+写入结果在 `data` 中保留 plan、steps、observed。步骤分别记录 write（not_sent/acknowledged/failed/unknown/skipped）和 verification（not_checked/matched/mismatched/unavailable）。observed 是最近成功读取的状态；回读失败时保留旧观测，不用计划目标填充。收到合规写入响应仍须回读匹配；result 接受 schema 规定的字符串，不只接受示例值 ok。
+
+| status / 实际退出码 | 含义及处理 |
+|---|---|
+| succeeded / 0 | 读取成功，或 mode=execute 的全部必要步骤已获确认且核对匹配 |
+| previewed / 0 | 仅预览，未写入 |
+| no_change / 0 | 独立标签执行无需 PUT |
+| rejected / 2 | 参数、授权或业务前置条件拒绝，尚未写入 |
+| failed / 3 | 读取失败，或明确的单项写入失败且无已成功步骤 |
+| partial / 4 | 审核已核对成功，标签明确失败或被变化检查阻断 |
+| unknown / 5 | 写入异常/响应丢失/计数无法解释；不重发、不继续后续写入 |
+| verification_failed / 6 | 写入已获确认，回读不匹配或不可用；不撤销既有写入 |
+| failed / 1 | 内部或输出失败，不能当作可信执行结果 |
+
+cancelled/7 保留在模型中，本原型没有交互取消场景。PowerShell 请立即保存 `$LASTEXITCODE`，并同时检查 environment、mode、status、exit_code 和步骤；单看退出 0 或 JSON 可解析不足以证明审核完成。unknown 不因另行读取到目标状态就变为本次操作成功。输出丢失、JVM 中断或截断时也不要自动重放写入。
 
 ## Mock 状态与原始材料
 
@@ -61,21 +107,22 @@ stdout 在 JSON 模式下只有一个 UTF-8 信封对象，诊断走 stderr。�
 - `CONTENTOPS_STATE_DIR` 必须是独立的绝对目录，默认是用户目录下 `.contentops/mock/v1`。原始附件目录及其子目录禁止用作工作目录。
 - 无 `state.json` 时，从只读 seed 创建内存数据视图。读取可能创建目录和 `state.lock` 元数据，**不创建业务快照**。
 - 每次读取均加 sidecar 文件锁并重新加载完整快照，没有长期状态缓存。已有 `state.json` 不会被只读命令重写；损坏、重复 JSON 键或 seed/版本不匹配时明确失败，不回退 seed。
-- 存储层的通用快照提交已实现：锁内加载 → 完整数据树副本 → 同目录临时文件写入并 `force(true)` → 关闭文件 → 原子替换。保留原始七类数据及 `_note`、未使用字段和已有异常数据。它不构成审核和标签两个操作的联合事务。
+- 快照提交顺序：锁内加载 → 完整数据树副本 → 同目录临时文件写入并 `force(true)` → 关闭文件 → 原子替换。保留原始七类数据及 `_note`、未使用字段和已有异常数据。审核单次 API 的状态与日志一起提交；无成功项的批次不新建/重写快照。它不构成审核和标签两个操作的联合事务。
 - 提交前实际探测同目录原子创建和替换能力；不支持时拒绝提交，不降级为非原子覆盖。锁等待上限为 2 秒。不承诺硬件断电后的目录项持久性，也没有跨机器/网络盘保证。
 
-当前没有初始化、重置或写入 CLI。需要新的只读初始视图时换一个独立状态目录；损坏工作副本应保留排查，不自动删除。测试中的快照修改仅限独立临时目录的标记/标题夹具，没有执行审核或标签变更。
+当前没有初始化或重置 CLI。需要初始视图时换一个独立状态目录；损坏工作副本应保留排查，不自动删除。Gateway 保留列表审核语义：最多 20 项、重复调用追加日志，不施加 CLI 的 pending/理由政策。标签 Gateway 接收完整数组，不施加 active 校验；CLI 只开放单条 add，不直接暴露底层宽松能力。
 
 ## 验证与阶段边界
 
-本轮最终 `mvn test`：55 项；`mvn verify`：55 项单元/契约测试 + 19 项独立 JVM 集成测试，全部通过，0 失败、0 错误、0 跳过。实际 JAR 另运行 18 条命令，记录见 [阶段证据](evidence/s0-s2/README.md)。
+S3–S4 的 `mvn test`：122 项；`mvn verify`：122 项单元/契约测试 + 28 项独立 JVM 集成测试，全部通过，0 失败、0 错误、0 跳过。当前真实 JAR 操作与前后状态见 [S3–S4 证据](evidence/s3-s4/README.md)。[S0–S2 历史证据](evidence/s0-s2/README.md) 保持不变。
 
-复跑独立 JAR 验证（使用新证据目录以免覆盖历史）：
+复跑独立 JAR 验证（使用新证据目录；S3–S4 脚本会在专用新 Mock 工作副本执行人工演示审核和标签更新）：
 
 ```powershell
 ./scripts/verify-s0-s2.ps1 -EvidenceDirectory ('evidence/s0-s2/recheck-' + [guid]::NewGuid())
+./scripts/verify-s3-s4.ps1 -EvidenceDirectory ('evidence/s3-s4/recheck-' + [guid]::NewGuid())
 ```
 
-测试状态统一放在被忽略的 `target/test-state` 下；手工验证状态位于 `.contentops/manual-validation`。构建缓存、产物、临时业务状态均不纳入 Git。证据是实际开发验证记录，不是任务二审核演示，也不替代完整 AI 对话导出。
+测试状态统一放在被忽略的 `target/test-state` 下；只读手工验证状态位于 `.contentops/manual-validation`，本轮写入验证位于 `.contentops/s3-s4-validation`，与后续任务二正式演示分开。构建缓存、产物、临时业务状态均不纳入 Git。证据是实际开发验证记录，不是任务二正式操作记录，也不替代完整 AI 对话导出。
 
-下一轮 S3–S4 可复用 Gateway 六方法、完整快照存储、DTO、只读服务、命令树和 JSON/退出码模型，实现审核/标签更新/组合编排及受控故障测试。本轮止于 S2；HTTP、交互确认、HTML Demo、Agent 100 条方案和最终交付包仍按已有计划后续推进。
+本轮止于 S4。S5 尚需实现明确标记来源的受控故障，包括真实持久化后丢响应、跨 JVM 的部分失败与核对失败、恢复与不重试证据；当前异常分支由手写 RecordingGateway 做单元/CLI runner 验证，不能冒充真实服务故障。remove/set、人工交互确认、HTTP、HTML、Agent 100 条完整方案和最终交付仍未实现。

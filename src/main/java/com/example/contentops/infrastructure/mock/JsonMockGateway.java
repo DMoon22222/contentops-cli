@@ -7,6 +7,9 @@ import com.example.contentops.model.ContentModels.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,10 +18,16 @@ import java.util.Set;
 public final class JsonMockGateway implements ContentGateway {
     private final JsonStateStore store;
     private final ObjectMapper json;
+    private final Clock clock;
 
     public JsonMockGateway(JsonStateStore store, ObjectMapper json) {
+        this(store, json, Clock.systemUTC());
+    }
+
+    public JsonMockGateway(JsonStateStore store, ObjectMapper json, Clock clock) {
         this.store = store;
         this.json = json;
+        this.clock = clock;
     }
 
     @Override public Page<ContentSummary> listContents(ContentQuery query) {
@@ -69,14 +78,54 @@ public final class JsonMockGateway implements ContentGateway {
         return List.copyOf(result);
     }
 
-    @Override public ReviewCounts submitReviews(List<ReviewItem> items) { throw writesUnavailable(); }
-    @Override public TagAck replaceTags(String contentId, List<String> completeTags) { throw writesUnavailable(); }
+    @Override public ReviewCounts submitReviews(List<ReviewItem> items) {
+        if (items == null || items.size() > 20) {
+            throw new GatewayFailure(Kind.REJECTED_NO_COMMIT, "INVALID_REVIEW_BATCH", "Mock 审核 items 必须存在且不能超过 20 项");
+        }
+        // The complete API batch, including each status/log pair, is one local snapshot commit.
+        return store.updateIfChanged(data -> {
+            int succeeded = 0;
+            ObjectNode histories = data.withObject("review_logs");
+            for (ReviewItem item : items) {
+                JsonNode found = item == null ? null : lookup(data.get("contents"), item.contentId());
+                if (found == null || item.action() == null || !Set.of("approve", "reject").contains(item.action())) { continue; }
+                JsonNode existing = histories.get(item.contentId());
+                if (existing != null && !existing.isArray()) { throw invalidResponse(); }
+                ArrayNode logs = existing == null ? histories.putArray(item.contentId()) : (ArrayNode) existing;
+                ((ObjectNode) found).put("review_status", "approve".equals(item.action()) ? "approved" : "rejected");
+                logs.addObject().put("action", item.action()).put("reason", item.reason() == null ? "" : item.reason())
+                        .put("operator_id", "op_mock_cli").put("created_at", clock.instant().toString());
+                succeeded++;
+            }
+            return new ReviewCounts(succeeded, items.size() - succeeded);
+        });
+    }
+
+    @Override public TagAck replaceTags(String contentId, List<String> completeTags) {
+        if (completeTags == null || completeTags.stream().anyMatch(t -> t == null)) {
+            throw new GatewayFailure(Kind.REJECTED_NO_COMMIT, "INVALID_TAG_ARRAY", "Mock tags 必须为完整字符串数组");
+        }
+        return store.update(data -> {
+            JsonNode found = lookup(data.get("contents"), contentId);
+            if (found == null) {
+                throw new GatewayFailure(Kind.REJECTED_NO_COMMIT, "CONTENT_NOT_FOUND", "Mock 中不存在指定内容；标签未提交");
+            }
+            ((ObjectNode) found).set("tags", json.valueToTree(completeTags));
+            return new TagAck("ok");
+        });
+    }
 
     private JsonNode find(JsonNode contents, String contentId) {
+        JsonNode found = lookup(contents, contentId);
+        if (found != null) { return found; }
+        throw new GatewayFailure(Kind.READ_FAILURE, "CONTENT_NOT_FOUND", "Mock 中不存在指定内容；请核对 ID");
+    }
+
+    private JsonNode lookup(JsonNode contents, String contentId) {
         for (JsonNode content : contents) {
             if (contentId != null && contentId.equals(content.path("content_id").asText())) { return content; }
         }
-        throw new GatewayFailure(Kind.READ_FAILURE, "CONTENT_NOT_FOUND", "Mock 中不存在指定内容；请核对 ID");
+        return null;
     }
 
     private <T> T decode(JsonNode node, Class<T> type) {
@@ -93,8 +142,5 @@ public final class JsonMockGateway implements ContentGateway {
 
     private static GatewayFailure invalidResponse() {
         return new GatewayFailure(Kind.READ_FAILURE, "MOCK_DATA_INVALID", "Mock 记录缺少必要字段或字段类型不合法");
-    }
-    private static GatewayFailure writesUnavailable() {
-        return new GatewayFailure(Kind.REJECTED_NO_COMMIT, "WRITE_NOT_IMPLEMENTED", "S0–S2 只读阶段未实现审核和标签写入");
     }
 }

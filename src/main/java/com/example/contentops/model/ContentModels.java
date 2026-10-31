@@ -2,6 +2,7 @@ package com.example.contentops.model;
 
 import java.time.Instant;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 public final class ContentModels {
     private ContentModels() { }
@@ -27,7 +28,7 @@ public final class ContentModels {
     }
     public record ReviewLog(String action, String operatorId, String reason, Instant createdAt) { }
     public record TagItem(String tag, String group, long usageCount, String status) { }
-    public record ReviewItem(String contentId, String action, String reason) { }
+    public record ReviewItem(String contentId, String action, @JsonInclude(JsonInclude.Include.NON_NULL) String reason) { }
     public record ReviewCounts(Integer successCount, Integer failedCount) { }
     public record TagAck(String result) { }
     public record ContentListView(int page, int pageSize, long total, List<ContentSummary> items) {

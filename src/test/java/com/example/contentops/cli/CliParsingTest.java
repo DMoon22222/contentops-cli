@@ -39,7 +39,9 @@ class CliParsingTest {
         return Stream.<String[]>of(new String[]{"--help"}, new String[]{"content", "--help"},
                 new String[]{"content", "list", "--help"}, new String[]{"content", "get", "--help"},
                 new String[]{"content", "history", "--help"}, new String[]{"tags", "--help"},
-                new String[]{"tags", "list", "--help"}).map(args -> Arguments.of((Object) args));
+                new String[]{"tags", "list", "--help"}, new String[]{"content", "review", "--help"},
+                new String[]{"content", "process", "--help"}, new String[]{"content", "tags", "--help"},
+                new String[]{"content", "tags", "update", "--help"}).map(args -> Arguments.of((Object) args));
     }
 
     @ParameterizedTest @MethodSource("helpCommands")
@@ -61,9 +63,9 @@ class CliParsingTest {
                 new String[]{"tags", "list", "--status", "deprecated"},
                 new String[]{"content", "list", "--page", "1", "--page", "2"},
                 new String[]{"content", "list", "--pa", "1"},
-                new String[]{"content", "review", "ct_000004", "--action", "approve"},
+                new String[]{"content", "review", "ct_000004", "--action", "unsupported"},
                 new String[]{"content", "process", "ct_000004", "--execute", "--yes"},
-                new String[]{"content", "tags", "update", "ct_000004", "--add", "轻松"}).map(args -> Arguments.of((Object) args));
+                new String[]{"content", "tags", "update", "ct_000004", "--remove", "轻松"}).map(args -> Arguments.of((Object) args));
     }
 
     @ParameterizedTest @MethodSource("invalidCommands")

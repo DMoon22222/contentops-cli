@@ -1,0 +1,863 @@
+{
+  "captured_at": "2026-10-31T14:57:21.1431342+08:00",
+  "scope": "S3-S4 local Mock development validation. Human-supplied demonstration decision; no automatic moderation.",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\s3-s4-validation\\d0a17d8a-7978-4661-a90b-62eb72a32f9c",
+  "jar_sha256": "DB70E5212A7D218044AB47C8968E78C95B7EB5C5119F8FE7077101311D0E7607",
+  "command_count": 17,
+  "commands": [
+    {
+      "name": "01-pending-list",
+      "command": "java -jar ./target/contentops.jar --env mock content list --review-status pending --page 1",
+      "arguments": [
+        "--env",
+        "mock",
+        "content",
+        "list",
+        "--review-status",
+        "pending",
+        "--page",
+        "1"
+      ],
+      "actual_exit_code": 0
+    },
+    {
+      "name": "02-before-table",
+      "command": "java -jar ./target/contentops.jar --env mock content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0
+    },
+    {
+      "name": "03-active-tags",
+      "command": "java -jar ./target/contentops.jar --env mock tags list --status active",
+      "arguments": [
+        "--env",
+        "mock",
+        "tags",
+        "list",
+        "--status",
+        "active"
+      ],
+      "actual_exit_code": 0
+    },
+    {
+      "name": "04-before-detail",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "05-before-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "06-process-preview",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason 演示：人工已给出审核决定 --add 轻松",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "演示：人工已给出审核决定",
+        "--add",
+        "轻松"
+      ],
+      "actual_exit_code": 0,
+      "status": "previewed",
+      "mode": "preview"
+    },
+    {
+      "name": "07-after-preview-detail",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "08-after-preview-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "09-execute-without-yes",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason 演示：人工已给出审核决定 --add 轻松 --execute",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "演示：人工已给出审核决定",
+        "--add",
+        "轻松",
+        "--execute"
+      ],
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "10-yes-without-execute",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content process ct_000004 --action approve --reason 演示：人工已给出审核决定 --add 轻松 --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "演示：人工已给出审核决定",
+        "--add",
+        "轻松",
+        "--yes"
+      ],
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "preview"
+    },
+    {
+      "name": "11-process-execute",
+      "command": "java -jar ./target/contentops.jar --env mock --output json --non-interactive content process ct_000004 --action approve --reason 演示：人工已给出审核决定 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "--non-interactive",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "演示：人工已给出审核决定",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "execute"
+    },
+    {
+      "name": "12-after-detail",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "13-after-history-table",
+      "command": "java -jar ./target/contentops.jar --env mock content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0
+    },
+    {
+      "name": "14-after-history-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    },
+    {
+      "name": "15-repeat-review-rejected",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content review ct_000004 --action approve --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "review",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--execute",
+        "--yes"
+      ],
+      "actual_exit_code": 2,
+      "status": "rejected",
+      "mode": "execute"
+    },
+    {
+      "name": "16-tag-no-change",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content tags update ct_000004 --add 轻松 --execute --yes",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "tags",
+        "update",
+        "ct_000004",
+        "--add",
+        "轻松",
+        "--execute",
+        "--yes"
+      ],
+      "actual_exit_code": 0,
+      "status": "no_change",
+      "mode": "execute"
+    },
+    {
+      "name": "17-final-history",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000004",
+      "arguments": [
+        "--env",
+        "mock",
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "actual_exit_code": 0,
+      "status": "succeeded",
+      "mode": "read"
+    }
+  ],
+  "preview_zero_write_verified": true,
+  "state_before_preview": {
+    "exists": false,
+    "revision": null,
+    "sha256": null
+  },
+  "state_after_preview": {
+    "exists": false,
+    "revision": null,
+    "sha256": null
+  },
+  "state_after_execute": {
+    "exists": true,
+    "revision": 2,
+    "sha256": "DF130231043BFE1E938604C7085BD4A5AF8EFA52AC6721E6C343B07B0AA9E4B4"
+  },
+  "review_before": "pending",
+  "review_after": "approved",
+  "tags_before": [
+    "恋爱",
+    "校园",
+    "武侠"
+  ],
+  "tags_after": [
+    "恋爱",
+    "校园",
+    "武侠",
+    "轻松"
+  ],
+  "history_count_before": 0,
+  "history_count_after": 1,
+  "protected_files": [
+    {
+      "file": "AGENTS.md",
+      "before_sha256": "A41B41D72795E20ADAA431BE50800F60D3CC99362358FDF65F40D62814E8FE49",
+      "after_sha256": "A41B41D72795E20ADAA431BE50800F60D3CC99362358FDF65F40D62814E8FE49",
+      "unchanged": true
+    },
+    {
+      "file": ".gitignore",
+      "before_sha256": "3C3F84F9A788CFEF48FC81DEB59FB926A5C394B0C8B4B5DF9C890576693BA279",
+      "after_sha256": "3C3F84F9A788CFEF48FC81DEB59FB926A5C394B0C8B4B5DF9C890576693BA279",
+      "unchanged": true
+    },
+    {
+      "file": ".gitattributes",
+      "before_sha256": "B9B213A20E276DE98B138ABF8CBAE64B17CF828D736D51873A1BC95FF7F2EF47",
+      "after_sha256": "B9B213A20E276DE98B138ABF8CBAE64B17CF828D736D51873A1BC95FF7F2EF47",
+      "unchanged": true
+    },
+    {
+      "file": "题目：内容运营后台 CLI 化.md",
+      "before_sha256": "511036C3C832E5E6823DB517A33129F06FBFA2BCEDF3A0BF21EEC1F374C0A337",
+      "after_sha256": "511036C3C832E5E6823DB517A33129F06FBFA2BCEDF3A0BF21EEC1F374C0A337",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/mock_data.json",
+      "before_sha256": "44BA17CBE95432547A8FE380F81E0416AE51404957ED0C87DE5CED7F8E3939B0",
+      "after_sha256": "44BA17CBE95432547A8FE380F81E0416AE51404957ED0C87DE5CED7F8E3939B0",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/content-ops-admin-openapi.json",
+      "before_sha256": "C66A657DE90D2FE021106B3EE822193B33DDCFBA78B861D7EA9C536B6C82C935",
+      "after_sha256": "C66A657DE90D2FE021106B3EE822193B33DDCFBA78B861D7EA9C536B6C82C935",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/README.md",
+      "before_sha256": "E289F0DAAA91FEECCE1B4CE3BD28440B43AB29F33932D6D7E66008C2B28E3D60",
+      "after_sha256": "E289F0DAAA91FEECCE1B4CE3BD28440B43AB29F33932D6D7E66008C2B28E3D60",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据.zip",
+      "before_sha256": "069AAD6F62EEC29573D20350E487CF5DF118D0E8CC0E1A2F9481FFB2C8741AC1",
+      "after_sha256": "069AAD6F62EEC29573D20350E487CF5DF118D0E8CC0E1A2F9481FFB2C8741AC1",
+      "unchanged": true
+    },
+    {
+      "file": "docs\\01-需求与接口分析.md",
+      "before_sha256": "F2C2EEB5E4F25DBED54BD767D332F5B0010D70B9E537CA3C88DB6D1D3E7C9941",
+      "after_sha256": "F2C2EEB5E4F25DBED54BD767D332F5B0010D70B9E537CA3C88DB6D1D3E7C9941",
+      "unchanged": true
+    },
+    {
+      "file": "docs\\02-第一阶段MVP与CLI产品方案.md",
+      "before_sha256": "106AE887A3692104827882640B448F1F44306FF5756E3DA43441CB55EA753DC6",
+      "after_sha256": "106AE887A3692104827882640B448F1F44306FF5756E3DA43441CB55EA753DC6",
+      "unchanged": true
+    },
+    {
+      "file": "docs\\03-Java技术架构与实施方案.md",
+      "before_sha256": "1395249857D11CC6AB5E9819A64D5B8FD5A897B3826FEAAB0376D9AB25A78697",
+      "after_sha256": "1395249857D11CC6AB5E9819A64D5B8FD5A897B3826FEAAB0376D9AB25A78697",
+      "unchanged": true
+    },
+    {
+      "file": "docs\\04-交付物规划与验收清单.md",
+      "before_sha256": "DCA6D8F3C4279C62A98F15DC3C83596E6147A897D2CF0A896ABA6850805D5510",
+      "after_sha256": "DCA6D8F3C4279C62A98F15DC3C83596E6147A897D2CF0A896ABA6850805D5510",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\README.md",
+      "before_sha256": "542D2EF0A5F35A9AD7DE411EE5EF27F41CB22BE846EF338375A3C5DEB91A61FB",
+      "after_sha256": "542D2EF0A5F35A9AD7DE411EE5EF27F41CB22BE846EF338375A3C5DEB91A61FB",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\01-help.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\01-help.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\01-help.stdout.txt",
+      "before_sha256": "3F816ED423876C38838BCDBCEA358FE32932D6C6BBC9F141D66921854DC23F7E",
+      "after_sha256": "3F816ED423876C38838BCDBCEA358FE32932D6C6BBC9F141D66921854DC23F7E",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\02-pending-table.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\02-pending-table.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\02-pending-table.stdout.txt",
+      "before_sha256": "DAFDAC8519B7E3475893BA85FBC46EB5D6DB983E5F387A72A836E751B5BECBA8",
+      "after_sha256": "DAFDAC8519B7E3475893BA85FBC46EB5D6DB983E5F387A72A836E751B5BECBA8",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\03-detail-table.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\03-detail-table.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\03-detail-table.stdout.txt",
+      "before_sha256": "09573C7B276DB4A8C0904FACDCC23F244F73582665785E40BA80E39F79D793FB",
+      "after_sha256": "09573C7B276DB4A8C0904FACDCC23F244F73582665785E40BA80E39F79D793FB",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\04-history-table.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\04-history-table.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\04-history-table.stdout.txt",
+      "before_sha256": "56D41A89B0471CED1539C4593E72309C7D0052268EFE5F1CA6D245C7D034F918",
+      "after_sha256": "56D41A89B0471CED1539C4593E72309C7D0052268EFE5F1CA6D245C7D034F918",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\05-tags-table.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\05-tags-table.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\05-tags-table.stdout.txt",
+      "before_sha256": "C5F06C08CE3A45C53620FC54FEB941003D0B5AC60381C6F3948C99A91CBC56FC",
+      "after_sha256": "C5F06C08CE3A45C53620FC54FEB941003D0B5AC60381C6F3948C99A91CBC56FC",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\06-detail-json.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\06-detail-json.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\06-detail-json.stdout.txt",
+      "before_sha256": "3BCA1F0CEFAD62BD8F12A7E24821B76EFAA48D46F5EBB16F62840D48132376CB",
+      "after_sha256": "3BCA1F0CEFAD62BD8F12A7E24821B76EFAA48D46F5EBB16F62840D48132376CB",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\07-total-json.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\07-total-json.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\07-total-json.stdout.txt",
+      "before_sha256": "2F7F9FFF8170425544F459230A99A7AC0A539BD911A0ABE3A7E3B8E65FEE3082",
+      "after_sha256": "2F7F9FFF8170425544F459230A99A7AC0A539BD911A0ABE3A7E3B8E65FEE3082",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\08-pending-json.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\08-pending-json.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\08-pending-json.stdout.txt",
+      "before_sha256": "E9259D866205BE2AE979620453F657724D530A99ACA5ABD31912AB120E4EBC09",
+      "after_sha256": "E9259D866205BE2AE979620453F657724D530A99ACA5ABD31912AB120E4EBC09",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\09-active-json.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\09-active-json.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\09-active-json.stdout.txt",
+      "before_sha256": "FA06FDB2FF49028EFF5E846E168DCFC473A4CF408B2E9597D90D9722793AD440",
+      "after_sha256": "FA06FDB2FF49028EFF5E846E168DCFC473A4CF408B2E9597D90D9722793AD440",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\10-all-tags-json.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\10-all-tags-json.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\10-all-tags-json.stdout.txt",
+      "before_sha256": "B6A52433D70E1C19AA274D71AED00347145A5D45137BB97F3C0A9AB4C8B64F4B",
+      "after_sha256": "B6A52433D70E1C19AA274D71AED00347145A5D45137BB97F3C0A9AB4C8B64F4B",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\11-last-pending-page.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\11-last-pending-page.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\11-last-pending-page.stdout.txt",
+      "before_sha256": "AD735AA31981F382368FBE10057E90BA62C3A173E3EAC6BBD6587D2E7E09A04E",
+      "after_sha256": "AD735AA31981F382368FBE10057E90BA62C3A173E3EAC6BBD6587D2E7E09A04E",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\12-and-query.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\12-and-query.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\12-and-query.stdout.txt",
+      "before_sha256": "A9AE9393B7338E46E408C0BE949841C189591ABB724F3ABE688BECBC910426AF",
+      "after_sha256": "A9AE9393B7338E46E408C0BE949841C189591ABB724F3ABE688BECBC910426AF",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\13-invalid-page.exit-code.txt",
+      "before_sha256": "53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3",
+      "after_sha256": "53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\13-invalid-page.stderr.txt",
+      "before_sha256": "D20EAD422D87B0B5F17BDD32B2FB2901E5A84ABF014281F53D701AB38C4A9523",
+      "after_sha256": "D20EAD422D87B0B5F17BDD32B2FB2901E5A84ABF014281F53D701AB38C4A9523",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\13-invalid-page.stdout.txt",
+      "before_sha256": "3D256F489ED453F02C7E25C82AA82FE90FAFD7407BDF2B53EB5E1585E4E17244",
+      "after_sha256": "3D256F489ED453F02C7E25C82AA82FE90FAFD7407BDF2B53EB5E1585E4E17244",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\14-invalid-page-type.exit-code.txt",
+      "before_sha256": "53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3",
+      "after_sha256": "53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\14-invalid-page-type.stderr.txt",
+      "before_sha256": "47C2794C93930349174F5C4C2E4A4300B4339E542B011F8BC22985631B712404",
+      "after_sha256": "47C2794C93930349174F5C4C2E4A4300B4339E542B011F8BC22985631B712404",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\14-invalid-page-type.stdout.txt",
+      "before_sha256": "3F2DCCCCEB17C8E3F68CD573DF76A5F8ECA4D38CFFFD555837E4F571E18210C7",
+      "after_sha256": "3F2DCCCCEB17C8E3F68CD573DF76A5F8ECA4D38CFFFD555837E4F571E18210C7",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\15-missing-content.exit-code.txt",
+      "before_sha256": "1121CFCCD5913F0A63FEC40A6FFD44EA64F9DC135C66634BA001D10BCF4302A2",
+      "after_sha256": "1121CFCCD5913F0A63FEC40A6FFD44EA64F9DC135C66634BA001D10BCF4302A2",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\15-missing-content.stderr.txt",
+      "before_sha256": "D7F5B6F919639687E0F4BE7162F03ED8E2C47E861BE0C227CCF1640D15830636",
+      "after_sha256": "D7F5B6F919639687E0F4BE7162F03ED8E2C47E861BE0C227CCF1640D15830636",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\15-missing-content.stdout.txt",
+      "before_sha256": "977248955488C77B1AF8A2084786B9E898642CDB55A2EB3EA1BE64BA915C71A1",
+      "after_sha256": "977248955488C77B1AF8A2084786B9E898642CDB55A2EB3EA1BE64BA915C71A1",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\16-api-rejected.exit-code.txt",
+      "before_sha256": "53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3",
+      "after_sha256": "53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\16-api-rejected.stderr.txt",
+      "before_sha256": "D236E6D18AB5A9F289370A214E68D9E9A69F1CC4362098B1C2AC864346C6062A",
+      "after_sha256": "D236E6D18AB5A9F289370A214E68D9E9A69F1CC4362098B1C2AC864346C6062A",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\16-api-rejected.stdout.txt",
+      "before_sha256": "0600B6BCE98AD8A547A7A56C861C09BCB81EE6DFD86B73F4B47578494E57591B",
+      "after_sha256": "0600B6BCE98AD8A547A7A56C861C09BCB81EE6DFD86B73F4B47578494E57591B",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\17-history-json.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\17-history-json.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\17-history-json.stdout.txt",
+      "before_sha256": "4A98FFC6420CCF4F259499FBCDBF6E3EE2B5231151F536E4B121C2FB6AED692F",
+      "after_sha256": "4A98FFC6420CCF4F259499FBCDBF6E3EE2B5231151F536E4B121C2FB6AED692F",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\18-outside-page.exit-code.txt",
+      "before_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "after_sha256": "9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\18-outside-page.stderr.txt",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\18-outside-page.stdout.txt",
+      "before_sha256": "FDF4F2E866EDB4E8F71DF606567DDE175A8C19E2DDB31C2FC0C2E57630FB1CF0",
+      "after_sha256": "FDF4F2E866EDB4E8F71DF606567DDE175A8C19E2DDB31C2FC0C2E57630FB1CF0",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\commands\\summary.json",
+      "before_sha256": "C33DB23A79CF362A8AE4A6AE51C88E9CF526C15841235369C6179563EFF40414",
+      "after_sha256": "C33DB23A79CF362A8AE4A6AE51C88E9CF526C15841235369C6179563EFF40414",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\diagnostics\\initial-booter-warning.txt",
+      "before_sha256": "ED4AA82A5C83FC02CE39D1777CCD4AE11B30C13C8332B303F7103D0F9325439F",
+      "after_sha256": "ED4AA82A5C83FC02CE39D1777CCD4AE11B30C13C8332B303F7103D0F9325439F",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\failures\\junit-parameter-source.txt",
+      "before_sha256": "A6CC70B603727769374935559A37AE5281E27E9B5CA2FE4282C61881EC5B7B2D",
+      "after_sha256": "A6CC70B603727769374935559A37AE5281E27E9B5CA2FE4282C61881EC5B7B2D",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\baseline-protection.json",
+      "before_sha256": "C594DC920B69F07218F51AA7ACEEB3595A1E590C5679980DD46D0F9E34A7F7CC",
+      "after_sha256": "C594DC920B69F07218F51AA7ACEEB3595A1E590C5679980DD46D0F9E34A7F7CC",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\dependency-tree.exit-code.txt",
+      "before_sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "after_sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\dependency-tree.stderr.log",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\dependency-tree.stdout.log",
+      "before_sha256": "C7BAA1EFCA0C1D1D12D176F49AC0EDA34334100672BC2DCF75F0F54A26AB685C",
+      "after_sha256": "C7BAA1EFCA0C1D1D12D176F49AC0EDA34334100672BC2DCF75F0F54A26AB685C",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\environment.txt",
+      "before_sha256": "82CC30F1C2CAF0911F6852A1CCA2EDD0D46F93A6B4E502C893432BD8A0983404",
+      "after_sha256": "82CC30F1C2CAF0911F6852A1CCA2EDD0D46F93A6B4E502C893432BD8A0983404",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\maven-test.exit-code.txt",
+      "before_sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "after_sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\maven-test.stderr.log",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\maven-test.stdout.log",
+      "before_sha256": "9C7D0D8D8439C25F079AAD49071CDD12723B1CDC1D796DEA3BAE74B6A890102A",
+      "after_sha256": "9C7D0D8D8439C25F079AAD49071CDD12723B1CDC1D796DEA3BAE74B6A890102A",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\maven-verify.exit-code.txt",
+      "before_sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "after_sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\maven-verify.stderr.log",
+      "before_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "after_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\maven-verify.stdout.log",
+      "before_sha256": "EABE3C3D9B1888A4ED74EF3E47F1E1A5FD1FF98861C965E667B1436E2264888B",
+      "after_sha256": "EABE3C3D9B1888A4ED74EF3E47F1E1A5FD1FF98861C965E667B1436E2264888B",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\test-summary.json",
+      "before_sha256": "C8ACF21E0280800932B47919FF4655193EB2CCF771CE7AC31E43D2BA7F3252A0",
+      "after_sha256": "C8ACF21E0280800932B47919FF4655193EB2CCF771CE7AC31E43D2BA7F3252A0",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\junit\\com.example.contentops.cli.CliParsingTest.txt",
+      "before_sha256": "10B59A6B48A8875670EAB02D971546F4C1DF76A02A4E2969D7217D814B43B4A7",
+      "after_sha256": "10B59A6B48A8875670EAB02D971546F4C1DF76A02A4E2969D7217D814B43B4A7",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\junit\\com.example.contentops.gateway.JsonMockGatewayContractTest.txt",
+      "before_sha256": "53C7B73DF497893ED45BE73B00F9B6711DE1B01FEBEA02A1A1BBFC3F7F05FD76",
+      "after_sha256": "53C7B73DF497893ED45BE73B00F9B6711DE1B01FEBEA02A1A1BBFC3F7F05FD76",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\junit\\com.example.contentops.infrastructure.AppConfigTest.txt",
+      "before_sha256": "3C2A9B3AD4B6190322D5B332DC0621C1558E1C790BC3929DC61C8F21F312A2CF",
+      "after_sha256": "3C2A9B3AD4B6190322D5B332DC0621C1558E1C790BC3929DC61C8F21F312A2CF",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\junit\\com.example.contentops.infrastructure.mock.JsonStateStoreTest.txt",
+      "before_sha256": "F796240483DF20408020583A873FBFBB00730368A65FC8D9B6A10AA687CE25EB",
+      "after_sha256": "F796240483DF20408020583A873FBFBB00730368A65FC8D9B6A10AA687CE25EB",
+      "unchanged": true
+    },
+    {
+      "file": "evidence\\s0-s2\\validation\\junit\\com.example.contentops.integration.CliProcessIT.txt",
+      "before_sha256": "63DEB322742393257D50FDA66DF67DDDB6EE10C93F1576DB4B495A1ACEB33EDE",
+      "after_sha256": "63DEB322742393257D50FDA66DF67DDDB6EE10C93F1576DB4B495A1ACEB33EDE",
+      "unchanged": true
+    }
+  ],
+  "all_assertions_passed": true
+}

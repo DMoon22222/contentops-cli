@@ -144,7 +144,7 @@ class CliProcessIT {
                 Arguments.of(2, new String[]{"--env", "api", "content", "get", "ct_000004"}),
                 Arguments.of(2, new String[]{"--env", "bad", "content", "get", "ct_000004"}),
                 Arguments.of(2, new String[]{"tags", "list", "--status", "deprecated"}),
-                Arguments.of(2, new String[]{"content", "review", "ct_000004", "--action", "approve"}),
+                Arguments.of(2, new String[]{"content", "review", "ct_000004", "--action", "unsupported"}),
                 Arguments.of(2, new String[]{"content", "process", "ct_000004", "--execute", "--yes"}));
     }
 
@@ -241,6 +241,93 @@ class CliProcessIT {
                 "--output", "json", "content", "get", "ct_missing"));
         assertEquals(3, result.exit());
         assertEquals("CONTENT_NOT_FOUND", parsed(result).at("/error/code").asText());
+    }
+
+    @Test void realJarProcessPreviewExecuteAndFreshQueriesProveTwoDurableCommits() throws Exception {
+        var before = parsed(run("--output", "json", "content", "get", "ct_000004"));
+        assertEquals("pending", before.at("/data/review_status").asText());
+        assertEquals(0, parsed(run("--output", "json", "content", "history", "ct_000004")).at("/data/items").size());
+        var preview = parsed(run("--output", "json", "content", "process", "ct_000004", "--action", "approve", "--reason", "演示：人工已给出审核决定", "--add", "轻松"));
+        assertEquals("previewed", preview.path("status").asText());
+        assertEquals("not_sent", preview.at("/data/steps/review/write").asText());
+        assertFalse(Files.exists(state.resolve("state.json")));
+        var executed = parsed(run("--output", "json", "--non-interactive", "content", "process", "ct_000004", "--action", "approve", "--reason", "演示：人工已给出审核决定", "--add", "轻松", "--execute", "--yes"));
+        assertEquals("succeeded", executed.path("status").asText());
+        assertEquals("acknowledged", executed.at("/data/steps/review/write").asText());
+        assertEquals("matched", executed.at("/data/steps/tags/verification").asText());
+        byte[] snapshot = Files.readAllBytes(state.resolve("state.json"));
+        assertEquals(2, JsonSupport.create().readTree(snapshot).path("revision").asLong());
+        var after = parsed(run("--output", "json", "content", "get", "ct_000004"));
+        assertEquals("approved", after.at("/data/review_status").asText());
+        assertEquals(List.of("恋爱", "校园", "武侠", "轻松"), JsonSupport.create().convertValue(after.at("/data/tags"), List.class));
+        var logs = parsed(run("--output", "json", "content", "history", "ct_000004")).at("/data/items");
+        assertEquals(1, logs.size()); assertEquals("op_mock_cli", logs.get(0).path("operator_id").asText());
+        assertEquals("演示：人工已给出审核决定", logs.get(0).path("reason").asText());
+        var repeated = parsed(run("--output", "json", "content", "review", "ct_000004", "--action", "approve", "--execute", "--yes"));
+        assertEquals(2, repeated.path("exit_code").asInt());
+        assertEquals("REVIEW_NOT_PENDING", repeated.at("/error/code").asText());
+        assertArrayEquals(snapshot, Files.readAllBytes(state.resolve("state.json")));
+    }
+
+    @Test void realJarIndependentRejectAndAddPersistAndNoChangeDoesNotRewrite() throws Exception {
+        var rejected = parsed(run("--output", "json", "content", "review", "ct_000004", "--action", "reject", "--reason", "人工演示驳回", "--execute", "--yes"));
+        assertEquals("succeeded", rejected.path("status").asText());
+        assertEquals("rejected", rejected.at("/data/observed/review_status").asText());
+        var tags = parsed(run("--output", "json", "content", "tags", "update", "ct_000004", "--add", "轻松", "--execute", "--yes"));
+        assertEquals("succeeded", tags.path("status").asText());
+        assertEquals(4, tags.at("/data/observed/tags").size());
+        byte[] before = Files.readAllBytes(state.resolve("state.json"));
+        var same = parsed(run("--output", "json", "content", "tags", "update", "ct_000004", "--add", "轻松", "--execute", "--yes"));
+        assertEquals("no_change", same.path("status").asText());
+        assertEquals("skipped", same.at("/data/steps/tags/write").asText());
+        assertArrayEquals(before, Files.readAllBytes(state.resolve("state.json")));
+        var history = parsed(run("--output", "json", "content", "history", "ct_000004")).at("/data/items");
+        assertEquals(1, history.size()); assertEquals("reject", history.get(0).path("action").asText());
+    }
+
+    @Test void realJarAllWritePreviewsLeaveExistingSnapshotByteIdentical() throws Exception {
+        assertEquals(0, execute(probeCommand("put", state.toString(), "fixture", "preview-test")).exit());
+        byte[] before = Files.readAllBytes(state.resolve("state.json"));
+        for (var command : List.of(new String[]{"content", "review", "ct_000004", "--action", "approve"},
+                new String[]{"content", "tags", "update", "ct_000004", "--add", "轻松"},
+                new String[]{"content", "process", "ct_000004", "--action", "approve", "--add", "轻松"})) {
+            var args = new ArrayList<>(List.of("--output", "json")); args.addAll(List.of(command));
+            var result = parsed(run(args.toArray(String[]::new)));
+            assertEquals("previewed", result.path("status").asText());
+            assertArrayEquals(before, Files.readAllBytes(state.resolve("state.json")));
+        }
+    }
+
+    static Stream<Arguments> writeGuards() {
+        return Stream.of(new String[]{"--execute"}, new String[]{"--yes"}, new String[]{"--remove", "轻松"},
+                new String[]{"--set", "轻松"}).map(args -> Arguments.of((Object) args));
+    }
+    @ParameterizedTest @MethodSource("writeGuards")
+    void realJarMissingAuthorizationOrUnsupportedParametersRejectWithoutInput(String[] extra) throws Exception {
+        var args = new ArrayList<>(List.of("--output", "json", "--non-interactive", "content", "process", "ct_000004", "--action", "approve", "--add", "轻松"));
+        args.addAll(List.of(extra));
+        var result = parsed(run(args.toArray(String[]::new)));
+        assertEquals(2, result.path("exit_code").asInt()); assertFalse(Files.exists(state));
+    }
+
+    @Test void realJarInvalidNewTagsAndMissingRejectReasonNeverCreateAuditSnapshot() throws Exception {
+        var all = parsed(run("--output", "json", "tags", "list", "--status", "all")).at("/data/items");
+        String deprecated = null;
+        for (var tag : all) { if ("deprecated".equals(tag.path("status").asText())) { deprecated = tag.path("tag").asText(); break; } }
+        assertNotNull(deprecated);
+        for (String tag : List.of("不存在的演示标签", deprecated)) {
+            assertEquals(2, parsed(run("--output", "json", "content", "process", "ct_000004", "--action", "approve", "--add", tag, "--execute", "--yes")).path("exit_code").asInt());
+        }
+        assertEquals(2, parsed(run("--output", "json", "content", "review", "ct_000004", "--action", "reject", "--execute", "--yes")).path("exit_code").asInt());
+        assertFalse(Files.exists(state.resolve("state.json")));
+        assertEquals(0, parsed(run("--output", "json", "content", "history", "ct_000004")).at("/data/items").size());
+    }
+
+    @Test void realJarWriteHelpDoesNotConstructMockOrRequireAuthorization() throws Exception {
+        for (var args : List.of(new String[]{"content", "review", "--help"}, new String[]{"content", "process", "--help"},
+                new String[]{"content", "tags", "update", "--help"})) {
+            assertEquals(0, run(args).exit()); assertFalse(Files.exists(state));
+        }
     }
 
     private static boolean isWindows() { return System.getProperty("os.name").toLowerCase().contains("windows"); }

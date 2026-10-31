@@ -6,6 +6,7 @@ import com.example.contentops.gateway.GatewayFailure;
 import com.example.contentops.infrastructure.AppConfig;
 import com.example.contentops.model.ResultModels;
 import com.example.contentops.model.ResultModels.*;
+import com.example.contentops.model.OperationModels.WriteSpec;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
 import java.io.PrintWriter;
@@ -40,6 +41,11 @@ public final class CliRunner {
         content.addSubcommand(new ReadCommands.ListContents(this));
         content.addSubcommand(new ReadCommands.GetContent(this));
         content.addSubcommand(new ReadCommands.History(this));
+        content.addSubcommand(new WriteCommands.Review(this));
+        content.addSubcommand(new WriteCommands.Process(this));
+        var contentTags = new CommandLine(new RootCommand.ContentTagsGroup());
+        contentTags.addSubcommand(new WriteCommands.UpdateTags(this));
+        content.addSubcommand(contentTags);
         var tags = new CommandLine(new RootCommand.TagsGroup());
         tags.addSubcommand(new ReadCommands.ListTags(this));
         command.addSubcommand(content).addSubcommand(tags);
@@ -56,16 +62,44 @@ public final class CliRunner {
         command.setExecutionExceptionHandler((exception, cmd, parse) -> {
             if (exception instanceof CommandLine.ParameterException parameter) { return parseError(parameter); }
             return emitFailure(null, null, null, Outcome.INTERNAL_FAILURE,
-                    "INTERNAL_ERROR", "内部错误；未执行任何业务写入");
+                    "INTERNAL_ERROR", "内部错误；无法提供可信结果，请核查实际状态");
         });
         command.getSubcommands().values().forEach(this::configure);
     }
 
     private int parseError(CommandLine.ParameterException exception) {
         Object leaf = exception.getCommandLine().getCommand();
-        String name = leaf instanceof ReadCommands.ReadCommand read ? read.canonicalName() : null;
+        String name = leaf instanceof ReadCommands.ReadCommand read ? read.canonicalName()
+                : leaf instanceof WriteCommands.WriteCommand write ? write.canonicalName() : null;
         return emitFailure(name, null, null, Outcome.REJECTED, "INVALID_ARGUMENTS",
-                "命令、参数、必填项或参数类型不合法；请查看对应 --help（写命令本阶段未开放）");
+                "命令、参数、必填项或参数类型不合法；请查看对应 --help（remove/set 尚未实现）");
+    }
+
+    int write(String command, WriteSpec spec, boolean execute, boolean yes) {
+        String mode = execute ? "execute" : "preview";
+        CliResult<?> result;
+        try {
+            if (!Set.of("table", "json").contains(root.output)) {
+                throw new OperationRejected("INVALID_OUTPUT", "--output 只支持 table 或 json");
+            }
+            if (knownEnvironment() == null) {
+                throw new OperationRejected("INVALID_ENVIRONMENT", "--env 只支持 mock 或 api");
+            }
+            if (execute != yes) {
+                throw new OperationRejected("EXECUTION_AUTHORIZATION_REQUIRED", "原型执行必须同时提供 --execute --yes；不等待 stdin，仅 --yes 也不合法");
+            }
+            var application = service();
+            var plan = application.plan(spec);
+            WriteResult write = execute ? application.execute(plan) : application.preview(plan);
+            result = ResultModels.result(knownEnvironment(), command, mode, spec.contentId(), write.outcome(), write.data(), write.error(), write.warnings());
+        } catch (OperationRejected failure) {
+            return emitFailure(command, mode, spec.contentId(), Outcome.REJECTED, failure.code(), failure.getMessage());
+        } catch (GatewayFailure failure) {
+            return emitFailure(command, mode, spec.contentId(), Outcome.READ_FAILURE, failure.code(), failure.getMessage());
+        } catch (RuntimeException failure) {
+            return emitFailure(command, mode, spec.contentId(), Outcome.INTERNAL_FAILURE, "INTERNAL_ERROR", "操作未完成；请核查实际状态，不自动重试");
+        }
+        return renderer.render(result, root.output);
     }
 
     int read(String command, String id, Supplier<?> query) {
@@ -100,7 +134,7 @@ public final class CliRunner {
 
     private int emitFailure(String command, String mode, String id, Outcome outcome, String code, String message) {
         var result = ResultModels.result(knownEnvironment(), command, mode, id, outcome, null,
-                new CliError(code, message, mode == null ? null : "read", null));
+                new CliError(code, message, mode == null ? null : "read".equals(mode) ? "read" : "preflight", null));
         return renderer.render(result, root.output);
     }
 }
