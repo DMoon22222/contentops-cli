@@ -1,0 +1,2541 @@
+{
+  "captured_at": "2026-10-31T14:41:26.133Z",
+  "passed": true,
+  "check_count": 624,
+  "browser": "156.0.8078.74",
+  "playwright": "1.64.0-alpha-1790635538000",
+  "url": "file:///F:/AI_TESTEXAM/demo/index.html",
+  "offline": true,
+  "browser_plugin": "Absent; Browser plugin not available. Existing local Playwright + Chrome used for file:// validation.",
+  "viewports": [
+    "1440x1000",
+    "1435x1096",
+    "1366x768",
+    "1024x768",
+    "390x844"
+  ],
+  "console_errors": [],
+  "requests": [
+    "file:///F:/AI_TESTEXAM/demo/index.html",
+    "file:///F:/AI_TESTEXAM/demo/style.css",
+    "file:///F:/AI_TESTEXAM/demo/data.js",
+    "file:///F:/AI_TESTEXAM/demo/app.js",
+    "file:///F:/AI_TESTEXAM/demo/index.html",
+    "file:///F:/AI_TESTEXAM/demo/style.css",
+    "file:///F:/AI_TESTEXAM/demo/data.js",
+    "file:///F:/AI_TESTEXAM/demo/app.js"
+  ],
+  "unique_source_links": 77,
+  "reading_metrics": {
+    "product": {
+      "visible_characters": 493
+    },
+    "demo": {
+      "visible_characters": 925
+    },
+    "technical": {
+      "visible_characters": 566
+    }
+  },
+  "checks": [
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/03-pending-page1-json.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/05-candidate-ct000004-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/07-candidate-ct000004-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/08-active-tags.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/10-process-preview.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/13-process-execute.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/14-after-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/15-after-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/16-after-pending-exact.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.started.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/commands/17-after-pending-total.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/summary.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/tags-reject-before-write/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-09-recovered-query.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-09-recovered-query.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-09-recovered-query.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-10-recovered-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-10-recovered-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-reject-before-write-10-recovered-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/review-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-commit-response-lost-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/tags-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/review-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/review-readback-mismatch-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/scenarios/tags-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "immutable source: evidence/task2/after/snapshot-facts.json",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/15-after-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/15-after-history",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/task2/commands/17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/task2/commands/17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-09-recovered-query",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-09-recovered-query",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-reject-before-write-10-recovered-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-reject-before-write-10-recovered-history",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-commit-response-lost-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-commit-response-lost-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-commit-response-lost-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/review-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/review-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-readback-mismatch-04-process",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-readback-mismatch-05-query-no-fault",
+      "passed": true
+    },
+    {
+      "name": "raw stdout matches: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "actual exit matches: evidence/s5/commands/tags-readback-mismatch-06-history-no-fault",
+      "passed": true
+    },
+    {
+      "name": "initial pending total",
+      "passed": true
+    },
+    {
+      "name": "page size and selected second row",
+      "passed": true
+    },
+    {
+      "name": "task2 after tags are distinct from S5",
+      "passed": true
+    },
+    {
+      "name": "task2 history 0 to 1",
+      "passed": true
+    },
+    {
+      "name": "task2 pending 131 / revision 2",
+      "passed": true
+    },
+    {
+      "name": "payload bytes unchanged",
+      "passed": true
+    },
+    {
+      "name": "file page identity",
+      "passed": true
+    },
+    {
+      "name": "three review routes",
+      "passed": true
+    },
+    {
+      "name": "default product page",
+      "passed": true
+    },
+    {
+      "name": "clear product purpose",
+      "passed": true
+    },
+    {
+      "name": "resource 1 名后端",
+      "passed": true
+    },
+    {
+      "name": "resource 2 周 MVP",
+      "passed": true
+    },
+    {
+      "name": "resource 6 项 API",
+      "passed": true
+    },
+    {
+      "name": "three business capabilities",
+      "passed": true
+    },
+    {
+      "name": "planned capabilities remain future",
+      "passed": true
+    },
+    {
+      "name": "existing ten day phase ranges",
+      "passed": true
+    },
+    {
+      "name": "no ten-row schedule copy",
+      "passed": true
+    },
+    {
+      "name": "product supplement is readable HTML",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "seven commands visible as main content",
+      "passed": true
+    },
+    {
+      "name": "five-step wizard removed",
+      "passed": true
+    },
+    {
+      "name": "default technical results hidden",
+      "passed": true
+    },
+    {
+      "name": "case immediately visible",
+      "passed": true
+    },
+    {
+      "name": "case before pending",
+      "passed": true
+    },
+    {
+      "name": "case after approved",
+      "passed": true
+    },
+    {
+      "name": "case original tags preserved",
+      "passed": true
+    },
+    {
+      "name": "case after tags exact",
+      "passed": true
+    },
+    {
+      "name": "case history zero to one",
+      "passed": true
+    },
+    {
+      "name": "case logs initially collapsed",
+      "passed": true
+    },
+    {
+      "name": "developer logs initially collapsed",
+      "passed": true
+    },
+    {
+      "name": "actual case command complete",
+      "passed": true
+    },
+    {
+      "name": "command selected 0",
+      "passed": true
+    },
+    {
+      "name": "complete supported prefix 0",
+      "passed": true
+    },
+    {
+      "name": "native clipboard command 0",
+      "passed": true
+    },
+    {
+      "name": "API available on demand 0",
+      "passed": true
+    },
+    {
+      "name": "complete JSON command 0",
+      "passed": true
+    },
+    {
+      "name": "actual exit command 0",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "command selected 1",
+      "passed": true
+    },
+    {
+      "name": "complete supported prefix 1",
+      "passed": true
+    },
+    {
+      "name": "native clipboard command 1",
+      "passed": true
+    },
+    {
+      "name": "API available on demand 1",
+      "passed": true
+    },
+    {
+      "name": "complete JSON command 1",
+      "passed": true
+    },
+    {
+      "name": "actual exit command 1",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "command selected 2",
+      "passed": true
+    },
+    {
+      "name": "complete supported prefix 2",
+      "passed": true
+    },
+    {
+      "name": "native clipboard command 2",
+      "passed": true
+    },
+    {
+      "name": "API available on demand 2",
+      "passed": true
+    },
+    {
+      "name": "complete JSON command 2",
+      "passed": true
+    },
+    {
+      "name": "actual exit command 2",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "command selected 3",
+      "passed": true
+    },
+    {
+      "name": "complete supported prefix 3",
+      "passed": true
+    },
+    {
+      "name": "native clipboard command 3",
+      "passed": true
+    },
+    {
+      "name": "API available on demand 3",
+      "passed": true
+    },
+    {
+      "name": "complete JSON command 3",
+      "passed": true
+    },
+    {
+      "name": "actual exit command 3",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "command selected 4",
+      "passed": true
+    },
+    {
+      "name": "complete supported prefix 4",
+      "passed": true
+    },
+    {
+      "name": "write starts in preview 4",
+      "passed": true
+    },
+    {
+      "name": "preview note 4",
+      "passed": true
+    },
+    {
+      "name": "review required action",
+      "passed": true
+    },
+    {
+      "name": "native clipboard command 4",
+      "passed": true
+    },
+    {
+      "name": "API available on demand 4",
+      "passed": true
+    },
+    {
+      "name": "independent example clearly unexecuted 4",
+      "passed": true
+    },
+    {
+      "name": "execute has both authorizations 4",
+      "passed": true
+    },
+    {
+      "name": "native clipboard execute 4",
+      "passed": true
+    },
+    {
+      "name": "no invented independent result 4",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "command selected 5",
+      "passed": true
+    },
+    {
+      "name": "complete supported prefix 5",
+      "passed": true
+    },
+    {
+      "name": "write starts in preview 5",
+      "passed": true
+    },
+    {
+      "name": "preview note 5",
+      "passed": true
+    },
+    {
+      "name": "tags required addition",
+      "passed": true
+    },
+    {
+      "name": "native clipboard command 5",
+      "passed": true
+    },
+    {
+      "name": "API available on demand 5",
+      "passed": true
+    },
+    {
+      "name": "independent example clearly unexecuted 5",
+      "passed": true
+    },
+    {
+      "name": "execute has both authorizations 5",
+      "passed": true
+    },
+    {
+      "name": "native clipboard execute 5",
+      "passed": true
+    },
+    {
+      "name": "no invented independent result 5",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "command selected 6",
+      "passed": true
+    },
+    {
+      "name": "complete supported prefix 6",
+      "passed": true
+    },
+    {
+      "name": "write starts in preview 6",
+      "passed": true
+    },
+    {
+      "name": "preview note 6",
+      "passed": true
+    },
+    {
+      "name": "process required parameters",
+      "passed": true
+    },
+    {
+      "name": "native clipboard command 6",
+      "passed": true
+    },
+    {
+      "name": "API available on demand 6",
+      "passed": true
+    },
+    {
+      "name": "complete JSON command 6",
+      "passed": true
+    },
+    {
+      "name": "actual exit command 6",
+      "passed": true
+    },
+    {
+      "name": "stderr text command 6",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "execute has both authorizations 6",
+      "passed": true
+    },
+    {
+      "name": "native clipboard execute 6",
+      "passed": true
+    },
+    {
+      "name": "complete JSON process execute",
+      "passed": true
+    },
+    {
+      "name": "actual exit process execute",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "copy compatibility fallback",
+      "passed": true
+    },
+    {
+      "name": "manual fallback visible",
+      "passed": true
+    },
+    {
+      "name": "manual complete selection",
+      "passed": true
+    },
+    {
+      "name": "manual Ctrl+C instructions",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "actual exit 10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "stderr text 10-process-preview",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "actual exit 13-process-execute",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "actual exit 14-after-detail",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "actual exit 03-pending-page1-json",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "actual exit 05-candidate-ct000004-detail",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit 07-candidate-ct000004-history",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "actual exit 08-active-tags",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 15-after-history",
+      "passed": true
+    },
+    {
+      "name": "actual exit 15-after-history",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "actual exit 16-after-pending-exact",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "complete JSON 17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "actual exit 17-after-pending-total",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "preview still no writes",
+      "passed": true
+    },
+    {
+      "name": "execution review and tags confirmed",
+      "passed": true
+    },
+    {
+      "name": "business meaning normal",
+      "passed": true
+    },
+    {
+      "name": "outcome hides technical codes normal",
+      "passed": true
+    },
+    {
+      "name": "business meaning partial",
+      "passed": true
+    },
+    {
+      "name": "outcome hides technical codes partial",
+      "passed": true
+    },
+    {
+      "name": "business meaning unknown",
+      "passed": true
+    },
+    {
+      "name": "outcome hides technical codes unknown",
+      "passed": true
+    },
+    {
+      "name": "complete JSON S5 tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "actual exit S5 tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "stderr text S5 tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "disk review state tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "disk revision tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "disk JSON tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "developer disclosure stays open tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "complete JSON S5 review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "actual exit S5 review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "stderr text S5 review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "disk review state review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "disk revision review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "disk JSON review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "developer disclosure stays open review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "complete JSON S5 tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "actual exit S5 tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "stderr text S5 tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "disk review state tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "disk revision tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "disk JSON tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "developer disclosure stays open tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "complete JSON S5 review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "actual exit S5 review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "stderr text S5 review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "disk review state review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "disk revision review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "disk JSON review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "developer disclosure stays open review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "complete JSON S5 tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "actual exit S5 tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "stderr text S5 tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "disk review state tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "disk revision tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "disk JSON tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "developer disclosure stays open tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "complete JSON tag-only recovery",
+      "passed": true
+    },
+    {
+      "name": "actual exit tag-only recovery",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "recovery avoids repeat review",
+      "passed": true
+    },
+    {
+      "name": "recovery history remains one",
+      "passed": true
+    },
+    {
+      "name": "original partial preserved",
+      "passed": true
+    },
+    {
+      "name": "five concise design choices",
+      "passed": true
+    },
+    {
+      "name": "HTTP branch future",
+      "passed": true
+    },
+    {
+      "name": "Agent design clearly future",
+      "passed": true
+    },
+    {
+      "name": "Agent main summary not whole document",
+      "passed": true
+    },
+    {
+      "name": "readable HTML opens technical-notes",
+      "passed": true
+    },
+    {
+      "name": "HTML headings instead of Markdown technical-notes",
+      "passed": true
+    },
+    {
+      "name": "reading stays on HTML technical-notes",
+      "passed": true
+    },
+    {
+      "name": "focus on readable summary technical-notes",
+      "passed": true
+    },
+    {
+      "name": "readable HTML opens agent-notes",
+      "passed": true
+    },
+    {
+      "name": "HTML headings instead of Markdown agent-notes",
+      "passed": true
+    },
+    {
+      "name": "reading stays on HTML agent-notes",
+      "passed": true
+    },
+    {
+      "name": "focus on readable summary agent-notes",
+      "passed": true
+    },
+    {
+      "name": "available original materials",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "keyboard opens supplement",
+      "passed": true
+    },
+    {
+      "name": "keyboard folds supplement",
+      "passed": true
+    },
+    {
+      "name": "keyboard selects command",
+      "passed": true
+    },
+    {
+      "name": "selection retains focus",
+      "passed": true
+    },
+    {
+      "name": "Tab moves to next feature",
+      "passed": true
+    },
+    {
+      "name": "skip link keeps current page",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1440 product",
+      "passed": true
+    },
+    {
+      "name": "single h1 1440 product",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1440 product",
+      "passed": true
+    },
+    {
+      "name": "readable body 1440 product",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1440 demo",
+      "passed": true
+    },
+    {
+      "name": "single h1 1440 demo",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1440 demo",
+      "passed": true
+    },
+    {
+      "name": "readable body 1440 demo",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1440 technical",
+      "passed": true
+    },
+    {
+      "name": "single h1 1440 technical",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1440 technical",
+      "passed": true
+    },
+    {
+      "name": "readable body 1440 technical",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1440 0",
+      "passed": true
+    },
+    {
+      "name": "code font 1440 0",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1440 1",
+      "passed": true
+    },
+    {
+      "name": "code font 1440 1",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1440 2",
+      "passed": true
+    },
+    {
+      "name": "code font 1440 2",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1440 3",
+      "passed": true
+    },
+    {
+      "name": "code font 1440 3",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1440 4",
+      "passed": true
+    },
+    {
+      "name": "code font 1440 4",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1440 5",
+      "passed": true
+    },
+    {
+      "name": "code font 1440 5",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1440 6",
+      "passed": true
+    },
+    {
+      "name": "code font 1440 6",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1440 tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1440 review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1440 tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1440 review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1440 tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1366 product",
+      "passed": true
+    },
+    {
+      "name": "single h1 1366 product",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1366 product",
+      "passed": true
+    },
+    {
+      "name": "readable body 1366 product",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1366 demo",
+      "passed": true
+    },
+    {
+      "name": "single h1 1366 demo",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1366 demo",
+      "passed": true
+    },
+    {
+      "name": "readable body 1366 demo",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1366 technical",
+      "passed": true
+    },
+    {
+      "name": "single h1 1366 technical",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1366 technical",
+      "passed": true
+    },
+    {
+      "name": "readable body 1366 technical",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1366 0",
+      "passed": true
+    },
+    {
+      "name": "code font 1366 0",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1366 1",
+      "passed": true
+    },
+    {
+      "name": "code font 1366 1",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1366 2",
+      "passed": true
+    },
+    {
+      "name": "code font 1366 2",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1366 3",
+      "passed": true
+    },
+    {
+      "name": "code font 1366 3",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1366 4",
+      "passed": true
+    },
+    {
+      "name": "code font 1366 4",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1366 5",
+      "passed": true
+    },
+    {
+      "name": "code font 1366 5",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1366 6",
+      "passed": true
+    },
+    {
+      "name": "code font 1366 6",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1366 tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1366 review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1366 tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1366 review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1366 tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1024 product",
+      "passed": true
+    },
+    {
+      "name": "single h1 1024 product",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1024 product",
+      "passed": true
+    },
+    {
+      "name": "readable body 1024 product",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1024 demo",
+      "passed": true
+    },
+    {
+      "name": "single h1 1024 demo",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1024 demo",
+      "passed": true
+    },
+    {
+      "name": "readable body 1024 demo",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 1024 technical",
+      "passed": true
+    },
+    {
+      "name": "single h1 1024 technical",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1024 technical",
+      "passed": true
+    },
+    {
+      "name": "readable body 1024 technical",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1024 0",
+      "passed": true
+    },
+    {
+      "name": "code font 1024 0",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1024 1",
+      "passed": true
+    },
+    {
+      "name": "code font 1024 1",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1024 2",
+      "passed": true
+    },
+    {
+      "name": "code font 1024 2",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1024 3",
+      "passed": true
+    },
+    {
+      "name": "code font 1024 3",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1024 4",
+      "passed": true
+    },
+    {
+      "name": "code font 1024 4",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1024 5",
+      "passed": true
+    },
+    {
+      "name": "code font 1024 5",
+      "passed": true
+    },
+    {
+      "name": "feature layout 1024 6",
+      "passed": true
+    },
+    {
+      "name": "code font 1024 6",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1024 tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1024 review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1024 tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1024 review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 1024 tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 390 product",
+      "passed": true
+    },
+    {
+      "name": "single h1 390 product",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 390 product",
+      "passed": true
+    },
+    {
+      "name": "readable body 390 product",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 390 demo",
+      "passed": true
+    },
+    {
+      "name": "single h1 390 demo",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 390 demo",
+      "passed": true
+    },
+    {
+      "name": "readable body 390 demo",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "route 390 technical",
+      "passed": true
+    },
+    {
+      "name": "single h1 390 technical",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 390 technical",
+      "passed": true
+    },
+    {
+      "name": "readable body 390 technical",
+      "passed": true
+    },
+    {
+      "name": "feature layout 390 0",
+      "passed": true
+    },
+    {
+      "name": "code font 390 0",
+      "passed": true
+    },
+    {
+      "name": "feature layout 390 1",
+      "passed": true
+    },
+    {
+      "name": "code font 390 1",
+      "passed": true
+    },
+    {
+      "name": "feature layout 390 2",
+      "passed": true
+    },
+    {
+      "name": "code font 390 2",
+      "passed": true
+    },
+    {
+      "name": "feature layout 390 3",
+      "passed": true
+    },
+    {
+      "name": "code font 390 3",
+      "passed": true
+    },
+    {
+      "name": "feature layout 390 4",
+      "passed": true
+    },
+    {
+      "name": "code font 390 4",
+      "passed": true
+    },
+    {
+      "name": "feature layout 390 5",
+      "passed": true
+    },
+    {
+      "name": "code font 390 5",
+      "passed": true
+    },
+    {
+      "name": "feature layout 390 6",
+      "passed": true
+    },
+    {
+      "name": "code font 390 6",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 390 tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 390 review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 390 tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 390 review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "no accidental undefined text",
+      "passed": true
+    },
+    {
+      "name": "fault layout 390 tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/03-pending-page1-json.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/03-pending-page1-json.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/03-pending-page1-json.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/10-process-preview.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/10-process-preview.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/10-process-preview.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/13-process-execute.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/13-process-execute.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/13-process-execute.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/14-after-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/14-after-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/14-after-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/preview/zero-write-validation.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/after/snapshot-facts.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/validation/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/README.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/06-实际操作记录.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/05-candidate-ct000004-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/05-candidate-ct000004-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/05-candidate-ct000004-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/07-candidate-ct000004-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/07-candidate-ct000004-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/07-candidate-ct000004-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/08-active-tags.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/08-active-tags.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/08-active-tags.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/15-after-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/15-after-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/15-after-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/16-after-pending-exact.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/16-after-pending-exact.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/16-after-pending-exact.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/17-after-pending-total.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/17-after-pending-total.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/task2/commands/17-after-pending-total.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/README.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/tags-reject-before-write/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/review-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/tags-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/review-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/review-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/scenarios/tags-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-10-recovered-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../evidence/s5/commands/tags-reject-before-write-09-recovered-query.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/01-需求与接口分析.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/02-第一阶段MVP与CLI产品方案.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/03-Java技术架构与实施方案.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/04-交付物规划与验收清单.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../docs/07-Agent批量处理方案.md",
+      "passed": true
+    },
+    {
+      "name": "local source ../README.md",
+      "passed": true
+    },
+    {
+      "name": "old seventy source paths preserved",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "default page has no visible raw Markdown link product",
+      "passed": true
+    },
+    {
+      "name": "default page has no visible JSON product",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "default page has no visible raw Markdown link demo",
+      "passed": true
+    },
+    {
+      "name": "default page has no visible JSON demo",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "raw Markdown link explicitly labeled",
+      "passed": true
+    },
+    {
+      "name": "default page has no visible raw Markdown link technical",
+      "passed": true
+    },
+    {
+      "name": "default page has no visible JSON technical",
+      "passed": true
+    },
+    {
+      "name": "no console errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "offline file resources only",
+      "passed": true,
+      "detail": "[\"file:///F:/AI_TESTEXAM/demo/index.html\",\"file:///F:/AI_TESTEXAM/demo/style.css\",\"file:///F:/AI_TESTEXAM/demo/data.js\",\"file:///F:/AI_TESTEXAM/demo/app.js\",\"file:///F:/AI_TESTEXAM/demo/index.html\",\"file:///F:/AI_TESTEXAM/demo/style.css\",\"file:///F:/AI_TESTEXAM/demo/data.js\",\"file:///F:/AI_TESTEXAM/demo/app.js\"]"
+    },
+    {
+      "name": "evidence object unchanged",
+      "passed": true
+    },
+    {
+      "name": "reduced motion body font",
+      "passed": true
+    }
+  ]
+}

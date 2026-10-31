@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-31T14:33:18.409Z",
+  "error": "locator.evaluate: Error: strict mode violation: locator('.example-panel .terminal pre') resolved to 2 elements:\n    1) <pre>java -jar ./target/contentops.jar --env mock --ou…</pre> aka getByRole('region', { name: '七条命令' }).getByText('java -jar ./target/contentops')\n    2) <pre class=\"json-view\">{↵  \"schema_version\": \"1\",↵  \"invocation_id\": \"bd…</pre> aka getByRole('region', { name: '七条命令' }).getByText('{ \"schema_version\": \"1\", \"')\n\nCall log:\n\u001b[2m  - waiting for locator('.example-panel .terminal pre')\u001b[22m\n\n    at run (F:\\AI_TESTEXAM\\evidence\\demo\\verify.cjs:213:101)",
+  "passed_checks": 386
+}

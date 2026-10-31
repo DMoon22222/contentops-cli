@@ -1,4 +1,4 @@
-// Review edition (three routes). Writes only evidence/demo-review/; S6 reports stay immutable.
+// Simplified edition. Writes only evidence/demo-simplified/; historical reports stay immutable.
 // Optional development QA only; not needed to open demo/index.html.
 // node evidence/demo/verify.cjs --playwright-module <existing playwright package directory>
 const fs=require('node:fs');
@@ -30,10 +30,9 @@ async function run(){
   check('task2 after tags are distinct from S5',D.task['14-after-detail'].result.data.tags.join('|')==='恋爱|校园|武侠|悬疑');
   check('task2 history 0 to 1',D.task['07-candidate-ct000004-history'].result.data.items.length===0&&D.task['15-after-history'].result.data.items.length===1);
   check('task2 pending 131 / revision 2',D.task['17-after-pending-total'].result.data.total===131&&D.taskFacts.revision===2);
-  const out=path.join(root,'evidence/demo-review');
+  const out=path.join(root,'evidence/demo-simplified');
   const integrity=JSON.parse(fs.readFileSync(path.join(out,'integrity.json'),'utf8'));
-  check('embedded payload unchanged since review baseline',sha(path.join(root,'demo/data.js'))===integrity.data_js_sha256);
-  const planDoc=fs.readFileSync(path.join(root,'docs/02-第一阶段MVP与CLI产品方案.md'),'utf8');
+  check('payload bytes unchanged',sha(path.join(root,'demo/data.js'))===integrity.data_js_sha256);
   const browser=await chromium.launch({channel:'chrome',headless:true});
   try{
     const context=await browser.newContext({viewport:{width:1440,height:1000},locale:'zh-CN',permissions:['clipboard-read','clipboard-write']});
@@ -43,9 +42,9 @@ async function run(){
     page.on('console',m=>{if(['error','warning'].includes(m.type()))errors.push(m.type()+': '+m.text());});
     page.on('request',r=>requests.push(r.url()));
     const url=pathToFileURL(path.join(root,'demo/index.html')).href;
-    const links=new Set();
+    const links=new Set(),readingMetrics={};
     const collect=async()=>{
-      for(const h of await page.locator('a[href]').evaluateAll(els=>els.map(e=>e.getAttribute('href'))))if(h&&!h.startsWith('#'))links.add(h);
+      for(const href of await page.locator('a[href]').evaluateAll(els=>els.map(e=>e.getAttribute('href'))))if(href&&!href.startsWith('#'))links.add(href);
       check('no accidental undefined text',!(await page.locator('main').textContent()).includes('undefined'));
     };
     const navigate=async route=>{
@@ -54,222 +53,195 @@ async function run(){
     };
     const open=async id=>{const el=page.locator('#'+id);if(!await el.evaluate(e=>e.open))await el.locator(':scope > summary').click();return el;};
     const close=async id=>{const el=page.locator('#'+id);if(await el.evaluate(e=>e.open))await el.locator(':scope > summary').click();};
-    const primary=()=>page.locator('#walkthrough .workflow-primary');
+    const snap=async(name,fullPage=false)=>{
+      await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
+      await page.screenshot({path:path.join(out,name+'.png'),fullPage});
+    };
     const jsonMatches=async(container,record,label)=>{
-      const details=container.locator(':scope > .raw-details');
-      if(!await details.evaluate(e=>e.open))await details.locator(':scope > summary').click();
-      const actual=JSON.parse(await details.locator('.json-view').textContent());
-      check('complete JSON '+label,JSON.stringify(actual)===JSON.stringify(record.result));
+      const raw=container.locator(':scope > .raw-details');
+      if(!await raw.evaluate(e=>e.open))await raw.locator(':scope > summary').click();
+      check('complete JSON '+label,JSON.stringify(JSON.parse(await raw.locator('.json-view').textContent()))===JSON.stringify(record.result));
       check('actual exit '+label,(await container.locator(':scope > .statusline .exit').textContent())==='exit '+record.exit);
-      if(record.stderr.trim())check('stderr preserved '+label,(await details.textContent()).includes(record.stderr.trim().replace(/\r\n/g,'\n')));
+      if(record.stderr.trim())check('stderr text '+label,(await raw.textContent()).includes(record.stderr.trim().replace(/\r\n/g,'\n')));
       await collect();
     };
-    await page.goto(url);
-    await page.locator('h1').waitFor();
-    check('local file page identity',page.url()===url&&(await page.title()).includes('CLI 评审台'));
-    check('three main routes',await page.locator('nav a').count()===3);
-    check('default product review',await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#product');
-    check('first screen product positioning',(await page.locator('h1').textContent()).includes('封装为可复用的 CLI'));
-    for(const fact of ['1 名 Java 后端','2 周 MVP','6 项现有 API'])check('resource constraint '+fact,(await page.locator('.constraints').textContent()).includes(fact));
-    check('planned vs implemented scopes',(await page.locator('.scope-plan').textContent()).includes('两周 MVP')&&(await page.locator('.scope-now').textContent()).includes('48 小时'));
-    check('HTTP/remove/set/human confirm remain unimplemented',(await page.locator('.scope-now').textContent()).includes('HTTP、标签 remove/set、人工输入 ID 确认及完整筛选尚未实现'));
-    check('five workflow stages',await page.locator('.workflow-strip li').count()===5);
-    await page.screenshot({path:path.join(out,'desktop-product.png')});
-    await page.setViewportSize({width:1505,height:1045});
-    await page.screenshot({path:path.join(out,'concept-size-product.png')});
-    await page.setViewportSize({width:1440,height:1000});
-    await open('api-scope');
-    check('six APIs and combination row',await page.locator('#api-scope tbody tr').count()===7);
-    await open('full-plan');
-    check('all ten days retained',await page.locator('.day-plan tbody tr').count()===10);
-    for(const row of await page.locator('.day-plan tbody tr').all()){
-      const cells=await row.locator('td').allTextContents();
-      check('schedule verbatim '+cells[0],planDoc.includes('| '+cells[0]+' | '+cells[1]+' |'));
-    }
-    await collect();
-    await close('full-plan');await close('api-scope');
-    await page.getByRole('link',{name:'体验一次 CLI 操作'}).click();
+    await page.goto(url);await page.locator('h1').waitFor();
+    check('file page identity',page.url()===url&&(await page.title()).includes('内容运营 CLI'));
+    check('three review routes',await page.locator('nav a').count()===3);
+    check('default product page',await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#product');
+    check('clear product purpose',(await page.locator('h1').textContent()).includes('查询、审核和标签维护'));
+    for(const fact of ['1 名后端','2 周 MVP','6 项 API'])check('resource '+fact,(await page.locator('.constraints').textContent()).includes(fact));
+    check('three business capabilities',await page.locator('.capabilities li').count()===3);
+    check('planned capabilities remain future',(await page.locator('.current-scope').textContent()).includes('仍需补齐真实后台接入（HTTP）、标签移除/替换、人工交互确认'));
+    const ranges=await page.locator('.timeline strong').allTextContents();
+    check('existing ten day phase ranges',JSON.stringify(ranges)===JSON.stringify(['D1–2','D3–4','D5–6','D7–8','D9–10']));
+    check('no ten-row schedule copy',await page.locator('.day-plan').count()===0);
+    readingMetrics.product={visible_characters:(await page.locator('main').innerText()).length};
+    await snap('desktop-product');await open('product-notes');
+    check('product supplement is readable HTML',await page.locator('#product-notes .reading-note h3').count()===2);
+    await collect();await close('product-notes');
+    await page.getByRole('link',{name:'看看七条命令怎样用'}).click();
     await page.waitForFunction(()=>document.querySelector('nav a[aria-current="page"]')?.hash==='#demo');
-    check('review flow CTA enters demo',await page.locator('#walkthrough').isVisible());
-    check('auxiliary command reference collapsed',!await page.locator('#command-reference').evaluate(e=>e.open));
-    check('all fault evidence collapsed',!await page.locator('#all-faults').evaluate(e=>e.open));
-    check('initial queue full page',await page.locator('.queue-table tbody tr').count()===20);
-    check('initial 132 and 20 actual results',(await page.locator('.queue-summary').textContent()).includes('132')&&(await page.locator('.queue-summary').textContent()).includes('20'));
-    check('real target is second row',(await page.locator('.queue-table tbody tr').nth(1).textContent()).includes('ct_000004'));
-    check('previous disabled at start',await page.locator('[data-move="-1"]').isDisabled());
-    await jsonMatches(primary(),D.task['03-pending-page1-json'],'initial queue');
-    await page.locator('[data-select-content="ct_000004"]').click();
-    check('select target moves to detail',await page.locator('[data-step="1"]').getAttribute('aria-pressed')==='true');
-    check('actual title/body/tags',(await page.locator('#walkthrough .inspector').textContent()).includes(D.task['05-candidate-ct000004-detail'].result.data.body)&&await page.locator('#walkthrough .inspector .tag').count()===3);
-    await page.locator('[data-step="0"]').click();
-    check('target stays highlighted',await page.locator('.queue-table tr.selected').count()===1);
-    await page.locator('[data-step="1"]').click();
-    await jsonMatches(primary(),D.task['05-candidate-ct000004-detail'],'before detail');
-    for(let i=2;i<5;i++){
-      await page.locator('[data-move="1"]').click();
-      check('next step '+i,await page.locator(`[data-step="${i}"]`).getAttribute('aria-pressed')==='true');
-      if(i===2){
-        await jsonMatches(primary(),D.task['10-process-preview'],'default preview');
-        check('not_sent review and tags',(await primary().locator('.steps-table').textContent()).match(/not_sent/g).length===2);
-        check('preview plan labels target uncommitted',(await page.locator('.plan-panel').textContent()).includes('计划，尚未写入'));
-        await primary().locator(':scope > .raw-details > summary').click();
-        await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
-        await page.screenshot({path:path.join(out,'desktop-preview.png')});
-        await page.setViewportSize({width:1505,height:1045});
-        await page.screenshot({path:path.join(out,'concept-size-preview.png')});
-        await page.setViewportSize({width:1440,height:1000});
-      }
-      if(i===3){
-        check('execution result initially explicit disclosure',await primary().locator(':scope > .statusline').count()===0);
-        check('execution command includes both permissions',(await primary().locator('[data-copy]').getAttribute('data-copy')).endsWith('--execute --yes'));
-        await page.locator('[data-show-execution]').click();
-        await jsonMatches(primary(),D.task['13-process-execute'],'recorded execution');
-        check('two acknowledged matched steps',(await primary().locator('.steps-table').textContent()).match(/acknowledged/g).length===2&&(await primary().locator('.steps-table').textContent()).match(/matched/g).length===2);
-      }
-      if(i===4){
-        await jsonMatches(primary(),D.task['14-after-detail'],'new JVM readback');
-        check('side by side comparison states',(await page.locator('.comparison-grid').textContent()).includes('pending')&&(await page.locator('.comparison-grid').textContent()).includes('approved'));
-        check('comparison retains original tags then suspense',await page.locator('.comparison-grid > div').nth(0).locator('.tag').count()===3&&await page.locator('.comparison-grid > div').nth(1).locator('.tag').count()===4);
-        check('business metrics 132 to131/history0to1/revision2',(await page.locator('.metrics').textContent()).includes('132 → 131')&&(await page.locator('.metrics').textContent()).includes('0 → 1')&&(await page.locator('.metrics').textContent()).includes('revision 2'));
-        check('next disabled at end',await page.locator('[data-move="1"]').isDisabled());
-        await primary().locator(':scope > .raw-details > summary').click();
-        await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
-        await page.screenshot({path:path.join(out,'desktop-comparison.png')});
-      }
-    }
-    await page.locator('[data-move="-1"]').click();
-    check('previous step works',await page.locator('[data-step="3"]').getAttribute('aria-pressed')==='true');
-    await page.locator('[data-step="4"]').click();
-    for(const snapshot of ['after','before']){
-      await page.locator(`[data-snapshot="${snapshot}"]`).click();
-      check('snapshot '+snapshot,(await page.locator('#walkthrough .inspector .state-label').textContent())===(snapshot==='after'?'approved':'pending'));
-      check('snapshot tags '+snapshot,await page.locator('#walkthrough .inspector .tag').count()===(snapshot==='after'?4:3));
-    }
-    await open('command-reference');
-    check('process default in command reference',await page.locator('[data-command="6"]').getAttribute('aria-pressed')==='true');
+    check('seven commands visible as main content',await page.locator('.feature-menu button:visible').count()===7);
+    check('five-step wizard removed',await page.locator('[data-step],[data-move],.step-rail').count()===0);
+    check('default technical results hidden',await page.locator('.statusline:visible,.json-view:visible,.steps-table:visible').count()===0);
+    check('case immediately visible',await page.locator('.case-comparison').isVisible());
+    const columns=page.locator('.case-comparison > div');
+    check('case before pending',(await columns.nth(0).locator('.business-status').textContent()).includes('pending'));
+    check('case after approved',(await columns.nth(1).locator('.business-status').textContent()).includes('approved'));
+    check('case original tags preserved',JSON.stringify(await columns.nth(0).locator('.tag').allTextContents())===JSON.stringify(D.task['05-candidate-ct000004-detail'].result.data.tags));
+    check('case after tags exact',JSON.stringify(await columns.nth(1).locator('.tag').allTextContents())===JSON.stringify(D.task['14-after-detail'].result.data.tags));
+    check('case history zero to one',(await columns.nth(0).textContent()).includes('审核历史 0 条')&&(await columns.nth(1).textContent()).includes('审核历史 1 条'));
+    check('case logs initially collapsed',!await page.locator('#case-records').evaluate(e=>e.open));
+    check('developer logs initially collapsed',!await page.locator('#developer-evidence').evaluate(e=>e.open));
+    check('actual case command complete',await page.locator('.real-case > .panel-head [data-copy]').getAttribute('data-copy')===D.task['13-process-execute'].command);
+    readingMetrics.demo={visible_characters:(await page.locator('main').innerText()).length};
+    await snap('desktop-demo');
+    await page.setViewportSize({width:1435,height:1096});await snap('concept-size-demo');await page.setViewportSize({width:1440,height:1000});
+    const keys=['03-pending-page1-json','05-candidate-ct000004-detail','07-candidate-ct000004-history','08-active-tags',null,null,'10-process-preview'];
     for(let i=0;i<7;i++){
       await page.locator(`[data-command="${i}"]`).click();
-      check('command reference remains open '+i,await page.locator('#command-reference').evaluate(e=>e.open));
-      const scope=page.locator('#command-reference .command-layout > section');
-      const button=scope.locator('[data-copy]');const cmd=await button.getAttribute('data-copy');
-      check('complete Java command '+i,cmd.startsWith('java -jar ./target/contentops.jar --env mock --output json'));
-      await button.click();check('native clipboard roundtrip '+i,await page.evaluate(()=>navigator.clipboard.readText())===cmd);
-      if([0,1,2,3,6].includes(i)){
-        const key=['03-pending-page1-json','05-candidate-ct000004-detail','07-candidate-ct000004-history','08-active-tags',null,null,'10-process-preview'][i];
-        await jsonMatches(scope,D.task[key],'command '+i);
-      }else check('unexecuted template and structure '+i,(await scope.textContent()).includes('本页没有执行此命令')&&(await scope.textContent()).includes('data.steps.'+(i===4?'review':'tags')));
-      await collect();
+      check('command selected '+i,await page.locator(`[data-command="${i}"]`).getAttribute('aria-pressed')==='true');
+      const example=page.locator('.example-panel');
+      const cmd=await example.locator('[data-copy]').getAttribute('data-copy');
+      check('complete supported prefix '+i,cmd.startsWith('java -jar ./target/contentops.jar --env mock --output json'));
+      if(i>=4){
+        check('write starts in preview '+i,!cmd.includes('--execute')&&!cmd.includes('--yes'));
+        check('preview note '+i,(await example.locator('.mode-note').textContent()).includes('不修改数据'));
+        if(i===4)check('review required action',cmd.includes('--action approve')&&cmd.includes('--reason'));
+        if(i===5)check('tags required addition',cmd.includes('--add'));
+        if(i===6)check('process required parameters',cmd.includes('--action approve')&&cmd.includes('--add'));
+      }
+      await example.locator('[data-copy]').click();check('native clipboard command '+i,await page.evaluate(()=>navigator.clipboard.readText())===cmd);
+      await open('command-detail');
+      check('API available on demand '+i,(await example.locator('.api').textContent()).length>10);
+      if(keys[i])await jsonMatches(page.locator('#command-detail'),D.task[keys[i]],'command '+i);
+      else check('independent example clearly unexecuted '+i,(await example.locator('.example-label').textContent()).includes('命令示例'));
+      if(i>=4){
+        await example.locator('[data-example-mode="execute"]').click();
+        const exec=await page.locator('.example-panel [data-copy]').getAttribute('data-copy');
+        check('execute has both authorizations '+i,exec.endsWith('--execute --yes'));
+        await page.locator('.example-panel [data-copy]').click();
+        check('native clipboard execute '+i,await page.evaluate(()=>navigator.clipboard.readText())===exec);
+        if(i===6)await jsonMatches(page.locator('#command-detail'),D.task['13-process-execute'],'process execute');
+        else check('no invented independent result '+i,await page.locator('#command-detail .statusline').count()===0);
+        await page.locator('[data-example-mode="preview"]').click();
+      }
+      await collect();await close('command-detail');
     }
-    const copyButton=page.locator('#command-reference [data-copy]');
-    await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:undefined}));
-    await copyButton.click();check('compatibility fallback',(await page.locator('#toast').textContent()).includes('兼容模式'));
-    await page.evaluate(()=>document.execCommand=()=>false);
-    await copyButton.click();check('manual copy available',await page.locator('.manual-copy').isVisible());
-    check('manual full selection',await page.locator('.manual-copy').evaluate(e=>e.selectionStart===0&&e.selectionEnd===e.value.length&&e.value.length>0));
-    await page.keyboard.press('Control+c');check('manual copy instructions',(await page.locator('#toast').textContent()).includes('Ctrl+C'));
+    const copy=page.locator('.example-panel [data-copy]');
+    await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:undefined}));await copy.click();
+    check('copy compatibility fallback',(await page.locator('#toast').textContent()).includes('兼容模式'));
+    await page.evaluate(()=>document.execCommand=()=>false);await copy.click();
+    check('manual fallback visible',await page.locator('.manual-copy').isVisible());
+    check('manual complete selection',await page.locator('.manual-copy').evaluate(e=>e.selectionStart===0&&e.selectionEnd===e.value.length&&e.value.length>0));
+    await page.keyboard.press('Control+c');check('manual Ctrl+C instructions',(await page.locator('#toast').textContent()).includes('Ctrl+C'));
     await page.reload();
-    await page.locator('[data-step="2"]').click();
-    const representatives={normal:D.task['13-process-execute'],partial:D.faults['tags-reject-before-write'].process,unknown:D.faults['tags-commit-response-lost'].process};
-    for(const [name,record]of Object.entries(representatives)){
-      await page.locator(`[data-outcome="${name}"]`).click();
-      await jsonMatches(page.locator('.outcome-view'),record,'representative '+name);
-      check('source split '+name,(await page.locator('.outcome-view .source-label').textContent()).includes(name==='normal'?'悬疑':'轻松'));
-      check('representative never changes core preview',(await primary().locator('.status').textContent())==='previewed');
+    await open('case-records');
+    for(const key of ['10-process-preview','13-process-execute','14-after-detail']){
+      await jsonMatches(page.locator(`#case-records > [data-record-key="${key}"]`),D.task[key],key);
     }
-    await open('all-faults');
+    await open('all-task-records');
+    for(const key of Object.keys(D.task).filter(k=>!['10-process-preview','13-process-execute','14-after-detail'].includes(k))){
+      await jsonMatches(page.locator(`#all-task-records > [data-record-key="${key}"]`),D.task[key],key);
+    }
+    check('preview still no writes',D.task['10-process-preview'].result.data.steps.review.write==='not_sent'&&D.task['10-process-preview'].result.data.steps.tags.write==='not_sent');
+    check('execution review and tags confirmed',Object.values(D.task['13-process-execute'].result.data.steps).every(s=>s.write==='acknowledged'&&s.verification==='matched'));
+    await close('case-records');
+    for(const [k,meaning] of [['normal','继续处理下一条'],['partial','不要重复审核'],['unknown','不能直接重试']]){
+      await page.locator(`[data-outcome="${k}"]`).click();
+      check('business meaning '+k,(await page.locator('.business-advice').textContent()).includes(meaning));
+      check('outcome hides technical codes '+k,await page.locator('.statusline:visible').count()===0);
+    }
+    await open('developer-evidence');
     for(const [name,f]of Object.entries(D.faults)){
       await page.locator('#fault-select').selectOption(name);
-      await jsonMatches(page.locator('#all-faults .two-col > section'),f.process,'S5 '+name);
-      check('S5 disk revision '+name,(await page.locator('#all-faults .inspector').textContent()).includes('revision '+f.facts.disk_revision_after_process));
-      check('all fault evidence stays open '+name,await page.locator('#all-faults').evaluate(e=>e.open));
+      await jsonMatches(page.locator('#developer-evidence .two-col > section'),f.process,'S5 '+name);
+      const disk=page.locator('#developer-evidence .inspector');
+      check('disk review state '+name,(await disk.textContent()).includes(f.query.result.data.review_status));
+      check('disk revision '+name,(await disk.textContent()).includes('revision '+f.facts.disk_revision_after_process));
+      const details=disk.locator(':scope > details');if(!await details.evaluate(e=>e.open))await details.locator('summary').click();
+      check('disk JSON '+name,JSON.stringify(JSON.parse(await details.locator('.json-view').textContent()))===JSON.stringify(f.query.result));
+      check('developer disclosure stays open '+name,await page.locator('#developer-evidence').evaluate(e=>e.open));
     }
-    await page.locator('[data-outcome="partial"]').click();
-    await page.locator('[data-show-recovery]').click();
-    await jsonMatches(page.locator('#all-faults .two-col > section'),D.faults['tags-reject-before-write'].recovery,'tag-only recovery');
-    check('recovery tags only',!(await page.locator('#all-faults .steps-table tbody').textContent()).includes('review'));
-    check('recovery history still one',(await page.locator('#all-faults .inspector').textContent()).includes('历史 1 条'));
-    await page.locator('[data-recovery="false"]').click();
-    check('original partial retained',(await page.locator('#all-faults .status').textContent())==='partial');
-    await close('all-faults');
-    await page.locator('main .page-actions a[href="#technical"]').click();
-    await page.waitForFunction(()=>document.querySelector('nav a[aria-current="page"]')?.hash==='#technical');
-    check('next review CTA technical',await page.locator('.architecture').isVisible());
-    check('HTTP is visibly future',(await page.locator('.future-adapter').textContent()).includes('HTTP · 尚未实现'));
-    check('five design choices',await page.locator('.technical-choices tbody tr').count()===5);
-    for(const name of ['current','future','upstream']){
-      await page.locator(`[data-capability="${name}"]`).click();
-      check('Agent boundary '+name,await page.locator(`[data-capability="${name}"]`).getAttribute('aria-pressed')==='true');
-      check('Agent always unexecuted',(await page.locator('.future-label').textContent()).includes('未执行'));
-      await collect();
+    await page.locator('#fault-select').selectOption('tags-reject-before-write');await page.locator('[data-recovery="true"]').click();
+    await jsonMatches(page.locator('#developer-evidence .two-col > section'),D.faults['tags-reject-before-write'].recovery,'tag-only recovery');
+    check('recovery avoids repeat review',!(await page.locator('#developer-evidence .steps-table tbody').textContent()).includes('review'));
+    check('recovery history remains one',(await page.locator('#developer-evidence .inspector').textContent()).includes('历史 1 条'));
+    await page.locator('[data-recovery="false"]').click();check('original partial preserved',(await page.locator('#developer-evidence .status').textContent())==='partial');
+    await close('developer-evidence');
+    await navigate('technical');
+    check('five concise design choices',await page.locator('.design-decisions dt').count()===5);
+    check('HTTP branch future',(await page.locator('.future-adapter').textContent()).includes('待实现'));
+    check('Agent design clearly future',(await page.locator('.agent-summary h2').textContent()).includes('后续设计'));
+    check('Agent main summary not whole document',(await page.locator('.agent-summary').innerText()).length<350);
+    readingMetrics.technical={visible_characters:(await page.locator('main').innerText()).length};
+    await snap('desktop-technical',true);
+    const technicalUrl=page.url();
+    for(const [button,id]of [['技术说明','technical-notes'],['Agent 方案','agent-notes']]){
+      await page.locator('#'+id+' > summary').click();
+      check('readable HTML opens '+id,await page.locator('#'+id).evaluate(e=>e.open));
+      check('HTML headings instead of Markdown '+id,await page.locator('#'+id+' .reading-note h3').count()===3);
+      check('reading stays on HTML '+id,page.url()===technicalUrl&&!page.url().endsWith('.md'));
+      check('focus on readable summary '+id,await page.locator('#'+id+' > summary').evaluate(e=>e===document.activeElement));
+      await page.locator('#'+id).screenshot({path:path.join(out,'readable-'+id+'.png')});
+      await close(id);
     }
-    await open('technical-details');await collect();await close('technical-details');
-    await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
-    await page.screenshot({path:path.join(out,'desktop-technical.png'),fullPage:true});
-    await page.locator('[data-capability="future"]').focus();await page.keyboard.press('Enter');
-    check('keyboard Enter activates capability',await page.locator('[data-capability="future"]').getAttribute('aria-pressed')==='true');
-    check('focus retained',await page.evaluate(()=>document.activeElement.dataset.capability==='future'));
-    await page.keyboard.press('Tab');check('keyboard Tab next',await page.evaluate(()=>document.activeElement.dataset.capability==='upstream'));
-    await navigate('demo');await page.locator('#command-reference > summary').focus();await page.keyboard.press('Enter');
-    check('keyboard disclosure toggles',await page.locator('#command-reference').evaluate(e=>e.open));await close('command-reference');
-    await page.locator('.skip-link').focus();await page.keyboard.press('Enter');
-    await page.waitForFunction(()=>document.activeElement.id==='workspace');
-    check('skip link keeps current review module',await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#demo');
-    check('skip link focuses main content',await page.locator('main').evaluate(e=>e===document.activeElement));
+    await open('original-materials');
+    check('available original materials',await page.locator('#original-materials a').count()===7);await collect();await close('original-materials');
+    await page.locator('#technical-notes > summary').focus();await page.keyboard.press('Enter');
+    check('keyboard opens supplement',await page.locator('#technical-notes').evaluate(e=>e.open));await page.keyboard.press('Enter');
+    check('keyboard folds supplement',!await page.locator('#technical-notes').evaluate(e=>e.open));
+    await navigate('demo');await page.locator('[data-command="4"]').focus();await page.keyboard.press('Enter');
+    check('keyboard selects command',await page.locator('[data-command="4"]').getAttribute('aria-pressed')==='true');
+    check('selection retains focus',await page.evaluate(()=>document.activeElement.dataset.command==='4'));
+    await page.keyboard.press('Tab');check('Tab moves to next feature',await page.evaluate(()=>document.activeElement.dataset.command==='5'));
+    await page.locator('.skip-link').focus();await page.keyboard.press('Enter');await page.waitForFunction(()=>document.activeElement.id==='workspace');
+    check('skip link keeps current page',await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#demo');
     for(const viewport of [{width:1440,height:1000},{width:1366,height:768},{width:1024,height:768},{width:390,height:844}]){
       await page.setViewportSize(viewport);
       for(const route of ['product','demo','technical']){
         await navigate(route);await collect();
-        check(`main route ${viewport.width} ${route}`,await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#'+route);
-        check(`no page overflow ${viewport.width} ${route}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+        check(`route ${viewport.width} ${route}`,await page.locator('nav a[aria-current="page"]').getAttribute('href')==='#'+route);
         check(`single h1 ${viewport.width} ${route}`,await page.locator('h1').count()===1);
+        check(`no page overflow ${viewport.width} ${route}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+        check(`readable body ${viewport.width} ${route}`,await page.locator('body').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=16));
       }
       await navigate('demo');
-      for(let i=0;i<5;i++){
-        await page.locator(`[data-step="${i}"]`).click();
-        check(`step layout ${viewport.width} ${i}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-      }
-      await open('command-reference');
       for(let i=0;i<7;i++){
         await page.locator(`[data-command="${i}"]`).click();
-        check(`command layout ${viewport.width} ${i}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+        check(`feature layout ${viewport.width} ${i}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+        check(`code font ${viewport.width} ${i}`,await page.locator('.example-panel > .terminal pre').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=14));
       }
-      await close('command-reference');await open('all-faults');
+      await open('developer-evidence');
       for(const name of Object.keys(D.faults)){
-        await page.locator('#fault-select').selectOption(name);
+        await page.locator('#fault-select').selectOption(name);await collect();
         check(`fault layout ${viewport.width} ${name}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-        await collect();
       }
-      await close('all-faults');await page.locator('[data-step="2"]').click();
-      await page.locator('[data-outcome="normal"]').click();
-      check(`readable command type ${viewport.width}`,await primary().locator('.terminal pre').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=14));
-      check(`prominent status type ${viewport.width}`,await primary().locator('.status').evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=22));
-      await page.locator('main').focus();await page.evaluate(()=>window.scrollTo(0,0));
-      if(viewport.width===1366)await page.screenshot({path:path.join(out,'laptop-preview.png')});
-      if(viewport.width===390){
-        await page.screenshot({path:path.join(out,'narrow-preview.png'),fullPage:true});
-        await navigate('product');await page.screenshot({path:path.join(out,'narrow-product.png'),fullPage:true});
-      }
+      await close('developer-evidence');await page.locator('[data-command="0"]').click();await page.locator('[data-outcome="normal"]').click();
+      if(viewport.width===1366)await snap('laptop-demo');
+      if(viewport.width===390){await snap('narrow-demo',true);await navigate('technical');await snap('narrow-technical',true);await navigate('product');await snap('narrow-product',true);}
     }
-    for(const href of links)check('local source link '+href,!/^https?:/.test(href)&&fs.existsSync(path.resolve(root,'demo',decodeURI(href.split('#')[0]))));
-    check('console healthy',errors.length===0,JSON.stringify(errors));
-    check('file resources only while offline',requests.every(r=>r.startsWith('file:')),JSON.stringify(requests));
-    check('no framework overlay',await page.locator('vite-error-overlay,nextjs-portal').count()===0);
-    const unchanged=await page.evaluate(()=>JSON.stringify(window.DEMO_DATA));
-    check('browser interactions do not mutate embedded evidence',unchanged===JSON.stringify(D));
-    await page.emulateMedia({reducedMotion:'reduce'});
-    check('larger type also with reduced motion',await page.evaluate(()=>getComputedStyle(document.body).fontSize==='16px'));
-    const sizes=await page.locator('h1,.intro,.constraints strong').evaluateAll(els=>els.map(e=>({text:e.textContent,size:getComputedStyle(e).fontSize})));
-    const report={captured_at:new Date().toISOString(),passed:true,check_count:checks.length,
-      browser:browser.version(),playwright:require((moduleArg<0?'playwright':process.argv[moduleArg+1])+'/package.json').version,
-      url,offline:true,viewports:['1440x1000','1505x1045','1366x768','1024x768','390x844'],
-      browser_plugin:'Absent; Browser plugin not available. Existing MCP Playwright blocks file navigation; used existing local Playwright and Chrome.',
-      console_errors:errors,requests,unique_source_links:links.size,computed_mobile_type:sizes,checks};
+    for(const href of links)check('local source '+href,!/^https?:/.test(href)&&fs.existsSync(path.resolve(root,'demo',decodeURI(href.split('#')[0]))));
+    const previous=JSON.parse(fs.readFileSync(path.join(root,'evidence/demo-review/browser-results.json'),'utf8')).checks.filter(c=>c.name.startsWith('local source link ')).map(c=>c.name.slice(18));
+    check('old seventy source paths preserved',previous.every(p=>links.has(p)),JSON.stringify(previous.filter(p=>!links.has(p))));
+    for(const route of ['product','demo','technical']){
+      await navigate(route);
+      for(const a of await page.locator('a[href$=".md"]').all())check('raw Markdown link explicitly labeled',(await a.textContent()).includes('原始 Markdown 文档'));
+      check('default page has no visible raw Markdown link '+route,await page.locator('a[href$=".md"]:visible').count()===0);
+      check('default page has no visible JSON '+route,await page.locator('.json-view:visible').count()===0);
+    }
+    check('no console errors',errors.length===0,JSON.stringify(errors));
+    check('offline file resources only',requests.every(r=>r.startsWith('file:')),JSON.stringify(requests));
+    check('evidence object unchanged',await page.evaluate(()=>JSON.stringify(window.DEMO_DATA))===JSON.stringify(D));
+    await page.emulateMedia({reducedMotion:'reduce'});check('reduced motion body font',await page.locator('body').evaluate(e=>getComputedStyle(e).fontSize==='16px'));
+    const report={captured_at:new Date().toISOString(),passed:true,check_count:checks.length,browser:browser.version(),
+      playwright:require((moduleArg<0?'playwright':process.argv[moduleArg+1])+'/package.json').version,url,offline:true,
+      browser_plugin:'Absent; Browser plugin not available. Existing local Playwright + Chrome used for file:// validation.',
+      viewports:['1440x1000','1435x1096','1366x768','1024x768','390x844'],console_errors:errors,requests,
+      unique_source_links:links.size,reading_metrics:readingMetrics,checks};
     fs.writeFileSync(path.join(out,'browser-results.json'),JSON.stringify(report,null,2)+'\n');
-    console.log(`PASS: ${checks.length} assertions; three review modules; ${links.size} links; offline file; Chrome ${browser.version()}.`);
+    console.log(`PASS: ${checks.length} assertions; seven visible commands; ${links.size} local links; offline Chrome ${browser.version()}.`);
   }finally{await browser.close();}
 }
-run().catch(e=>{
-  const p=path.join(root,'evidence/demo-review','failure-'+Date.now()+'.json');
-  fs.writeFileSync(p,JSON.stringify({at:new Date().toISOString(),error:e.stack,passed_checks:checks.length},null,2)+'\n');
-  console.error(e);process.exitCode=1;
-});
+run().catch(e=>{fs.writeFileSync(path.join(root,'evidence/demo-simplified/failure-'+Date.now()+'.json'),JSON.stringify({at:new Date().toISOString(),error:e.stack,passed_checks:checks.length},null,2)+'\n');console.error(e);process.exitCode=1;});

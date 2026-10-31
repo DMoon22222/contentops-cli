@@ -26,15 +26,15 @@ java -jar ./target/contentops.jar --env mock --output json content list --review
 
 ## 离线 HTML Demo
 
-直接双击 [demo/index.html](demo/index.html)，或在 Windows Chrome / Edge 中打开该文件。请保留同目录的 `style.css`、`data.js`、`app.js`；不需要 Java、Node、服务、网络或 CDN。评审路线为三个模块：**产品方案 → CLI 交互演示 → 技术方案与演进**。
+直接双击 [demo/index.html](demo/index.html)，或在 Windows Chrome / Edge 中打开该文件。请保留同目录的 `style.css`、`data.js`、`app.js`；不需要 Java、Node、服务、网络或 CDN。页面保留三个入口：**产品方案 → CLI 功能演示 → 技术设计与演进**。
 
-默认首页先说明 MVP 目标、1 名后端/两周约束、当前 48 小时原型边界和原有十日计划。核心演示支持选择真实目标 ct_000004，通过五步导航及上一步/下一步查看查询、详情、预览、既有执行记录和前后核验。七条命令与复制收纳到“命令参考”（默认突出 process）；三类代表结果下可展开全部五种 S5 故障与独立标签修复。技术页展示 Java 分层、关键取舍及 Agent 的现有/未来/上游能力边界。完整 JSON 和证据入口始终保留，默认折叠详细信息。
+首页简要说明用途、首期三项能力、一名后端/两周/六项 API 的约束，以及当前原型完成情况。功能页直接展示七条命令的用途与完整示例，支持复制；写命令可切换预览/执行示例。下面直接对比 ct_000004 审核前后状态、标签与历史，不再需要点击五个步骤。实际操作记录、完整 JSON、stderr、退出码及全部五种 S5 故障/独立标签修复按需展开。
 
 三类信息分别标记：任务二是 **Java CLI 的既有 Mock 实测**（新增“悬疑”）；S5 是 **受控 Mock 故障实测**（新增“轻松”，每场景独立副本）；Agent 是 **未实现的未来设计**。浏览器只切换内嵌快照，不执行 Java、不连接 API、不修改 Mock 状态，不能代替 JAR 验收。独立审核/标签命令的预览模板未冒充新增实测。
 
-JSON 展开保留全部字段，并可打开原始 stdout、stderr、退出码及文档。Markdown 链接在部分浏览器会下载或显示源码，可用编辑器阅读。复制不执行命令；剪贴板不可用时提供兼容复制及选中文本后 Ctrl+C 的降级。若要在终端手工试用写命令，先按下文设置新的独立状态目录。
+“技术说明”和“Agent 方案”直接在页面内展开排版好的 HTML，不跳到 Markdown 源码。完整原稿保留在“原始资料（Markdown）”中，每个链接明确标注为原始 Markdown 文档。没有新增文档站或渲染依赖。JSON 保留全部字段及原始输出链接。复制不执行命令；剪贴板不可用时提供兼容复制及选中文本后 Ctrl+C 的降级。若要在终端手工试用写命令，先按下文设置新的独立状态目录。
 
-本次三模块改版的实际浏览器检查、截图和来源校验见 [评审版验收记录](evidence/demo-review/README.md)；[S6 五模块验收记录](evidence/demo/README.md)及其 407 项结果属于原版历史，未被覆盖。现有 `evidence/demo/verify.cjs` 已同步为新版交互，输出到独立的 `evidence/demo-review/`。本轮只改展示层，未重跑 Java 写操作；Java、原始材料、`demo/data.js` 和任务二/S5 证据保持不变。
+本次精简版的检查、截图与阅读对照见 [精简版验收记录](evidence/demo-simplified/README.md)。[上一版 571 项记录](evidence/demo-review/README.md)与 [S6 原版 407 项记录](evidence/demo/README.md)均为历史，未被覆盖。`evidence/demo/verify.cjs` 现在验证七命令与直接案例，输出到独立的 `evidence/demo-simplified/`。本轮只改展示层，未重跑 Java 写操作；Java、原始材料、`demo/data.js` 和任务二/S5 证据保持不变。
 
 ## 构建与运行
 

@@ -1,0 +1,48 @@
+{
+  "captured_at": "2026-10-31T14:40:24.196Z",
+  "baseline_commit": "77d329242fef593879dfe4eea378a810a784a735",
+  "method": "Actual offline Chrome at 1440x1000. main.innerText excluding whitespace, closed details hidden. Includes code, captions and scrollable content; not a reading-time measurement.",
+  "browser": "156.0.8078.74",
+  "versions": {
+    "previous": {
+      "product": {
+        "visible_characters": 653,
+        "visible_tables": 0,
+        "visible_result_panels": 0,
+        "folded_sections": 2
+      },
+      "demo": {
+        "visible_characters": 1339,
+        "visible_tables": 2,
+        "visible_result_panels": 2,
+        "folded_sections": 8
+      },
+      "technical": {
+        "visible_characters": 926,
+        "visible_tables": 1,
+        "visible_result_panels": 0,
+        "folded_sections": 1
+      }
+    },
+    "current": {
+      "product": {
+        "visible_characters": 431,
+        "visible_tables": 0,
+        "visible_result_panels": 0,
+        "folded_sections": 1
+      },
+      "demo": {
+        "visible_characters": 794,
+        "visible_tables": 0,
+        "visible_result_panels": 0,
+        "folded_sections": 18
+      },
+      "technical": {
+        "visible_characters": 508,
+        "visible_tables": 0,
+        "visible_result_panels": 0,
+        "folded_sections": 3
+      }
+    }
+  }
+}
