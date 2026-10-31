@@ -1,0 +1,286 @@
+{
+  "captured_at": "2026-10-31T14:33:03.9222779+08:00",
+  "platform": "Microsoft Windows NT 10.0.22631.0",
+  "powershell": "7.6.5",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\manual-validation\\928736dc-ad1a-4fd9-9f3f-ab460da7fc18",
+  "jar_sha256": "F8104CB3CAB7810AF199AB3C12B8DDF0DB5AC7C0AA4ACD49AC5767D7CB3BCFD5",
+  "command_count": 18,
+  "commands": [
+    {
+      "name": "01-help",
+      "command": "java -jar ./target/contentops.jar --help",
+      "actual_exit_code": 0,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit"
+      ],
+      "passed": true
+    },
+    {
+      "name": "02-pending-table",
+      "command": "java -jar ./target/contentops.jar --env mock content list --review-status pending --page 1",
+      "actual_exit_code": 0,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit"
+      ],
+      "passed": true
+    },
+    {
+      "name": "03-detail-table",
+      "command": "java -jar ./target/contentops.jar --env mock content get ct_000004",
+      "actual_exit_code": 0,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit"
+      ],
+      "passed": true
+    },
+    {
+      "name": "04-history-table",
+      "command": "java -jar ./target/contentops.jar --env mock content history ct_000003",
+      "actual_exit_code": 0,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit"
+      ],
+      "passed": true
+    },
+    {
+      "name": "05-tags-table",
+      "command": "java -jar ./target/contentops.jar --env mock tags list --status active",
+      "actual_exit_code": 0,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit"
+      ],
+      "passed": true
+    },
+    {
+      "name": "06-detail-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_000004",
+      "actual_exit_code": 0,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match"
+      ],
+      "passed": true
+    },
+    {
+      "name": "07-total-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list",
+      "actual_exit_code": 0,
+      "actual_total": 300,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match",
+        "total_and_item_counts"
+      ],
+      "passed": true
+    },
+    {
+      "name": "08-pending-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1",
+      "actual_exit_code": 0,
+      "actual_total": 132,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match",
+        "total_and_item_counts"
+      ],
+      "passed": true
+    },
+    {
+      "name": "09-active-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json tags list",
+      "actual_exit_code": 0,
+      "actual_total": 23,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match",
+        "total_and_item_counts"
+      ],
+      "passed": true
+    },
+    {
+      "name": "10-all-tags-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json tags list --status all",
+      "actual_exit_code": 0,
+      "actual_total": 25,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match",
+        "total_and_item_counts"
+      ],
+      "passed": true
+    },
+    {
+      "name": "11-last-pending-page",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 7",
+      "actual_exit_code": 0,
+      "actual_total": 132,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match",
+        "total_and_item_counts"
+      ],
+      "passed": true
+    },
+    {
+      "name": "12-and-query",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --content-id ct_000003 --review-status pending",
+      "actual_exit_code": 0,
+      "actual_total": 0,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match",
+        "total_and_item_counts"
+      ],
+      "passed": true
+    },
+    {
+      "name": "13-invalid-page",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --page 0",
+      "actual_exit_code": 2,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match"
+      ],
+      "passed": true
+    },
+    {
+      "name": "14-invalid-page-type",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --page abc",
+      "actual_exit_code": 2,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match"
+      ],
+      "passed": true
+    },
+    {
+      "name": "15-missing-content",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content get ct_missing",
+      "actual_exit_code": 3,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match"
+      ],
+      "passed": true
+    },
+    {
+      "name": "16-api-rejected",
+      "command": "java -jar ./target/contentops.jar --env api --output json content list",
+      "actual_exit_code": 2,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match"
+      ],
+      "passed": true
+    },
+    {
+      "name": "17-history-json",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content history ct_000003",
+      "actual_exit_code": 0,
+      "actual_total": null,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match"
+      ],
+      "passed": true
+    },
+    {
+      "name": "18-outside-page",
+      "command": "java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 999",
+      "actual_exit_code": 0,
+      "actual_total": 132,
+      "checks": [
+        "actual_process_exit",
+        "single_json_envelope_and_exit_match",
+        "total_and_item_counts"
+      ],
+      "passed": true
+    }
+  ],
+  "business_snapshot_created": false,
+  "protected_files": [
+    {
+      "file": "AGENTS.md",
+      "before_sha256": "A41B41D72795E20ADAA431BE50800F60D3CC99362358FDF65F40D62814E8FE49",
+      "after_sha256": "A41B41D72795E20ADAA431BE50800F60D3CC99362358FDF65F40D62814E8FE49",
+      "unchanged": true
+    },
+    {
+      "file": ".gitignore",
+      "before_sha256": "3C3F84F9A788CFEF48FC81DEB59FB926A5C394B0C8B4B5DF9C890576693BA279",
+      "after_sha256": "3C3F84F9A788CFEF48FC81DEB59FB926A5C394B0C8B4B5DF9C890576693BA279",
+      "unchanged": true
+    },
+    {
+      "file": ".gitattributes",
+      "before_sha256": "B9B213A20E276DE98B138ABF8CBAE64B17CF828D736D51873A1BC95FF7F2EF47",
+      "after_sha256": "B9B213A20E276DE98B138ABF8CBAE64B17CF828D736D51873A1BC95FF7F2EF47",
+      "unchanged": true
+    },
+    {
+      "file": "docs/01-需求与接口分析.md",
+      "before_sha256": "F2C2EEB5E4F25DBED54BD767D332F5B0010D70B9E537CA3C88DB6D1D3E7C9941",
+      "after_sha256": "F2C2EEB5E4F25DBED54BD767D332F5B0010D70B9E537CA3C88DB6D1D3E7C9941",
+      "unchanged": true
+    },
+    {
+      "file": "docs/02-第一阶段MVP与CLI产品方案.md",
+      "before_sha256": "106AE887A3692104827882640B448F1F44306FF5756E3DA43441CB55EA753DC6",
+      "after_sha256": "106AE887A3692104827882640B448F1F44306FF5756E3DA43441CB55EA753DC6",
+      "unchanged": true
+    },
+    {
+      "file": "docs/03-Java技术架构与实施方案.md",
+      "before_sha256": "1395249857D11CC6AB5E9819A64D5B8FD5A897B3826FEAAB0376D9AB25A78697",
+      "after_sha256": "1395249857D11CC6AB5E9819A64D5B8FD5A897B3826FEAAB0376D9AB25A78697",
+      "unchanged": true
+    },
+    {
+      "file": "docs/04-交付物规划与验收清单.md",
+      "before_sha256": "DCA6D8F3C4279C62A98F15DC3C83596E6147A897D2CF0A896ABA6850805D5510",
+      "after_sha256": "DCA6D8F3C4279C62A98F15DC3C83596E6147A897D2CF0A896ABA6850805D5510",
+      "unchanged": true
+    },
+    {
+      "file": "题目：内容运营后台 CLI 化.md",
+      "before_sha256": "511036C3C832E5E6823DB517A33129F06FBFA2BCEDF3A0BF21EEC1F374C0A337",
+      "after_sha256": "511036C3C832E5E6823DB517A33129F06FBFA2BCEDF3A0BF21EEC1F374C0A337",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/README.md",
+      "before_sha256": "E289F0DAAA91FEECCE1B4CE3BD28440B43AB29F33932D6D7E66008C2B28E3D60",
+      "after_sha256": "E289F0DAAA91FEECCE1B4CE3BD28440B43AB29F33932D6D7E66008C2B28E3D60",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/content-ops-admin-openapi.json",
+      "before_sha256": "C66A657DE90D2FE021106B3EE822193B33DDCFBA78B861D7EA9C536B6C82C935",
+      "after_sha256": "C66A657DE90D2FE021106B3EE822193B33DDCFBA78B861D7EA9C536B6C82C935",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/mock_data.json",
+      "before_sha256": "44BA17CBE95432547A8FE380F81E0416AE51404957ED0C87DE5CED7F8E3939B0",
+      "after_sha256": "44BA17CBE95432547A8FE380F81E0416AE51404957ED0C87DE5CED7F8E3939B0",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据.zip",
+      "before_sha256": "069AAD6F62EEC29573D20350E487CF5DF118D0E8CC0E1A2F9481FFB2C8741AC1",
+      "after_sha256": "069AAD6F62EEC29573D20350E487CF5DF118D0E8CC0E1A2F9481FFB2C8741AC1",
+      "unchanged": true
+    }
+  ],
+  "scope": "Read-only Mock validation; no review or tag business mutation was executed."
+}

@@ -1,0 +1,84 @@
+{
+  "baseline_commit": "2a6ed8c355d95e090624b8d760368e143b7e8c12",
+  "files": [
+    {
+      "file": ".gitattributes",
+      "sha256": "B9B213A20E276DE98B138ABF8CBAE64B17CF828D736D51873A1BC95FF7F2EF47",
+      "baseline_blob": "9ad1722ab0a2bb849bee463a7f6b41327342fcbb",
+      "working_blob": "9ad1722ab0a2bb849bee463a7f6b41327342fcbb",
+      "unchanged": true
+    },
+    {
+      "file": ".gitignore",
+      "sha256": "3C3F84F9A788CFEF48FC81DEB59FB926A5C394B0C8B4B5DF9C890576693BA279",
+      "baseline_blob": "1984a708abb27e0871e64be6da6d3b61892f2dbd",
+      "working_blob": "1984a708abb27e0871e64be6da6d3b61892f2dbd",
+      "unchanged": true
+    },
+    {
+      "file": "AGENTS.md",
+      "sha256": "A41B41D72795E20ADAA431BE50800F60D3CC99362358FDF65F40D62814E8FE49",
+      "baseline_blob": "e009047216c5c0d37805698ee0e1a1ae377ed001",
+      "working_blob": "e009047216c5c0d37805698ee0e1a1ae377ed001",
+      "unchanged": true
+    },
+    {
+      "file": "docs/01-需求与接口分析.md",
+      "sha256": "F2C2EEB5E4F25DBED54BD767D332F5B0010D70B9E537CA3C88DB6D1D3E7C9941",
+      "baseline_blob": "85d06830e4903f73f43ed55e77c7a3e3c3fe905c",
+      "working_blob": "85d06830e4903f73f43ed55e77c7a3e3c3fe905c",
+      "unchanged": true
+    },
+    {
+      "file": "docs/02-第一阶段MVP与CLI产品方案.md",
+      "sha256": "106AE887A3692104827882640B448F1F44306FF5756E3DA43441CB55EA753DC6",
+      "baseline_blob": "bfa01642be7c773730325d4c563d13f337c1c2aa",
+      "working_blob": "bfa01642be7c773730325d4c563d13f337c1c2aa",
+      "unchanged": true
+    },
+    {
+      "file": "docs/03-Java技术架构与实施方案.md",
+      "sha256": "1395249857D11CC6AB5E9819A64D5B8FD5A897B3826FEAAB0376D9AB25A78697",
+      "baseline_blob": "30876db5bd6fb51640d89e762b1e2da516724336",
+      "working_blob": "30876db5bd6fb51640d89e762b1e2da516724336",
+      "unchanged": true
+    },
+    {
+      "file": "docs/04-交付物规划与验收清单.md",
+      "sha256": "DCA6D8F3C4279C62A98F15DC3C83596E6147A897D2CF0A896ABA6850805D5510",
+      "baseline_blob": "39c1dba6b73a52b7fda2d958fc952f437780ab5b",
+      "working_blob": "39c1dba6b73a52b7fda2d958fc952f437780ab5b",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/README.md",
+      "sha256": "E289F0DAAA91FEECCE1B4CE3BD28440B43AB29F33932D6D7E66008C2B28E3D60",
+      "baseline_blob": "c3fbac05fc5ac72e5c34da8b8b782b11a7930785",
+      "working_blob": "c3fbac05fc5ac72e5c34da8b8b782b11a7930785",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/content-ops-admin-openapi.json",
+      "sha256": "C66A657DE90D2FE021106B3EE822193B33DDCFBA78B861D7EA9C536B6C82C935",
+      "baseline_blob": "f8d9b38a781e6c2bb7460e98dfd5139dae677485",
+      "working_blob": "f8d9b38a781e6c2bb7460e98dfd5139dae677485",
+      "unchanged": true
+    },
+    {
+      "file": "内容运营后台接口数据/mock_data.json",
+      "sha256": "44BA17CBE95432547A8FE380F81E0416AE51404957ED0C87DE5CED7F8E3939B0",
+      "baseline_blob": "6d607549dc6e8552a53f912380d76ac5d45e541c",
+      "working_blob": "6d607549dc6e8552a53f912380d76ac5d45e541c",
+      "unchanged": true
+    },
+    {
+      "file": "题目：内容运营后台 CLI 化.md",
+      "sha256": "511036C3C832E5E6823DB517A33129F06FBFA2BCEDF3A0BF21EEC1F374C0A337",
+      "baseline_blob": "e8fc68070560568d3801d200086ea6c2c29f133c",
+      "working_blob": "e8fc68070560568d3801d200086ea6c2c29f133c",
+      "unchanged": true
+    }
+  ],
+  "ignored_zip_sha256": "069AAD6F62EEC29573D20350E487CF5DF118D0E8CC0E1A2F9481FFB2C8741AC1",
+  "original_zip_unchanged": true
+}

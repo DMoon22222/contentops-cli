@@ -1,0 +1,11 @@
+Captured: 2026-10-31T14:35:03.6755289+08:00 PowerShell: 7.6.5 Workspace: F:\AI_TESTEXAM
+openjdk version "21.0.7" 2025-04-15 LTS
+OpenJDK Runtime Environment Temurin-21.0.7+6 (build 21.0.7+6-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.7+6 (build 21.0.7+6-LTS, mixed mode, sharing)
+Apache Maven 3.9.4 (dfbb324ad4a7c8fb0bf182e6d91b0ae20e3d2dd9)
+Maven home: F:\Develop\apache-maven-3.9.4-bin\apache-maven-3.9.4
+Java version: 21.0.7, vendor: Eclipse Adoptium, runtime: C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+
+Get-Volume -DriveLetter F: 拒绝访问；文件系统类型未确认。原子替换和锁的能力由 F 盘真实文件测试验证。

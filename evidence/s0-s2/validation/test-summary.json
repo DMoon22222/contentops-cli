@@ -1,0 +1,54 @@
+{
+  "captured_at": "2026-10-31T14:35:03.6412678+08:00",
+  "suites": [
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.cli.CliParsingTest",
+      "tests": 27,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.346
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.gateway.JsonMockGatewayContractTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.339
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.infrastructure.AppConfigTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.016
+    },
+    {
+      "group": "surefire-reports",
+      "suite": "com.example.contentops.infrastructure.mock.JsonStateStoreTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.28
+    },
+    {
+      "group": "failsafe-reports",
+      "suite": "com.example.contentops.integration.CliProcessIT",
+      "tests": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 30.958
+    }
+  ],
+  "unique_test_count": 74.0,
+  "failures": 0.0,
+  "errors": 0.0,
+  "skipped": 0.0
+}

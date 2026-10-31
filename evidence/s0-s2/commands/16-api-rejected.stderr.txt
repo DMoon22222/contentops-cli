@@ -1,0 +1,1 @@
+API_ENV_NOT_IMPLEMENTED: S0–S2 尚未实现 HTTP Gateway；不会回退 Mock

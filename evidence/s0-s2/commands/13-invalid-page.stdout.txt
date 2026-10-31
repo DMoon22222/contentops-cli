@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"58e903d0-6e7a-455f-a6fe-f240c4c99815","environment":"mock","command":"content.list","mode":"read","status":"rejected","exit_code":2,"content_id":null,"data":null,"error":{"code":"INVALID_PAGE","message":"--page 必须是大于等于 1 的整数","step":"read","upstream":null},"warnings":[]}

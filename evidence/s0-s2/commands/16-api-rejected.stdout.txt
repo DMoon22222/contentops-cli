@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"13b28d6c-0de0-4c74-bc8b-5898af4518f4","environment":"api","command":"content.list","mode":"read","status":"rejected","exit_code":2,"content_id":null,"data":null,"error":{"code":"API_ENV_NOT_IMPLEMENTED","message":"S0–S2 尚未实现 HTTP Gateway；不会回退 Mock","step":"read","upstream":null},"warnings":[]}

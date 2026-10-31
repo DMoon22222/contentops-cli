@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"05e8dcc2-8e2d-4086-b405-74a54cc8ab2f","environment":"mock","command":"content.list","mode":null,"status":"rejected","exit_code":2,"content_id":null,"data":null,"error":{"code":"INVALID_ARGUMENTS","message":"命令、参数、必填项或参数类型不合法；请查看对应 --help（写命令本阶段未开放）","step":null,"upstream":null},"warnings":[]}
