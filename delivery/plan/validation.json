@@ -1,0 +1,263 @@
+{
+  "stage": "static_only_no_business_execution",
+  "summary": {
+    "selected_files": 1920,
+    "selected_known_bytes": 12163803,
+    "excluded_baseline_files": 10,
+    "excluded_baseline_bytes": 677200,
+    "category_counts": {
+      "C": 261,
+      "A": 82,
+      "B": 1594
+    },
+    "edge_count": 1539,
+    "html_pages": 13,
+    "dynamic_states": 22,
+    "all_link_issues": 0,
+    "candidate_link_issues": 0,
+    "package_missing_targets": 0,
+    "credential_pattern_hits": 0
+  },
+  "jar_observation": {
+    "path": "target/contentops.jar",
+    "bytes": 3054342,
+    "sha256": "a42bf7cbb747a75ad7373c4142d70ac62ff39af1bf0cfbd872eb718b4192e2ef",
+    "frozen": false,
+    "main_class_present": true,
+    "seed_matches_original": true,
+    "main_class_entry_present": true,
+    "embedded_required_classes": {
+      "com/example/contentops/Main.class": true,
+      "picocli/CommandLine.class": true,
+      "com/fasterxml/jackson/databind/ObjectMapper.class": true,
+      "com/fasterxml/jackson/core/JsonFactory.class": true,
+      "com/fasterxml/jackson/datatype/jsr310/JavaTimeModule.class": true
+    },
+    "main_class_major_version": 61
+  },
+  "protected_originals": [
+    {
+      "path": "题目：内容运营后台 CLI 化.md",
+      "sha256": "511036c3c832e5e6823db517a33129f06fbfa2bcedf3a0bf21eec1f374c0a337",
+      "matches_initial_commit": true,
+      "matches_original_archive": null
+    },
+    {
+      "path": "内容运营后台接口数据/README.md",
+      "sha256": "e289f0daaa91feecce1b4ce3bd28440b43ab29f33932d6d7e66008c2b28e3d60",
+      "matches_initial_commit": true,
+      "matches_original_archive": true
+    },
+    {
+      "path": "内容运营后台接口数据/content-ops-admin-openapi.json",
+      "sha256": "c66a657de90d2fe021106b3ee822193b33ddcfba78b861d7ea9c536b6c82c935",
+      "matches_initial_commit": true,
+      "matches_original_archive": true
+    },
+    {
+      "path": "内容运营后台接口数据/mock_data.json",
+      "sha256": "44ba17cbe95432547a8fe380f81e0416ae51404957ed0c87de5ced7f8e3939b0",
+      "matches_initial_commit": true,
+      "matches_original_archive": true
+    }
+  ],
+  "credential_pattern_hits": [],
+  "immutable_demo_evidence_sources": {
+    "checked": 101,
+    "mismatches": []
+  },
+  "task2_original_evidence": {
+    "command_count": 18,
+    "missing_streams": [],
+    "historical_jar_sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2",
+    "current_jar_is_same_binary_as_historical": false,
+    "recorded_cross_jvm_verified": true,
+    "recorded_all_assertions_passed": true
+  },
+  "maven_static_inputs": {
+    "pom_parsed": true,
+    "compiler_release": "17",
+    "seed_resource_directory": "${project.basedir}/内容运营后台接口数据",
+    "maven_config_exists": true,
+    "all_tracked_paths_exist": true
+  },
+  "absolute_path_occurrences_in_runtime_and_maintenance_material": [
+    {
+      "path": "demo/docs/01-requirements.html",
+      "line": 99,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 131,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 136,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 182,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 185,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 202,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 207,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 212,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 222,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 227,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 232,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 237,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 242,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 489,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 516,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 529,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 530,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 599,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 904,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 919,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 955,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/03-architecture.html",
+      "line": 956,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/04-delivery-plan.html",
+      "line": 89,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/04-delivery-plan.html",
+      "line": 278,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/06-operation-record.html",
+      "line": 48,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/06-operation-record.html",
+      "line": 72,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/07-agent-plan.html",
+      "line": 378,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/07-agent-plan.html",
+      "line": 417,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/readme.html",
+      "line": 48,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/readme.html",
+      "line": 73,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/readme.html",
+      "line": 214,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "demo/docs/readme.html",
+      "line": 264,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "scripts/test-render-docs.py",
+      "line": 112,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "scripts/test-render-docs.py",
+      "line": 117,
+      "classification": "review_context_no_automatic_replacement"
+    },
+    {
+      "path": "scripts/test-render-docs.py",
+      "line": 124,
+      "classification": "review_context_no_automatic_replacement"
+    }
+  ],
+  "missing_planned_files": [],
+  "no_tests_or_browser_runs_claimed": true
+}

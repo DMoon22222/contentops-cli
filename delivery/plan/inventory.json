@@ -1,0 +1,334 @@
+{
+  "captured_at": "2026-11-01T13:58:37.656837+08:00",
+  "source_commit": "d8100279dd6ed37d46042abf4a40ff9a0f668f37",
+  "branch": "master",
+  "status": "",
+  "total_files": 16173,
+  "total_bytes": 297204096,
+  "tracked_files": 1929,
+  "tracked_bytes": 9786661,
+  "top_level": [
+    {
+      "path": ".contentops",
+      "files": 12251,
+      "bytes": 271378767
+    },
+    {
+      "path": ".git",
+      "files": 1553,
+      "bytes": 5855799
+    },
+    {
+      "path": ".gitattributes",
+      "files": 1,
+      "bytes": 369
+    },
+    {
+      "path": ".gitignore",
+      "files": 1,
+      "bytes": 1275
+    },
+    {
+      "path": ".mvn",
+      "files": 1,
+      "bytes": 34
+    },
+    {
+      "path": "AGENTS.md",
+      "files": 1,
+      "bytes": 5354
+    },
+    {
+      "path": "README.md",
+      "files": 1,
+      "bytes": 24841
+    },
+    {
+      "path": "demo",
+      "files": 22,
+      "bytes": 909993
+    },
+    {
+      "path": "docs",
+      "files": 7,
+      "bytes": 297740
+    },
+    {
+      "path": "evidence",
+      "files": 1837,
+      "bytes": 7967252
+    },
+    {
+      "path": "pom.xml",
+      "files": 1,
+      "bytes": 4638
+    },
+    {
+      "path": "scripts",
+      "files": 14,
+      "bytes": 138376
+    },
+    {
+      "path": "src",
+      "files": 40,
+      "bytes": 214171
+    },
+    {
+      "path": "target",
+      "files": 438,
+      "bytes": 10136206
+    },
+    {
+      "path": "内容运营后台接口数据",
+      "files": 3,
+      "bytes": 242097
+    },
+    {
+      "path": "内容运营后台接口数据.zip",
+      "files": 1,
+      "bytes": 26043
+    },
+    {
+      "path": "题目：内容运营后台 CLI 化.md",
+      "files": 1,
+      "bytes": 1141
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/cli-entry",
+      "files": 774,
+      "bytes": 965663
+    },
+    {
+      "path": "evidence/demo",
+      "files": 12,
+      "bytes": 650147
+    },
+    {
+      "path": "evidence/demo-docs",
+      "files": 37,
+      "bytes": 1872589
+    },
+    {
+      "path": "evidence/demo-playground",
+      "files": 16,
+      "bytes": 440919
+    },
+    {
+      "path": "evidence/demo-review",
+      "files": 15,
+      "bytes": 1287349
+    },
+    {
+      "path": "evidence/demo-simplified",
+      "files": 17,
+      "bytes": 1006339
+    },
+    {
+      "path": "evidence/reliability-review",
+      "files": 466,
+      "bytes": 1101401
+    },
+    {
+      "path": "evidence/s0-s2",
+      "files": 75,
+      "bytes": 136654
+    },
+    {
+      "path": "evidence/s3-s4",
+      "files": 79,
+      "bytes": 72773
+    },
+    {
+      "path": "evidence/s5",
+      "files": 194,
+      "bytes": 172821
+    },
+    {
+      "path": "evidence/task2",
+      "files": 152,
+      "bytes": 260597
+    }
+  ],
+  "maven_cache": {
+    "path": ".contentops/m2",
+    "files": 991,
+    "bytes": 41139747
+  },
+  "test_temporary": {
+    "path": "target/test-state",
+    "files": 0,
+    "bytes": 0
+  },
+  "scan_errors": [],
+  "reparse_directories_not_followed": [],
+  "additional_statistics": {
+    "evidence_screenshots": 43,
+    "evidence_log_extension_files": 62,
+    "evidence_stdout_stderr_texts": 568,
+    "evidence_exit_code_files": 264,
+    "evidence_zero_byte_files": 319,
+    "nonempty_exact_duplicate_groups": 89,
+    "nonempty_exact_duplicate_files": 547,
+    "nonempty_duplicate_excess_bytes": 743950,
+    "contentops_subdirectories": [
+      {
+        "path": ".contentops/doc-check",
+        "files": 9081,
+        "bytes": 122914955
+      },
+      {
+        "path": ".contentops/npm-cache",
+        "files": 633,
+        "bytes": 65777454
+      },
+      {
+        "path": ".contentops/m2",
+        "files": 991,
+        "bytes": 41139747
+      },
+      {
+        "path": ".contentops/cli-entry",
+        "files": 51,
+        "bytes": 18883028
+      },
+      {
+        "path": ".contentops/publication",
+        "files": 1413,
+        "bytes": 13340617
+      },
+      {
+        "path": ".contentops/demo-review-qa",
+        "files": 9,
+        "bytes": 3334100
+      },
+      {
+        "path": ".contentops/demo-simplified-qa",
+        "files": 15,
+        "bytes": 1894913
+      },
+      {
+        "path": ".contentops/demo-qa",
+        "files": 3,
+        "bytes": 1746328
+      },
+      {
+        "path": ".contentops/s5-validation",
+        "files": 12,
+        "bytes": 1349290
+      },
+      {
+        "path": ".contentops/task2",
+        "files": 2,
+        "bytes": 224911
+      },
+      {
+        "path": ".contentops/s3-s4-validation",
+        "files": 2,
+        "bytes": 224883
+      },
+      {
+        "path": ".contentops/cli-entry-qa",
+        "files": 1,
+        "bytes": 179056
+      },
+      {
+        "path": ".contentops/demo-playground-qa",
+        "files": 5,
+        "bytes": 152274
+      },
+      {
+        "path": ".contentops/demo-docs-qa",
+        "files": 2,
+        "bytes": 107601
+      },
+      {
+        "path": ".contentops/reliability-review",
+        "files": 1,
+        "bytes": 88780
+      },
+      {
+        "path": ".contentops/github-sync-20261101-a7cedaca",
+        "files": 28,
+        "bytes": 20774
+      },
+      {
+        "path": ".contentops/github-sync-latest.txt",
+        "files": 1,
+        "bytes": 56
+      },
+      {
+        "path": ".contentops/manual-validation",
+        "files": 1,
+        "bytes": 0
+      }
+    ],
+    "java_main": {
+      "path": "src/main",
+      "files": 20,
+      "bytes": 78737
+    },
+    "java_test": {
+      "path": "src/test",
+      "files": 20,
+      "bytes": 135434
+    },
+    "jar": {
+      "path": "target/contentops.jar",
+      "files": 1,
+      "bytes": 3054342
+    },
+    "java_and_build_bytes": 218843,
+    "largest_evidence_files": [
+      {
+        "path": "evidence/cli-entry/protected-files.json",
+        "bytes": 356107
+      },
+      {
+        "path": "evidence/demo-docs/browser-results.json",
+        "bytes": 198386
+      },
+      {
+        "path": "evidence/reliability-review/findings/protected-files.json",
+        "bytes": 192948
+      },
+      {
+        "path": "evidence/demo-review/desktop-technical.png",
+        "bytes": 176586
+      },
+      {
+        "path": "evidence/demo-docs/product-plan-reading.png",
+        "bytes": 163619
+      },
+      {
+        "path": "evidence/demo-review/narrow-preview.png",
+        "bytes": 154790
+      },
+      {
+        "path": "evidence/demo-review/concept-size-product.png",
+        "bytes": 142074
+      },
+      {
+        "path": "evidence/demo-review/desktop-product.png",
+        "bytes": 137028
+      },
+      {
+        "path": "evidence/demo-docs/product-narrow.png",
+        "bytes": 134322
+      },
+      {
+        "path": "evidence/demo-simplified/narrow-demo.png",
+        "bytes": 129518
+      },
+      {
+        "path": "evidence/demo-review/desktop-comparison.png",
+        "bytes": 128963
+      },
+      {
+        "path": "evidence/demo-review/narrow-product.png",
+        "bytes": 125658
+      }
+    ]
+  }
+}
