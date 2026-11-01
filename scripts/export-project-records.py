@@ -239,7 +239,7 @@ def export_session(spec):
 
 def main():
     manifest = OUT / '会话清单.json'
-    if manifest.exists() and json.loads(manifest.read_text(encoding='utf-8')).get('format') == 'chinese_dialogue_reading_v1':
+    if manifest.exists() and json.loads(manifest.read_text(encoding='utf-8')).get('format') in {'chinese_dialogue_reading_v1', 'chinese_dialogue_reading_incremental_v1'}:
         raise SystemExit('Current deliverable uses Chinese dialogue reading format. Use render-ai-reading.py; legacy full exports remain private, not overwritten into submission.')
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / '附件').mkdir(exist_ok=True)

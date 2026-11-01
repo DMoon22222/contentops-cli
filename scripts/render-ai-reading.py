@@ -312,7 +312,20 @@ def write_index(s):
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--refresh-source',action='store_true');parser.add_argument('--exclude-final-notice',action='store_true');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--refresh-source',action='store_true');parser.add_argument('--exclude-final-notice',action='store_true')
+    parser.add_argument('--append-snapshot',type=Path,help='Append visible messages from an independent snapshot, preserving old bodies')
+    parser.add_argument('--records-dir',type=Path,default=OUT)
+    parser.add_argument('--incremental-baseline',type=Path)
+    args=parser.parse_args()
+    if args.append_snapshot:
+        if args.refresh_source or args.exclude_final_notice or not args.incremental_baseline:
+            parser.error('append mode requires --incremental-baseline and cannot refresh/replace historical exports')
+        spec=importlib.util.spec_from_file_location('incremental',ROOT/'scripts/ai-reading-incremental.py')
+        incremental=importlib.util.module_from_spec(spec);spec.loader.exec_module(incremental)
+        incremental.append_records(args.append_snapshot,args.records_dir,args.incremental_baseline)
+        raise SystemExit(0)
+    if (OUT/'会话清单.json').exists() and json.loads((OUT/'会话清单.json').read_text(encoding='utf-8')).get('format')=='chinese_dialogue_reading_incremental_v1':
+        parser.error('Incremental records already exist; refuse to regenerate or replace verified historical bodies')
     FINAL_NOTICE_EXCLUDED=args.exclude_final_notice
     if args.refresh_source:
         subdir='原始记录快照-'+datetime.now().strftime('%H%M%S-%f');SOURCE=BACKUP/subdir;SOURCE.mkdir()

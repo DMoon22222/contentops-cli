@@ -188,4 +188,23 @@ def main():
         'failed_tool_events_covered','relative_links_checked','current_turn_tail_pending','candidate_files_unchanged')},indent=2))
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--records-dir',type=Path,default=OUT)
+    parser.add_argument('--incremental-baseline',type=Path)
+    args=parser.parse_args()
+    current_manifest=args.records_dir/'会话清单.json'
+    if not args.incremental_baseline and current_manifest.is_file():
+        current=load(current_manifest)
+        if current.get('format')=='chinese_dialogue_reading_incremental_v1':
+            args.incremental_baseline=ROOT/current['validation_baseline']
+            if not args.incremental_baseline.is_file():parser.error('Local source snapshots are required for message-level verification; reading files remain self-contained')
+    if args.incremental_baseline:
+        # AI-only verification must not depend on the old 1920-file candidate or frozen JAR.
+        spec=importlib.util.spec_from_file_location('incremental',ROOT/'scripts/ai-reading-incremental.py')
+        incremental=importlib.util.module_from_spec(spec);spec.loader.exec_module(incremental)
+        incremental.verify_records(args.records_dir,args.incremental_baseline)
+    else:
+        if args.records_dir!=OUT:parser.error('--records-dir requires --incremental-baseline')
+        main()
