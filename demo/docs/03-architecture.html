@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
-  <meta name="source-sha256" content="1395249857d11cc6ab5e9819a64d5b8fd5a897b3826feaab0376d9ab25a78697">
+  <meta name="source-sha256" content="a2c96e93eac018fcbe67eba665a1f8ec70b66ff0635be8d8c4673d50ac6633cd">
   <title>Java 技术架构与实施方案 · ContentOps 文档</title>
   <link rel="stylesheet" href="reading.css">
 </head>
@@ -12,7 +12,8 @@
   <a class="skip-link" href="#document-body">跳至正文</a>
   <header class="reading-header"><a href="../index.html#product">← 返回主 Demo</a><span>ContentOps CLI / 评审文档</span><a href="index.html">全部阅读文档</a></header>
   <div class="reading-layout">
-    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-1-设计结论依据与实现状态">1. 设计结论、依据与实现状态</a></li>
+    <aside class="reading-toc"><details open><summary>章节目录</summary><nav aria-label="章节目录"><ul><li class="toc-level-2"><a href="#section-当前实现补记交互式入口2026-11-01">当前实现补记：交互式入口（2026-11-01）</a></li>
+<li class="toc-level-2"><a href="#section-1-设计结论依据与实现状态">1. 设计结论、依据与实现状态</a></li>
 <li class="toc-level-3"><a href="#section-11-已有待实现与不实现">1.1 已有、待实现与不实现</a></li>
 <li class="toc-level-3"><a href="#section-12-已确认的产品合同">1.2 已确认的产品合同</a></li>
 <li class="toc-level-2"><a href="#section-2-技术选型与具体版本">2. 技术选型与具体版本</a></li>
@@ -71,6 +72,19 @@
       <div class="document-meta"><span>技术评审</span><a href="../../docs/03-Java%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88.md">原始 Markdown 文件</a></div>
 <p class="stage-note">本文保留对应阶段的设计与决策记录；当前实现情况请以<a href="../index.html#product">产品概览</a>和<a href="readme.html">README</a>为准。</p>
       <article class="markdown-body"><h1 id="section-java-技术架构与实施方案">Java 技术架构与实施方案</h1>
+<h2 id="section-当前实现补记交互式入口2026-11-01">当前实现补记：交互式入口（2026-11-01）</h2>
+<p>交互式 Shell 已在代码提交 <code>93d9d586ba0c5b0c493ffed5c21f7c563acf11fe</code> 中完成。下文保留原设计阶段的事实与计划，不将历史“准备实现”改写成当时已实现；当前入口规则以本补记和根 README 为准。<a href="../../evidence/interactive-shell/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">既有 37 项专项和 247 项完整测试证据</a>来自实际开发验收，本次文档同步不重复构建或重跑这些测试。</p>
+<pre><code class="language-text">Main
+ ├── 单次命令 → CliRunner
+ └── InteractiveShell
+      └── CommandTokenizer
+           └── CliRunner
+                └── ContentService
+                     └── Gateway
+</code></pre>
+<p>无参数进入 Shell，有参数保持单次模式；help/exit/quit/EOF 由入口处理。Tokenizer 仅将引号、中文及空格整理为参数数组，业务参数解析仍由原 Picocli 命令树完成。每条命令重建解析上下文、按原规则读取最新状态，不增加业务缓存，也没有复制 ContentService 或 Gateway。</p>
+<p>写入仍先生成合法计划。Shell 的 <code>--execute</code> 在 stderr 询问 y/N，默认 N；确认后才复用原 execute，取消保留原结果结构的 <code>cancelled / 7</code>，步骤为 not_sent。<code>--execute --yes</code> 不询问；单次及 <code>--non-interactive</code> 必须两项同时提供。命令循环与确认共用 Reader，提示不混入 JSON。Shell 正常退出进程为 0，各命令 JSON 保留各自 exit_code；不能用会话退出码代替逐条结果。</p>
+<p>Shell 横幅 v1.1 与原 <code>--version</code> 的 0.1.0 显示口径暂不统一；本轮不改版本功能。Shell 不运行系统命令，不支持管道、重定向、变量展开、方向键历史或自动补全。浏览器 Playground 仍是独立内存模拟，不会执行真实 Java Shell。审核/标签依旧分开提交，原并发审核、标签覆盖及未知结果边界没有改变。</p>
 <h2 id="section-1-设计结论依据与实现状态">1. 设计结论、依据与实现状态</h2>
 <p>采用<strong>单模块 Java CLI：Maven + Picocli + Jackson + JDK HttpClient + JUnit 5</strong>。不启动 Web 服务，不引入 Spring Boot、SQLite、消息队列或任务平台。业务通过一个六方法 Gateway 接口访问 Mock 或 HTTP；Application Service 负责审核、标签和固定两步组合。</p>
 <p>Mock 使用可跨进程读取的 JSON 工作快照，配合独立锁文件、同目录临时文件和原子替换。<strong>一次 Mock API 写入</strong>可以在同一快照内保存内容状态及其审核记录；<strong>审核和标签这两次调用仍然分别提交</strong>，不会被包装为一个事务。</p>

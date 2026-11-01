@@ -1,0 +1,58 @@
+{
+  "source_run": "20261101-214846-30e54b",
+  "code_commit_after_validation": "93d9d586ba0c5b0c493ffed5c21f7c563acf11fe",
+  "build_workspace_base": "8c73984973122bee9f7ed8fd8045a3a4f486e0b8",
+  "note": "Built and tested before commit from the workspace containing the Shell changes. Source was then committed as 93d9d58. These are preserved actual results, not rerun during release documentation.",
+  "files": [
+    {
+      "path": "verification-summary.json",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/verification-summary.json",
+      "sha256": "897ea13b8c2cc92617032885a6b3fb1012f49c541a28cb1b33992fbbb53d6359"
+    },
+    {
+      "path": "targeted.stdout.log",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/targeted.stdout.log",
+      "sha256": "9f5101771000b3fc4d58c42c022136d2a7d0daaa8951ae8cc0f68cb2c92c08f6"
+    },
+    {
+      "path": "targeted.stderr.log",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/targeted.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "targeted.exit-code.txt",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/targeted.exit-code.txt",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "verify.stdout.log",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/verify.stdout.log",
+      "sha256": "1dcad20a3d59ac59e8a5b44e7df24fa2fe4667a02c5aaafc84650ba9d45e3e14"
+    },
+    {
+      "path": "verify.stderr.log",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/verify.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "verify.exit-code.txt",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/verify.exit-code.txt",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "junit-reports/surefire/com.example.contentops.cli.CommandTokenizerTest.txt",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/junit-reports/surefire/com.example.contentops.cli.CommandTokenizerTest.txt",
+      "sha256": "5eb43b6c254aefebd699ee717498489cb6ca7e1d41fac7fb3152593af565e33c"
+    },
+    {
+      "path": "junit-reports/surefire/com.example.contentops.cli.InteractiveShellTest.txt",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/junit-reports/surefire/com.example.contentops.cli.InteractiveShellTest.txt",
+      "sha256": "655affbb06600e1335f10d441d695c46c2049186a3d362bb6267ecdca276f712"
+    },
+    {
+      "path": "junit-reports/failsafe/com.example.contentops.integration.InteractiveShellIT.txt",
+      "source": ".contentops/shell-enhancement/20261101-214846-30e54b/junit-reports/failsafe/com.example.contentops.integration.InteractiveShellIT.txt",
+      "sha256": "51dcea4824f9219e2e6a817e425c78972f7077e90f587c9b5456b9e5951bf752"
+    }
+  ]
+}

@@ -1,5 +1,25 @@
 # Java 技术架构与实施方案
 
+## 当前实现补记：交互式入口（2026-11-01）
+
+交互式 Shell 已在代码提交 `93d9d586ba0c5b0c493ffed5c21f7c563acf11fe` 中完成。下文保留原设计阶段的事实与计划，不将历史“准备实现”改写成当时已实现；当前入口规则以本补记和根 README 为准。[既有 37 项专项和 247 项完整测试证据](../evidence/interactive-shell/README.md)来自实际开发验收，本次文档同步不重复构建或重跑这些测试。
+
+```text
+Main
+ ├── 单次命令 → CliRunner
+ └── InteractiveShell
+      └── CommandTokenizer
+           └── CliRunner
+                └── ContentService
+                     └── Gateway
+```
+
+无参数进入 Shell，有参数保持单次模式；help/exit/quit/EOF 由入口处理。Tokenizer 仅将引号、中文及空格整理为参数数组，业务参数解析仍由原 Picocli 命令树完成。每条命令重建解析上下文、按原规则读取最新状态，不增加业务缓存，也没有复制 ContentService 或 Gateway。
+
+写入仍先生成合法计划。Shell 的 `--execute` 在 stderr 询问 y/N，默认 N；确认后才复用原 execute，取消保留原结果结构的 `cancelled / 7`，步骤为 not_sent。`--execute --yes` 不询问；单次及 `--non-interactive` 必须两项同时提供。命令循环与确认共用 Reader，提示不混入 JSON。Shell 正常退出进程为 0，各命令 JSON 保留各自 exit_code；不能用会话退出码代替逐条结果。
+
+Shell 横幅 v1.1 与原 `--version` 的 0.1.0 显示口径暂不统一；本轮不改版本功能。Shell 不运行系统命令，不支持管道、重定向、变量展开、方向键历史或自动补全。浏览器 Playground 仍是独立内存模拟，不会执行真实 Java Shell。审核/标签依旧分开提交，原并发审核、标签覆盖及未知结果边界没有改变。
+
 ## 1. 设计结论、依据与实现状态
 
 采用**单模块 Java CLI：Maven + Picocli + Jackson + JDK HttpClient + JUnit 5**。不启动 Web 服务，不引入 Spring Boot、SQLite、消息队列或任务平台。业务通过一个六方法 Gateway 接口访问 Mock 或 HTTP；Application Service 负责审核、标签和固定两步组合。

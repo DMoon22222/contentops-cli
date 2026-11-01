@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
-  <meta name="source-sha256" content="3dd1a03dda704073cade21c267f0bb419c39effad0bd360ad98ff2ac77950042">
+  <meta name="source-sha256" content="2c3d925a09145ccf792cf380fe122c0fd40fba6c05495cca5ceb22b9b8282d24">
   <title>Contentops CLI · S0–S6 · ContentOps 文档</title>
   <link rel="stylesheet" href="reading.css">
 </head>
@@ -27,11 +27,23 @@
 
       <article class="markdown-body"><h1 id="section-contentops-cli-s0s6">Contentops CLI · S0–S6</h1>
 <p>内容运营后台的 Java CLI。目前已实现 <strong>Mock 数据驱动的四个查询命令与单条审核、标签新增、组合处理</strong>。真实 HTTP 尚未实现。产品合同见 <a href="02-product-plan.html">docs/02</a>，实施顺序见 <a href="03-architecture.html">docs/03</a>。以下描述当前 48 小时原型，未将完整两周 MVP 的功能标为已完成。</p>
+<p>已补充真实 Java 交互式 Shell 和 y/N 写入确认；它与单次命令复用同一命令树、ContentService 和 Gateway。网页 Playground 仍是独立的浏览器模拟器。</p>
 <p>任务二已使用新 Mock 副本实际完成：<a href="06-operation-record.html">操作记录</a> · <a href="task2-evidence.html">原始命令与证据</a>。本次从 132 条 pending 的实际第一页选取 ct_000004，经零写入预览后完成一次 approve 并新增“悬疑”，新 JVM 核查历史仅增加一条；这是演示性操作，不代表真实业务合规结论。</p>
 <p>任务三专项设计已完成：<a href="07-agent-plan.html">Agent 批量处理方案</a>。推荐冻结 ID、人工审批和轻量账本后逐条复用 CLI；批次执行器仍未实现，也未执行 100 条。</p>
 <h2 id="section-windows-快速使用">Windows 快速使用</h2>
-<p>**面试官试用：**先安装 JDK 21，在已解压的项目根目录打开 PowerShell。如果目录已包含 <code>target/contentops.jar</code>，无需 Maven、Git 或网络。本轮已实测 PowerShell 7.6.5 和 Windows PowerShell 5.1 的初始化与中文显示；现有冻结交付 ZIP 尚未同步本轮脚本修复，需要另行更新和验收。</p>
+<p>**面试官试用：**先安装 JDK 21，在已解压的项目根目录打开 PowerShell。如果目录已包含 <code>target/contentops.jar</code>，无需 Maven、Git 或网络。Shell 实测环境为 PowerShell 7.6.5；此前初始化与中文编码专项另已覆盖 Windows PowerShell 5.1，不把它冒充新版 Shell 的独立验收。</p>
 <p>在准备使用 CLI 的同一个窗口执行，无需点源或管理员权限。初始化会自动处理中文显示，配置本会话为 UTF-8，无需手动执行 <code>chcp</code> 或修改 Windows 系统设置：</p>
+<p>**交互式模式：**只输入一次 <code>contentops</code>。<code>-NewState</code> 创建新的独立 Mock 副本，保留旧数据。</p>
+<pre><code class="language-powershell">.\scripts\enable-contentops.ps1 -NewState
+contentops
+</code></pre>
+<pre><code class="language-text">contentops&gt; content list --review-status pending
+contentops&gt; content get ct_000004
+contentops&gt; help
+contentops&gt; exit
+</code></pre>
+<p>Shell 支持单双引号、中文、带空格的参数、<code>--key=value</code>，也接受完整 <code>contentops</code> 前缀。<code>help content</code> 查看子命令；<code>exit</code>、<code>quit</code> 或 EOF 正常退出。暂不支持方向键历史、自动补全、批量写入、系统命令、管道、重定向或变量展开。</p>
+<p>**单次命令模式：**退出 Shell 后，在 PowerShell 中继续使用原命令；带参数启动不会进入 Shell。</p>
 <pre><code class="language-powershell">.\scripts\enable-contentops.ps1
 contentops --help
 
@@ -46,6 +58,13 @@ contentops content tags update ct_000004 --add &quot;悬疑&quot;
 contentops content process ct_000004 --action approve --reason &quot;本地演示审核决定&quot; --add &quot;悬疑&quot;
 </code></pre>
 <p>初始化设置当前会话的 PATH、绝对 <code>CONTENTOPS_STATE_DIR</code> 和 UTF-8 输入/输出编码，成功提示包含编码状态。失败时恢复原 PATH、状态变量和编码；不修改永久环境、JAVA_HOME、Profile、注册表或执行策略。默认使用项目 <code>.contentops/reviewer</code>；已明确设置的状态目录会保留，已有数据不重置。脚本检查 JDK 21、JAR、同名命令与故障变量；存在 <code>CONTENTOPS_MOCK_SCENARIO</code> 时拒绝普通试用，需自行确认后清除。<code>-StateDirectory &quot;D:\contentops-test&quot;</code> 可指定其他目录，<code>-NewState</code> 创建新的项目内目录。</p>
+<p>Shell 中写命令默认仍只预览；加 <code>--execute</code> 后先校验并展示摘要，再询问 <code>确认执行吗？(y/N):</code>。只有 <code>y</code> 或 <code>yes</code>（不区分大小写）授权执行；N、空回答或 EOF 都取消，不修改审核、标签、revision 或历史。<code>--execute --yes</code> 直接执行；单次模式以及显式 <code>--non-interactive</code> 都必须同时提供两项，不能借此绕过授权，仅 <code>--yes</code> 也会拒绝。</p>
+<pre><code class="language-text">contentops&gt; content process ct_000004 --action approve --reason &quot;本地演示&quot; --add 悬疑 --execute
+确认执行吗？(y/N): N
+已取消，未执行任何写入。
+</code></pre>
+<p>Shell 的横幅、提示符和确认提示走 stderr；每条 JSON 命令在 stdout 输出自己的结果。取消为 <code>cancelled / 7</code>，正常退出 Shell 的<strong>进程</strong>退出码为 0，不能据此声称取消操作写入成功。单次模式的 JSON <code>exit_code</code> 仍与进程退出码一致。Shell 横幅为 <code>v1.1</code>，原 <code>--version</code> 保持 <code>contentops 0.1.0</code>，这是当前显示口径差异，不表示两个业务版本。</p>
+<p>新增 37 项专项、247 项完整 Java 测试及真实进程结果见 <a href="../../evidence/interactive-shell/README.md" class="raw-link" title="原始 Markdown 文件（不属于本轮阅读版范围）">Shell 实现与验收证据</a>；既有历史报告保留原版本和哈希。</p>
 <p>确认使用独立状态目录、人工给定演示决定后，只执行一次：</p>
 <pre><code class="language-powershell">.\scripts\enable-contentops.ps1 -NewState
 contentops content process ct_000004 --action approve --reason &quot;本地演示审核决定&quot; --add &quot;悬疑&quot; --execute --yes
@@ -116,7 +135,7 @@ java -jar ./target/contentops.jar --env mock tags list --status active
 java -jar ./target/contentops.jar --env mock tags list --status all
 </code></pre>
 <p>列表固定每页 20 条，筛选条件按 AND 组合；越界空页保留真实匹配总数。历史按时间倒序显示，不重写原始历史。标签默认只显示 active，<code>all</code> 包含 deprecated；<code>--status deprecated</code> 不在本阶段参数范围内。</p>
-<p>公共参数 <code>--env</code>、<code>--output table|json</code>、<code>--help</code> 在各级命令可用，默认为 mock/table。<code>--non-interactive</code> 可用于脚本；当前原型均不读取 stdin。各级 <code>--help</code> 不实例化 Gateway、不创建状态目录、不调用网络。<code>--env api</code> 明确返回退出码 2，不会回退 Mock。</p>
+<p>公共参数 <code>--env</code>、<code>--output table|json</code>、<code>--help</code> 在各级命令可用，默认为 mock/table。<code>--non-interactive</code> 禁止 Shell 写入确认，执行仍需 <code>--execute --yes</code>；单次命令不等待 stdin。各级 <code>--help</code> 不实例化 Gateway、不创建状态目录、不调用网络。<code>--env api</code> 明确返回退出码 2，不会回退 Mock。</p>
 <p>Windows 也可用 <code>./scripts/contentops.cmd</code> 启动，它传递参数并保留 Java 进程退出码。</p>
 <h2 id="section-写命令默认预览显式授权后执行">写命令：默认预览，显式授权后执行</h2>
 <p>继续使用上面新建的独立 Mock 状态目录。以下是可复现的调用方式；审核决定由人工提供，CLI 不判断内容是否应当通过。</p>
@@ -136,7 +155,7 @@ java -jar ./target/contentops.jar --env mock --output json --non-interactive con
 java -jar ./target/contentops.jar --env mock --output json content get ct_000004
 java -jar ./target/contentops.jar --env mock content history ct_000004
 </code></pre>
-<p>所有写命令不带授权参数时只读取、校验并输出计划，<code>mode=preview/status=previewed</code>，零业务写入；预览成功不代表执行成功。<code>--execute</code> 缺少 <code>--yes</code>，或只给 <code>--yes</code>，都返回 rejected/2，不等待 stdin。完整两周 MVP 的输入内容 ID 确认尚未实现。</p>
+<p>所有写命令不带授权参数时只读取、校验并输出计划，<code>mode=preview/status=previewed</code>，零业务写入；预览成功不代表执行成功。单次或非交互模式缺少 <code>--yes</code>，以及任意模式只给 <code>--yes</code>，均返回 rejected/2。交互式 Shell 中 <code>--execute</code> 使用上述 y/N 确认；这是用户后续明确选择的规则，不把历史方案中的“输入完整 ID”写成已经实现。</p>
 <p><code>--action approve|reject</code> 和 <code>--reason</code> 用于 review/process。tags update 只接受 <code>--add</code> 和执行授权；不接受没有实现用途的 reason、remove/set。未知参数、重复的单值参数以及 <code>--apply/--force/--dry-run</code> 均拒绝，不静默忽略。</p>
 <p>业务约束属于 CLI：只审核 pending；reject 必须有理由；只对真正新增的标签要求存在且 active。保留存量废弃/未知标签并给出警告，原有标签顺序和数据不被自动清洗。已存在标签的独立执行返回 <code>no_change</code>、tags=skipped/matched，不发 PUT。默认预览即使目标无变化也返回 previewed。</p>
 <p>process 按“全部校验/计划 → 授权 → 重读并检查 → 单 item 审核 → 计数检查及回读 → 检查标签未变化 → 全数组 PUT → 最终回读”执行。标签不变时只跳过标签写入。两项 API 各提交一次完整本地快照，<strong>没有联合事务、回滚或自动重试</strong>。GET 与写入之间仍有竞争窗口，没有服务端版本控制，不能宣称并发安全。</p>
@@ -280,7 +299,7 @@ java -jar ./target/contentops.jar --env mock content history ct_000004
 ./scripts/verify-s5.ps1 -EvidenceDirectory ('evidence/s5/recheck-' + [guid]::NewGuid())
 </code></pre>
 <p>测试状态统一放在被忽略的 <code>target/test-state</code> 下；只读手工验证状态位于 <code>.contentops/manual-validation</code>，S3–S4 状态位于 <code>.contentops/s3-s4-validation</code>，S5 状态位于 <code>.contentops/s5-validation</code>。每个故障采用新子目录，核查/恢复 JVM 清除场景配置，与后续任务二正式演示分开。脚本保存原始 stdout/stderr/进程退出码、步骤、计数、快照 SHA/revision 及内容/日志事实，任一断言失败返回非零；已存在的命令/场景证据会拒绝覆盖。构建缓存、产物、完整运行状态均不纳入 Git。证据是实际开发验证记录，不是任务二正式操作记录，也不替代完整 AI 对话导出。</p>
-<p>Java 实施已完成至 S5；任务二正式 Mock 操作记录和任务三设计见页首导航。实际文件提交后丢响应、跨 JVM 的部分失败/核对失败、独立标签恢复与不重试已验证。缺失计数、写后读取不可用等额外分支继续由 RecordingGateway 单元测试覆盖；真实 HTTP 的超时、接收次数与协议行为仍未验证。没有新增自动恢复、resume、幂等键或任务管理；pending 检查只防止顺序重复审核，不消除竞态，也不是服务端强幂等。remove/set、人工交互确认、HTTP、Agent 批次运行系统和最终交付仍未实现。HTML 离线回放现已完成，见页首入口。</p>
+<p>Java 实施已完成至 S5，并已增加 Shell 与人工确认；任务二正式 Mock 操作记录和任务三设计见页首导航。实际文件提交后丢响应、跨 JVM 的部分失败/核对失败、独立标签恢复与不重试已验证。缺失计数、写后读取不可用等额外分支继续由 RecordingGateway 单元测试覆盖；真实 HTTP 的超时、接收次数与协议行为仍未验证。没有新增自动恢复、resume、幂等键或任务管理；pending 检查只防止顺序重复审核，不消除竞态，也不是服务端强幂等。remove/set、HTTP 和 Agent 批次运行系统仍未实现，方向键历史和自动补全也未实现。最终提交状态以最新外置验收报告和 AI 记录缺口说明为准。</p>
 </article>
       <footer><a href="#document-top">返回顶部 ↑</a><span>静态阅读版 · 正文来源 README.md</span></footer>
     </main>

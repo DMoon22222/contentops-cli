@@ -2,15 +2,35 @@
 
 内容运营后台的 Java CLI。目前已实现 **Mock 数据驱动的四个查询命令与单条审核、标签新增、组合处理**。真实 HTTP 尚未实现。产品合同见 [docs/02](docs/02-第一阶段MVP与CLI产品方案.md)，实施顺序见 [docs/03](docs/03-Java技术架构与实施方案.md)。以下描述当前 48 小时原型，未将完整两周 MVP 的功能标为已完成。
 
+已补充真实 Java 交互式 Shell 和 y/N 写入确认；它与单次命令复用同一命令树、ContentService 和 Gateway。网页 Playground 仍是独立的浏览器模拟器。
+
 任务二已使用新 Mock 副本实际完成：[操作记录](docs/06-实际操作记录.md) · [原始命令与证据](evidence/task2/README.md)。本次从 132 条 pending 的实际第一页选取 ct_000004，经零写入预览后完成一次 approve 并新增“悬疑”，新 JVM 核查历史仅增加一条；这是演示性操作，不代表真实业务合规结论。
 
 任务三专项设计已完成：[Agent 批量处理方案](docs/07-Agent批量处理方案.md)。推荐冻结 ID、人工审批和轻量账本后逐条复用 CLI；批次执行器仍未实现，也未执行 100 条。
 
 ## Windows 快速使用
 
-**面试官试用：**先安装 JDK 21，在已解压的项目根目录打开 PowerShell。如果目录已包含 `target/contentops.jar`，无需 Maven、Git 或网络。本轮已实测 PowerShell 7.6.5 和 Windows PowerShell 5.1 的初始化与中文显示；现有冻结交付 ZIP 尚未同步本轮脚本修复，需要另行更新和验收。
+**面试官试用：**先安装 JDK 21，在已解压的项目根目录打开 PowerShell。如果目录已包含 `target/contentops.jar`，无需 Maven、Git 或网络。Shell 实测环境为 PowerShell 7.6.5；此前初始化与中文编码专项另已覆盖 Windows PowerShell 5.1，不把它冒充新版 Shell 的独立验收。
 
 在准备使用 CLI 的同一个窗口执行，无需点源或管理员权限。初始化会自动处理中文显示，配置本会话为 UTF-8，无需手动执行 `chcp` 或修改 Windows 系统设置：
+
+**交互式模式：**只输入一次 `contentops`。`-NewState` 创建新的独立 Mock 副本，保留旧数据。
+
+```powershell
+.\scripts\enable-contentops.ps1 -NewState
+contentops
+```
+
+```text
+contentops> content list --review-status pending
+contentops> content get ct_000004
+contentops> help
+contentops> exit
+```
+
+Shell 支持单双引号、中文、带空格的参数、`--key=value`，也接受完整 `contentops` 前缀。`help content` 查看子命令；`exit`、`quit` 或 EOF 正常退出。暂不支持方向键历史、自动补全、批量写入、系统命令、管道、重定向或变量展开。
+
+**单次命令模式：**退出 Shell 后，在 PowerShell 中继续使用原命令；带参数启动不会进入 Shell。
 
 ```powershell
 .\scripts\enable-contentops.ps1
@@ -28,6 +48,18 @@ contentops content process ct_000004 --action approve --reason "本地演示审�
 ```
 
 初始化设置当前会话的 PATH、绝对 `CONTENTOPS_STATE_DIR` 和 UTF-8 输入/输出编码，成功提示包含编码状态。失败时恢复原 PATH、状态变量和编码；不修改永久环境、JAVA_HOME、Profile、注册表或执行策略。默认使用项目 `.contentops/reviewer`；已明确设置的状态目录会保留，已有数据不重置。脚本检查 JDK 21、JAR、同名命令与故障变量；存在 `CONTENTOPS_MOCK_SCENARIO` 时拒绝普通试用，需自行确认后清除。`-StateDirectory "D:\contentops-test"` 可指定其他目录，`-NewState` 创建新的项目内目录。
+
+Shell 中写命令默认仍只预览；加 `--execute` 后先校验并展示摘要，再询问 `确认执行吗？(y/N):`。只有 `y` 或 `yes`（不区分大小写）授权执行；N、空回答或 EOF 都取消，不修改审核、标签、revision 或历史。`--execute --yes` 直接执行；单次模式以及显式 `--non-interactive` 都必须同时提供两项，不能借此绕过授权，仅 `--yes` 也会拒绝。
+
+```text
+contentops> content process ct_000004 --action approve --reason "本地演示" --add 悬疑 --execute
+确认执行吗？(y/N): N
+已取消，未执行任何写入。
+```
+
+Shell 的横幅、提示符和确认提示走 stderr；每条 JSON 命令在 stdout 输出自己的结果。取消为 `cancelled / 7`，正常退出 Shell 的**进程**退出码为 0，不能据此声称取消操作写入成功。单次模式的 JSON `exit_code` 仍与进程退出码一致。Shell 横幅为 `v1.1`，原 `--version` 保持 `contentops 0.1.0`，这是当前显示口径差异，不表示两个业务版本。
+
+新增 37 项专项、247 项完整 Java 测试及真实进程结果见 [Shell 实现与验收证据](evidence/interactive-shell/README.md)；既有历史报告保留原版本和哈希。
 
 确认使用独立状态目录、人工给定演示决定后，只执行一次：
 
@@ -140,7 +172,7 @@ java -jar ./target/contentops.jar --env mock tags list --status all
 
 列表固定每页 20 条，筛选条件按 AND 组合；越界空页保留真实匹配总数。历史按时间倒序显示，不重写原始历史。标签默认只显示 active，`all` 包含 deprecated；`--status deprecated` 不在本阶段参数范围内。
 
-公共参数 `--env`、`--output table|json`、`--help` 在各级命令可用，默认为 mock/table。`--non-interactive` 可用于脚本；当前原型均不读取 stdin。各级 `--help` 不实例化 Gateway、不创建状态目录、不调用网络。`--env api` 明确返回退出码 2，不会回退 Mock。
+公共参数 `--env`、`--output table|json`、`--help` 在各级命令可用，默认为 mock/table。`--non-interactive` 禁止 Shell 写入确认，执行仍需 `--execute --yes`；单次命令不等待 stdin。各级 `--help` 不实例化 Gateway、不创建状态目录、不调用网络。`--env api` 明确返回退出码 2，不会回退 Mock。
 
 Windows 也可用 `./scripts/contentops.cmd` 启动，它传递参数并保留 Java 进程退出码。
 
@@ -166,7 +198,7 @@ java -jar ./target/contentops.jar --env mock --output json content get ct_000004
 java -jar ./target/contentops.jar --env mock content history ct_000004
 ```
 
-所有写命令不带授权参数时只读取、校验并输出计划，`mode=preview/status=previewed`，零业务写入；预览成功不代表执行成功。`--execute` 缺少 `--yes`，或只给 `--yes`，都返回 rejected/2，不等待 stdin。完整两周 MVP 的输入内容 ID 确认尚未实现。
+所有写命令不带授权参数时只读取、校验并输出计划，`mode=preview/status=previewed`，零业务写入；预览成功不代表执行成功。单次或非交互模式缺少 `--yes`，以及任意模式只给 `--yes`，均返回 rejected/2。交互式 Shell 中 `--execute` 使用上述 y/N 确认；这是用户后续明确选择的规则，不把历史方案中的“输入完整 ID”写成已经实现。
 
 `--action approve|reject` 和 `--reason` 用于 review/process。tags update 只接受 `--add` 和执行授权；不接受没有实现用途的 reason、remove/set。未知参数、重复的单值参数以及 `--apply/--force/--dry-run` 均拒绝，不静默忽略。
 
@@ -269,4 +301,4 @@ S5 的 `mvn test`：156 项；`mvn verify`：156 项单元/契约测试 + 36 项
 
 测试状态统一放在被忽略的 `target/test-state` 下；只读手工验证状态位于 `.contentops/manual-validation`，S3–S4 状态位于 `.contentops/s3-s4-validation`，S5 状态位于 `.contentops/s5-validation`。每个故障采用新子目录，核查/恢复 JVM 清除场景配置，与后续任务二正式演示分开。脚本保存原始 stdout/stderr/进程退出码、步骤、计数、快照 SHA/revision 及内容/日志事实，任一断言失败返回非零；已存在的命令/场景证据会拒绝覆盖。构建缓存、产物、完整运行状态均不纳入 Git。证据是实际开发验证记录，不是任务二正式操作记录，也不替代完整 AI 对话导出。
 
-Java 实施已完成至 S5；任务二正式 Mock 操作记录和任务三设计见页首导航。实际文件提交后丢响应、跨 JVM 的部分失败/核对失败、独立标签恢复与不重试已验证。缺失计数、写后读取不可用等额外分支继续由 RecordingGateway 单元测试覆盖；真实 HTTP 的超时、接收次数与协议行为仍未验证。没有新增自动恢复、resume、幂等键或任务管理；pending 检查只防止顺序重复审核，不消除竞态，也不是服务端强幂等。remove/set、人工交互确认、HTTP、Agent 批次运行系统和最终交付仍未实现。HTML 离线回放现已完成，见页首入口。
+Java 实施已完成至 S5，并已增加 Shell 与人工确认；任务二正式 Mock 操作记录和任务三设计见页首导航。实际文件提交后丢响应、跨 JVM 的部分失败/核对失败、独立标签恢复与不重试已验证。缺失计数、写后读取不可用等额外分支继续由 RecordingGateway 单元测试覆盖；真实 HTTP 的超时、接收次数与协议行为仍未验证。没有新增自动恢复、resume、幂等键或任务管理；pending 检查只防止顺序重复审核，不消除竞态，也不是服务端强幂等。remove/set、HTTP 和 Agent 批次运行系统仍未实现，方向键历史和自动补全也未实现。最终提交状态以最新外置验收报告和 AI 记录缺口说明为准。

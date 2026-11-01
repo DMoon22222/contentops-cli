@@ -1,0 +1,42 @@
+{
+  "source_commit_before_and_after": "8c73984973122bee9f7ed8fd8045a3a4f486e0b8",
+  "changed_existing_files": [
+    "src/main/java/com/example/contentops/Main.java",
+    "src/main/java/com/example/contentops/cli/CliRunner.java",
+    "src/main/java/com/example/contentops/cli/RootCommand.java",
+    "src/main/java/com/example/contentops/cli/WriteCommands.java"
+  ],
+  "protected_existing_files_checked": 6375,
+  "unexpected_changes": [],
+  "new_jar_sha256": "4db8686e91dd388dc17c0c41a5c7419e2807da1002a8e330db06bab5b2930ad8",
+  "new_jar_bytes": 3059260,
+  "old_backup": "F:\\AI_TESTEXAM\\.contentops\\shell-enhancement\\20261101-214846-30e54b\\frozen-backup\\contentops.jar",
+  "old_jar_sha256": "2e6b40ece3567579383c777bff31c35bc682bbf5b18a5bf881bfe5c6596940c6",
+  "final_zip_sha256": "fca6c78c89c1cea5cabafcadbfcb6acc4ab9323ebb6775172d7f185ddfcff547",
+  "business_gateway_models_renderers_docs_demo_scripts_seed_history_AI_unchanged": true,
+  "targeted_tests": 37,
+  "complete_suite": {
+    "surefire": {
+      "tests": 202,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "failsafe": {
+      "tests": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "real_JAR_manual_validation_passed": true,
+  "powershell_entry_passed": true,
+  "not_rerun": [
+    "HTML 500-check browser suite",
+    "full PowerShell UTF-8 specialist suite",
+    "S5 evidence collection",
+    "historical reliability evidence collection"
+  ],
+  "original_JUnit_regressions_ran_once_with_verify": true,
+  "no_git_commit_push_or_email": true
+}

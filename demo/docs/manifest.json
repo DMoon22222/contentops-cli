@@ -477,13 +477,18 @@
       "html": "03-architecture.html",
       "kind": "技术评审",
       "historical": true,
-      "source_sha256": "1395249857d11cc6ab5e9819a64d5b8fd5a897b3826feaab0376d9ab25a78697",
-      "html_sha256": "b0855e09722e56802ea2316bb503e92b41ddef1e82e673c6dc3f45401581097e",
+      "source_sha256": "a2c96e93eac018fcbe67eba665a1f8ec70b66ff0635be8d8c4673d50ac6633cd",
+      "html_sha256": "f298c14c2fa1ade6764d30cd10541f7273c4de48b1b037150927ca5b4575d4bf",
       "headings": [
         {
           "level": 1,
           "title": "Java 技术架构与实施方案",
           "id": "section-java-技术架构与实施方案"
+        },
+        {
+          "level": 2,
+          "title": "当前实现补记：交互式入口（2026-11-01）",
+          "id": "section-当前实现补记交互式入口2026-11-01"
         },
         {
           "level": 2,
@@ -762,7 +767,7 @@
         }
       ],
       "tables": 19,
-      "code_blocks": 16
+      "code_blocks": 17
     },
     {
       "source": "docs/04-交付物规划与验收清单.md",
@@ -1170,8 +1175,8 @@
       "html": "readme.html",
       "kind": "当前实现与运行说明",
       "historical": false,
-      "source_sha256": "3dd1a03dda704073cade21c267f0bb419c39effad0bd360ad98ff2ac77950042",
-      "html_sha256": "331fde849b08d26bb5b66bec5424e4a8a525b1eea63ae6687a0469a0dc10dd7c",
+      "source_sha256": "2c3d925a09145ccf792cf380fe122c0fd40fba6c05495cca5ceb22b9b8282d24",
+      "html_sha256": "373b61d9bed30d188049094b4b33dc623d4faec43ca01d994e874b310acd09be",
       "headings": [
         {
           "level": 1,
@@ -1230,7 +1235,7 @@
         }
       ],
       "tables": 2,
-      "code_blocks": 12
+      "code_blocks": 15
     },
     {
       "source": "evidence/task2/README.md",
