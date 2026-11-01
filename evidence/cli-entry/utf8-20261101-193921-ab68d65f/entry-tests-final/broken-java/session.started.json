@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-01T19:46:29.6124015+08:00",
+  "executable": "C:\\Users\\[LOCAL_USER]\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoLogo",
+    "-NoProfile",
+    "-File",
+    "F:\\AI_TESTEXAM\\scripts\\test-support\\cli-entry-session.ps1",
+    "-CaseName",
+    "broken-java",
+    "-ProjectRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI",
+    "-SourceRoot",
+    "F:\\AI_TESTEXAM",
+    "-WorkRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198",
+    "-EvidenceDirectory",
+    "F:\\AI_TESTEXAM\\evidence\\cli-entry\\utf8-20261101-193921-ab68d65f\\entry-tests-final\\broken-java",
+    "-JavaFixtureDirectory",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\无法运行 Java"
+  ],
+  "redaction": {
+    "fields": [
+      "executable/local-user-directory"
+    ],
+    "raw_sha256": "354707e7dd1ae1c15be659b353156073b345da7a8a04a88eb08023a68610ee55",
+    "note": "Only the local account directory is masked. Actual arguments, timestamps and results unchanged; raw metadata is retained privately outside Git."
+  }
+}

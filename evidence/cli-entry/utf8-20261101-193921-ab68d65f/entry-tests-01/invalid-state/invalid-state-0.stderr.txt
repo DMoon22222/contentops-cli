@@ -1,0 +1,1 @@
+ContentOps 初始化失败：现有 CONTENTOPS_STATE_DIR 必须是有效绝对目录；请明确用 -StateDirectory 或 -NewState 选择，不会静默覆盖。

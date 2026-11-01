@@ -1,0 +1,1 @@
+ContentOps: java.exe was not found on PATH. Install JDK 21, reopen PowerShell, and initialize again.

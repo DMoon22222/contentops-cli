@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"0e3102e5-5f28-4aa0-b4eb-df630a970831","environment":"mock","command":"content.review","mode":"execute","status":"rejected","exit_code":2,"content_id":"ct_000004","data":null,"error":{"code":"EXECUTION_AUTHORIZATION_REQUIRED","message":"原型执行必须同时提供 --execute --yes；不等待 stdin，仅 --yes 也不合法","step":"preflight","upstream":null},"warnings":[]}

@@ -1,0 +1,29 @@
+{
+  "arguments": [
+    "-NoLogo",
+    "-NoProfile",
+    "-File",
+    "F:\\AI_TESTEXAM\\scripts\\test-support\\cli-entry-session.ps1",
+    "-CaseName",
+    "late-conflict",
+    "-ProjectRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\同名入口冲突 项目",
+    "-SourceRoot",
+    "F:\\AI_TESTEXAM",
+    "-WorkRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df",
+    "-EvidenceDirectory",
+    "F:\\AI_TESTEXAM\\evidence\\cli-entry\\utf8-20261101-193921-ab68d65f\\entry-tests-01\\late-conflict",
+    "-JavaFixtureDirectory",
+    ""
+  ],
+  "executable": "C:\\Users\\[LOCAL_USER]\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "at": "2026-11-01T19:43:01.6050967+08:00",
+  "redaction": {
+    "fields": [
+      "executable/local-user-directory"
+    ],
+    "raw_sha256": "686d4888d8d9bb0d37bf5dd8fbcde003f4fdbb75d4dc8be117529a1a6593c65c",
+    "note": "Only the local account directory is masked. Actual arguments, timestamps and results unchanged; raw metadata is retained privately outside Git."
+  }
+}

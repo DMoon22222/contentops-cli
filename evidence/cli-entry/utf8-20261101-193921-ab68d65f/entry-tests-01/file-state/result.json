@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "state-is-file expected initializer exit 2",
+    "state-is-file friendly error",
+    "state-is-file PATH rollback",
+    "state-is-file state rollback",
+    "state-is-file JAVA_HOME unchanged",
+    "existing non-state file preserved",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI",
+  "passed": true,
+  "state_directory": null,
+  "calls": [
+    {
+      "exit": 2,
+      "name": "state-is-file",
+      "type": "initializer"
+    }
+  ],
+  "case": "file-state",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\.contentops\\reviewer"
+}

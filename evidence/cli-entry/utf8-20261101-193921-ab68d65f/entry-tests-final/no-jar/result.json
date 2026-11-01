@@ -1,0 +1,30 @@
+{
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\缺少 JAR 项目\\.contentops\\reviewer",
+  "calls": [
+    {
+      "name": "missing-jar",
+      "type": "initializer",
+      "exit": 2
+    },
+    {
+      "name": "launcher-no-jar",
+      "type": "launcher",
+      "exit": 2
+    }
+  ],
+  "case": "no-jar",
+  "state_directory": null,
+  "passed": true,
+  "checks": [
+    "missing-jar expected initializer exit 2",
+    "missing-jar friendly error",
+    "missing-jar PATH rollback",
+    "missing-jar state rollback",
+    "missing-jar JAVA_HOME unchanged",
+    "launcher-no-jar actual native exit",
+    "launcher missing JAR stdout empty",
+    "build or complete extraction advice",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\缺少 JAR 项目"
+}

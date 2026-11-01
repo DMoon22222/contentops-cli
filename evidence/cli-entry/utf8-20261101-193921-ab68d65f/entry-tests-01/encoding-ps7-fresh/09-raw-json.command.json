@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "arguments": "/d /s /c \"\"F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\scripts\\contentops.cmd\" --output json content get ct_000004\"",
+  "has_bom": false,
+  "strict_utf8": true
+}

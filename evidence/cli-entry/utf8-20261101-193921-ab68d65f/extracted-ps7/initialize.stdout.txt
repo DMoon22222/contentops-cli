@@ -1,0 +1,12 @@
+ContentOps CLI 已准备就绪
+Java：21 · C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\java.exe
+运行模式：Mock
+控制台编码：UTF-8 (65001)
+命令入口：F:\AI_TESTEXAM\.contentops\utf8-20261101-193921-ab68d65f\独立解压 UTF8 验收\ContentOps-CLI\scripts\contentops.cmd
+状态目录：F:\AI_TESTEXAM\.contentops\utf8-20261101-193921-ab68d65f\独立解压 UTF8 验收\ContentOps-CLI\.contentops\reviewer-20261101-194640-b82317d92b7340f5a9642878914e63e6
+
+  contentops --help
+  contentops content list --review-status pending
+  contentops content get ct_000004
+
+此配置仅在当前 PowerShell 会话及子进程生效。浏览器 Playground 使用另一份页面内存状态。

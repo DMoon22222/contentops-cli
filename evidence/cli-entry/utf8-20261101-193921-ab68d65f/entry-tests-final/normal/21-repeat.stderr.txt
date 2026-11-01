@@ -1,0 +1,1 @@
+REVIEW_NOT_PENDING: 只允许审核 pending 内容；请重新查看详情，不会重复提交

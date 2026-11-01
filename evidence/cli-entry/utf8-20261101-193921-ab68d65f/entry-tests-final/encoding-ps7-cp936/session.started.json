@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-01T19:46:53.0988396+08:00",
+  "executable": "C:\\Users\\[LOCAL_USER]\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoLogo",
+    "-NoProfile",
+    "-File",
+    "F:\\AI_TESTEXAM\\scripts\\test-support\\cli-encoding-session.ps1",
+    "-CaseName",
+    "cp936",
+    "-ProjectRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI",
+    "-EvidenceDirectory",
+    "F:\\AI_TESTEXAM\\evidence\\cli-entry\\utf8-20261101-193921-ab68d65f\\entry-tests-final\\encoding-ps7-cp936"
+  ],
+  "redaction": {
+    "fields": [
+      "executable/local-user-directory"
+    ],
+    "raw_sha256": "b8411a15b74ceae9c23e829592e9dbd8c0cc4144527be7885c9110d0cc21315f",
+    "note": "Only the local account directory is masked. Actual arguments, timestamps and results unchanged; raw metadata is retained privately outside Git."
+  }
+}

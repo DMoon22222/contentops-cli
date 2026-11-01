@@ -1,0 +1,29 @@
+{
+  "arguments": [
+    "-NoLogo",
+    "-NoProfile",
+    "-File",
+    "F:\\AI_TESTEXAM\\scripts\\test-support\\cli-entry-session.ps1",
+    "-CaseName",
+    "broken-java",
+    "-ProjectRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI",
+    "-SourceRoot",
+    "F:\\AI_TESTEXAM",
+    "-WorkRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df",
+    "-EvidenceDirectory",
+    "F:\\AI_TESTEXAM\\evidence\\cli-entry\\utf8-20261101-193921-ab68d65f\\entry-tests-01\\broken-java",
+    "-JavaFixtureDirectory",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\无法运行 Java"
+  ],
+  "executable": "C:\\Users\\[LOCAL_USER]\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "at": "2026-11-01T19:42:52.6324352+08:00",
+  "redaction": {
+    "fields": [
+      "executable/local-user-directory"
+    ],
+    "raw_sha256": "14bc45d88fe88ae9238eaed82d782bf27a86bd138c499cce176ff41bd45040c9",
+    "note": "Only the local account directory is masked. Actual arguments, timestamps and results unchanged; raw metadata is retained privately outside Git."
+  }
+}

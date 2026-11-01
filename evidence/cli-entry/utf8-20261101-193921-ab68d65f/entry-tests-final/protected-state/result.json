@@ -1,0 +1,32 @@
+{
+  "case": "protected-state",
+  "checks": [
+    "formal-task2-refused expected initializer exit 2",
+    "formal-task2-refused friendly error",
+    "formal-task2-refused PATH rollback",
+    "formal-task2-refused state rollback",
+    "formal-task2-refused JAVA_HOME unchanged",
+    "seed-directory-refused expected initializer exit 2",
+    "seed-directory-refused friendly error",
+    "seed-directory-refused PATH rollback",
+    "seed-directory-refused state rollback",
+    "seed-directory-refused JAVA_HOME unchanged",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "calls": [
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "formal-task2-refused"
+    },
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "seed-directory-refused"
+    }
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\task2\\a20c72c2-74c1-4130-af99-8d17452424b6",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "passed": true
+}

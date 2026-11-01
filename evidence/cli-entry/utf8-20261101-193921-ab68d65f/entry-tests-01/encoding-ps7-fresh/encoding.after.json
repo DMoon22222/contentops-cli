@@ -1,0 +1,8 @@
+{
+  "pipeline": 65001,
+  "native_output": 65001,
+  "input": 65001,
+  "pipeline_preamble": 0,
+  "output": 65001,
+  "native_input": 65001
+}

@@ -1,0 +1,22 @@
+{
+  "actual_exit": 0,
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "entry": "contentops",
+  "arguments": [
+    "--output",
+    "json",
+    "content",
+    "process",
+    "ct_000004",
+    "--action",
+    "approve",
+    "--reason",
+    "本地演示审核决定 · 中文 English 空格 (A) !",
+    "--add",
+    "悬疑",
+    "--execute",
+    "--yes"
+  ],
+  "resolved": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\scripts\\contentops.cmd"
+}

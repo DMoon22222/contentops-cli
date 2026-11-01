@@ -1,0 +1,204 @@
+{
+  "case": "cp65001",
+  "passed": true,
+  "powershell": "7.6.5",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\.contentops\\reviewer-20261101-194703-b45890f16bb4459e9ce4e5e7a72862d3",
+  "checks": [
+    "baseline native input available",
+    "baseline native output available",
+    "initializer actual exit code",
+    "input UTF-8 persists after script returns",
+    "output UTF-8 persists after script returns",
+    "pipeline UTF-8 persists after script returns",
+    "pipeline no BOM",
+    "native input 65001",
+    "native output 65001",
+    "chcp independently confirms 65001",
+    "success notice encoding",
+    "new independent state directory",
+    "01-list native exit",
+    "01-list no replacement character",
+    "list Chinese heading/page/title",
+    "02-get native exit",
+    "02-get no replacement character",
+    "detail exact Chinese title/body/tags",
+    "03-history native exit",
+    "03-history no replacement character",
+    "history Chinese fields",
+    "04-tags native exit",
+    "04-tags no replacement character",
+    "tags Chinese labels",
+    "05-review-preview native exit",
+    "05-review-preview no replacement character",
+    "review Chinese preview and argument",
+    "06-tags-preview native exit",
+    "06-tags-preview no replacement character",
+    "tags preview retains other Chinese tags",
+    "07-process-preview native exit",
+    "07-process-preview no replacement character",
+    "process Chinese preview",
+    "all seven commands and previews zero writes",
+    "08-json native exit",
+    "08-json no replacement character",
+    "JSON exact Chinese fields",
+    "JSON only envelope and actual exit",
+    "raw JSON UTF-8 first byte no BOM",
+    "raw JSON exit and Chinese exact",
+    "10-execute native exit",
+    "10-execute no replacement character",
+    "explicit execution verified as before",
+    "11-after-get native exit",
+    "11-after-get no replacement character",
+    "new JVM actual stored Chinese tags",
+    "12-after-history native exit",
+    "12-after-history no replacement character",
+    "Chinese history reason after execution",
+    "post-execution queries preserve bytes"
+  ],
+  "encoding_after": {
+    "native_output": 65001,
+    "input": 65001,
+    "native_input": 65001,
+    "output": 65001,
+    "pipeline": 65001,
+    "pipeline_preamble": 0
+  },
+  "calls": [
+    {
+      "name": "01-list",
+      "arguments": [
+        "content",
+        "list",
+        "--review-status",
+        "pending",
+        "--page",
+        "1"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "02-get",
+      "arguments": [
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "03-history",
+      "arguments": [
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "04-tags",
+      "arguments": [
+        "tags",
+        "list"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "05-review-preview",
+      "arguments": [
+        "content",
+        "review",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "编码回归 · 中文 English 空格 (A) !"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "06-tags-preview",
+      "arguments": [
+        "content",
+        "tags",
+        "update",
+        "ct_000004",
+        "--add",
+        "悬疑"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "07-process-preview",
+      "arguments": [
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "编码回归 · 中文 English 空格 (A) !",
+        "--add",
+        "悬疑"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "08-json",
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "10-execute",
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "编码回归 · 中文 English 空格 (A) !",
+        "--add",
+        "悬疑",
+        "--execute",
+        "--yes"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "11-after-get",
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "12-after-history",
+      "arguments": [
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "encoding_before": {
+    "native_output": 65001,
+    "input": 65001,
+    "native_input": 65001,
+    "output": 65001,
+    "pipeline": 20127,
+    "pipeline_preamble": 0
+  }
+}

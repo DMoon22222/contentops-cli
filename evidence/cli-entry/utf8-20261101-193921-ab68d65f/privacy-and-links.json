@@ -1,0 +1,209 @@
+{
+  "privacy": {
+    "scanned_files": 1528,
+    "credential_hits": [],
+    "local_user_paths_in_new_diagnostics": [],
+    "note": "49 session-start executable metadata fields masked explicitly; no stdout, stderr, error, command, or outcome was removed or rewritten.",
+    "minimal_redactions": [
+      {
+        "file": "entry-tests-01/broken-java/session.started.json",
+        "raw_sha256": "14bc45d88fe88ae9238eaed82d782bf27a86bd138c499cce176ff41bd45040c9"
+      },
+      {
+        "file": "entry-tests-01/custom/session.started.json",
+        "raw_sha256": "30ab19c75c52f97b81cb6b75af5678e38d23766f988f27f944c47befc0cd7160"
+      },
+      {
+        "file": "entry-tests-01/custom-relative/session.started.json",
+        "raw_sha256": "ff5352d056a38060e2d1dacca6977d8b67df6b7676eedd94864b121e7c2e67c0"
+      },
+      {
+        "file": "entry-tests-01/empty-fault/session.started.json",
+        "raw_sha256": "9abdb1d4d9a158e3de0f6bb05c6af7d5a84ed3d4083e0500a0a6ef134e267d48"
+      },
+      {
+        "file": "entry-tests-01/encoding-ps7-cp65001/session.started.json",
+        "raw_sha256": "6789653f62e06816a5c6b126d20eef4b7f404036af416dc97d5aa8604fa1c058"
+      },
+      {
+        "file": "entry-tests-01/encoding-ps7-cp936/session.started.json",
+        "raw_sha256": "c3919fa38042af9a4eca37f22da444c21700d02acb4d994022907956d73ad5e8"
+      },
+      {
+        "file": "entry-tests-01/encoding-ps7-fresh/session.started.json",
+        "raw_sha256": "617173126aafc60cfc4b90c9d27743641ab846c222b5acec8cc3ae09067ca634"
+      },
+      {
+        "file": "entry-tests-01/encoding-ps7-rollback/session.started.json",
+        "raw_sha256": "6877be08d06d7d53c7c8fe44d1d5bc9077ef1ac62b155f1d11ec708470ba47b3"
+      },
+      {
+        "file": "entry-tests-01/encoding-ps7-rollback-mixed/session.started.json",
+        "raw_sha256": "2302b9d2b680f92088c74322dd925b9d8a1b2bb8161253f27fb6aacfc7e6d898"
+      },
+      {
+        "file": "entry-tests-01/fault/session.started.json",
+        "raw_sha256": "c32f1be1263962aad1173e9c47fdb64deebb44557813fdfc3a20a55909ad356d"
+      },
+      {
+        "file": "entry-tests-01/file-state/session.started.json",
+        "raw_sha256": "d945d47148bd904efcfa69c29b22ac0e619af1837cb8e551de20c42b2f59e320"
+      },
+      {
+        "file": "entry-tests-01/foreign-command/session.started.json",
+        "raw_sha256": "9f8dae1c11fabc5c0710174ff0d7e8a515f40ba0233f40464ba4a227a815d76d"
+      },
+      {
+        "file": "entry-tests-01/function-conflict/session.started.json",
+        "raw_sha256": "9c869c35d928c0622cb99f2774fff9f924fc10eaf2221458fa6a97f61a84daf8"
+      },
+      {
+        "file": "entry-tests-01/invalid-state/session.started.json",
+        "raw_sha256": "0a792aebe5bb981e2c80445bf52ed3ec54722615133c2b6cdf63bbc1297bb430"
+      },
+      {
+        "file": "entry-tests-01/late-conflict/session.started.json",
+        "raw_sha256": "686d4888d8d9bb0d37bf5dd8fbcde003f4fdbb75d4dc8be117529a1a6593c65c"
+      },
+      {
+        "file": "entry-tests-01/new-state/session.started.json",
+        "raw_sha256": "25749e08caee1491dda0fafee349859db4b39928d85583c5a28ce9477b775038"
+      },
+      {
+        "file": "entry-tests-01/no-jar/session.started.json",
+        "raw_sha256": "bbabf47906238c470ad37fe47bfdfd1a056ceb44bfa5d7b0872562e0e0fcf88f"
+      },
+      {
+        "file": "entry-tests-01/no-java/session.started.json",
+        "raw_sha256": "aaca434dff0000609af084f3ebf44c3256d9fb20eebcc8f711db7fcd0052c4d0"
+      },
+      {
+        "file": "entry-tests-01/normal/session.started.json",
+        "raw_sha256": "a2c3ac12ac573c44074e54dcaffe21b04c9fbfece33914f87f91af7bfdd913be"
+      },
+      {
+        "file": "entry-tests-01/old-java/session.started.json",
+        "raw_sha256": "16e27fb35658828c0bd9664f9e87889ce53f07b1d5e737a695e1813fb5a92dd0"
+      },
+      {
+        "file": "entry-tests-01/path-dedup/session.started.json",
+        "raw_sha256": "a9c2014b45a99f443be703f95d9765e426a2884e757b1b84824a878124ab1d36"
+      },
+      {
+        "file": "entry-tests-01/preserve/session.started.json",
+        "raw_sha256": "0adb0036994ffc6e29a017686d5ed1826e113ccec5016af49a4a2a5c2425e49c"
+      },
+      {
+        "file": "entry-tests-01/protected-state/session.started.json",
+        "raw_sha256": "a85b33c90a0e32a5b56090e590cf987d2ec015a3861a944a3a9f813c4774a8e6"
+      },
+      {
+        "file": "entry-tests-01/root-and-cwd/session.started.json",
+        "raw_sha256": "98773362756d95d48e150f257c2fa29216bf9d8276b5a253b7220908cef480d3"
+      },
+      {
+        "file": "entry-tests-final/broken-java/session.started.json",
+        "raw_sha256": "354707e7dd1ae1c15be659b353156073b345da7a8a04a88eb08023a68610ee55"
+      },
+      {
+        "file": "entry-tests-final/custom/session.started.json",
+        "raw_sha256": "b05f61f5e0736ea66dd50a2a352d365115afe04044b945654fe0ca21d7493c69"
+      },
+      {
+        "file": "entry-tests-final/custom-relative/session.started.json",
+        "raw_sha256": "c7f75d58fc36211e6ea53ac8755697edac29da9da3b0a404526f192d3684c4b3"
+      },
+      {
+        "file": "entry-tests-final/empty-fault/session.started.json",
+        "raw_sha256": "1f44fab6ab5ca5621c16b7a4b380117b8663dd63818632ece3400ad6634e691a"
+      },
+      {
+        "file": "entry-tests-final/encoding-ps7-cp65001/session.started.json",
+        "raw_sha256": "9233379cba7673220d0bb10e0f9489862c152dcaf4f93c8df03316fa394e3d78"
+      },
+      {
+        "file": "entry-tests-final/encoding-ps7-cp936/session.started.json",
+        "raw_sha256": "b8411a15b74ceae9c23e829592e9dbd8c0cc4144527be7885c9110d0cc21315f"
+      },
+      {
+        "file": "entry-tests-final/encoding-ps7-encoding-refused/session.started.json",
+        "raw_sha256": "facb6b097900923969b1fd40b53500202a2cc76d5200e7d4b7daea4e0fbde143"
+      },
+      {
+        "file": "entry-tests-final/encoding-ps7-fresh/session.started.json",
+        "raw_sha256": "2ed1024728d41d9b2b3027c4f6658c289832d57987bf61038f6bf185a923f5f1"
+      },
+      {
+        "file": "entry-tests-final/encoding-ps7-rollback/session.started.json",
+        "raw_sha256": "b3beb91331fb166e3460d531e1bff34013d867d956acb17c8b76323ed04ad449"
+      },
+      {
+        "file": "entry-tests-final/encoding-ps7-rollback-mixed/session.started.json",
+        "raw_sha256": "b91494438085ede18db8d88c64c2855b249a255ca701fd1e38767acf20dd9c34"
+      },
+      {
+        "file": "entry-tests-final/fault/session.started.json",
+        "raw_sha256": "8ff099c95ee01952b10b9a300626b3fbd8ba7cbff4734a45de83638972070cfa"
+      },
+      {
+        "file": "entry-tests-final/file-state/session.started.json",
+        "raw_sha256": "94470b69ffb9af5348ac9ab98d12ac43127b739209d3d779cb7c34ccad6d6f33"
+      },
+      {
+        "file": "entry-tests-final/foreign-command/session.started.json",
+        "raw_sha256": "8561c9a889b8a2eb15ce98634547ae6b20ff04424be337366e618198b2b5b87d"
+      },
+      {
+        "file": "entry-tests-final/function-conflict/session.started.json",
+        "raw_sha256": "7bf125207aad665a7a5b79b35d41f3d6fa770596b992341fa88a111792d5bfb2"
+      },
+      {
+        "file": "entry-tests-final/invalid-state/session.started.json",
+        "raw_sha256": "9c71ae7b7c9f0fafdda3466cc2972bee864d4995d3b151c16f9573dd42b8b9eb"
+      },
+      {
+        "file": "entry-tests-final/late-conflict/session.started.json",
+        "raw_sha256": "263aede2e6e31d4c4aded6d8708b01b25f6ac0441d9ab277ab38c4c666d83358"
+      },
+      {
+        "file": "entry-tests-final/new-state/session.started.json",
+        "raw_sha256": "db3de9b4db786fd4cb598fb413cbd13355c676333cbb023dabeb9a7e8aedabe2"
+      },
+      {
+        "file": "entry-tests-final/no-jar/session.started.json",
+        "raw_sha256": "d3512df136cf259616e63eeb28406dd7e9e89545749c59ac1694ccf3e999270b"
+      },
+      {
+        "file": "entry-tests-final/no-java/session.started.json",
+        "raw_sha256": "eba471f2380517766013f4b470052cc3dcffb129226fdf1f48e329102f2336d7"
+      },
+      {
+        "file": "entry-tests-final/normal/session.started.json",
+        "raw_sha256": "b0a85ea4ab68e4eb30491928d74d798b34d3346bb58dc64b7a6af8e8d8a913dc"
+      },
+      {
+        "file": "entry-tests-final/old-java/session.started.json",
+        "raw_sha256": "59d57524b05e94206495fc833f01681d1bfb3aa421ee6fcf33c94c7ed772c987"
+      },
+      {
+        "file": "entry-tests-final/path-dedup/session.started.json",
+        "raw_sha256": "bb723f0c08b40d306edaedc18cc4ed4a1f42eb02f70a072875d07ae527eb077e"
+      },
+      {
+        "file": "entry-tests-final/preserve/session.started.json",
+        "raw_sha256": "3ed739f3c418dbb970ea6e84faf5edf384b570c509ac5c505f3f5cf88781b7ee"
+      },
+      {
+        "file": "entry-tests-final/protected-state/session.started.json",
+        "raw_sha256": "779569afffd1eca8f98ac9360981f9b9286a5a4b8c4e2695bf3a099cc0c1bdd5"
+      },
+      {
+        "file": "entry-tests-final/root-and-cwd/session.started.json",
+        "raw_sha256": "a89d9bc4714ed9dd122af724c3ff37a1072c3454f9e3bfd141f509418933bf4c"
+      }
+    ],
+    "raw_metadata_preserved_privately": true
+  },
+  "local_links_checked": 48,
+  "link_issues": []
+}

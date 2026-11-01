@@ -1,0 +1,39 @@
+{
+  "powershell": "7.6.5",
+  "encoding_after": {
+    "output": 936,
+    "native_input": 936,
+    "input": 936,
+    "pipeline": 20127,
+    "native_output": 65001,
+    "pipeline_preamble": 0
+  },
+  "calls": [],
+  "checks": [
+    "baseline native input available",
+    "baseline native output available",
+    "initializer actual exit code",
+    "clear initialization error",
+    "rollback output",
+    "rollback native_input",
+    "rollback input",
+    "rollback pipeline",
+    "rollback native_output",
+    "rollback pipeline_preamble",
+    "rollback PATH",
+    "rollback state",
+    "failure is post-encoding entry conflict",
+    "rollback completed without secondary errors"
+  ],
+  "case": "rollback-mixed",
+  "passed": true,
+  "state_directory": null,
+  "encoding_before": {
+    "output": 936,
+    "native_input": 936,
+    "input": 936,
+    "pipeline": 20127,
+    "native_output": 65001,
+    "pipeline_preamble": 0
+  }
+}

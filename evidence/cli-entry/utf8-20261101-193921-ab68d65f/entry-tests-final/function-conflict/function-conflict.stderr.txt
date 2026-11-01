@@ -1,0 +1,1 @@
+ContentOps 初始化失败：当前会话有同名 contentops 别名、函数或命令，PATH 无法覆盖它。请先检查 Get-Command contentops -All，或明确使用 scripts/contentops.cmd。

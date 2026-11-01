@@ -1,0 +1,23 @@
+{
+  "checked_existing_files": 4238,
+  "expected_changed_files": [
+    "demo/docs/manifest.json",
+    "demo/docs/readme.html",
+    "README.md",
+    "scripts/enable-contentops.ps1",
+    "scripts/verify-cli-entry.ps1"
+  ],
+  "unexpected_changes": [],
+  "missing_files": [],
+  "candidate_files": 1920,
+  "frozen_jar_sha256": "2e6b40ece3567579383c777bff31c35bc682bbf5b18a5bf881bfe5c6596940c6",
+  "final_zip_sha256": "aaffbc930761007ab317d90b89c995298ca18310505ed32db8c5c83cda9e15e3",
+  "formal_task2_state_sha256": "0e72b6dfc455b59f87ea7d9fb7c29f379680540df39056397e15c911c36a8790",
+  "original_materials": {
+    "内容运营后台接口数据/content-ops-admin-openapi.json": "c66a657de90d2fe021106b3ee822193b33ddcfba78b861d7ea9c536b6c82c935",
+    "内容运营后台接口数据/mock_data.json": "44ba17cbe95432547a8fe380f81e0416ae51404957ed0c87de5ced7f8e3939b0",
+    "内容运营后台接口数据/README.md": "e289f0daaa91feecce1b4ce3bd28440b43ab29f33932d6d7e66008c2b28e3d60",
+    "题目：内容运营后台 CLI 化.md": "511036c3c832e5e6823db517a33129f06fbfa2bcedf3a0bf21eec1f374c0a337"
+  },
+  "candidate_final_ai_history_unchanged": true
+}

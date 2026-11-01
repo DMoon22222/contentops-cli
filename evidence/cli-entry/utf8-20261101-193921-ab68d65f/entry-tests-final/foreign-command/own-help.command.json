@@ -1,0 +1,10 @@
+{
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "resolved": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\scripts\\contentops.cmd",
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI",
+  "entry": "contentops",
+  "arguments": [
+    "--help"
+  ],
+  "actual_exit": 0
+}

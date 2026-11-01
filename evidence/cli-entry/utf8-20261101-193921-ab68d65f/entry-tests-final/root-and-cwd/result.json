@@ -1,0 +1,29 @@
+{
+  "calls": [
+    {
+      "name": "root-help",
+      "exit": 0,
+      "type": "launcher"
+    },
+    {
+      "name": "root-other-cwd",
+      "exit": 0,
+      "type": "launcher"
+    }
+  ],
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\原项目只读 状态",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\reviewer",
+  "checks": [
+    "root-help actual native exit",
+    "root-other-cwd actual native exit",
+    "root-other-cwd exactly one JSON object",
+    "root-other-cwd JSON/native exit match",
+    "root-other-cwd Java mock origin",
+    "current-directory Java fixture did not replace PATH Java",
+    "source-root launcher queries do not create snapshot",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "project_root": "F:\\AI_TESTEXAM",
+  "case": "root-and-cwd",
+  "passed": true
+}

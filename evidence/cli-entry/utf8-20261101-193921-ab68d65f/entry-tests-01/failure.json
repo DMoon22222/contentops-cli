@@ -1,0 +1,7 @@
+{
+  "error": "Encoding test failed: encoding-ps51-fresh. See saved failure.json and stdout/stderr",
+  "position": "At F:\\AI_TESTEXAM\\scripts\\verify-cli-entry.ps1:127 char:33\r\n+ … code -ne 0){throw \"Encoding test failed: $name. See saved failure.jso …\r\n+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "completed_encoding_cases": 5,
+  "passed": false,
+  "completed_cases": 19
+}

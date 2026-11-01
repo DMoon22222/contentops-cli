@@ -1,0 +1,1 @@
+ContentOps 初始化失败：检测到 CONTENTOPS_MOCK_SCENARIO，未进入普通试用，也未清除配置。请先确认并在当前会话运行 Remove-Item Env:CONTENTOPS_MOCK_SCENARIO 后重试（空值同样无效）。

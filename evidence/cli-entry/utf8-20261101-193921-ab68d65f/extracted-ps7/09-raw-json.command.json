@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "has_bom": false,
+  "arguments": "/d /s /c \"\"F:\\AI_TESTEXAM\\.contentops\\utf8-20261101-193921-ab68d65f\\独立解压 UTF8 验收\\ContentOps-CLI\\scripts\\contentops.cmd\" --output json content get ct_000004\"",
+  "strict_utf8": true
+}

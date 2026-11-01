@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "case": "invalid-state",
+  "state_directory": null,
+  "calls": [
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "invalid-state-0"
+    },
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "invalid-state-1"
+    },
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "conflicting-options"
+    }
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "checks": [
+    "invalid-state-0 expected initializer exit 2",
+    "invalid-state-0 friendly error",
+    "invalid-state-0 PATH rollback",
+    "invalid-state-0 state rollback",
+    "invalid-state-0 JAVA_HOME unchanged",
+    "invalid-state-1 expected initializer exit 2",
+    "invalid-state-1 friendly error",
+    "invalid-state-1 PATH rollback",
+    "invalid-state-1 state rollback",
+    "invalid-state-1 JAVA_HOME unchanged",
+    "conflicting-options expected initializer exit 2",
+    "conflicting-options friendly error",
+    "conflicting-options PATH rollback",
+    "conflicting-options state rollback",
+    "conflicting-options JAVA_HOME unchanged",
+    "JAVA_HOME unchanged throughout"
+  ]
+}

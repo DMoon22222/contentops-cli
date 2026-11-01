@@ -1,0 +1,2 @@
+System.Threading.Tasks.VoidTaskResult
+PASS: encoding cp936 (50 checks)

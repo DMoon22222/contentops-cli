@@ -1,0 +1,12 @@
+{
+  "arguments": [
+    "content",
+    "history",
+    "ct_000004"
+  ],
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "resolved": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\scripts\\contentops.cmd",
+  "entry": "contentops",
+  "actual_exit": 0,
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI"
+}

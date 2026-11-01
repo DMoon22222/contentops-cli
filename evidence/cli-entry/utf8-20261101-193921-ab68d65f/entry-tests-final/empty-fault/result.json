@@ -1,0 +1,24 @@
+{
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI",
+  "calls": [
+    {
+      "type": "initializer",
+      "exit": 2,
+      "name": "fault-empty"
+    }
+  ],
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "state_directory": null,
+  "passed": true,
+  "checks": [
+    "empty variable present",
+    "fault-empty expected initializer exit 2",
+    "fault-empty friendly error",
+    "fault-empty PATH rollback",
+    "fault-empty state rollback",
+    "fault-empty JAVA_HOME unchanged",
+    "empty fault not removed",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "case": "empty-fault"
+}

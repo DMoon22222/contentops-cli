@@ -1,0 +1,7 @@
+contentops.cmd : 预览未执行；实际写入需同时提供 --execute --yes。
+所在位置 F:\AI_TESTEXAM\scripts\test-support\cli-encoding-session.ps1:54 字符: 18
++         $lines=@(& contentops @Arguments 2> $temporaryError)
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (预览未执行；实际写入需同时提供 --execute --yes。:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

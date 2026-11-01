@@ -40,6 +40,8 @@ function New-Project([string]$Name,[bool]$IncludeJar=$true){
     $null=[IO.Directory]::CreateDirectory((Join-Path $root 'scripts'))
     foreach($file in @('contentops.cmd','enable-contentops.ps1')){Copy-Item -LiteralPath (Join-Path $PSScriptRoot $file) -Destination (Join-Path $root "scripts/$file")}
     if($IncludeJar){$null=[IO.Directory]::CreateDirectory((Join-Path $root 'target'));Copy-Item -LiteralPath $jar -Destination (Join-Path $root 'target/contentops.jar')}
+    $null=[IO.Directory]::CreateDirectory((Join-Path $root '内容运营后台接口数据'))
+    Copy-Item -LiteralPath (Join-Path $project '内容运营后台接口数据/mock_data.json') -Destination (Join-Path $root '内容运营后台接口数据/mock_data.json')
     $root
 }
 
@@ -67,6 +69,7 @@ Copy-Item -LiteralPath (Join-Path $fake17 'java.exe') -Destination (Join-Path $w
 
 $cases=@('normal','preserve','new-state','custom','custom-relative','path-dedup','file-state','no-java','broken-java','old-java','no-jar','fault','empty-fault','invalid-state','protected-state','function-conflict','foreign-command','late-conflict','root-and-cwd')
 $results=[Collections.Generic.List[object]]::new()
+$encodingResults=[Collections.Generic.List[object]]::new()
 try {
     foreach($case in $cases){
         $caseOut=Join-Path $out $case;$null=[IO.Directory]::CreateDirectory($caseOut)
@@ -93,16 +96,54 @@ try {
             Write-Host "PASS: $case ($($result.checks.Count) checks)"
         } finally {if(!$process.HasExited){$process.Kill($true)};$process.Dispose()}
     }
+    # Preserve all original cases above; run the encoding matrix in separate,
+    # no-profile PS7 and Windows PowerShell 5.1 processes. Each success uses a
+    # fresh state selected by the normal (not dot-sourced) initializer.
+    $engines=@($pwsh)
+    $windowsPowerShell=Join-Path $env:WINDIR 'System32/WindowsPowerShell/v1.0/powershell.exe'
+    if(Test-Path -LiteralPath $windowsPowerShell){$engines+=$windowsPowerShell}
+    $encodingChild=Join-Path $PSScriptRoot 'test-support/cli-encoding-session.ps1'
+    foreach($engine in $engines){
+        $label=if($engine -eq $pwsh){'ps7'}else{'ps51'}
+        foreach($case in @('fresh','cp936','cp65001','rollback','rollback-mixed','encoding-refused')){
+            $name='encoding-'+$label+'-'+$case
+            $caseOut=Join-Path $out $name;$null=[IO.Directory]::CreateDirectory($caseOut)
+            $root=if($case.StartsWith('rollback')){$shadow}else{$normal}
+            $start=[Diagnostics.ProcessStartInfo]::new($engine)
+            $start.WorkingDirectory=$root;$start.UseShellExecute=$false;$start.CreateNoWindow=$true;$start.WindowStyle='Hidden'
+            $start.RedirectStandardOutput=$true;$start.RedirectStandardError=$true
+            $start.StandardOutputEncoding=$utf8;$start.StandardErrorEncoding=$utf8
+            foreach($arg in @('-NoLogo','-NoProfile','-File',$encodingChild,'-CaseName',$case,'-ProjectRoot',$root,'-EvidenceDirectory',$caseOut)){$start.ArgumentList.Add($arg)}
+            foreach($key in @('CONTENTOPS_STATE_DIR','CONTENTOPS_MOCK_SCENARIO','JAVA_TOOL_OPTIONS','_JAVA_OPTIONS','JDK_JAVA_OPTIONS')){[void]$start.Environment.Remove($key)}
+            Save ($name+'/session.started.json') @{arguments=@($start.ArgumentList);executable=$engine;at=[DateTimeOffset]::Now.ToString('o')}
+            $process=[Diagnostics.Process]::Start($start)
+            try {
+                $stdout=$process.StandardOutput.ReadToEndAsync();$stderr=$process.StandardError.ReadToEndAsync()
+                if(!$process.WaitForExit(60000)){$process.Kill($true);throw "Encoding session timed out: $name"}
+                $code=$process.ExitCode
+                [IO.File]::WriteAllText((Join-Path $caseOut 'session.stdout.txt'),$stdout.GetAwaiter().GetResult(),$utf8)
+                [IO.File]::WriteAllText((Join-Path $caseOut 'session.stderr.txt'),$stderr.GetAwaiter().GetResult(),$utf8)
+                Save ($name+'/session.finished.json') @{exit_code=$code;at=[DateTimeOffset]::Now.ToString('o')}
+                if($code -ne 0){throw "Encoding test failed: $name. See saved failure.json and stdout/stderr"}
+                $result=Get-Content -LiteralPath (Join-Path $caseOut 'result.json') -Raw -Encoding UTF8|ConvertFrom-Json
+                $encodingResults.Add($result)
+                Write-Host "PASS: $name ($($result.checks.Count) checks)"
+            } finally {if(!$process.HasExited){$process.Kill($true)};$process.Dispose()}
+        }
+    }
     $permanentAfter=PermanentFingerprint
     Save 'permanent-environment.json' @{before=$permanentBefore;after=$permanentAfter;unchanged=($permanentBefore|ConvertTo-Json -Compress) -ceq ($permanentAfter|ConvertTo-Json -Compress)}
     if(($permanentBefore|ConvertTo-Json -Compress) -cne ($permanentAfter|ConvertTo-Json -Compress)){throw 'Permanent environment changed during test'}
     if($parentPath -cne $env:PATH -or $parentState -cne $env:CONTENTOPS_STATE_DIR -or $parentFault -cne $env:CONTENTOPS_MOCK_SCENARIO -or $parentJavaHome -cne $env:JAVA_HOME){throw 'Parent session environment changed'}
     $summary=@{passed=$true;case_count=$results.Count;check_count=($results|ForEach-Object {$_.checks.Count}|Measure-Object -Sum).Sum;
         commands=@($results|ForEach-Object {$_.calls});results=$results;source_commit=(& git -C $project rev-parse HEAD);jar_sha256=(Get-FileHash -LiteralPath $jar -Algorithm SHA256).Hash;
-        powershell=$PSVersionTable.PSVersion.ToString();copied_project=$normal;work_root=$work;permanent_environment_unchanged=$true;parent_environment_unchanged=$true}
+        powershell=$PSVersionTable.PSVersion.ToString();copied_project=$normal;work_root=$work;permanent_environment_unchanged=$true;parent_environment_unchanged=$true;
+        encoding_session_count=$encodingResults.Count;encoding_check_count=($encodingResults|ForEach-Object {$_.checks.Count}|Measure-Object -Sum).Sum;
+        encoding_results=$encodingResults;windows_powershell_available=(Test-Path -LiteralPath $windowsPowerShell)}
     Save 'summary.json' $summary
     Write-Host "PASS: $($results.Count) sessions; $($summary.check_count) checks; isolated Mock only"
+    Write-Host "PASS: $($encodingResults.Count) encoding sessions; $($summary.encoding_check_count) checks"
 } catch {
-    Save 'failure.json' @{passed=$false;completed_cases=$results.Count;error=$_.ToString();position=$_.InvocationInfo.PositionMessage}
+    Save 'failure.json' @{passed=$false;completed_cases=$results.Count;completed_encoding_cases=$encodingResults.Count;error=$_.ToString();position=$_.InvocationInfo.PositionMessage}
     throw
 }

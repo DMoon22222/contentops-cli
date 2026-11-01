@@ -1,0 +1,5 @@
+# Preserve actual diagnostic bytes and their recorded SHA-256 on every checkout.
+* -text whitespace=cr-at-eol
+# Actual stdout/stderr spacing is evidence, not source formatting.
+*.log whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+*.txt whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof

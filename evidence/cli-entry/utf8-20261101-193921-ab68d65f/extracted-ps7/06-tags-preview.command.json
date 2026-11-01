@@ -1,0 +1,14 @@
+{
+  "exit_code": 0,
+  "entry": "F:\\AI_TESTEXAM\\.contentops\\utf8-20261101-193921-ab68d65f\\独立解压 UTF8 验收\\ContentOps-CLI\\scripts\\contentops.cmd",
+  "capture": "PowerShell native decoder; evidence re-encoded UTF-8 without BOM",
+  "arguments": [
+    "content",
+    "tags",
+    "update",
+    "ct_000004",
+    "--add",
+    "悬疑"
+  ],
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\utf8-20261101-193921-ab68d65f\\独立解压 UTF8 验收\\ContentOps-CLI"
+}

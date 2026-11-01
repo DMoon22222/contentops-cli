@@ -1,0 +1,1 @@
+ContentOps 初始化失败：未找到 java.exe。请安装 JDK 21，将其 bin 加入可用环境后重新打开 PowerShell；本脚本不安装 JDK 或修改 JAVA_HOME。

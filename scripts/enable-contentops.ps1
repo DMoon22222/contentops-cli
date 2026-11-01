@@ -14,6 +14,8 @@ $oldPath = $env:PATH
 $hadState = Test-Path Env:CONTENTOPS_STATE_DIR
 $oldState = $env:CONTENTOPS_STATE_DIR
 $environmentChanged = $false
+$encodingChanged = $false
+$encodingSaved = $false
 
 function Get-ComparablePath([string]$Value) {
     try { return [IO.Path]::GetFullPath($Value.Trim().Trim('"')).TrimEnd('\','/') }
@@ -24,6 +26,29 @@ try {
     if ([Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT) {
         throw '此脚本用于 Windows；其他平台可按 README 使用 java -jar。'
     }
+    # Save the independent .NET, PowerShell and native console states. Their
+    # cached code pages can differ. Redirected automation may have no console.
+    if (-not ('ContentOps.ConsoleCodePages' -as [type])) {
+        Add-Type -TypeDefinition @'
+using System.Runtime.InteropServices;
+namespace ContentOps {
+    public static class ConsoleCodePages {
+        [DllImport("kernel32.dll", SetLastError = true)] public static extern uint GetConsoleCP();
+        [DllImport("kernel32.dll", SetLastError = true)] public static extern uint GetConsoleOutputCP();
+        [DllImport("kernel32.dll", SetLastError = true)] [return: MarshalAs(UnmanagedType.Bool)] public static extern bool SetConsoleCP(uint value);
+        [DllImport("kernel32.dll", SetLastError = true)] [return: MarshalAs(UnmanagedType.Bool)] public static extern bool SetConsoleOutputCP(uint value);
+    }
+}
+'@
+    }
+    $oldInputEncoding = [Console]::InputEncoding
+    $oldOutputEncoding = [Console]::OutputEncoding
+    $oldPipelineEncoding = (Get-Variable -Name OutputEncoding -Scope Global -ErrorAction Stop).Value
+    $oldInputCP = [ContentOps.ConsoleCodePages]::GetConsoleCP()
+    $oldOutputCP = [ContentOps.ConsoleCodePages]::GetConsoleOutputCP()
+    if (($oldInputCP -eq 0) -ne ($oldOutputCP -eq 0)) { throw '无法读取完整的控制台代码页，尚未更改编码。' }
+    $hasConsole = $oldInputCP -ne 0
+    $encodingSaved = $true
     if ($NewState -and $PSBoundParameters.ContainsKey('StateDirectory')) {
         throw '-NewState 与 -StateDirectory 请只选一个。'
     }
@@ -112,6 +137,27 @@ try {
         if (![StringComparer]::OrdinalIgnoreCase.Equals((Get-ComparablePath $part), (Get-ComparablePath $scriptsDirectory))) { $newParts.Add($part) }
     }
     $null = [IO.Directory]::CreateDirectory($absoluteState)
+    $encodingChanged = $true
+    $utf8 = New-Object Text.UTF8Encoding($false)
+    try {
+        [Console]::InputEncoding = $utf8
+        [Console]::OutputEncoding = $utf8
+        $global:OutputEncoding = $utf8
+        if ($hasConsole) {
+            if (![ContentOps.ConsoleCodePages]::SetConsoleCP(65001) -or
+                ![ContentOps.ConsoleCodePages]::SetConsoleOutputCP(65001)) {
+                throw '无法将 Windows 控制台输入、输出代码页设置为 65001。'
+            }
+            if ([ContentOps.ConsoleCodePages]::GetConsoleCP() -ne 65001 -or
+                [ContentOps.ConsoleCodePages]::GetConsoleOutputCP() -ne 65001) {
+                throw 'Windows 控制台代码页核对失败。'
+            }
+        }
+        if ([Console]::InputEncoding.CodePage -ne 65001 -or [Console]::OutputEncoding.CodePage -ne 65001 -or
+            $global:OutputEncoding.CodePage -ne 65001 -or $global:OutputEncoding.GetPreamble().Length -ne 0) {
+            throw 'UTF-8 编码核对失败。'
+        }
+    } catch { throw ('UTF-8 初始化失败：' + $_.Exception.Message) }
     $environmentChanged = $true
     $env:PATH = $newParts -join ';'
     # Keep an existing explicit value exactly as provided when no override was requested.
@@ -126,6 +172,8 @@ try {
     Write-Host 'ContentOps CLI 已准备就绪'
     Write-Host ('Java：21 · ' + $java.Source)
     Write-Host '运行模式：Mock'
+    if ($hasConsole) { Write-Host '控制台编码：UTF-8 (65001)' }
+    else { Write-Host '流编码：UTF-8 (65001)；当前无可用 Windows 控制台。' }
     Write-Host ('命令入口：' + $launcher)
     Write-Host ('状态目录：' + $env:CONTENTOPS_STATE_DIR)
     if ($stateFileExists) { Write-Host '复用已有工作状态，未读取、删除或重置。' }
@@ -136,10 +184,25 @@ try {
     Write-Host "`n此配置仅在当前 PowerShell 会话及子进程生效。浏览器 Playground 使用另一份页面内存状态。"
     exit 0
 } catch {
+    $failureMessage = $_.Exception.Message
+    $rollbackErrors = New-Object 'Collections.Generic.List[string]'
     if ($environmentChanged) {
         $env:PATH = $oldPath
         if ($hadState) { Set-Item Env:CONTENTOPS_STATE_DIR -Value $oldState } else { Remove-Item Env:CONTENTOPS_STATE_DIR -ErrorAction SilentlyContinue }
     }
-    [Console]::Error.WriteLine('ContentOps 初始化失败：' + $_.Exception.Message)
+    if ($encodingSaved -and $encodingChanged) {
+        # Restore every setting even if another restoration fails.
+        try { [Console]::InputEncoding = $oldInputEncoding } catch { $rollbackErrors.Add('Console.InputEncoding: ' + $_.Exception.Message) }
+        try { [Console]::OutputEncoding = $oldOutputEncoding } catch { $rollbackErrors.Add('Console.OutputEncoding: ' + $_.Exception.Message) }
+        try {
+            if (![object]::ReferenceEquals($global:OutputEncoding, $oldPipelineEncoding)) { $global:OutputEncoding = $oldPipelineEncoding }
+        } catch { $rollbackErrors.Add('OutputEncoding: ' + $_.Exception.Message) }
+        if ($hasConsole) {
+            if (![ContentOps.ConsoleCodePages]::SetConsoleCP($oldInputCP)) { $rollbackErrors.Add('Windows 输入代码页恢复失败') }
+            if (![ContentOps.ConsoleCodePages]::SetConsoleOutputCP($oldOutputCP)) { $rollbackErrors.Add('Windows 输出代码页恢复失败') }
+        }
+    }
+    [Console]::Error.WriteLine('ContentOps 初始化失败：' + $failureMessage)
+    if ($rollbackErrors.Count) { [Console]::Error.WriteLine('环境恢复未完成：' + ($rollbackErrors -join '; ')) }
     exit 2
 }

@@ -1,0 +1,226 @@
+{
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "calls": [
+    {
+      "type": "initializer",
+      "name": "01-enable",
+      "exit": 0
+    },
+    {
+      "type": "initializer",
+      "name": "02-enable-again",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "03-help",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "04-list",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "05-get",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "06-history",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "07-tags",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "08-total",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "09-pending",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "10-tags",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "11-all-tags",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "12-review-preview",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "13-tags-preview",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "14-process-preview",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "15-missing-yes",
+      "exit": 2
+    },
+    {
+      "type": "launcher",
+      "name": "16-only-yes",
+      "exit": 2
+    },
+    {
+      "type": "launcher",
+      "name": "17-process-execute",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "18-after-get",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "19-after-history",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "20-pending-after",
+      "exit": 0
+    },
+    {
+      "type": "launcher",
+      "name": "21-repeat",
+      "exit": 2
+    },
+    {
+      "type": "launcher",
+      "name": "22-missing-id",
+      "exit": 3
+    },
+    {
+      "type": "launcher",
+      "name": "23-other-cwd",
+      "exit": 0
+    }
+  ],
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI",
+  "case": "normal",
+  "passed": true,
+  "checks": [
+    "01-enable expected initializer exit 0",
+    "default absolute state directory",
+    "project launcher resolved",
+    "02-enable-again expected initializer exit 0",
+    "repeat initialization unchanged PATH",
+    "scripts first and occurs once",
+    "03-help actual native exit",
+    "help content",
+    "help no business snapshot",
+    "04-list actual native exit",
+    "04-list table mode",
+    "05-get actual native exit",
+    "05-get table mode",
+    "06-history actual native exit",
+    "06-history table mode",
+    "07-tags actual native exit",
+    "07-tags table mode",
+    "08-total actual native exit",
+    "08-total exactly one JSON object",
+    "08-total JSON/native exit match",
+    "08-total Java mock origin",
+    "all 300 contents",
+    "09-pending actual native exit",
+    "09-pending exactly one JSON object",
+    "09-pending JSON/native exit match",
+    "09-pending Java mock origin",
+    "pending132 page1=20",
+    "10-tags actual native exit",
+    "10-tags exactly one JSON object",
+    "10-tags JSON/native exit match",
+    "10-tags Java mock origin",
+    "active23 default",
+    "11-all-tags actual native exit",
+    "11-all-tags exactly one JSON object",
+    "11-all-tags JSON/native exit match",
+    "11-all-tags Java mock origin",
+    "all25",
+    "12-review-preview actual native exit",
+    "12-review-preview exactly one JSON object",
+    "12-review-preview JSON/native exit match",
+    "12-review-preview Java mock origin",
+    "12-review-preview preview",
+    "12-review-preview zero business writes",
+    "13-tags-preview actual native exit",
+    "13-tags-preview exactly one JSON object",
+    "13-tags-preview JSON/native exit match",
+    "13-tags-preview Java mock origin",
+    "13-tags-preview preview",
+    "13-tags-preview zero business writes",
+    "14-process-preview actual native exit",
+    "14-process-preview exactly one JSON object",
+    "14-process-preview JSON/native exit match",
+    "14-process-preview Java mock origin",
+    "14-process-preview preview",
+    "14-process-preview zero business writes",
+    "15-missing-yes actual native exit",
+    "15-missing-yes exactly one JSON object",
+    "15-missing-yes JSON/native exit match",
+    "15-missing-yes Java mock origin",
+    "16-only-yes actual native exit",
+    "16-only-yes exactly one JSON object",
+    "16-only-yes JSON/native exit match",
+    "16-only-yes Java mock origin",
+    "authorization guards no writes",
+    "17-process-execute actual native exit",
+    "17-process-execute exactly one JSON object",
+    "17-process-execute JSON/native exit match",
+    "17-process-execute Java mock origin",
+    "execute success and verified",
+    "18-after-get actual native exit",
+    "18-after-get exactly one JSON object",
+    "18-after-get JSON/native exit match",
+    "18-after-get Java mock origin",
+    "approved complete tags",
+    "19-after-history actual native exit",
+    "19-after-history exactly one JSON object",
+    "19-after-history JSON/native exit match",
+    "19-after-history Java mock origin",
+    "Chinese spaced reason and exclamation preserved",
+    "20-pending-after actual native exit",
+    "20-pending-after exactly one JSON object",
+    "20-pending-after JSON/native exit match",
+    "20-pending-after Java mock origin",
+    "pending131",
+    "21-repeat actual native exit",
+    "21-repeat exactly one JSON object",
+    "21-repeat JSON/native exit match",
+    "21-repeat Java mock origin",
+    "repeat pending protection",
+    "22-missing-id actual native exit",
+    "22-missing-id exactly one JSON object",
+    "22-missing-id JSON/native exit match",
+    "22-missing-id Java mock origin",
+    "queries and repeat preserve snapshot",
+    "23-other-cwd actual native exit",
+    "23-other-cwd exactly one JSON object",
+    "23-other-cwd JSON/native exit match",
+    "23-other-cwd Java mock origin",
+    "other cwd same stored state",
+    "JAVA_HOME unchanged throughout"
+  ]
+}

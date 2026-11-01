@@ -1,0 +1,14 @@
+{
+    "capture":  "PowerShell native decoder; evidence re-encoded UTF-8 without BOM",
+    "arguments":  [
+                      "content",
+                      "tags",
+                      "update",
+                      "ct_000004",
+                      "--add",
+                      "悬疑"
+                  ],
+    "cwd":  "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI",
+    "entry":  "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\scripts\\contentops.cmd",
+    "exit_code":  0
+}

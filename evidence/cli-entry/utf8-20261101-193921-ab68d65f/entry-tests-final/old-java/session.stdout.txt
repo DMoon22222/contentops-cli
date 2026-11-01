@@ -1,0 +1,1 @@
+PASS: old-java (7 checks)

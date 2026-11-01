@@ -1,0 +1,24 @@
+{
+  "case": "empty-fault",
+  "passed": true,
+  "state_directory": null,
+  "calls": [
+    {
+      "exit": 2,
+      "name": "fault-empty",
+      "type": "initializer"
+    }
+  ],
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI",
+  "checks": [
+    "empty variable present",
+    "fault-empty expected initializer exit 2",
+    "fault-empty friendly error",
+    "fault-empty PATH rollback",
+    "fault-empty state rollback",
+    "fault-empty JAVA_HOME unchanged",
+    "empty fault not removed",
+    "JAVA_HOME unchanged throughout"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "source_commit_before": "49d049a4156b63d7ac2c4a36f5a0f92482105a57",
+  "maven_working_directory": ".contentops/utf8-20261101-193921-ab68d65f/maven-source",
+  "maven_options": [
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=F:/AI_TESTEXAM/.contentops/m2"
+  ],
+  "maven_test_exit": 0,
+  "maven_verify_exit": 0,
+  "surefire": {
+    "tests": 165,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "failsafe": {
+    "tests": 40,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "windows_original_sessions": 19,
+  "windows_original_checks": 239,
+  "encoding_sessions": 12,
+  "encoding_checks": 382,
+  "powershell_versions": [
+    "5.1.22621.6133",
+    "7.6.5"
+  ],
+  "jar_rebuilt_only_in_disposable_source_copy": true,
+  "original_jar_not_rebuilt": true,
+  "no_zip_repack": true,
+  "old_failure_preserved": "entry-tests-01/encoding-ps51-fresh/failure.json",
+  "independent_extraction": {
+    "origin": "delivery/final/项目代码包.zip",
+    "overlay": [
+      "scripts/enable-contentops.ps1"
+    ],
+    "reason": "Validate the fix in a disposable extracted copy without changing frozen artifacts. This is NOT a claim that the unchanged ZIP includes the fix.",
+    "ps7": true,
+    "ps51": true,
+    "checks_each": 48
+  },
+  "no_business_source_or_cmd_changes": true,
+  "ai_records_unchanged": true
+}

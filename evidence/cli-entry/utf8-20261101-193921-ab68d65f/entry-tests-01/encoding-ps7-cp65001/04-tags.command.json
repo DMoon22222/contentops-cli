@@ -1,0 +1,10 @@
+{
+  "exit_code": 0,
+  "entry": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\scripts\\contentops.cmd",
+  "arguments": [
+    "tags",
+    "list"
+  ],
+  "capture": "PowerShell native decoder; evidence re-encoded UTF-8 without BOM",
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI"
+}

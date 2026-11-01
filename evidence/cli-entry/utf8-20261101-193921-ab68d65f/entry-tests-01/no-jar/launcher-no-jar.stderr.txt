@@ -1,0 +1,2 @@
+ContentOps: executable JAR was not found at "F:\AI_TESTEXAM\.contentops\cli-entry\36bbea7c10ba420c9fb2e3acade235df\缺少 JAR 项目\scripts\..\target\contentops.jar".
+Source checkout: run mvn -B -ntp verify. Packaged copy: check that extraction is complete.

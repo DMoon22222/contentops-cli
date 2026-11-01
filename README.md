@@ -8,9 +8,9 @@
 
 ## Windows 快速使用
 
-**面试官试用：**先安装 JDK 21，在已解压的项目根目录打开 PowerShell（完整验收环境为 PowerShell 7）。如果目录已包含 `target/contentops.jar`，无需 Maven、Git 或网络。本项目尚未制作最终邮件附件，不能据此认为提交包已经就绪。
+**面试官试用：**先安装 JDK 21，在已解压的项目根目录打开 PowerShell。如果目录已包含 `target/contentops.jar`，无需 Maven、Git 或网络。本轮已实测 PowerShell 7.6.5 和 Windows PowerShell 5.1 的初始化与中文显示；现有冻结交付 ZIP 尚未同步本轮脚本修复，需要另行更新和验收。
 
-在准备使用 CLI 的同一个窗口执行，无需点源或管理员权限：
+在准备使用 CLI 的同一个窗口执行，无需点源或管理员权限。初始化会自动处理中文显示，配置本会话为 UTF-8，无需手动执行 `chcp` 或修改 Windows 系统设置：
 
 ```powershell
 .\scripts\enable-contentops.ps1
@@ -27,7 +27,7 @@ contentops content tags update ct_000004 --add "悬疑"
 contentops content process ct_000004 --action approve --reason "本地演示审核决定" --add "悬疑"
 ```
 
-初始化只设置当前会话的 PATH 和绝对 `CONTENTOPS_STATE_DIR`，不修改永久环境、JAVA_HOME 或执行策略。默认使用项目 `.contentops/reviewer`；已明确设置的状态目录会保留，已有数据不重置。脚本检查 JDK 21、JAR、同名命令与故障变量；存在 `CONTENTOPS_MOCK_SCENARIO` 时拒绝普通试用，需自行确认后清除。`-StateDirectory "D:\contentops-test"` 可指定其他目录，`-NewState` 创建新的项目内目录。
+初始化设置当前会话的 PATH、绝对 `CONTENTOPS_STATE_DIR` 和 UTF-8 输入/输出编码，成功提示包含编码状态。失败时恢复原 PATH、状态变量和编码；不修改永久环境、JAVA_HOME、Profile、注册表或执行策略。默认使用项目 `.contentops/reviewer`；已明确设置的状态目录会保留，已有数据不重置。脚本检查 JDK 21、JAR、同名命令与故障变量；存在 `CONTENTOPS_MOCK_SCENARIO` 时拒绝普通试用，需自行确认后清除。`-StateDirectory "D:\contentops-test"` 可指定其他目录，`-NewState` 创建新的项目内目录。
 
 确认使用独立状态目录、人工给定演示决定后，只执行一次：
 
@@ -52,7 +52,7 @@ Get-Command contentops -All # 确认本项目入口；有同名别名/函数时�
 .\scripts\contentops.cmd --help
 ```
 
-手动方式不包含初始化脚本的完整前置检查。也可继续使用 `java -jar ./target/contentops.jar ...`；启动器不解析业务参数、不自动编译或下载。启动前缺 Java/JAR 时 stderr 提示、退出 2、stdout 为空；成功启动后 JSON 与退出码由 Java 原样提供。
+手动方式不包含初始化脚本的完整前置检查和自动编码配置；正常试用优先只执行上面的初始化脚本。也可继续使用 `java -jar ./target/contentops.jar ...`；启动器不解析业务参数、不自动编译或下载。启动前缺 Java/JAR 时 stderr 提示、退出 2、stdout 为空；成功启动后 JSON 与退出码由 Java 原样提供。
 
 ## 开发者从源码构建
 
@@ -66,6 +66,8 @@ contentops content list --review-status pending
 ```
 
 **Maven 是构建工具，不是已打包 CLI 的运行依赖。**首次构建通常需联网下载依赖，JAR 含运行库和只读 seed，可离线运行。GitHub 是可选源码入口：[contentops-cli](https://github.com/DMoon22222/contentops-cli)。缓存、实时状态、个人配置和提交包不纳入源码版本；最终交付状态见 [交付清单](docs/04-交付物规划与验收清单.md)。本轮入口测试与真实输出见 [cli-entry](evidence/cli-entry/README.md)。
+
+UTF-8 修复的真实测试、回滚结果和交付包待同步文件见 [Windows 中文编码专项记录](evidence/cli-entry/utf8-20261101-193921-ab68d65f/README.md)。既有入口验收与交付验收报告继续作为历史证据保留。
 
 ## 离线 HTML Demo
 
@@ -117,7 +119,7 @@ mvn -B -ntp verify
 java -jar ./target/contentops.jar --help
 ```
 
-编译目标为 Java 17，Shade 产物为 `target/contentops.jar`。当前实际运行验收使用 Temurin 21.0.7、Maven 3.9.4、Windows 11 和 PowerShell 7.6.5；尚未在 Java 17 JVM 或 Windows PowerShell 5.1 上验收。
+编译目标为 Java 17，Shade 产物为 `target/contentops.jar`。当前实际运行验收使用 Temurin 21.0.7、Maven 3.9.4、Windows 11 和 PowerShell 7.6.5；本轮另在 Windows PowerShell 5.1.22621.6133 上通过了启动、七条命令中文输出及编码回滚专项测试，尚未在 Java 17 JVM 上验收。
 
 依赖固定为 Picocli 4.7.7、Jackson BOM 2.21.8、JUnit Jupiter 5.13.4。没有 Spring Boot、数据库或 Mock HTTP 服务器。`.mvn/maven.config` 将 Maven 缓存放到忽略目录 `.contentops/m2`，解决本机全局缓存的写权限问题；请从项目根目录构建，首次构建需要下载依赖。
 

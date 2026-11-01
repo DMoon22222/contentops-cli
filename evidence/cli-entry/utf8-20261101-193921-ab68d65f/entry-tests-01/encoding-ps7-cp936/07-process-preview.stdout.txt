@@ -1,0 +1,10 @@
+环境: mock | 命令: content.process | 模式: preview
+审核计划: pending -> approved | action=approve
+理由: 编码回归 · 中文 English 空格 (A) !
+标签 before: 恋爱、校园、武侠
+标签 after: 恋爱、校园、武侠、悬疑
+步骤	写入	核对	接口响应
+review	not_sent	not_checked	null
+tags	not_sent	not_checked	null
+最近实际读取: review_status=pending | tags=恋爱、校园、武侠
+结果: previewed / 0

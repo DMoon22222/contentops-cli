@@ -1,0 +1,1 @@
+PASS: root-and-cwd (8 checks)

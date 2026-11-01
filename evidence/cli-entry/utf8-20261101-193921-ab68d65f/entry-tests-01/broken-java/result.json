@@ -1,0 +1,22 @@
+{
+  "state_directory": null,
+  "checks": [
+    "broken-java expected initializer exit 2",
+    "broken-java friendly error",
+    "broken-java PATH rollback",
+    "broken-java state rollback",
+    "broken-java JAVA_HOME unchanged",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "passed": true,
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI",
+  "calls": [
+    {
+      "type": "initializer",
+      "name": "broken-java",
+      "exit": 2
+    }
+  ],
+  "case": "broken-java",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\36bbea7c10ba420c9fb2e3acade235df\\面试解压项目 ContentOps CLI\\.contentops\\reviewer"
+}

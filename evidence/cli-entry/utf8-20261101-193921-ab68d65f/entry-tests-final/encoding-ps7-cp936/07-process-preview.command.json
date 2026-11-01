@@ -1,0 +1,17 @@
+{
+  "entry": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI\\scripts\\contentops.cmd",
+  "capture": "PowerShell native decoder; evidence re-encoded UTF-8 without BOM",
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9244ad004a1c4e6fa4f316c1b45f1198\\面试解压项目 ContentOps CLI",
+  "exit_code": 0,
+  "arguments": [
+    "content",
+    "process",
+    "ct_000004",
+    "--action",
+    "approve",
+    "--reason",
+    "编码回归 · 中文 English 空格 (A) !",
+    "--add",
+    "悬疑"
+  ]
+}
