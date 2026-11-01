@@ -2,12 +2,15 @@ package com.example.contentops;
 
 import com.example.contentops.application.ContentService;
 import com.example.contentops.cli.CliRunner;
+import com.example.contentops.cli.InteractiveShell;
 import com.example.contentops.infrastructure.JsonSupport;
 import com.example.contentops.infrastructure.mock.JsonMockGateway;
 import com.example.contentops.infrastructure.mock.JsonStateStore;
 import com.example.contentops.infrastructure.mock.FaultInjectingGateway;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public final class Main {
@@ -23,6 +26,13 @@ public final class Main {
             var faults = new FaultInjectingGateway(mock, config.mockScenario());
             return new ContentService(faults, faults::diagnosticWarnings);
         });
-        System.exit(runner.run(args));
+        int exitCode;
+        if (args.length == 0) {
+            var input = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
+            exitCode = new InteractiveShell(input, err, runner).run();
+        } else {
+            exitCode = runner.run(args);
+        }
+        System.exit(exitCode);
     }
 }

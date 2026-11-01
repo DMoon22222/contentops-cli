@@ -10,11 +10,15 @@ import com.example.contentops.model.ResultModels.*;
 import com.example.contentops.model.OperationModels.WriteSpec;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Set;
 import java.util.List;
 import java.util.LinkedHashSet;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -26,6 +30,7 @@ public final class CliRunner {
     private final ResultRenderer renderer;
     private RootCommand root;
     private ContentService service;
+    private BufferedReader interactiveInput;
 
     public CliRunner(Map<String, String> environment, PrintWriter out, PrintWriter err,
                      ObjectMapper json, Function<AppConfig, ContentService> factory) {
@@ -37,8 +42,25 @@ public final class CliRunner {
     }
 
     public int run(String... args) {
+        return runCommand(null, args);
+    }
+
+    public int runInteractive(BufferedReader input, String... args) {
+        return runCommand(Objects.requireNonNull(input), args);
+    }
+
+    private int runCommand(BufferedReader input, String... args) {
         root = new RootCommand();
         service = null;
+        interactiveInput = input;
+        try {
+            return createCommandTree().execute(args);
+        } finally {
+            interactiveInput = null;
+        }
+    }
+
+    private CommandLine createCommandTree() {
         var command = new CommandLine(root);
         var content = new CommandLine(new RootCommand.ContentGroup());
         content.addSubcommand(new ReadCommands.ListContents(this));
@@ -53,7 +75,7 @@ public final class CliRunner {
         tags.addSubcommand(new ReadCommands.ListTags(this));
         command.addSubcommand(content).addSubcommand(tags);
         configure(command);
-        return command.execute(args);
+        return command;
     }
 
     private void configure(CommandLine command) {
@@ -88,21 +110,48 @@ public final class CliRunner {
             if (knownEnvironment() == null) {
                 throw new OperationRejected("INVALID_ENVIRONMENT", "--env 只支持 mock 或 api");
             }
-            if (execute != yes) {
-                throw new OperationRejected("EXECUTION_AUTHORIZATION_REQUIRED", "原型执行必须同时提供 --execute --yes；不等待 stdin，仅 --yes 也不合法");
+            boolean confirm = execute && !yes && interactiveInput != null && !root.nonInteractive;
+            if ((!execute && yes) || (execute && !yes && !confirm)) {
+                throw new OperationRejected("EXECUTION_AUTHORIZATION_REQUIRED", "单次或非交互执行必须同时提供 --execute --yes；仅 --yes 也不合法");
             }
             var application = service();
             var plan = application.plan(spec);
-            WriteResult write = execute ? application.execute(plan) : application.preview(plan);
+            WriteResult write;
+            if (confirm && !confirm(spec)) {
+                err.println("已取消，未执行任何写入。");
+                err.flush();
+                var preview = application.preview(plan);
+                write = new WriteResult(Outcome.CANCELLED, preview.data(), null, preview.warnings());
+            } else {
+                write = execute ? application.execute(plan) : application.preview(plan);
+            }
             result = ResultModels.result(knownEnvironment(), command, mode, spec.contentId(), write.outcome(), write.data(), write.error(), warnings(write.warnings()));
         } catch (OperationRejected failure) {
             return emitFailure(command, mode, spec.contentId(), Outcome.REJECTED, failure.code(), failure.getMessage());
         } catch (GatewayFailure failure) {
             return emitFailure(command, mode, spec.contentId(), Outcome.READ_FAILURE, failure.code(), failure.getMessage());
+        } catch (IOException failure) {
+            return emitFailure(command, mode, spec.contentId(), Outcome.CANCELLED, "CONFIRMATION_INPUT_FAILED", "读取确认失败，已取消，未执行任何写入");
         } catch (RuntimeException failure) {
             return emitFailure(command, mode, spec.contentId(), Outcome.INTERNAL_FAILURE, "INTERNAL_ERROR", "操作未完成；请核查实际状态，不自动重试");
         }
         return renderer.render(result, root.output);
+    }
+
+    private boolean confirm(WriteSpec spec) throws IOException {
+        err.println("即将执行以下操作：");
+        err.println("内容 ID：" + spec.contentId());
+        if (spec.kind().includesReview()) { err.println("审核动作：" + spec.action()); }
+        if (spec.reason() != null) { err.println("理由：" + confirmationText(spec.reason())); }
+        if (spec.kind().includesTags()) { err.println("新增标签：" + confirmationText(String.join("、", spec.add()))); }
+        err.print("确认执行吗？(y/N): ");
+        err.flush();
+        String answer = interactiveInput.readLine();
+        return answer != null && Set.of("y", "yes").contains(answer.strip().toLowerCase(Locale.ROOT));
+    }
+
+    private static String confirmationText(String value) {
+        return value.replace("\r", "\\r").replace("\n", "\\n").replace("\t", "\\t").replace("\u001b", "\\u001b");
     }
 
     int read(String command, String id, Supplier<?> query) {

@@ -13,7 +13,7 @@ public final class WriteCommands {
     private WriteCommands() { }
 
     static final class ExecutionOptions {
-        @Option(names = "--execute", description = "执行计划；原型要求同时提供 --yes") boolean execute;
+        @Option(names = "--execute", description = "执行计划；单次模式需 --yes，Shell 可人工确认") boolean execute;
         @Option(names = "--yes", description = "显式授权本次执行；必须与 --execute 同时提供") boolean yes;
     }
     public abstract static class WriteCommand implements Callable<Integer> {

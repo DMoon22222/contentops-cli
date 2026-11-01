@@ -9,7 +9,7 @@ import java.util.concurrent.Callable;
 
 @Command(name = "contentops", description = "内容运营后台 CLI：单条 Mock 审核与标签维护",
         mixinStandardHelpOptions = true, version = "contentops 0.1.0",
-        footer = "写命令默认预览；原型执行必须同时提供 --execute --yes，不等待人工输入。HTTP 尚未实现。")
+        footer = "写命令默认预览；单次/非交互执行需 --execute --yes，Shell 中 --execute 可人工确认。HTTP 尚未实现。")
 public final class RootCommand implements Callable<Integer> {
     @Option(names = "--env", scope = CommandLine.ScopeType.INHERIT, defaultValue = "mock",
             paramLabel = "mock|api", description = "数据源；api 尚未实现，会明确拒绝")
@@ -18,7 +18,7 @@ public final class RootCommand implements Callable<Integer> {
             paramLabel = "table|json", description = "输出格式（默认 table）")
     String output = "table";
     @Option(names = "--non-interactive", scope = CommandLine.ScopeType.INHERIT,
-            description = "禁止交互；当前原型均不读取 stdin，执行需 --execute --yes")
+            description = "禁止 Shell 写入确认；执行需同时提供 --execute --yes")
     boolean nonInteractive;
     @Spec CommandSpec spec;
 
