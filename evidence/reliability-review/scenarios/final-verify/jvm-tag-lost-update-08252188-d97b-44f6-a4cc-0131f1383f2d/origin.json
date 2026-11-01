@@ -1,0 +1,6 @@
+{
+  "source" : "controlled Java test against real local Mock snapshot",
+  "captured_at" : "2026-11-01T04:04:25.872852100Z",
+  "scenario" : "jvm-tag-lost-update",
+  "production_incident" : false
+}

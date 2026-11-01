@@ -1,0 +1,128 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.example:contentops >-----------------------
+[INFO] Building Content Operations CLI 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ contentops ---
+[INFO] Copying 1 resource from 内容运营后台接口数据 to target\classes\seed
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ contentops ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ contentops ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ contentops ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ contentops ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.contentops.application.ReliabilityBoundaryTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.916 s -- in com.example.contentops.application.ReliabilityBoundaryTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ contentops ---
+[INFO] 
+[INFO] --- shade:3.6.2:shade (default) @ contentops ---
+[WARNING] contentops.jar, jackson-databind-2.21.8.jar define 815 overlapping classes and resources: 
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.properties
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.xml
+[WARNING]   - com.fasterxml.jackson.databind.AbstractTypeResolver
+[WARNING]   - com.fasterxml.jackson.databind.AnnotationIntrospector
+[WARNING]   - com.fasterxml.jackson.databind.AnnotationIntrospector$ReferenceProperty
+[WARNING]   - com.fasterxml.jackson.databind.AnnotationIntrospector$ReferenceProperty$Type
+[WARNING]   - com.fasterxml.jackson.databind.AnnotationIntrospector$XmlExtensions
+[WARNING]   - com.fasterxml.jackson.databind.BeanDescription
+[WARNING]   - com.fasterxml.jackson.databind.BeanProperty
+[WARNING]   - com.fasterxml.jackson.databind.BeanProperty$Bogus
+[WARNING]   - 805 more...
+[WARNING] contentops.jar, jackson-core-2.21.8.jar define 225 overlapping classes and resources: 
+[WARNING]   - META-INF.versions.11.com.fasterxml.jackson.core.internal.shaded.fdp.v2_21_8.BigSignificand
+[WARNING]   - META-INF.versions.11.com.fasterxml.jackson.core.internal.shaded.fdp.v2_21_8.FastDoubleSwar
+[WARNING]   - META-INF.versions.11.com.fasterxml.jackson.core.internal.shaded.fdp.v2_21_8.FastIntegerMath
+[WARNING]   - META-INF.versions.17.com.fasterxml.jackson.core.internal.shaded.fdp.v2_21_8.FastDoubleSwar
+[WARNING]   - META-INF.versions.17.com.fasterxml.jackson.core.internal.shaded.fdp.v2_21_8.FastIntegerMath
+[WARNING]   - META-INF.versions.21.com.fasterxml.jackson.core.internal.shaded.fdp.v2_21_8.FastDoubleSwar
+[WARNING]   - META-INF.versions.21.com.fasterxml.jackson.core.internal.shaded.fdp.v2_21_8.FastIntegerMath
+[WARNING]   - META-INF/FastDoubleParser-LICENSE
+[WARNING]   - META-INF/FastDoubleParser-ThirdParty-LICENSE
+[WARNING]   - META-INF/Schubfach-LICENSE
+[WARNING]   - 215 more...
+[WARNING] contentops.jar, jackson-annotations-2.21.jar define 77 overlapping classes and resources: 
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.xml
+[WARNING]   - com.fasterxml.jackson.annotation.JacksonAnnotation
+[WARNING]   - com.fasterxml.jackson.annotation.JacksonAnnotationValue
+[WARNING]   - com.fasterxml.jackson.annotation.JacksonAnnotationsInside
+[WARNING]   - com.fasterxml.jackson.annotation.JacksonInject
+[WARNING]   - com.fasterxml.jackson.annotation.JacksonInject$Value
+[WARNING]   - com.fasterxml.jackson.annotation.JsonAlias
+[WARNING]   - com.fasterxml.jackson.annotation.JsonAnyGetter
+[WARNING]   - com.fasterxml.jackson.annotation.JsonAnySetter
+[WARNING]   - 67 more...
+[WARNING] contentops.jar, jackson-datatype-jsr310-2.21.8.jar define 66 overlapping classes and resources: 
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/pom.properties
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/pom.xml
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.DecimalUtils
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.JSR310Module
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.JSR310Module$1
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.JavaTimeFeature
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.JavaTimeModule$1
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.JavaTimeModule$JavaTimeSerializers
+[WARNING]   - com.fasterxml.jackson.datatype.jsr310.PackageVersion
+[WARNING]   - 56 more...
+[WARNING] contentops.jar, picocli-4.7.7.jar define 228 overlapping classes: 
+[WARNING]   - picocli.AutoComplete
+[WARNING]   - picocli.AutoComplete$1
+[WARNING]   - picocli.AutoComplete$2
+[WARNING]   - picocli.AutoComplete$App
+[WARNING]   - picocli.AutoComplete$Bashify
+[WARNING]   - picocli.AutoComplete$BooleanArgFilter
+[WARNING]   - picocli.AutoComplete$CommandDescriptor
+[WARNING]   - picocli.AutoComplete$Function
+[WARNING]   - picocli.AutoComplete$GenerateCompletion
+[WARNING]   - picocli.AutoComplete$NullFunction
+[WARNING]   - 218 more...
+[WARNING] contentops.jar, jackson-annotations-2.21.jar, jackson-core-2.21.8.jar, jackson-databind-2.21.8.jar, jackson-datatype-jsr310-2.21.8.jar, picocli-4.7.7.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] 
+[INFO] --- failsafe:3.5.5:integration-test (default) @ contentops ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.contentops.integration.ReliabilityProcessIT
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.539 s -- in com.example.contentops.integration.ReliabilityProcessIT
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.5:verify (default) @ contentops ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.147 s
+[INFO] Finished at: 2026-11-01T12:01:52+08:00
+[INFO] ------------------------------------------------------------------------

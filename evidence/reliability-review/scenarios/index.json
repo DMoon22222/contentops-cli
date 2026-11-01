@@ -1,0 +1,320 @@
+{
+  "source_phase": "final-verify",
+  "scenario_count": 13,
+  "child_jvms": 14,
+  "unmodified_jar_jvms": 9,
+  "scenarios": [
+    {
+      "scenario": "atomic-move-target-obstruction",
+      "directory": "scenarios/final-verify/atomic-move-target-obstruction-df201401-4961-4ca4-a164-2ab99283b5b7",
+      "files": [
+        "scenarios/final-verify/atomic-move-target-obstruction-df201401-4961-4ca4-a164-2ab99283b5b7/before.json",
+        "scenarios/final-verify/atomic-move-target-obstruction-df201401-4961-4ca4-a164-2ab99283b5b7/error.json",
+        "scenarios/final-verify/atomic-move-target-obstruction-df201401-4961-4ca4-a164-2ab99283b5b7/origin.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "jvm-review-race",
+      "directory": "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51",
+      "files": [
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/A.exit-code.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/A.finished.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/A.ready.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/A.started.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/A.stderr.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/A.stdout.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/B.exit-code.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/B.finished.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/B.ready.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/B.started.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/B.stderr.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/B.stdout.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/after-A.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/after-B.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/before.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/both-validated-no-write.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-detail.exit-code.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-detail.finished.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-detail.started.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-detail.stderr.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-detail.stdout.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-history.exit-code.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-history.finished.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-history.started.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-history.stderr.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/fresh-history.stdout.txt",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/origin.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/release-A.release.json",
+        "scenarios/final-verify/jvm-review-race-1f7415a3-7f0d-4a87-8d17-679956307a51/release-B.release.json"
+      ],
+      "child_processes": [
+        {
+          "name": "A",
+          "entrypoint": "test-only barrier harness using packaged CliRunner / Store",
+          "pid": 13212,
+          "exit_code": 0
+        },
+        {
+          "name": "B",
+          "entrypoint": "test-only barrier harness using packaged CliRunner / Store",
+          "pid": 19180,
+          "exit_code": 0
+        },
+        {
+          "name": "fresh-detail",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 67320,
+          "exit_code": 0
+        },
+        {
+          "name": "fresh-history",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 23596,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "scenario": "jvm-sequential-review",
+      "directory": "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9",
+      "files": [
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/A.exit-code.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/A.finished.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/A.started.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/A.stderr.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/A.stdout.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/B.exit-code.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/B.finished.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/B.started.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/B.stderr.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/B.stdout.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/after.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/before.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/history.exit-code.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/history.finished.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/history.started.json",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/history.stderr.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/history.stdout.txt",
+        "scenarios/final-verify/jvm-sequential-review-dd9b4fe4-3b6c-43d7-a539-4fb06a118ac9/origin.json"
+      ],
+      "child_processes": [
+        {
+          "name": "A",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 7600,
+          "exit_code": 0
+        },
+        {
+          "name": "B",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 51304,
+          "exit_code": 2
+        },
+        {
+          "name": "history",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 28384,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "scenario": "jvm-snapshot-writers",
+      "directory": "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea",
+      "files": [
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/A.exit-code.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/A.finished.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/A.mid.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/A.ready.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/A.started.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/A.stderr.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/A.stdout.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/B.exit-code.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/B.finished.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/B.mid.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/B.ready.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/B.started.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/B.stderr.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/B.stdout.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/after.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/before.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/final-reader.exit-code.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/final-reader.finished.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/final-reader.started.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/final-reader.stderr.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/final-reader.stdout.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/mid-reader.exit-code.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/mid-reader.finished.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/mid-reader.started.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/mid-reader.stderr.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/mid-reader.stdout.txt",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/mid.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/origin.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/release-finish.json",
+        "scenarios/final-verify/jvm-snapshot-writers-88bf9747-5110-4d3a-b6ff-9783e10a7cea/release-start.json"
+      ],
+      "child_processes": [
+        {
+          "name": "A",
+          "entrypoint": "test-only barrier harness using packaged CliRunner / Store",
+          "pid": 42036,
+          "exit_code": 0
+        },
+        {
+          "name": "B",
+          "entrypoint": "test-only barrier harness using packaged CliRunner / Store",
+          "pid": 38128,
+          "exit_code": 0
+        },
+        {
+          "name": "final-reader",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 39284,
+          "exit_code": 0
+        },
+        {
+          "name": "mid-reader",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 52040,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "scenario": "jvm-tag-lost-update",
+      "directory": "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d",
+      "files": [
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/A.exit-code.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/A.finished.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/A.ready.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/A.started.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/A.stderr.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/A.stdout.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/B-committed.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/B.exit-code.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/B.finished.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/B.started.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/B.stderr.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/B.stdout.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/after.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/before.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/fresh-detail.exit-code.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/fresh-detail.finished.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/fresh-detail.started.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/fresh-detail.stderr.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/fresh-detail.stdout.txt",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/origin.json",
+        "scenarios/final-verify/jvm-tag-lost-update-08252188-d97b-44f6-a4cc-0131f1383f2d/release-A.release.json"
+      ],
+      "child_processes": [
+        {
+          "name": "A",
+          "entrypoint": "test-only barrier harness using packaged CliRunner / Store",
+          "pid": 79472,
+          "exit_code": 0
+        },
+        {
+          "name": "B",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 68172,
+          "exit_code": 0
+        },
+        {
+          "name": "fresh-detail",
+          "entrypoint": "unmodified packaged Java Main",
+          "pid": 42864,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "scenario": "malformed-tags-missing",
+      "directory": "scenarios/final-verify/malformed-tags-missing-68345ed4-0492-4559-aa8f-be86b0404996",
+      "files": [
+        "scenarios/final-verify/malformed-tags-missing-68345ed4-0492-4559-aa8f-be86b0404996/origin.json",
+        "scenarios/final-verify/malformed-tags-missing-68345ed4-0492-4559-aa8f-be86b0404996/result.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "malformed-tags-not-array",
+      "directory": "scenarios/final-verify/malformed-tags-not-array-1c03ca92-5131-4be8-a911-d16a94175e8b",
+      "files": [
+        "scenarios/final-verify/malformed-tags-not-array-1c03ca92-5131-4be8-a911-d16a94175e8b/origin.json",
+        "scenarios/final-verify/malformed-tags-not-array-1c03ca92-5131-4be8-a911-d16a94175e8b/result.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "malformed-tags-null",
+      "directory": "scenarios/final-verify/malformed-tags-null-b68928df-1f68-4d69-b154-b649293261ce",
+      "files": [
+        "scenarios/final-verify/malformed-tags-null-b68928df-1f68-4d69-b154-b649293261ce/origin.json",
+        "scenarios/final-verify/malformed-tags-null-b68928df-1f68-4d69-b154-b649293261ce/result.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "process-tag-lost-update",
+      "directory": "scenarios/final-verify/process-tag-lost-update-d987e096-965e-47f6-b176-a455bae72ce4",
+      "files": [
+        "scenarios/final-verify/process-tag-lost-update-d987e096-965e-47f6-b176-a455bae72ce4/A-result.json",
+        "scenarios/final-verify/process-tag-lost-update-d987e096-965e-47f6-b176-a455bae72ce4/B-committed.json",
+        "scenarios/final-verify/process-tag-lost-update-d987e096-965e-47f6-b176-a455bae72ce4/B-result.json",
+        "scenarios/final-verify/process-tag-lost-update-d987e096-965e-47f6-b176-a455bae72ce4/after.json",
+        "scenarios/final-verify/process-tag-lost-update-d987e096-965e-47f6-b176-a455bae72ce4/before.json",
+        "scenarios/final-verify/process-tag-lost-update-d987e096-965e-47f6-b176-a455bae72ce4/origin.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "stale-review-plan",
+      "directory": "scenarios/final-verify/stale-review-plan-20c83032-4ae9-4df4-ba7e-48a072273c74",
+      "files": [
+        "scenarios/final-verify/stale-review-plan-20c83032-4ae9-4df4-ba7e-48a072273c74/A-result.json",
+        "scenarios/final-verify/stale-review-plan-20c83032-4ae9-4df4-ba7e-48a072273c74/B-result.json",
+        "scenarios/final-verify/stale-review-plan-20c83032-4ae9-4df4-ba7e-48a072273c74/after.json",
+        "scenarios/final-verify/stale-review-plan-20c83032-4ae9-4df4-ba7e-48a072273c74/before.json",
+        "scenarios/final-verify/stale-review-plan-20c83032-4ae9-4df4-ba7e-48a072273c74/origin.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "stale-tag-plan",
+      "directory": "scenarios/final-verify/stale-tag-plan-81c7a232-5d57-4e49-83d8-599fb1888ee2",
+      "files": [
+        "scenarios/final-verify/stale-tag-plan-81c7a232-5d57-4e49-83d8-599fb1888ee2/A-result.json",
+        "scenarios/final-verify/stale-tag-plan-81c7a232-5d57-4e49-83d8-599fb1888ee2/B-result.json",
+        "scenarios/final-verify/stale-tag-plan-81c7a232-5d57-4e49-83d8-599fb1888ee2/after.json",
+        "scenarios/final-verify/stale-tag-plan-81c7a232-5d57-4e49-83d8-599fb1888ee2/before.json",
+        "scenarios/final-verify/stale-tag-plan-81c7a232-5d57-4e49-83d8-599fb1888ee2/origin.json",
+        "scenarios/final-verify/stale-tag-plan-81c7a232-5d57-4e49-83d8-599fb1888ee2/plan.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "tag-library-change",
+      "directory": "scenarios/final-verify/tag-library-change-51a5bb02-3b87-4467-8a7a-da0d74898107",
+      "files": [
+        "scenarios/final-verify/tag-library-change-51a5bb02-3b87-4467-8a7a-da0d74898107/after.json",
+        "scenarios/final-verify/tag-library-change-51a5bb02-3b87-4467-8a7a-da0d74898107/before.json",
+        "scenarios/final-verify/tag-library-change-51a5bb02-3b87-4467-8a7a-da0d74898107/library.json",
+        "scenarios/final-verify/tag-library-change-51a5bb02-3b87-4467-8a7a-da0d74898107/origin.json",
+        "scenarios/final-verify/tag-library-change-51a5bb02-3b87-4467-8a7a-da0d74898107/result.json"
+      ],
+      "child_processes": []
+    },
+    {
+      "scenario": "write-lock-timeout",
+      "directory": "scenarios/final-verify/write-lock-timeout-07feffd1-517d-4bf4-a652-e4789b284121",
+      "files": [
+        "scenarios/final-verify/write-lock-timeout-07feffd1-517d-4bf4-a652-e4789b284121/after.json",
+        "scenarios/final-verify/write-lock-timeout-07feffd1-517d-4bf4-a652-e4789b284121/before.json",
+        "scenarios/final-verify/write-lock-timeout-07feffd1-517d-4bf4-a652-e4789b284121/error.json",
+        "scenarios/final-verify/write-lock-timeout-07feffd1-517d-4bf4-a652-e4789b284121/origin.json"
+      ],
+      "child_processes": []
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "lock_valid" : true,
+  "callback_invoked" : false,
+  "kind" : "REJECTED_NO_COMMIT",
+  "code" : "STATE_LOCK_TIMEOUT"
+}

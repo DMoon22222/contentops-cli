@@ -1,0 +1,8 @@
+{
+  "query": "Get-Volume -DriveLetter F",
+  "outcome": "access_denied",
+  "filesystem_type": null,
+  "observation": "PowerShell reported 拒绝访问 under the current execution permissions; no elevation was requested for this supplementary metadata query.",
+  "tested_location": "F:\\AI_TESTEXAM\\target\\test-state",
+  "note": "Actual lock/create/atomic-replace tests passed at this location; this record does not infer the underlying filesystem type."
+}

@@ -1,0 +1,6 @@
+{
+  "fixture" : "test replaced destination with a nonempty directory after snapshot load; not a power-loss test",
+  "cause" : "java.nio.file.AccessDeniedException",
+  "code" : "STATE_COMMIT_UNKNOWN",
+  "kind" : "WRITE_UNKNOWN"
+}

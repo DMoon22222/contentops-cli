@@ -1,0 +1,6 @@
+{
+  "scenario" : "jvm-review-race",
+  "production_incident" : false,
+  "source" : "controlled Java test against real local Mock snapshot",
+  "captured_at" : "2026-11-01T04:01:49.710994700Z"
+}

@@ -1,0 +1,7 @@
+{
+  "at" : "2026-11-01T04:04:28.493705300Z",
+  "stage" : "ready",
+  "facts" : "waiting for explicit start gate",
+  "pid" : 42036,
+  "actor" : "A"
+}

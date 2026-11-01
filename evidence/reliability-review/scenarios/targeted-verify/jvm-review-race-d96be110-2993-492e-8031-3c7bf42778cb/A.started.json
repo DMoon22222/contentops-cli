@@ -1,0 +1,7 @@
+{
+  "entrypoint" : "test-only barrier harness using packaged CliRunner / Store",
+  "started_at" : "2026-11-01T04:01:49.714910200Z",
+  "arguments" : [ "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.7.6-hotspot\\bin\\java.exe", "-Dfile.encoding=UTF-8", "-cp", "F:\\AI_TESTEXAM\\target\\test-classes;F:\\AI_TESTEXAM\\target\\contentops.jar", "com.example.contentops.support.ReliabilityProbe", "review-gate", "F:\\AI_TESTEXAM\\target\\test-state\\case-1194731750093263557\\state", "F:\\AI_TESTEXAM\\target\\test-state\\case-1194731750093263557\\barriers", "A", "--output", "json", "content", "review", "ct_000004", "--action", "approve", "--reason", "并发风险测试的显式决定", "--execute", "--yes" ],
+  "jar_sha256" : "065e7ab3a31e5cd5268f36810217711fa8db12c74338ba2f66089830e5acc77f",
+  "state_directory" : "F:\\AI_TESTEXAM\\target\\test-state\\case-1194731750093263557\\state"
+}

@@ -1,0 +1,13 @@
+{
+  "arguments": [
+    "mvn",
+    "-B",
+    "-ntp",
+    "-Dtest=ReliabilityBoundaryTest",
+    "-Dit.test=ReliabilityProcessIT",
+    "verify"
+  ],
+  "started_at": "2026-11-01T12:01:35.8870980+08:00",
+  "finished_at": "2026-11-01T12:01:52.1351262+08:00",
+  "exit_code": 0
+}

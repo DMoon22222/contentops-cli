@@ -1,0 +1,45 @@
+{
+  "review_type": "controlled local Mock reliability boundary audit",
+  "production_code_modified": false,
+  "p0_for_current_serial_mock_prototype": [],
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "P1",
+      "title": "Concurrent review preflight does not deduplicate commits",
+      "evidence_scenario": "jvm-review-race",
+      "observation": "Both JVMs pass pending checks before either delegates; ordered release yields exit 0 for both, revision 2 and two review logs.",
+      "recommendation": "Keep the declared serial prototype boundary; require server-side expected-state/version checks plus idempotency/result lookup before claiming concurrent safety.",
+      "fixed": false
+    },
+    {
+      "id": "F-02",
+      "severity": "P1",
+      "title": "Full tag PUT loses an intervening addition despite matched readback",
+      "evidence_scenarios": ["jvm-tag-lost-update", "process-tag-lost-update"],
+      "observation": "B commits the original three tags plus 轻松 after A's last check; A overwrites with the original three plus 悬疑 and reports matched.",
+      "recommendation": "Server-side version/If-Match or atomic add; no local transaction or unconditional retry.",
+      "fixed": false
+    },
+    {
+      "id": "F-03",
+      "severity": "P1",
+      "title": "Active-tag validation is based on the plan-time library",
+      "evidence_scenario": "tag-library-change",
+      "observation": "A controlled work-copy fixture deprecates 悬疑 after planning; execute still adds it. The current CLI has no library-write command.",
+      "recommendation": "State the timing limitation and validate within the server update if submission-time validity is required.",
+      "fixed": false
+    },
+    {
+      "id": "F-04",
+      "severity": "P2",
+      "title": "Repeated shading changes archive identity without payload changes in the observed adjacent pair",
+      "evidence_file": "tests/jar-packaging-observation.json",
+      "observation": "The adjacent archived pair has equal entry payloads and different entry ordering; final JAR SHA differs from the task2 historical SHA.",
+      "recommendation": "Freeze the final candidate and preserve historical hashes; separately assess jar.forceCreation/outputTimestamp and verify reproducibility.",
+      "fixed": false
+    }
+  ],
+  "scope_caveat": "P1 becomes a release blocker if production concurrent writes or submission-time tag validity are required. No such guarantee is claimed by this serial Mock prototype.",
+  "unverified": ["real HTTP faults and internal resending", "power loss and filesystem crash", "non-Windows platforms", "filesystems without atomic replacement", "trusted authentication and approval"]
+}

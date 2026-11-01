@@ -1,0 +1,7 @@
+{
+  "shape" : "null",
+  "code" : "MOCK_DATA_INVALID",
+  "kind" : "READ_FAILURE",
+  "sha_before" : "ee78d2b466dd290ecf547a272cb7890fba27210afd7625f958418606c2617f24",
+  "sha_after" : "ee78d2b466dd290ecf547a272cb7890fba27210afd7625f958418606c2617f24"
+}

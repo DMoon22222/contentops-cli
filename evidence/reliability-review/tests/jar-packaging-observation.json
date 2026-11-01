@@ -1,0 +1,12 @@
+{
+  "target\\original-contentops.jar": "065e7ab3a31e5cd5268f36810217711fa8db12c74338ba2f66089830e5acc77f",
+  "target\\contentops.jar": "a42bf7cbb747a75ad7373c4142d70ac62ff39af1bf0cfbd872eb718b4192e2ef",
+  "added_entries": [],
+  "removed_entries": [],
+  "changed_payloads": [],
+  "project_class_count": 66,
+  "has_test_helpers": false,
+  "seed_sha": "44ba17cbe95432547a8fe380f81e0416ae51404957ed0c87de5ced7f8e3939b0",
+  "zip_metadata_changes": [],
+  "same_entry_order": false
+}

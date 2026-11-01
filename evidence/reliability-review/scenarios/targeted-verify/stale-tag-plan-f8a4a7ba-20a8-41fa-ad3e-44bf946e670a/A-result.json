@@ -1,0 +1,40 @@
+{
+  "schema_version" : "1",
+  "invocation_id" : "1ea983f1-12a2-4930-be87-c80c55d6a5e5",
+  "environment" : "mock",
+  "command" : "test.application",
+  "mode" : "execute",
+  "status" : "rejected",
+  "exit_code" : 2,
+  "content_id" : "ct_000004",
+  "data" : {
+    "plan" : {
+      "review" : null,
+      "tags" : {
+        "before" : [ "恋爱", "校园", "武侠" ],
+        "after" : [ "恋爱", "校园", "武侠", "悬疑" ]
+      }
+    },
+    "steps" : {
+      "tags" : {
+        "write" : "not_sent",
+        "verification" : "not_checked",
+        "api_result" : null
+      }
+    },
+    "observed" : {
+      "content_id" : "ct_000004",
+      "review_status" : "pending",
+      "quality_status" : "normal",
+      "visibility" : "online",
+      "tags" : [ "恋爱", "校园", "武侠", "轻松" ]
+    }
+  },
+  "error" : {
+    "code" : "STATE_CHANGED",
+    "message" : "内容状态或标签已变化；请重新查询和预览，本次未提交",
+    "step" : "preflight",
+    "upstream" : null
+  },
+  "warnings" : [ ]
+}

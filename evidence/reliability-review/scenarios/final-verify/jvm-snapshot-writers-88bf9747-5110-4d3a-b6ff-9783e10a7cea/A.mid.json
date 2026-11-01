@@ -1,0 +1,7 @@
+{
+  "at" : "2026-11-01T04:04:28.902527100Z",
+  "stage" : "mid",
+  "facts" : "10 complete commits, waiting outside the lock",
+  "pid" : 42036,
+  "actor" : "A"
+}

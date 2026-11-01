@@ -1,0 +1,6 @@
+{
+  "scenario" : "process-tag-lost-update",
+  "production_incident" : false,
+  "source" : "controlled Java test against real local Mock snapshot",
+  "captured_at" : "2026-11-01T04:01:38.985517300Z"
+}

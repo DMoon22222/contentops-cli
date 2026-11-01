@@ -1,0 +1,6 @@
+{
+  "production_incident" : false,
+  "scenario" : "tag-library-change",
+  "captured_at" : "2026-11-01T04:03:12.433709600Z",
+  "source" : "controlled Java test against real local Mock snapshot"
+}

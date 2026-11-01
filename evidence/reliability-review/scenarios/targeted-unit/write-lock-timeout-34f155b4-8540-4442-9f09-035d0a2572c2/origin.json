@@ -1,0 +1,6 @@
+{
+  "scenario" : "write-lock-timeout",
+  "captured_at" : "2026-11-01T04:01:19.218644200Z",
+  "source" : "controlled Java test against real local Mock snapshot",
+  "production_incident" : false
+}

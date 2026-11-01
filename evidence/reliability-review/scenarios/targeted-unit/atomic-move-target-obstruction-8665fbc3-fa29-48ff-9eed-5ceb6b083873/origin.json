@@ -1,0 +1,6 @@
+{
+  "scenario" : "atomic-move-target-obstruction",
+  "captured_at" : "2026-11-01T04:01:19.137500100Z",
+  "source" : "controlled Java test against real local Mock snapshot",
+  "production_incident" : false
+}

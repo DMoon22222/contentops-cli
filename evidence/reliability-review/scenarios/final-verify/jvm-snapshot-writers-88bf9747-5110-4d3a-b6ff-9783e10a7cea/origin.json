@@ -1,0 +1,6 @@
+{
+  "source" : "controlled Java test against real local Mock snapshot",
+  "captured_at" : "2026-11-01T04:04:28.111770900Z",
+  "scenario" : "jvm-snapshot-writers",
+  "production_incident" : false
+}

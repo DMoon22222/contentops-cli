@@ -1,0 +1,6 @@
+{
+  "production_incident" : false,
+  "scenario" : "malformed-tags-not-array",
+  "captured_at" : "2026-11-01T04:03:12.129903600Z",
+  "source" : "controlled Java test against real local Mock snapshot"
+}

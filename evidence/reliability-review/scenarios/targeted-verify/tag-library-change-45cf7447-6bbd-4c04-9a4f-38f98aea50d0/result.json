@@ -1,0 +1,37 @@
+{
+  "schema_version" : "1",
+  "invocation_id" : "b9d7dfb3-07dd-447f-a1a7-62638c90a22a",
+  "environment" : "mock",
+  "command" : "test.application",
+  "mode" : "execute",
+  "status" : "succeeded",
+  "exit_code" : 0,
+  "content_id" : "ct_000004",
+  "data" : {
+    "plan" : {
+      "review" : null,
+      "tags" : {
+        "before" : [ "恋爱", "校园", "武侠" ],
+        "after" : [ "恋爱", "校园", "武侠", "悬疑" ]
+      }
+    },
+    "steps" : {
+      "tags" : {
+        "write" : "acknowledged",
+        "verification" : "matched",
+        "api_result" : {
+          "result" : "ok"
+        }
+      }
+    },
+    "observed" : {
+      "content_id" : "ct_000004",
+      "review_status" : "pending",
+      "quality_status" : "normal",
+      "visibility" : "online",
+      "tags" : [ "恋爱", "校园", "武侠", "悬疑" ]
+    }
+  },
+  "error" : null,
+  "warnings" : [ ]
+}

@@ -1,0 +1,13 @@
+{
+  "captured_at": "2026-11-01T11:54:13.3030189+08:00",
+  "branch": "master",
+  "head": "5647ac60d88b22725f1b1171682fdb556a560566",
+  "java_home": "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.7.6-hotspot",
+  "java": "openjdk version \"21.0.7\" 2025-04-15 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.7+6 (build 21.0.7+6-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.7+6 (build 21.0.7+6-LTS, mixed mode, sharing)\r\n",
+  "javac": "javac 21.0.7\r\n",
+  "maven": "Apache Maven 3.9.4 (dfbb324ad4a7c8fb0bf182e6d91b0ae20e3d2dd9)\r\nMaven home: F:\\Develop\\apache-maven-3.9.4-bin\\apache-maven-3.9.4\r\nJava version: 21.0.7, vendor: Eclipse Adoptium, runtime: C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.7.6-hotspot\r\nDefault locale: zh_CN, platform encoding: UTF-8\r\nOS name: \"windows 11\", version: \"10.0\", arch: \"amd64\", family: \"windows\"\r\n",
+  "shell": "7.6.5",
+  "state_env_set": false,
+  "fault_env_set": false,
+  "jar_sha_before": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2"
+}

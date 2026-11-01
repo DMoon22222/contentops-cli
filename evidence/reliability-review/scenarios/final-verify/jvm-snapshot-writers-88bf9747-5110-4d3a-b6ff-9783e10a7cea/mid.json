@@ -1,0 +1,42 @@
+{
+  "exists" : true,
+  "sha256" : "5ec4fcf13bdbf823f40c6df5bf4c1cf0026d02c8fd5d897c7678e30ffd00fe12",
+  "revision" : 20,
+  "content" : {
+    "content_id" : "ct_000004",
+    "title" : "无人剧场·第12话：逆流而上",
+    "creator_id" : "cr_00002",
+    "review_status" : "pending",
+    "quality_status" : "normal",
+    "visibility" : "online",
+    "tags" : [ "恋爱", "校园", "武侠" ],
+    "created_at" : "2026-07-04T05:19:06Z",
+    "body" : "赛琳娜在灯塔下做出了一个反常的决定，故事从这里开始分岔……",
+    "source" : "app",
+    "channels" : [ "search_only" ],
+    "category_id" : "cat_03"
+  },
+  "history" : null,
+  "markers" : {
+    "B-0" : 0,
+    "B-1" : 1,
+    "B-2" : 2,
+    "B-3" : 3,
+    "B-4" : 4,
+    "B-5" : 5,
+    "B-6" : 6,
+    "B-7" : 7,
+    "B-8" : 8,
+    "B-9" : 9,
+    "A-0" : 0,
+    "A-1" : 1,
+    "A-2" : 2,
+    "A-3" : 3,
+    "A-4" : 4,
+    "A-5" : 5,
+    "A-6" : 6,
+    "A-7" : 7,
+    "A-8" : 8,
+    "A-9" : 9
+  }
+}

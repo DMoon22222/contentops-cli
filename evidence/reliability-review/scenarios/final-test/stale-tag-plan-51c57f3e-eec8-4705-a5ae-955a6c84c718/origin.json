@@ -1,0 +1,6 @@
+{
+  "production_incident" : false,
+  "scenario" : "stale-tag-plan",
+  "captured_at" : "2026-11-01T04:02:52.040207900Z",
+  "source" : "controlled Java test against real local Mock snapshot"
+}

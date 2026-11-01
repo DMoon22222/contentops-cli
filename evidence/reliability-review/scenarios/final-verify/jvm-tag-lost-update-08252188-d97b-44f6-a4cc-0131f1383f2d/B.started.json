@@ -1,0 +1,7 @@
+{
+  "state_directory" : "F:\\AI_TESTEXAM\\target\\test-state\\case-7479545602917798231\\state",
+  "entrypoint" : "unmodified packaged Java Main",
+  "started_at" : "2026-11-01T04:04:26.473030400Z",
+  "arguments" : [ "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.7.6-hotspot\\bin\\java.exe", "-Dfile.encoding=UTF-8", "-jar", "F:\\AI_TESTEXAM\\target\\contentops.jar", "--output", "json", "content", "tags", "update", "ct_000004", "--add", "轻松", "--execute", "--yes" ],
+  "jar_sha256" : "a42bf7cbb747a75ad7373c4142d70ac62ff39af1bf0cfbd872eb718b4192e2ef"
+}

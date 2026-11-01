@@ -1,0 +1,39 @@
+{
+  "schema_version" : "1",
+  "invocation_id" : "30e25eec-f7c3-4a05-8b49-61093d1e185d",
+  "environment" : "mock",
+  "command" : "test.application",
+  "mode" : "execute",
+  "status" : "succeeded",
+  "exit_code" : 0,
+  "content_id" : "ct_000004",
+  "data" : {
+    "plan" : {
+      "review" : {
+        "before" : "pending",
+        "action" : "approve",
+        "reason" : "可靠性测试明确给定的演示决定"
+      },
+      "tags" : null
+    },
+    "steps" : {
+      "review" : {
+        "write" : "acknowledged",
+        "verification" : "matched",
+        "api_result" : {
+          "success_count" : 1,
+          "failed_count" : 0
+        }
+      }
+    },
+    "observed" : {
+      "content_id" : "ct_000004",
+      "review_status" : "approved",
+      "quality_status" : "normal",
+      "visibility" : "online",
+      "tags" : [ "恋爱", "校园", "武侠" ]
+    }
+  },
+  "error" : null,
+  "warnings" : [ ]
+}

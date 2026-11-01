@@ -1,0 +1,7 @@
+{
+  "kind" : "READ_FAILURE",
+  "code" : "MOCK_DATA_INVALID",
+  "shape" : "missing",
+  "sha_after" : "c6eed3b571881e84b33c4f461153bb086592da38de4a94258f2274c1aa6fbb06",
+  "sha_before" : "c6eed3b571881e84b33c4f461153bb086592da38de4a94258f2274c1aa6fbb06"
+}
