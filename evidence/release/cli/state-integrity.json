@@ -1,0 +1,19 @@
+{
+  "source": "Actual isolated trial state.json compared with immutable original seed; no fixture data",
+  "revision": 2,
+  "contents_total": 300,
+  "changed_content_ids": [
+    "ct_000004"
+  ],
+  "changed_content_fields": [
+    "review_status",
+    "tags"
+  ],
+  "existing_review_logs_preserved": true,
+  "new_review_log_groups": [
+    "ct_000004"
+  ],
+  "new_review_log_count": 1,
+  "all_other_business_collections_unchanged": true,
+  "trial_state_sha256": "257dbb8cefcc43a57275783de250b25a4fa3eb3cf283a8d2d7647bd2422503f1"
+}

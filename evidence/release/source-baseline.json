@@ -1,0 +1,8 @@
+{
+  "source_commit": "c5906402d87ad78e5ea43bd0932cbd97bb08f00e",
+  "initial_workspace_clean": true,
+  "protected_paths": 1938,
+  "historical_task2": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2",
+  "protection_baseline": ".contentops/release-qa/protected-before.json",
+  "note": "Initial capture helper omitted encoding for a Chinese JSON document and raised UnicodeDecodeError after saving the protection baseline. Build was already started once; no rebuild was performed. Capture corrected to explicit UTF-8."
+}

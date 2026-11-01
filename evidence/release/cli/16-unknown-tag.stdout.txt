@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"b5d55922-4aba-4594-87e4-182fbf832ddb","environment":"mock","command":"content.tags.update","mode":"execute","status":"rejected","exit_code":2,"content_id":"ct_000004","data":null,"error":{"code":"UNKNOWN_TAG","message":"新增标签不在标签库中：不存在的交付标签","step":"preflight","upstream":null},"warnings":[]}

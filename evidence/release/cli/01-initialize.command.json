@@ -1,0 +1,8 @@
+{
+  "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+  "actual_exit_code": 0,
+  "arguments": [
+    "-NewState"
+  ],
+  "script": "scripts/enable-contentops.ps1"
+}

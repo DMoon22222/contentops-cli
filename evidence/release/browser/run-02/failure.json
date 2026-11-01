@@ -1,0 +1,16 @@
+{
+  "error": "AssertionError [ERR_ASSERTION]: Correct copied file URL and title\n    at check (F:\\AI_TESTEXAM\\scripts\\verify-release-browser.cjs:9:35)\n    at main (F:\\AI_TESTEXAM\\scripts\\verify-release-browser.cjs:31:5)",
+  "passed_checks": [],
+  "errors": [],
+  "requests": [
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/style.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/data.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/seed.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/cli-engine.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/playground.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/links.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/app.js"
+  ],
+  "sessions": []
+}

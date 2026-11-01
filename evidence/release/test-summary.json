@@ -1,0 +1,114 @@
+{
+  "suites": [
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.application.ContentServiceWriteTest",
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.application.ReliabilityBoundaryTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.application.TagPlannerTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.cli.CliFaultConfigTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.cli.CliParsingTest",
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.cli.CliWriteTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.gateway.FaultInjectingGatewayTest",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.gateway.JsonMockGatewayContractTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.gateway.JsonMockWriteContractTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.infrastructure.AppConfigTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "surefire",
+      "suite": "com.example.contentops.infrastructure.mock.JsonStateStoreTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "failsafe",
+      "suite": "com.example.contentops.integration.CliProcessIT",
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "kind": "failsafe",
+      "suite": "com.example.contentops.integration.ReliabilityProcessIT",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "totals": {
+    "tests": 205,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

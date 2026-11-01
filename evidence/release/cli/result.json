@@ -1,0 +1,529 @@
+{
+  "project_root": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+  "state_sha256": "257DBB8CEFCC43A57275783DE250B25A4FA3EB3CF283A8D2D7647BD2422503F1",
+  "passed": true,
+  "snapshot_metadata": {
+    "state_schema_version": 1,
+    "seed_sha256": "44ba17cbe95432547a8fe380f81e0416ae51404957ed0c87de5ced7f8e3939b0",
+    "revision": 2
+  },
+  "business_changes": {
+    "content_id": "ct_000004",
+    "pending_after": 131,
+    "review_after": "approved",
+    "tags_before": [
+      "恋爱",
+      "校园",
+      "武侠"
+    ],
+    "history_count": 1,
+    "pending_before": 132,
+    "review_before": "pending",
+    "tags_after": [
+      "恋爱",
+      "校园",
+      "武侠",
+      "悬疑"
+    ]
+  },
+  "administrator": false,
+  "finished_at": "2026-11-01T14:35:04.2960798+08:00",
+  "frozen_jar_sha256": "2e6b40ece3567579383c777bff31c35bc682bbf5b18a5bf881bfe5c6596940c6",
+  "started_at": "2026-11-01T14:34:48.0624174+08:00",
+  "state_directory": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+  "checks": [
+    "Maven absent from runtime PATH",
+    "Git absent from runtime PATH",
+    "No inherited state",
+    "No inherited fault injection",
+    "Trial JAR equals frozen binary",
+    "Initialization succeeded",
+    "Resolved launcher belongs to trial project",
+    "New state is inside trial project",
+    "New state absolute and initially empty",
+    "02-help native exit",
+    "Help renders without business state",
+    "03-list-table native exit",
+    "03-list-table table output",
+    "04-get-table native exit",
+    "04-get-table table output",
+    "05-history-table native exit",
+    "05-history-table table output",
+    "06-tags-table native exit",
+    "06-tags-table table output",
+    "07-before-get native exit",
+    "07-before-get one JSON object",
+    "07-before-get envelope/native exit",
+    "07-before-get actual Java Mock environment",
+    "Initial pending content with original tags",
+    "08-before-history native exit",
+    "08-before-history one JSON object",
+    "08-before-history envelope/native exit",
+    "08-before-history actual Java Mock environment",
+    "Initial history empty",
+    "09-before-pending native exit",
+    "09-before-pending one JSON object",
+    "09-before-pending envelope/native exit",
+    "09-before-pending actual Java Mock environment",
+    "Initial pending132",
+    "10-review-preview native exit",
+    "10-review-preview one JSON object",
+    "10-review-preview envelope/native exit",
+    "10-review-preview actual Java Mock environment",
+    "10-review-preview preview semantics",
+    "10-review-preview zero business writes",
+    "11-tags-preview native exit",
+    "11-tags-preview one JSON object",
+    "11-tags-preview envelope/native exit",
+    "11-tags-preview actual Java Mock environment",
+    "11-tags-preview preview semantics",
+    "11-tags-preview zero business writes",
+    "12-process-preview native exit",
+    "12-process-preview one JSON object",
+    "12-process-preview envelope/native exit",
+    "12-process-preview actual Java Mock environment",
+    "12-process-preview preview semantics",
+    "12-process-preview zero business writes",
+    "13-execute-without-yes native exit",
+    "13-execute-without-yes one JSON object",
+    "13-execute-without-yes envelope/native exit",
+    "13-execute-without-yes actual Java Mock environment",
+    "13-execute-without-yes rejected and zero writes",
+    "14-yes-without-execute native exit",
+    "14-yes-without-execute one JSON object",
+    "14-yes-without-execute envelope/native exit",
+    "14-yes-without-execute actual Java Mock environment",
+    "14-yes-without-execute rejected and zero writes",
+    "15-reject-no-reason native exit",
+    "15-reject-no-reason one JSON object",
+    "15-reject-no-reason envelope/native exit",
+    "15-reject-no-reason actual Java Mock environment",
+    "15-reject-no-reason rejected and zero writes",
+    "16-unknown-tag native exit",
+    "16-unknown-tag one JSON object",
+    "16-unknown-tag envelope/native exit",
+    "16-unknown-tag actual Java Mock environment",
+    "16-unknown-tag rejected and zero writes",
+    "17-deprecated-tag native exit",
+    "17-deprecated-tag one JSON object",
+    "17-deprecated-tag envelope/native exit",
+    "17-deprecated-tag actual Java Mock environment",
+    "17-deprecated-tag rejected and zero writes",
+    "18-process-execute native exit",
+    "18-process-execute one JSON object",
+    "18-process-execute envelope/native exit",
+    "18-process-execute actual Java Mock environment",
+    "Process succeeded, execute, exit0",
+    "Both operations acknowledged and matched",
+    "19-after-get-new-jvm native exit",
+    "19-after-get-new-jvm one JSON object",
+    "19-after-get-new-jvm envelope/native exit",
+    "19-after-get-new-jvm actual Java Mock environment",
+    "New JVM reads approved and preserves existing tags",
+    "20-after-history-new-jvm native exit",
+    "20-after-history-new-jvm one JSON object",
+    "20-after-history-new-jvm envelope/native exit",
+    "20-after-history-new-jvm actual Java Mock environment",
+    "Exactly one new audit with exact reason",
+    "21-after-pending native exit",
+    "21-after-pending one JSON object",
+    "21-after-pending envelope/native exit",
+    "21-after-pending actual Java Mock environment",
+    "Pending now131",
+    "22-repeat-review native exit",
+    "22-repeat-review one JSON object",
+    "22-repeat-review envelope/native exit",
+    "22-repeat-review actual Java Mock environment",
+    "Repeat review refused without changes",
+    "23-other-cwd-new-jvm native exit",
+    "23-other-cwd-new-jvm one JSON object",
+    "23-other-cwd-new-jvm envelope/native exit",
+    "23-other-cwd-new-jvm actual Java Mock environment",
+    "Other working directory uses same persisted state",
+    "24-missing-jar native exit",
+    "Missing JAR has stderr and empty stdout"
+  ],
+  "runtime_path": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\scripts;C:\\Users\\15614\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.7.6-hotspot\\bin;C:\\Windows\\System32",
+  "resolved_launcher": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\scripts\\contentops.cmd",
+  "powershell": "7.6.5",
+  "calls": [
+    {
+      "arguments": [
+        "--help"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "02-help",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "content",
+        "list",
+        "--review-status",
+        "pending"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "03-list-table",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "04-get-table",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "05-history-table",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "tags",
+        "list"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "06-tags-table",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "07-before-get",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "08-before-history",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "list",
+        "--review-status",
+        "pending"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "09-before-pending",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "review",
+        "ct_000004",
+        "--action",
+        "approve"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "10-review-preview",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "tags",
+        "update",
+        "ct_000004",
+        "--add",
+        "悬疑"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "11-tags-preview",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "交付候选测试",
+        "--add",
+        "悬疑"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "12-process-preview",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "review",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--execute"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "13-execute-without-yes",
+      "actual_exit_code": 2,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "review",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--yes"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "14-yes-without-execute",
+      "actual_exit_code": 2,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "review",
+        "ct_000004",
+        "--action",
+        "reject",
+        "--execute",
+        "--yes"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "15-reject-no-reason",
+      "actual_exit_code": 2,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "tags",
+        "update",
+        "ct_000004",
+        "--add",
+        "不存在的交付标签",
+        "--execute",
+        "--yes"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "16-unknown-tag",
+      "actual_exit_code": 2,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "tags",
+        "update",
+        "ct_000004",
+        "--add",
+        "旧版-悬疑",
+        "--execute",
+        "--yes"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "17-deprecated-tag",
+      "actual_exit_code": 2,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "process",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--reason",
+        "交付候选测试",
+        "--add",
+        "悬疑",
+        "--execute",
+        "--yes"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "18-process-execute",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "19-after-get-new-jvm",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "history",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "20-after-history-new-jvm",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "list",
+        "--review-status",
+        "pending"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "21-after-pending",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "review",
+        "ct_000004",
+        "--action",
+        "approve",
+        "--execute",
+        "--yes"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+      "caller_pid": 12484,
+      "name": "22-repeat-review",
+      "actual_exit_code": 2,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run",
+      "caller_pid": 12484,
+      "name": "23-other-cwd-new-jvm",
+      "actual_exit_code": 0,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "contentops"
+    },
+    {
+      "arguments": [
+        "--output",
+        "json",
+        "content",
+        "get",
+        "ct_000004"
+      ],
+      "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run",
+      "caller_pid": 12484,
+      "name": "24-missing-jar",
+      "actual_exit_code": 2,
+      "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+      "entry": "F:\\AI_TESTEXAM\\delivery\\test-run\\missing-jar-fixture\\scripts\\contentops.cmd"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 # Maven build output, delivery staging, and local caches
 /target/
 /dist/
+/delivery/candidate/
+/delivery/test-run/
 /.m2/
 /.maven-repo/
 /.contentops/

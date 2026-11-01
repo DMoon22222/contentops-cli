@@ -1,0 +1,16 @@
+{
+  "arguments": [
+    "--output",
+    "json",
+    "content",
+    "list",
+    "--review-status",
+    "pending"
+  ],
+  "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+  "caller_pid": 12484,
+  "name": "21-after-pending",
+  "actual_exit_code": 0,
+  "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+  "entry": "contentops"
+}

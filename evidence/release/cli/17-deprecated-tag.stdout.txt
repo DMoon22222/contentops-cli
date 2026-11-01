@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"dabd6e79-9a88-4004-8854-747f7cad83c7","environment":"mock","command":"content.tags.update","mode":"execute","status":"rejected","exit_code":2,"content_id":"ct_000004","data":null,"error":{"code":"INACTIVE_TAG","message":"新增标签必须为 active：旧版-悬疑","step":"preflight","upstream":null},"warnings":[]}

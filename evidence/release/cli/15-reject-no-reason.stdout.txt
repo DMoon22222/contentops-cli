@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"9cac568d-1d84-480c-8ddb-6d64f9013f70","environment":"mock","command":"content.review","mode":"execute","status":"rejected","exit_code":2,"content_id":"ct_000004","data":null,"error":{"code":"REJECT_REASON_REQUIRED","message":"驳回必须提供非空 --reason","step":"preflight","upstream":null},"warnings":[]}

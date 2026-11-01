@@ -1,0 +1,1 @@
+EXECUTION_AUTHORIZATION_REQUIRED: 鍘熷瀷鎵ц蹇呴』鍚屾椂鎻愪緵 --execute --yes锛涗笉绛夊緟 stdin锛屼粎 --yes 涔熶笉鍚堟硶

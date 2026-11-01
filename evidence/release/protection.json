@@ -1,0 +1,30 @@
+{
+  "checked_baseline_paths": 1938,
+  "changed_existing_paths": [
+    ".gitignore"
+  ],
+  "explained_changes": [
+    {
+      "path": ".gitignore",
+      "planned_sha256": "07ec33cfe2915616a5afd1bd1e656bee6a2464d3a3d64722821968c34afdebc3",
+      "candidate_sha256": "c06c61ad22be1c6d6fadf2346228f42a941aa70cdbf21f3aae09e72d675f77b7",
+      "reason": "Explicit addition of /delivery/candidate/ and /delivery/test-run/ exclusions to prevent accidental staging of generated copies. No business or runtime change."
+    }
+  ],
+  "all_other_tracked_and_formal_task2_files_unchanged": true,
+  "trial_approved_files_unchanged": true,
+  "formal_task2": [
+    {
+      "path": ".contentops/task2/a20c72c2-74c1-4130-af99-8d17452424b6/state.json",
+      "before": "0e72b6dfc455b59f87ea7d9fb7c29f379680540df39056397e15c911c36a8790",
+      "after": "0e72b6dfc455b59f87ea7d9fb7c29f379680540df39056397e15c911c36a8790"
+    },
+    {
+      "path": ".contentops/task2/a20c72c2-74c1-4130-af99-8d17452424b6/state.lock",
+      "before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "frozen_source_jar_unchanged": true,
+  "candidate_jar_unchanged": true
+}

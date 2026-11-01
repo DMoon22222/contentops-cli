@@ -1,0 +1,1849 @@
+{
+  "passed": true,
+  "at": "2026-11-01T06:37:29.025Z",
+  "browser": "156.0.8078.74",
+  "playwright": "1.64.0-alpha-1790635538000",
+  "browser_plugin": "Absent: Browser plugin not available; reused existing local Playwright + Chrome",
+  "url": "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+  "doc_index": "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/index.html",
+  "offline": true,
+  "viewports": [
+    "1440x1000",
+    "390x844"
+  ],
+  "checks": [
+    {
+      "name": "Correct copied file URL and title",
+      "passed": true
+    },
+    {
+      "name": "Meaningful product screen, no blank shell",
+      "passed": true
+    },
+    {
+      "name": "Three navigation entries",
+      "passed": true
+    },
+    {
+      "name": "Technical and Agent content visible",
+      "passed": true
+    },
+    {
+      "name": "Default design references are HTML",
+      "passed": true
+    },
+    {
+      "name": "Playground can receive input",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content list --review-status pending",
+      "passed": true
+    },
+    {
+      "name": "Simulated pending132, page20",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content get ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Simulated initial tags and pending",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content history ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Simulated initial empty audit",
+      "passed": true
+    },
+    {
+      "name": "Browser origin tags list",
+      "passed": true
+    },
+    {
+      "name": "Simulated active23",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content review ct_000004 --action approve",
+      "passed": true
+    },
+    {
+      "name": "Preview zero writes content review ct_000004 --action approve",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content tags update ct_000004 --add 悬疑",
+      "passed": true
+    },
+    {
+      "name": "Preview zero writes content tags update ct_000004 --add 悬疑",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content process ct_000004 --action approve --reason \"网页候选验收\" --add 悬疑",
+      "passed": true
+    },
+    {
+      "name": "Preview zero writes content process ct_000004 --action approve --reason \"网页候选验收\" --add 悬疑",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content get ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Three previews preserve all tags/review",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content history ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Three previews append no audit",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content process ct_000004 --action approve --reason \"网页候选验收\" --add 悬疑 --execute --yes",
+      "passed": true
+    },
+    {
+      "name": "Simulated process succeeded",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content get ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Simulated new state query",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content history ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Simulated new audit",
+      "passed": true
+    },
+    {
+      "name": "Dirty reset confirms",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content get ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Reset restores initial view",
+      "passed": true
+    },
+    {
+      "name": "Browser origin content history ct_000004",
+      "passed": true
+    },
+    {
+      "name": "Reset clears simulated audit",
+      "passed": true
+    },
+    {
+      "name": "Task2 original success record readable",
+      "passed": true
+    },
+    {
+      "name": "Five S5 fault cases available",
+      "passed": true
+    },
+    {
+      "name": "S5 raw record available tags-reject-before-write",
+      "passed": true
+    },
+    {
+      "name": "S5 raw record available review-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "S5 raw record available tags-commit-response-lost",
+      "passed": true
+    },
+    {
+      "name": "S5 raw record available review-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "S5 raw record available tags-readback-mismatch",
+      "passed": true
+    },
+    {
+      "name": "Independent tags recovery readable",
+      "passed": true
+    },
+    {
+      "name": "Mobile layout no page overflow product",
+      "passed": true
+    },
+    {
+      "name": "Mobile layout no page overflow demo",
+      "passed": true
+    },
+    {
+      "name": "Mobile layout no page overflow technical",
+      "passed": true
+    },
+    {
+      "name": "Mobile input usable",
+      "passed": true
+    },
+    {
+      "name": "Reading index loads",
+      "passed": true
+    },
+    {
+      "name": "Eleven reading pages available",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading 01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors 01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading 02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors 02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading 03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors 03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading 04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors 04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading 06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors 06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading 07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors 07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading readme.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors readme.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading assignment.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors assignment.html",
+      "passed": true
+    },
+    {
+      "name": "Nonblank reading attachment-guide.html",
+      "passed": true
+    },
+    {
+      "name": "Reading internal anchors attachment-guide.html",
+      "passed": true
+    },
+    {
+      "name": "Reading semantic tables and code present",
+      "passed": true
+    },
+    {
+      "name": "Reading TOC anchor navigates",
+      "passed": true
+    },
+    {
+      "name": "Mobile reading no page overflow",
+      "passed": true
+    },
+    {
+      "name": "Actual task2 raw evidence opens from copied folder",
+      "passed": true
+    },
+    {
+      "name": "Actual S5 recovery raw evidence opens",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/style.css",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/data.js",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/seed.js",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/cli-engine.js",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/playground.js",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/links.js",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/app.js",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/docs/01-%E9%9C%80%E6%B1%82%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/docs/02-%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5MVP%E4%B8%8ECLI%E4%BA%A7%E5%93%81%E6%96%B9%E6%A1%88.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/docs/03-Java%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/docs/04-%E4%BA%A4%E4%BB%98%E7%89%A9%E8%A7%84%E5%88%92%E4%B8%8E%E9%AA%8C%E6%94%B6%E6%B8%85%E5%8D%95.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/docs/06-%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/docs/07-Agent%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/10-process-preview.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/10-process-preview.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/10-process-preview.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/13-process-execute.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/13-process-execute.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/13-process-execute.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/14-after-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/14-after-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/14-after-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/preview/zero-write-validation.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/after/snapshot-facts.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/validation/result.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/03-pending-page1-json.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/03-pending-page1-json.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/03-pending-page1-json.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/05-candidate-ct000004-detail.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/05-candidate-ct000004-detail.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/05-candidate-ct000004-detail.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/07-candidate-ct000004-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/07-candidate-ct000004-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/07-candidate-ct000004-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/08-active-tags.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/08-active-tags.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/08-active-tags.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/15-after-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/15-after-history.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/15-after-history.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/16-after-pending-exact.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/16-after-pending-exact.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/16-after-pending-exact.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/17-after-pending-total.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/17-after-pending-total.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/17-after-pending-total.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/scenarios/tags-reject-before-write/result.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/scenarios/review-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-commit-response-lost-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-commit-response-lost-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-commit-response-lost-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-commit-response-lost-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-commit-response-lost-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/scenarios/tags-commit-response-lost/result.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/review-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/scenarios/review-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-readback-mismatch-04-process.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-readback-mismatch-04-process.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-readback-mismatch-04-process.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-readback-mismatch-05-query-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-readback-mismatch-06-history-no-fault.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/scenarios/tags-readback-mismatch/result.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.exit-code.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-10-recovered-history.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-09-recovered-query.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/assignment.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/attachment-guide.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/index.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5%E5%90%8E%E5%8F%B0%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/content-ops-admin-openapi.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5%E5%90%8E%E5%8F%B0%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/mock_data.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/AGENTS.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/validation/environment.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/manifest.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/02-pending-page1-table.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/09-selected-pending-exact.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/before/selection.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/before/operation-plan.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/validation/business-diff.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/cli-entry/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/manifest.json",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/demo-docs/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/demo-playground/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/demo-simplified/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/demo-review/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/demo/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s3-s4/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s0-s2/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/task2-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/assignment.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/assignment.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5%E5%90%8E%E5%8F%B0%20CLI%20%E5%8C%96.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/attachment-guide.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/attachment-guide.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/attachment-guide.html",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/%E5%86%85%E5%AE%B9%E8%BF%90%E8%90%A5%E5%90%8E%E5%8F%B0%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/README.md",
+      "passed": true
+    },
+    {
+      "name": "Copied local reference exists /F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/attachment-guide.html",
+      "passed": true
+    },
+    {
+      "name": "No JavaScript errors/warnings",
+      "passed": true
+    },
+    {
+      "name": "Offline: only file requests",
+      "passed": true
+    }
+  ],
+  "check_count": 448,
+  "local_link_count": 370,
+  "errors": [],
+  "requests": [
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/index.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/style.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/data.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/seed.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/cli-engine.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/playground.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/links.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/app.js",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/index.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/01-requirements.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/03-architecture.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/04-delivery-plan.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/06-operation-record.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/07-agent-plan.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/readme.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/task2-evidence.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/s5-evidence.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/assignment.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/attachment-guide.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/02-product-plan.html",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/demo/docs/reading.css",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/task2/commands/13-process-execute.stdout.txt",
+    "file:///F:/AI_TESTEXAM/delivery/test-run/%E9%9D%A2%E8%AF%95%E8%A7%A3%E5%8E%8B%E6%B5%8B%E8%AF%95%20ContentOps%20CLI/evidence/s5/commands/tags-reject-before-write-08-tags-only-recovery.stdout.txt"
+  ]
+}

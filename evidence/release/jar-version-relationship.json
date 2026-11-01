@@ -1,0 +1,32 @@
+{
+  "historical_task2": {
+    "source_commit": "a726f317e321236107bf9a44480f647bb6ef54ea",
+    "sha256": "16859DA000D14E9D6B02FE73A330B3A5EEDC647F6862D0B20E3AD5675D5091E2",
+    "stage": "S5 Java CLI accepted, before reliability review",
+    "binary_available_for_entrywise_comparison": false
+  },
+  "frozen_release": {
+    "source_commit": "c5906402d87ad78e5ea43bd0932cbd97bb08f00e",
+    "sha256": "2e6b40ece3567579383c777bff31c35bc682bbf5b18a5bf881bfe5c6596940c6",
+    "stage": "Includes subsequent reliability tests and Windows launcher; product Java/pom unchanged from task2 source",
+    "production_source_diff_paths": [],
+    "test_diff_paths": [
+      "src/test/java/com/example/contentops/application/ReliabilityBoundaryTest.java",
+      "src/test/java/com/example/contentops/integration/ReliabilityProcessIT.java",
+      "src/test/java/com/example/contentops/support/ForwardingGateway.java",
+      "src/test/java/com/example/contentops/support/ReliabilityEvidence.java",
+      "src/test/java/com/example/contentops/support/ReliabilityProbe.java"
+    ]
+  },
+  "confirmed_facts": [
+    "SHA-256 values differ; historical evidence preserved",
+    "git diff of src/main and pom.xml between recorded source commits is empty",
+    "Frozen JAR was rebuilt once by clean verify and tested independently; contains no test helpers",
+    "Historical reliability packaging observation compares a42b... and 065e..., NOT task2 binary versus this freeze"
+  ],
+  "possible_causes_not_proven_for_task2_vs_freeze": [
+    "ZIP entry order, generated metadata/timestamps and packaging history can change archive hashes",
+    "No claim that the two whole binaries are equal or all behavior is identical; independent acceptance is the evidence"
+  ],
+  "documentation_commit_relationship": "Final new commit only adds release tooling/evidence/report and generated-directory ignores; no production Java/pom change. Frozen source baseline remains c590640."
+}

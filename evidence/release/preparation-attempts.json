@@ -1,0 +1,13 @@
+[
+  {
+    "stage": "initial metadata capture",
+    "observed_error": "UnicodeDecodeError: gbk codec while reading Chinese JSON without explicit encoding",
+    "resolution": "Protection baseline was saved; metadata capture corrected to UTF-8. Existing single Maven build continued; no rebuild."
+  },
+  {
+    "stage": "first candidate preflight",
+    "observed_error": "AssertionError: Missing/changed approved input: .gitignore",
+    "result": "Stopped before copying candidate files",
+    "resolution": "Documented the intentional two-line generated-directory ignore adjustment in input-adjustments.json; all other planned hashes unchanged."
+  }
+]

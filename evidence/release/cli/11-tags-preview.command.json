@@ -1,0 +1,18 @@
+{
+  "arguments": [
+    "--output",
+    "json",
+    "content",
+    "tags",
+    "update",
+    "ct_000004",
+    "--add",
+    "悬疑"
+  ],
+  "cwd": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+  "caller_pid": 12484,
+  "name": "11-tags-preview",
+  "actual_exit_code": 0,
+  "state": "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI\\.contentops\\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8",
+  "entry": "contentops"
+}

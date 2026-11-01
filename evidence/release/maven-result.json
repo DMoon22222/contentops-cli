@@ -1,0 +1,13 @@
+{
+  "executable": "F:\\Develop\\apache-maven-3.9.4-bin\\apache-maven-3.9.4\\bin\\mvn.cmd",
+  "command": [
+    "mvn",
+    "-B",
+    "-ntp",
+    "clean",
+    "verify"
+  ],
+  "finished_at": "2026-11-01T14:32:46.6070380+08:00",
+  "exit_code": 0,
+  "started_at": "2026-11-01T14:30:59.5401397+08:00"
+}

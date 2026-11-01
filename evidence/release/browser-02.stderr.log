@@ -1,0 +1,10 @@
+AssertionError [ERR_ASSERTION]: Correct copied file URL and title
+    at check (F:\AI_TESTEXAM\scripts\verify-release-browser.cjs:9:35)
+    at main (F:\AI_TESTEXAM\scripts\verify-release-browser.cjs:31:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

@@ -1,0 +1,11 @@
+ContentOps CLI 已准备就绪
+Java：21 · C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\java.exe
+运行模式：Mock
+命令入口：F:\AI_TESTEXAM\delivery\test-run\面试解压测试 ContentOps CLI\scripts\contentops.cmd
+状态目录：F:\AI_TESTEXAM\delivery\test-run\面试解压测试 ContentOps CLI\.contentops\reviewer-20261101-143448-1fc2c6977f1f4779a2ffef2892d6deb8
+
+  contentops --help
+  contentops content list --review-status pending
+  contentops content get ct_000004
+
+此配置仅在当前 PowerShell 会话及子进程生效。浏览器 Playground 使用另一份页面内存状态。

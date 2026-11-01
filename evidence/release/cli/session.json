@@ -1,0 +1,20 @@
+{
+  "started_at": "2026-11-01T14:34:47.8500662+08:00",
+  "executable": "C:\\Users\\15614\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoLogo",
+    "-NoProfile",
+    "-File",
+    "F:\\AI_TESTEXAM\\scripts\\test-support\\release-session.ps1",
+    "-ProjectRoot",
+    "F:\\AI_TESTEXAM\\delivery\\test-run\\面试解压测试 ContentOps CLI",
+    "-EvidenceDirectory",
+    "F:\\AI_TESTEXAM\\evidence\\release\\cli",
+    "-ExpectedJarSha256",
+    "2e6b40ece3567579383c777bff31c35bc682bbf5b18a5bf881bfe5c6596940c6"
+  ],
+  "finished_at": "2026-11-01T14:35:04.3766258+08:00",
+  "actual_exit_code": 0,
+  "runtime_path": "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.7.6-hotspot\\bin;C:\\Windows\\System32",
+  "pid": 12484
+}

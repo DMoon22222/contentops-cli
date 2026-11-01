@@ -1,0 +1,15 @@
+{
+  "finished_at": "2026-11-01T14:36:12.7139055+08:00",
+  "actual_exit_code": 1,
+  "started_at": "2026-11-01T14:36:12.3300571+08:00",
+  "command": [
+    "node",
+    "scripts/verify-release-browser.cjs",
+    "--project",
+    "delivery/test-run/面试解压测试 ContentOps CLI",
+    "--evidence",
+    "evidence/release/browser/run-01",
+    "--playwright-module",
+    "existing local Playwright package"
+  ]
+}

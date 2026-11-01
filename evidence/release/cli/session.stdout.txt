@@ -1,0 +1,1 @@
+PASS: 110 checks, no Maven/Git, actual copied JAR, independent Mock persistence

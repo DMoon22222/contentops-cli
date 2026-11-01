@@ -1,0 +1,56 @@
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('a[href^="#"]').first()
+    - locator resolved to <a class="skip-link" href="#document-body">跳至正文</a>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+      - waiting 100ms
+    58 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - element is outside of the viewport
+     - retrying click action
+       - waiting 500ms
+
+    at main (F:\AI_TESTEXAM\scripts\verify-release-browser.cjs:82:67) {
+  log: [
+    `  - waiting for locator('a[href^="#"]').first()`,
+    '    - locator resolved to <a class="skip-link" href="#document-body">跳至正文</a>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - element is outside of the viewport',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - element is outside of the viewport',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    58 × waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - element is outside of the viewport',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}

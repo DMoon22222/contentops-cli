@@ -1,0 +1,40 @@
+{
+  "source_commit": "c5906402d87ad78e5ea43bd0932cbd97bb08f00e",
+  "frozen_jar": "2e6b40ece3567579383c777bff31c35bc682bbf5b18a5bf881bfe5c6596940c6",
+  "maven": {
+    "tests": 205,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "candidate": {
+    "source_commit": "c5906402d87ad78e5ea43bd0932cbd97bb08f00e",
+    "candidate_root": "delivery/candidate/ContentOps-CLI",
+    "files": 1920,
+    "bytes": 12163842,
+    "file_records_sha256": "150dd5d1d2aefb10aedca2125b7802a6bda95c2db831fe65e20e6f90fae6cf2e",
+    "directory_hash_definition": "SHA256 of UTF-8 compact JSON file records, sorted by path and object keys; excludes external manifest itself",
+    "frozen_jar_sha256": "2e6b40ece3567579383c777bff31c35bc682bbf5b18a5bf881bfe5c6596940c6",
+    "local_references_checked": 2750,
+    "candidate_dynamic_template_states": 22,
+    "link_issues": [],
+    "credential_pattern_hits": [],
+    "unexpected_files": [],
+    "candidate_has_runtime_state": false,
+    "candidate_hashes_match_approved_sources": true
+  },
+  "java_cli_checks": 110,
+  "offline_browser_checks": 448,
+  "new_report_missing_links": [],
+  "new_text_credential_pattern_hits": [],
+  "candidate_acceptance_passed": true,
+  "final_submission_complete": false,
+  "pending_external_deliverables": [
+    "running/viewing guide",
+    "additional notes",
+    "complete AI records and index with redaction review",
+    "final ZIP and extracted-copy verification"
+  ],
+  "candidate_contains_release_report": false,
+  "no_zip_push_upload_or_email": true
+}
