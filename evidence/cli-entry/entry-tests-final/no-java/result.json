@@ -1,0 +1,29 @@
+{
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "state_directory": null,
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "checks": [
+    "no-java expected initializer exit 2",
+    "no-java friendly error",
+    "no-java PATH rollback",
+    "no-java state rollback",
+    "no-java JAVA_HOME unchanged",
+    "launcher-no-java actual native exit",
+    "launcher missing Java stdout empty",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "case": "no-java",
+  "passed": true,
+  "calls": [
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "no-java"
+    },
+    {
+      "exit": 2,
+      "type": "launcher",
+      "name": "launcher-no-java"
+    }
+  ]
+}

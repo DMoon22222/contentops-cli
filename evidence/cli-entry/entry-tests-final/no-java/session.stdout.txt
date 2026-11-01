@@ -1,0 +1,1 @@
+PASS: no-java (8 checks)

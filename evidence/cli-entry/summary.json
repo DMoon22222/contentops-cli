@@ -1,0 +1,206 @@
+{
+  "source_baseline_commit": "c9059feb085fa56b1085a07263b75b7a63393f41",
+  "maven": {
+    "test": {
+      "suites": [
+        {
+          "suite": "com.example.contentops.application.ContentServiceWriteTest",
+          "tests": 33,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.application.ReliabilityBoundaryTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.application.TagPlannerTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.cli.CliFaultConfigTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.cli.CliParsingTest",
+          "tests": 31,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.cli.CliWriteTest",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.gateway.FaultInjectingGatewayTest",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.gateway.JsonMockGatewayContractTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.gateway.JsonMockWriteContractTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.infrastructure.AppConfigTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.infrastructure.mock.JsonStateStoreTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "tests": 165,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "verify": {
+      "suites": [
+        {
+          "suite": "com.example.contentops.integration.CliProcessIT",
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.integration.ReliabilityProcessIT",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.application.ContentServiceWriteTest",
+          "tests": 33,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.application.ReliabilityBoundaryTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.application.TagPlannerTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.cli.CliFaultConfigTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.cli.CliParsingTest",
+          "tests": 31,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.cli.CliWriteTest",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.gateway.FaultInjectingGatewayTest",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.gateway.JsonMockGatewayContractTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.gateway.JsonMockWriteContractTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.infrastructure.AppConfigTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "com.example.contentops.infrastructure.mock.JsonStateStoreTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "windows_sessions": 19,
+  "windows_checks": 239,
+  "initializer_calls": 23,
+  "launcher_calls": 29,
+  "extra_no_maven_checks": 7,
+  "no_maven_exit": 0,
+  "runtime_jar_sha256": "065E7AB3A31E5CD5268F36810217711FA8DB12C74338BA2F66089830E5ACC77F",
+  "final_jar_sha256": "065e7ab3a31e5cd5268f36810217711fa8db12c74338ba2f66089830e5acc77f",
+  "permanent_environment_unchanged": true,
+  "parent_environment_unchanged": true,
+  "supported_validation_environment": "Windows 11, PowerShell 7.6.5, Temurin JDK 21.0.7; Windows PowerShell 5.1 has not been independently validated",
+  "generated_readme_tests": 15,
+  "prior_failures_retained": [
+    "entry-tests-01",
+    "entry-tests-02",
+    "no-maven-check"
+  ]
+}

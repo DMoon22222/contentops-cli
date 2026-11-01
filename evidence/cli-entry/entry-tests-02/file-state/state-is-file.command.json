@@ -1,0 +1,8 @@
+{
+  "script": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\面试解压项目 ContentOps CLI\\scripts\\enable-contentops.ps1",
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\面试解压项目 ContentOps CLI",
+  "parameters": {
+    "StateDirectory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\directory-is-a-file.txt"
+  },
+  "actual_exit": 2
+}

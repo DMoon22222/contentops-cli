@@ -1,0 +1,23 @@
+{
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "passed": true,
+  "calls": [
+    {
+      "name": "old-java",
+      "type": "initializer",
+      "exit": 2
+    }
+  ],
+  "checks": [
+    "old-java expected initializer exit 2",
+    "old-java friendly error",
+    "old-java PATH rollback",
+    "old-java state rollback",
+    "old-java JAVA_HOME unchanged",
+    "unsupported version friendly",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "state_directory": null,
+  "case": "old-java"
+}

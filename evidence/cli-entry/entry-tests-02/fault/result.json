@@ -1,0 +1,23 @@
+{
+  "calls": [
+    {
+      "type": "initializer",
+      "name": "fault-active",
+      "exit": 2
+    }
+  ],
+  "case": "fault",
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\面试解压项目 ContentOps CLI",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "checks": [
+    "fault-active expected initializer exit 2",
+    "fault-active friendly error",
+    "fault-active PATH rollback",
+    "fault-active state rollback",
+    "fault-active JAVA_HOME unchanged",
+    "fault configuration not removed",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "passed": true,
+  "state_directory": null
+}

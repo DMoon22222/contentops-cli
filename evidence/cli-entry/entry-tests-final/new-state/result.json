@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "case": "new-state",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer-20261101-132443-d902749a4dbf4c2fa57b022b14fe805c",
+  "calls": [
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "new-state"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "new-state-get"
+    },
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "reuse-new"
+    }
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "checks": [
+    "new-state expected initializer exit 0",
+    "new unique directory",
+    "new-state-get actual native exit",
+    "new-state-get exactly one JSON object",
+    "new-state-get JSON/native exit match",
+    "new-state-get Java mock origin",
+    "new view pending initial three tags",
+    "fresh directory has no business snapshot",
+    "reuse-new expected initializer exit 0",
+    "second init reuses new directory",
+    "old state was not reset",
+    "JAVA_HOME unchanged throughout"
+  ]
+}

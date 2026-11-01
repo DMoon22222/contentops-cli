@@ -1,0 +1,26 @@
+{
+  "error": "A positional parameter cannot be found that accepts argument 'System.Object[]'.",
+  "passed": false,
+  "calls": [
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "01-enable"
+    },
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "02-enable-again"
+    }
+  ],
+  "position": "At F:\\AI_TESTEXAM\\scripts\\test-support\\cli-entry-session.ps1:85 char:19\r\n+             $help=Cli '03-help' @('--help') 0 $false\r\n+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "case": "normal",
+  "checks": [
+    "01-enable expected initializer exit 0",
+    "default absolute state directory",
+    "project launcher resolved",
+    "02-enable-again expected initializer exit 0",
+    "repeat initialization unchanged PATH",
+    "scripts first and occurs once"
+  ]
+}

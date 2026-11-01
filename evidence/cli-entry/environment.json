@@ -1,0 +1,10 @@
+{
+  "captured_at": "2026-11-01T13:11:19.1420674+08:00",
+  "branch": "master",
+  "head": "c9059feb085fa56b1085a07263b75b7a63393f41",
+  "java": "openjdk version \"21.0.7\" 2025-04-15 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.7+6 (build 21.0.7+6-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.7+6 (build 21.0.7+6-LTS, mixed mode, sharing)\r\n",
+  "maven": "Apache Maven 3.9.4 (dfbb324ad4a7c8fb0bf182e6d91b0ae20e3d2dd9)\r\nMaven home: F:\\Develop\\apache-maven-3.9.4-bin\\apache-maven-3.9.4\r\nJava version: 21.0.7, vendor: Eclipse Adoptium, runtime: C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.7.6-hotspot\r\nDefault locale: zh_CN, platform encoding: UTF-8\r\nOS name: \"windows 11\", version: \"10.0\", arch: \"amd64\", family: \"windows\"\r\n",
+  "powershell": "7.6.5",
+  "jar_sha_before": "A42BF7CBB747A75AD7373C4142D70AC62FF39AF1BF0CFBD872EB718B4192E2EF",
+  "protected_file_count": 1153
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "pwsh",
+    "-NoLogo",
+    "-NoProfile",
+    "-File",
+    "scripts/verify-cli-entry.ps1",
+    "-EvidenceDirectory",
+    "evidence/cli-entry/entry-tests-final"
+  ],
+  "started_at": "2026-11-01T13:24:13.9955245+08:00",
+  "finished_at": "2026-11-01T13:25:05.6464585+08:00",
+  "exit_code": 0
+}

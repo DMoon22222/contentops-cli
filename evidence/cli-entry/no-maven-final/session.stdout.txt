@@ -1,0 +1,2 @@
+Verified: Maven is absent from this runtime PATH.
+PASS: custom (7 checks)

@@ -1,0 +1,22 @@
+{
+  "at": "2026-11-01T13:24:51.1305306+08:00",
+  "arguments": [
+    "-NoLogo",
+    "-NoProfile",
+    "-File",
+    "F:\\AI_TESTEXAM\\scripts\\test-support\\cli-entry-session.ps1",
+    "-CaseName",
+    "no-java",
+    "-ProjectRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+    "-SourceRoot",
+    "F:\\AI_TESTEXAM",
+    "-WorkRoot",
+    "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886",
+    "-EvidenceDirectory",
+    "F:\\AI_TESTEXAM\\evidence\\cli-entry\\entry-tests-final\\no-java",
+    "-JavaFixtureDirectory",
+    ""
+  ],
+  "executable": "C:\\Users\\15614\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}

@@ -1,0 +1,10 @@
+{
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\缺少 JAR 项目",
+  "actual_exit": 2,
+  "state_directory": null,
+  "resolved": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\缺少 JAR 项目\\scripts\\contentops.cmd",
+  "entry": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\缺少 JAR 项目\\scripts\\contentops.cmd",
+  "arguments": [
+    "--help"
+  ]
+}

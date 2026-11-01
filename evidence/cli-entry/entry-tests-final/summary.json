@@ -1,0 +1,984 @@
+{
+  "check_count": 239.0,
+  "source_commit": "c9059feb085fa56b1085a07263b75b7a63393f41",
+  "work_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886",
+  "passed": true,
+  "parent_environment_unchanged": true,
+  "powershell": "7.6.5",
+  "jar_sha256": "065E7AB3A31E5CD5268F36810217711FA8DB12C74338BA2F66089830E5ACC77F",
+  "commands": [
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "01-enable"
+    },
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "02-enable-again"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "03-help"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "04-list"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "05-get"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "06-history"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "07-tags"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "08-total"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "09-pending"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "10-tags"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "11-all-tags"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "12-review-preview"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "13-tags-preview"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "14-process-preview"
+    },
+    {
+      "type": "launcher",
+      "exit": 2,
+      "name": "15-missing-yes"
+    },
+    {
+      "type": "launcher",
+      "exit": 2,
+      "name": "16-only-yes"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "17-process-execute"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "18-after-get"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "19-after-history"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "20-pending-after"
+    },
+    {
+      "type": "launcher",
+      "exit": 2,
+      "name": "21-repeat"
+    },
+    {
+      "type": "launcher",
+      "exit": 3,
+      "name": "22-missing-id"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "23-other-cwd"
+    },
+    {
+      "name": "enable-preserve",
+      "type": "initializer",
+      "exit": 0
+    },
+    {
+      "name": "read-existing",
+      "type": "launcher",
+      "exit": 0
+    },
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "new-state"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "new-state-get"
+    },
+    {
+      "type": "initializer",
+      "exit": 0,
+      "name": "reuse-new"
+    },
+    {
+      "exit": 0,
+      "name": "custom",
+      "type": "initializer"
+    },
+    {
+      "exit": 0,
+      "name": "custom-read",
+      "type": "launcher"
+    },
+    {
+      "exit": 0,
+      "type": "initializer",
+      "name": "relative-custom"
+    },
+    {
+      "type": "initializer",
+      "name": "path-dedup",
+      "exit": 0
+    },
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "state-is-file"
+    },
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "no-java"
+    },
+    {
+      "exit": 2,
+      "type": "launcher",
+      "name": "launcher-no-java"
+    },
+    {
+      "exit": 2,
+      "name": "broken-java",
+      "type": "initializer"
+    },
+    {
+      "name": "old-java",
+      "type": "initializer",
+      "exit": 2
+    },
+    {
+      "name": "missing-jar",
+      "type": "initializer",
+      "exit": 2
+    },
+    {
+      "name": "launcher-no-jar",
+      "type": "launcher",
+      "exit": 2
+    },
+    {
+      "exit": 2,
+      "type": "initializer",
+      "name": "fault-active"
+    },
+    {
+      "type": "initializer",
+      "exit": 2,
+      "name": "fault-empty"
+    },
+    {
+      "name": "invalid-state-0",
+      "exit": 2,
+      "type": "initializer"
+    },
+    {
+      "name": "invalid-state-1",
+      "exit": 2,
+      "type": "initializer"
+    },
+    {
+      "name": "conflicting-options",
+      "exit": 2,
+      "type": "initializer"
+    },
+    {
+      "name": "formal-task2-refused",
+      "type": "initializer",
+      "exit": 2
+    },
+    {
+      "name": "seed-directory-refused",
+      "type": "initializer",
+      "exit": 2
+    },
+    {
+      "type": "initializer",
+      "exit": 2,
+      "name": "function-conflict"
+    },
+    {
+      "name": "foreign-command",
+      "exit": 0,
+      "type": "initializer"
+    },
+    {
+      "name": "own-help",
+      "exit": 0,
+      "type": "launcher"
+    },
+    {
+      "name": "late-conflict",
+      "type": "initializer",
+      "exit": 2
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "root-help"
+    },
+    {
+      "type": "launcher",
+      "exit": 0,
+      "name": "root-other-cwd"
+    }
+  ],
+  "permanent_environment_unchanged": true,
+  "results": [
+    {
+      "passed": true,
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "checks": [
+        "01-enable expected initializer exit 0",
+        "default absolute state directory",
+        "project launcher resolved",
+        "02-enable-again expected initializer exit 0",
+        "repeat initialization unchanged PATH",
+        "scripts first and occurs once",
+        "03-help actual native exit",
+        "help content",
+        "help no business snapshot",
+        "04-list actual native exit",
+        "04-list table mode",
+        "05-get actual native exit",
+        "05-get table mode",
+        "06-history actual native exit",
+        "06-history table mode",
+        "07-tags actual native exit",
+        "07-tags table mode",
+        "08-total actual native exit",
+        "08-total exactly one JSON object",
+        "08-total JSON/native exit match",
+        "08-total Java mock origin",
+        "all 300 contents",
+        "09-pending actual native exit",
+        "09-pending exactly one JSON object",
+        "09-pending JSON/native exit match",
+        "09-pending Java mock origin",
+        "pending132 page1=20",
+        "10-tags actual native exit",
+        "10-tags exactly one JSON object",
+        "10-tags JSON/native exit match",
+        "10-tags Java mock origin",
+        "active23 default",
+        "11-all-tags actual native exit",
+        "11-all-tags exactly one JSON object",
+        "11-all-tags JSON/native exit match",
+        "11-all-tags Java mock origin",
+        "all25",
+        "12-review-preview actual native exit",
+        "12-review-preview exactly one JSON object",
+        "12-review-preview JSON/native exit match",
+        "12-review-preview Java mock origin",
+        "12-review-preview preview",
+        "12-review-preview zero business writes",
+        "13-tags-preview actual native exit",
+        "13-tags-preview exactly one JSON object",
+        "13-tags-preview JSON/native exit match",
+        "13-tags-preview Java mock origin",
+        "13-tags-preview preview",
+        "13-tags-preview zero business writes",
+        "14-process-preview actual native exit",
+        "14-process-preview exactly one JSON object",
+        "14-process-preview JSON/native exit match",
+        "14-process-preview Java mock origin",
+        "14-process-preview preview",
+        "14-process-preview zero business writes",
+        "15-missing-yes actual native exit",
+        "15-missing-yes exactly one JSON object",
+        "15-missing-yes JSON/native exit match",
+        "15-missing-yes Java mock origin",
+        "16-only-yes actual native exit",
+        "16-only-yes exactly one JSON object",
+        "16-only-yes JSON/native exit match",
+        "16-only-yes Java mock origin",
+        "authorization guards no writes",
+        "17-process-execute actual native exit",
+        "17-process-execute exactly one JSON object",
+        "17-process-execute JSON/native exit match",
+        "17-process-execute Java mock origin",
+        "execute success and verified",
+        "18-after-get actual native exit",
+        "18-after-get exactly one JSON object",
+        "18-after-get JSON/native exit match",
+        "18-after-get Java mock origin",
+        "approved complete tags",
+        "19-after-history actual native exit",
+        "19-after-history exactly one JSON object",
+        "19-after-history JSON/native exit match",
+        "19-after-history Java mock origin",
+        "Chinese spaced reason and exclamation preserved",
+        "20-pending-after actual native exit",
+        "20-pending-after exactly one JSON object",
+        "20-pending-after JSON/native exit match",
+        "20-pending-after Java mock origin",
+        "pending131",
+        "21-repeat actual native exit",
+        "21-repeat exactly one JSON object",
+        "21-repeat JSON/native exit match",
+        "21-repeat Java mock origin",
+        "repeat pending protection",
+        "22-missing-id actual native exit",
+        "22-missing-id exactly one JSON object",
+        "22-missing-id JSON/native exit match",
+        "22-missing-id Java mock origin",
+        "queries and repeat preserve snapshot",
+        "23-other-cwd actual native exit",
+        "23-other-cwd exactly one JSON object",
+        "23-other-cwd JSON/native exit match",
+        "23-other-cwd Java mock origin",
+        "other cwd same stored state",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "case": "normal",
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "calls": [
+        {
+          "type": "initializer",
+          "exit": 0,
+          "name": "01-enable"
+        },
+        {
+          "type": "initializer",
+          "exit": 0,
+          "name": "02-enable-again"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "03-help"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "04-list"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "05-get"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "06-history"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "07-tags"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "08-total"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "09-pending"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "10-tags"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "11-all-tags"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "12-review-preview"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "13-tags-preview"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "14-process-preview"
+        },
+        {
+          "type": "launcher",
+          "exit": 2,
+          "name": "15-missing-yes"
+        },
+        {
+          "type": "launcher",
+          "exit": 2,
+          "name": "16-only-yes"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "17-process-execute"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "18-after-get"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "19-after-history"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "20-pending-after"
+        },
+        {
+          "type": "launcher",
+          "exit": 2,
+          "name": "21-repeat"
+        },
+        {
+          "type": "launcher",
+          "exit": 3,
+          "name": "22-missing-id"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "23-other-cwd"
+        }
+      ]
+    },
+    {
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "case": "preserve",
+      "calls": [
+        {
+          "name": "enable-preserve",
+          "type": "initializer",
+          "exit": 0
+        },
+        {
+          "name": "read-existing",
+          "type": "launcher",
+          "exit": 0
+        }
+      ],
+      "passed": true,
+      "checks": [
+        "enable-preserve expected initializer exit 0",
+        "existing env retained",
+        "read-existing actual native exit",
+        "read-existing exactly one JSON object",
+        "read-existing JSON/native exit match",
+        "read-existing Java mock origin",
+        "existing bytes unchanged",
+        "JAVA_HOME unchanged throughout"
+      ]
+    },
+    {
+      "passed": true,
+      "case": "new-state",
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer-20261101-132443-d902749a4dbf4c2fa57b022b14fe805c",
+      "calls": [
+        {
+          "type": "initializer",
+          "exit": 0,
+          "name": "new-state"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "new-state-get"
+        },
+        {
+          "type": "initializer",
+          "exit": 0,
+          "name": "reuse-new"
+        }
+      ],
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "checks": [
+        "new-state expected initializer exit 0",
+        "new unique directory",
+        "new-state-get actual native exit",
+        "new-state-get exactly one JSON object",
+        "new-state-get JSON/native exit match",
+        "new-state-get Java mock origin",
+        "new view pending initial three tags",
+        "fresh directory has no business snapshot",
+        "reuse-new expected initializer exit 0",
+        "second init reuses new directory",
+        "old state was not reset",
+        "JAVA_HOME unchanged throughout"
+      ]
+    },
+    {
+      "case": "custom",
+      "passed": true,
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "checks": [
+        "custom expected initializer exit 0",
+        "custom absolute state",
+        "custom-read actual native exit",
+        "custom-read exactly one JSON object",
+        "custom-read JSON/native exit match",
+        "custom-read Java mock origin",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\自定义 状态目录",
+      "calls": [
+        {
+          "exit": 0,
+          "name": "custom",
+          "type": "initializer"
+        },
+        {
+          "exit": 0,
+          "name": "custom-read",
+          "type": "launcher"
+        }
+      ],
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI"
+    },
+    {
+      "passed": true,
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "checks": [
+        "relative-custom expected initializer exit 0",
+        "explicit relative argument resolved absolutely",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\相对 状态目录",
+      "calls": [
+        {
+          "exit": 0,
+          "type": "initializer",
+          "name": "relative-custom"
+        }
+      ],
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "case": "custom-relative"
+    },
+    {
+      "calls": [
+        {
+          "type": "initializer",
+          "name": "path-dedup",
+          "exit": 0
+        }
+      ],
+      "case": "path-dedup",
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "passed": true,
+      "checks": [
+        "path-dedup expected initializer exit 0",
+        "normalized duplicate entries removed",
+        "other original PATH contents preserved",
+        "JAVA_HOME unchanged throughout"
+      ]
+    },
+    {
+      "case": "file-state",
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "state_directory": null,
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "passed": true,
+      "calls": [
+        {
+          "exit": 2,
+          "type": "initializer",
+          "name": "state-is-file"
+        }
+      ],
+      "checks": [
+        "state-is-file expected initializer exit 2",
+        "state-is-file friendly error",
+        "state-is-file PATH rollback",
+        "state-is-file state rollback",
+        "state-is-file JAVA_HOME unchanged",
+        "existing non-state file preserved",
+        "JAVA_HOME unchanged throughout"
+      ]
+    },
+    {
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "state_directory": null,
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "checks": [
+        "no-java expected initializer exit 2",
+        "no-java friendly error",
+        "no-java PATH rollback",
+        "no-java state rollback",
+        "no-java JAVA_HOME unchanged",
+        "launcher-no-java actual native exit",
+        "launcher missing Java stdout empty",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "case": "no-java",
+      "passed": true,
+      "calls": [
+        {
+          "exit": 2,
+          "type": "initializer",
+          "name": "no-java"
+        },
+        {
+          "exit": 2,
+          "type": "launcher",
+          "name": "launcher-no-java"
+        }
+      ]
+    },
+    {
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "passed": true,
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "state_directory": null,
+      "checks": [
+        "broken-java expected initializer exit 2",
+        "broken-java friendly error",
+        "broken-java PATH rollback",
+        "broken-java state rollback",
+        "broken-java JAVA_HOME unchanged",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "calls": [
+        {
+          "exit": 2,
+          "name": "broken-java",
+          "type": "initializer"
+        }
+      ],
+      "case": "broken-java"
+    },
+    {
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "passed": true,
+      "calls": [
+        {
+          "name": "old-java",
+          "type": "initializer",
+          "exit": 2
+        }
+      ],
+      "checks": [
+        "old-java expected initializer exit 2",
+        "old-java friendly error",
+        "old-java PATH rollback",
+        "old-java state rollback",
+        "old-java JAVA_HOME unchanged",
+        "unsupported version friendly",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "state_directory": null,
+      "case": "old-java"
+    },
+    {
+      "checks": [
+        "missing-jar expected initializer exit 2",
+        "missing-jar friendly error",
+        "missing-jar PATH rollback",
+        "missing-jar state rollback",
+        "missing-jar JAVA_HOME unchanged",
+        "launcher-no-jar actual native exit",
+        "launcher missing JAR stdout empty",
+        "build or complete extraction advice",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "case": "no-jar",
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\缺少 JAR 项目\\.contentops\\reviewer",
+      "state_directory": null,
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\缺少 JAR 项目",
+      "passed": true,
+      "calls": [
+        {
+          "name": "missing-jar",
+          "type": "initializer",
+          "exit": 2
+        },
+        {
+          "name": "launcher-no-jar",
+          "type": "launcher",
+          "exit": 2
+        }
+      ]
+    },
+    {
+      "passed": true,
+      "state_directory": null,
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "case": "fault",
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "calls": [
+        {
+          "exit": 2,
+          "type": "initializer",
+          "name": "fault-active"
+        }
+      ],
+      "checks": [
+        "fault-active expected initializer exit 2",
+        "fault-active friendly error",
+        "fault-active PATH rollback",
+        "fault-active state rollback",
+        "fault-active JAVA_HOME unchanged",
+        "fault configuration not removed",
+        "JAVA_HOME unchanged throughout"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "type": "initializer",
+          "exit": 2,
+          "name": "fault-empty"
+        }
+      ],
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "case": "empty-fault",
+      "state_directory": null,
+      "passed": true,
+      "checks": [
+        "empty variable present",
+        "fault-empty expected initializer exit 2",
+        "fault-empty friendly error",
+        "fault-empty PATH rollback",
+        "fault-empty state rollback",
+        "fault-empty JAVA_HOME unchanged",
+        "empty fault not removed",
+        "JAVA_HOME unchanged throughout"
+      ]
+    },
+    {
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "state_directory": null,
+      "calls": [
+        {
+          "name": "invalid-state-0",
+          "exit": 2,
+          "type": "initializer"
+        },
+        {
+          "name": "invalid-state-1",
+          "exit": 2,
+          "type": "initializer"
+        },
+        {
+          "name": "conflicting-options",
+          "exit": 2,
+          "type": "initializer"
+        }
+      ],
+      "passed": true,
+      "checks": [
+        "invalid-state-0 expected initializer exit 2",
+        "invalid-state-0 friendly error",
+        "invalid-state-0 PATH rollback",
+        "invalid-state-0 state rollback",
+        "invalid-state-0 JAVA_HOME unchanged",
+        "invalid-state-1 expected initializer exit 2",
+        "invalid-state-1 friendly error",
+        "invalid-state-1 PATH rollback",
+        "invalid-state-1 state rollback",
+        "invalid-state-1 JAVA_HOME unchanged",
+        "conflicting-options expected initializer exit 2",
+        "conflicting-options friendly error",
+        "conflicting-options PATH rollback",
+        "conflicting-options state rollback",
+        "conflicting-options JAVA_HOME unchanged",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "case": "invalid-state"
+    },
+    {
+      "calls": [
+        {
+          "name": "formal-task2-refused",
+          "type": "initializer",
+          "exit": 2
+        },
+        {
+          "name": "seed-directory-refused",
+          "type": "initializer",
+          "exit": 2
+        }
+      ],
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\task2\\a20c72c2-74c1-4130-af99-8d17452424b6",
+      "checks": [
+        "formal-task2-refused expected initializer exit 2",
+        "formal-task2-refused friendly error",
+        "formal-task2-refused PATH rollback",
+        "formal-task2-refused state rollback",
+        "formal-task2-refused JAVA_HOME unchanged",
+        "seed-directory-refused expected initializer exit 2",
+        "seed-directory-refused friendly error",
+        "seed-directory-refused PATH rollback",
+        "seed-directory-refused state rollback",
+        "seed-directory-refused JAVA_HOME unchanged",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "case": "protected-state",
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "passed": true
+    },
+    {
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+      "calls": [
+        {
+          "type": "initializer",
+          "exit": 2,
+          "name": "function-conflict"
+        }
+      ],
+      "checks": [
+        "function-conflict expected initializer exit 2",
+        "function-conflict friendly error",
+        "function-conflict PATH rollback",
+        "function-conflict state rollback",
+        "function-conflict JAVA_HOME unchanged",
+        "user function not deleted",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "case": "function-conflict",
+      "passed": true,
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "state_directory": null
+    },
+    {
+      "case": "foreign-command",
+      "passed": true,
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "checks": [
+        "foreign-command expected initializer exit 0",
+        "own entry wins over external same name",
+        "own-help actual native exit",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+      "calls": [
+        {
+          "name": "foreign-command",
+          "exit": 0,
+          "type": "initializer"
+        },
+        {
+          "name": "own-help",
+          "exit": 0,
+          "type": "launcher"
+        }
+      ],
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI"
+    },
+    {
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\同名入口冲突 项目\\.contentops\\reviewer",
+      "passed": true,
+      "case": "late-conflict",
+      "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\同名入口冲突 项目",
+      "state_directory": null,
+      "calls": [
+        {
+          "name": "late-conflict",
+          "type": "initializer",
+          "exit": 2
+        }
+      ],
+      "checks": [
+        "late-conflict expected initializer exit 2",
+        "late-conflict friendly error",
+        "late-conflict PATH rollback",
+        "late-conflict state rollback",
+        "late-conflict JAVA_HOME unchanged",
+        "conflicting executable not executed",
+        "JAVA_HOME unchanged throughout"
+      ]
+    },
+    {
+      "passed": true,
+      "state_default": "F:\\AI_TESTEXAM\\.contentops\\reviewer",
+      "checks": [
+        "root-help actual native exit",
+        "root-other-cwd actual native exit",
+        "root-other-cwd exactly one JSON object",
+        "root-other-cwd JSON/native exit match",
+        "root-other-cwd Java mock origin",
+        "current-directory Java fixture did not replace PATH Java",
+        "source-root launcher queries do not create snapshot",
+        "JAVA_HOME unchanged throughout"
+      ],
+      "calls": [
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "root-help"
+        },
+        {
+          "type": "launcher",
+          "exit": 0,
+          "name": "root-other-cwd"
+        }
+      ],
+      "project_root": "F:\\AI_TESTEXAM",
+      "case": "root-and-cwd",
+      "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\原项目只读 状态"
+    }
+  ],
+  "copied_project": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "case_count": 19
+}

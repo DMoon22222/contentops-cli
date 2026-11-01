@@ -1,0 +1,10 @@
+{
+  "resolved": "F:\\AI_TESTEXAM\\scripts\\contentops.cmd",
+  "entry": "F:\\AI_TESTEXAM\\scripts\\contentops.cmd",
+  "actual_exit": 0,
+  "arguments": [
+    "--help"
+  ],
+  "cwd": "F:\\AI_TESTEXAM",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\原项目只读 状态"
+}

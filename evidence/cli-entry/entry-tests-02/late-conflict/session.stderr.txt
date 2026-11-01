@@ -1,0 +1,1 @@
+CHECK FAILED: late-conflict expected initializer exit 2

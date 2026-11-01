@@ -1,0 +1,5 @@
+Exception: F:\AI_TESTEXAM\scripts\verify-cli-entry.ps1:88
+Line |
+  88 |  … code -ne 0){throw "Test case failed: $case. Read its saved stdout/std …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Test case failed: late-conflict. Read its saved stdout/stderr and failure.json

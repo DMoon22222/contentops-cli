@@ -1,0 +1,1 @@
+CHECK FAILED: custom expected initializer exit 0

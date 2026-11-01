@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "position": "At F:\\AI_TESTEXAM\\scripts\\test-support\\cli-entry-session.ps1:26 char:21\r\n+     if(!$Condition){throw \"CHECK FAILED: $Name\"};$checks.Add($Name)\r\n+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "checks": [],
+  "error": "CHECK FAILED: late-conflict expected initializer exit 2",
+  "case": "late-conflict",
+  "calls": [
+    {
+      "exit": 0,
+      "name": "late-conflict",
+      "type": "initializer"
+    }
+  ]
+}

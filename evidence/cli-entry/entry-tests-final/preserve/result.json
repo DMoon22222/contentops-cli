@@ -1,0 +1,29 @@
+{
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "case": "preserve",
+  "calls": [
+    {
+      "name": "enable-preserve",
+      "type": "initializer",
+      "exit": 0
+    },
+    {
+      "name": "read-existing",
+      "type": "launcher",
+      "exit": 0
+    }
+  ],
+  "passed": true,
+  "checks": [
+    "enable-preserve expected initializer exit 0",
+    "existing env retained",
+    "read-existing actual native exit",
+    "read-existing exactly one JSON object",
+    "read-existing JSON/native exit match",
+    "read-existing Java mock origin",
+    "existing bytes unchanged",
+    "JAVA_HOME unchanged throughout"
+  ]
+}

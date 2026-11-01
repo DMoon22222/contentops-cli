@@ -1,0 +1,1 @@
+ContentOps 初始化失败：当前 Java 版本不符合已验证的 JDK 21 环境。请切换到 JDK 21 后重试；本脚本不自动修改 JAVA_HOME。

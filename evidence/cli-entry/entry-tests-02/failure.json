@@ -1,0 +1,6 @@
+{
+  "completed_cases": 17,
+  "position": "At F:\\AI_TESTEXAM\\scripts\\verify-cli-entry.ps1:88 char:29\r\n+ … code -ne 0){throw \"Test case failed: $case. Read its saved stdout/std …\r\n+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "passed": false,
+  "error": "Test case failed: late-conflict. Read its saved stdout/stderr and failure.json"
+}

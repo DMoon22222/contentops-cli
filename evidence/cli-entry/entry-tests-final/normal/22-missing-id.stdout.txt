@@ -1,0 +1,1 @@
+{"schema_version":"1","invocation_id":"b8bf7637-5da9-4837-8fef-b0ed482aff13","environment":"mock","command":"content.get","mode":"read","status":"failed","exit_code":3,"content_id":"ct_missing","data":null,"error":{"code":"CONTENT_NOT_FOUND","message":"Mock 中不存在指定内容；请核对 ID","step":"read","upstream":null},"warnings":[]}

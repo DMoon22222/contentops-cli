@@ -1,0 +1,1 @@
+PASS: foreign-command (4 checks)

@@ -1,0 +1,23 @@
+{
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "calls": [
+    {
+      "type": "initializer",
+      "exit": 2,
+      "name": "function-conflict"
+    }
+  ],
+  "checks": [
+    "function-conflict expected initializer exit 2",
+    "function-conflict friendly error",
+    "function-conflict PATH rollback",
+    "function-conflict state rollback",
+    "function-conflict JAVA_HOME unchanged",
+    "user function not deleted",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "case": "function-conflict",
+  "passed": true,
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "state_directory": null
+}

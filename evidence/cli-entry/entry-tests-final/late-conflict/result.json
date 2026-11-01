@@ -1,0 +1,23 @@
+{
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\同名入口冲突 项目\\.contentops\\reviewer",
+  "passed": true,
+  "case": "late-conflict",
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\同名入口冲突 项目",
+  "state_directory": null,
+  "calls": [
+    {
+      "name": "late-conflict",
+      "type": "initializer",
+      "exit": 2
+    }
+  ],
+  "checks": [
+    "late-conflict expected initializer exit 2",
+    "late-conflict friendly error",
+    "late-conflict PATH rollback",
+    "late-conflict state rollback",
+    "late-conflict JAVA_HOME unchanged",
+    "conflicting executable not executed",
+    "JAVA_HOME unchanged throughout"
+  ]
+}

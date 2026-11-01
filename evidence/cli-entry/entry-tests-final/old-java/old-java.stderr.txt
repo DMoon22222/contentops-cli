@@ -1,0 +1,1 @@
+ContentOps 初始化失败：检测到 Java 版本：17；已验证环境要求 JDK 21。请切换后重试，本脚本不自动修改 JAVA_HOME。

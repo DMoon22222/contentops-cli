@@ -1,0 +1,28 @@
+{
+  "case": "custom",
+  "passed": true,
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "checks": [
+    "custom expected initializer exit 0",
+    "custom absolute state",
+    "custom-read actual native exit",
+    "custom-read exactly one JSON object",
+    "custom-read JSON/native exit match",
+    "custom-read Java mock origin",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\自定义 状态目录",
+  "calls": [
+    {
+      "exit": 0,
+      "name": "custom",
+      "type": "initializer"
+    },
+    {
+      "exit": 0,
+      "name": "custom-read",
+      "type": "launcher"
+    }
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI"
+}

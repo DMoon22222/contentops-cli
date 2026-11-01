@@ -1170,8 +1170,8 @@
       "html": "readme.html",
       "kind": "当前实现与运行说明",
       "historical": false,
-      "source_sha256": "72688a850726c636f79f68dac1764ef50a9d9ac5cc116e08c07d5c91cbb176cf",
-      "html_sha256": "2e99f382133d90cd4f218da9d3c50c0191971a37fba5787e3e373cd0d0dbedbe",
+      "source_sha256": "d7e7cb5060c6cb13c9a8ed0c4ffb1de28f2bcb6c54f1e94900cd93d61096119a",
+      "html_sha256": "cd938c314d5a12764838824b0788271e7dedfe154d1aa9c190b649ee0671c7b8",
       "headings": [
         {
           "level": 1,
@@ -1180,8 +1180,13 @@
         },
         {
           "level": 2,
-          "title": "从 GitHub 获取并运行",
-          "id": "section-从-github-获取并运行"
+          "title": "Windows 快速使用",
+          "id": "section-windows-快速使用"
+        },
+        {
+          "level": 2,
+          "title": "开发者从源码构建",
+          "id": "section-开发者从源码构建"
         },
         {
           "level": 2,
@@ -1225,7 +1230,7 @@
         }
       ],
       "tables": 2,
-      "code_blocks": 9
+      "code_blocks": 12
     },
     {
       "source": "evidence/task2/README.md",

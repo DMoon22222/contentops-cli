@@ -1,0 +1,8 @@
+{
+  "cwd": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "script": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\scripts\\enable-contentops.ps1",
+  "actual_exit": 0,
+  "parameters": {
+    "StateDirectory": "相对 状态目录"
+  }
+}

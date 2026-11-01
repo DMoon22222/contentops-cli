@@ -1,0 +1,20 @@
+{
+  "calls": [
+    {
+      "type": "initializer",
+      "name": "path-dedup",
+      "exit": 0
+    }
+  ],
+  "case": "path-dedup",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "passed": true,
+  "checks": [
+    "path-dedup expected initializer exit 0",
+    "normalized duplicate entries removed",
+    "other original PATH contents preserved",
+    "JAVA_HOME unchanged throughout"
+  ]
+}

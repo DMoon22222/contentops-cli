@@ -1,0 +1,14 @@
+{
+  "calls": [
+    {
+      "type": "initializer",
+      "exit": 2,
+      "name": "custom"
+    }
+  ],
+  "case": "custom",
+  "error": "CHECK FAILED: custom expected initializer exit 0",
+  "position": "At F:\\AI_TESTEXAM\\scripts\\test-support\\cli-entry-session.ps1:26 char:21\r\n+     if(!$Condition){throw \"CHECK FAILED: $Name\"};$checks.Add($Name)\r\n+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "checks": [],
+  "passed": false
+}

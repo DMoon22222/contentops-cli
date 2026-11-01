@@ -1,0 +1,25 @@
+{
+  "case": "foreign-command",
+  "passed": true,
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "checks": [
+    "foreign-command expected initializer exit 0",
+    "own entry wins over external same name",
+    "own-help actual native exit",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "calls": [
+    {
+      "name": "foreign-command",
+      "exit": 0,
+      "type": "initializer"
+    },
+    {
+      "name": "own-help",
+      "exit": 0,
+      "type": "launcher"
+    }
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\c777c578cc084cbaa4bd74864ed49886\\面试解压项目 ContentOps CLI"
+}

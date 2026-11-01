@@ -6,23 +6,66 @@
 
 任务三专项设计已完成：[Agent 批量处理方案](docs/07-Agent批量处理方案.md)。推荐冻结 ID、人工审批和轻量账本后逐条复用 CLI；批次执行器仍未实现，也未执行 100 条。
 
-## 从 GitHub 获取并运行
+## Windows 快速使用
 
-安装 Git、JDK 21 和 Maven 3.9.x（开发验收版本为 3.9.4），确认 `java -version`、`mvn -version` 可用且 Maven 使用 JDK 21。以下命令在 PowerShell 7 中执行：
+**面试官试用：**先安装 JDK 21，在已解压的项目根目录打开 PowerShell（完整验收环境为 PowerShell 7）。如果目录已包含 `target/contentops.jar`，无需 Maven、Git 或网络。本项目尚未制作最终邮件附件，不能据此认为提交包已经就绪。
+
+在准备使用 CLI 的同一个窗口执行，无需点源或管理员权限：
 
 ```powershell
-git clone https://github.com/DMoon22222/contentops-cli.git
-cd contentops-cli
-mvn -B -ntp verify
-if ($LASTEXITCODE -ne 0) { throw '构建或测试失败，请先检查 Maven 输出' }
-java -jar ./target/contentops.jar --help
+.\scripts\enable-contentops.ps1
+contentops --help
 
-# 新建独立 Mock 状态目录，进行只读查询
-$env:CONTENTOPS_STATE_DIR = Join-Path $PWD ('.contentops/try-' + [guid]::NewGuid())
-java -jar ./target/contentops.jar --env mock --output json content list --review-status pending --page 1
+contentops content list --review-status pending
+contentops content get ct_000004
+contentops content history ct_000004
+contentops tags list
+
+# 以下三个写命令默认只预览，不改变业务状态
+contentops content review ct_000004 --action approve
+contentops content tags update ct_000004 --add "悬疑"
+contentops content process ct_000004 --action approve --reason "本地演示审核决定" --add "悬疑"
 ```
 
-首次构建需要联网下载 Maven 依赖；构建后的 JAR 包含运行依赖和 Mock seed，可离线运行，无须后台服务、账号或 API Key。源码、测试、Maven 配置、启动/验证脚本、原始接口和虚构样例、设计文档、HTML Demo 及其引用的实测证据均在仓库中。`target/` 产物由构建生成，Maven 缓存、个人配置、运行中的 Mock 状态、重复附件 ZIP、提交包和 AI 会话记录不上传。本仓库是可运行项目源码发布，试炼最终交付状态仍以 [交付清单](docs/04-交付物规划与验收清单.md) 为准。
+初始化只设置当前会话的 PATH 和绝对 `CONTENTOPS_STATE_DIR`，不修改永久环境、JAVA_HOME 或执行策略。默认使用项目 `.contentops/reviewer`；已明确设置的状态目录会保留，已有数据不重置。脚本检查 JDK 21、JAR、同名命令与故障变量；存在 `CONTENTOPS_MOCK_SCENARIO` 时拒绝普通试用，需自行确认后清除。`-StateDirectory "D:\contentops-test"` 可指定其他目录，`-NewState` 创建新的项目内目录。
+
+确认使用独立状态目录、人工给定演示决定后，只执行一次：
+
+```powershell
+.\scripts\enable-contentops.ps1 -NewState
+contentops content process ct_000004 --action approve --reason "本地演示审核决定" --add "悬疑" --execute --yes
+contentops content get ct_000004
+contentops content history ct_000004
+contentops --output json content get ct_000004
+$cliExit = $LASTEXITCODE
+```
+
+审核成功后，同一副本不能重复审核该内容。重新体验用 `-NewState`，保留旧记录。浏览器 Playground 与这里的真实 Java CLI 使用不同状态；网页重置不会重置本地目录。关闭窗口后重新初始化；不要在另开的子 PowerShell 中初始化后，期待旧窗口获得配置。
+
+若执行策略阻止 `.ps1`，不必降低系统安全设置。可在项目根目录手动设置**当前会话**（仍需 JDK 21 和完整 JAR）：
+
+```powershell
+if (Test-Path Env:CONTENTOPS_MOCK_SCENARIO) { throw '请先确认并手动清除故障配置' }
+$env:PATH = (Join-Path $PWD.Path 'scripts') + ';' + $env:PATH
+$env:CONTENTOPS_STATE_DIR = Join-Path $PWD.Path ('.contentops/reviewer-' + [guid]::NewGuid())
+Get-Command contentops -All # 确认本项目入口；有同名别名/函数时可直接用下行完整入口
+.\scripts\contentops.cmd --help
+```
+
+手动方式不包含初始化脚本的完整前置检查。也可继续使用 `java -jar ./target/contentops.jar ...`；启动器不解析业务参数、不自动编译或下载。启动前缺 Java/JAR 时 stderr 提示、退出 2、stdout 为空；成功启动后 JSON 与退出码由 Java 原样提供。
+
+## 开发者从源码构建
+
+安装 JDK 21、Maven 3.9.x（本机 3.9.4），确认 Maven 使用 JDK 21。源码可以来自本地目录或解压文件，不必从 GitHub 获取：
+
+```powershell
+mvn -B -ntp verify
+if ($LASTEXITCODE -ne 0) { throw '构建或测试失败，请先检查 Maven 输出' }
+.\scripts\enable-contentops.ps1
+contentops content list --review-status pending
+```
+
+**Maven 是构建工具，不是已打包 CLI 的运行依赖。**首次构建通常需联网下载依赖，JAR 含运行库和只读 seed，可离线运行。GitHub 是可选源码入口：[contentops-cli](https://github.com/DMoon22222/contentops-cli)。缓存、实时状态、个人配置和提交包不纳入源码版本；最终交付状态见 [交付清单](docs/04-交付物规划与验收清单.md)。本轮入口测试与真实输出见 [cli-entry](evidence/cli-entry/README.md)。
 
 ## 离线 HTML Demo
 
@@ -45,7 +88,7 @@ content history ct_000004
 
 写命令默认预览；只有 `--execute --yes` 同时出现才修改网页内存。模拟器使用原始 seed 的完整 300 条内容、25 个标签，初始 pending=132。刷新或点击“重置数据”恢复初始数据；有模拟修改时需再确认重置，命令历史与业务数据分开管理。不使用 localStorage/sessionStorage，不读写 Java 状态目录。JSON 标记 `environment=browser`、`source=browser_simulator`，其中退出码是模拟结果，不是 JVM 进程码。
 
-网页新生成的模拟结果与真实记录分开。“查看真实 Java CLI 运行记录”保留任务二的独立 Mock 实测（新增“悬疑”）和 S5 故障/恢复记录（新增“轻松”）；它们不随网页操作或重置改变。Agent 仍是未来设计，未实现批次执行器。网页不调用 JAR、不连接 API，也不模拟生产网络故障。真正运行 Java CLI 仍使用下文的 `java -jar ./target/contentops.jar ...`，网页还保留了独立的 JAR 命令参考。
+网页新生成的模拟结果与真实记录分开。“查看真实 Java CLI 运行记录”保留任务二的独立 Mock 实测（新增“悬疑”）和 S5 故障/恢复记录（新增“轻松”）；它们不随网页操作或重置改变。Agent 仍是未来设计，未实现批次执行器。网页不调用 JAR、不连接 API，也不模拟生产网络故障。真实 Java CLI 可用上面的会话初始化后 `contentops ...`，或下文兼容的 `java -jar ./target/contentops.jar ...`；网页原有 JAR 命令参考仍有效。
 
 “技术说明”和“Agent 方案”保留简短说明；完整方案默认打开预先排版的 [HTML 文档目录](demo/docs/index.html)。重点入口为 [产品方案](demo/docs/02-product-plan.html)、[技术架构](demo/docs/03-architecture.html)、[实际操作记录](demo/docs/06-operation-record.html)、[Agent 批量方案](demo/docs/07-agent-plan.html) 和 [运行说明](demo/docs/readme.html)。共 11 份阅读版，另包括 01/04、任务二/S5 证据索引、原题和附件说明；不转换全部历史日志。原始 Markdown 保留在根目录、`docs/` 及证据原位置，网页资料区的原稿链接明确标为“原始 Markdown 文件”。历史设计阅读页有阶段提示，未修改原文来覆盖过去的状态。
 
@@ -172,7 +215,7 @@ cancelled/7 保留在模型中，本原型没有交互取消场景。PowerShell 
 - 快照提交顺序：锁内加载 → 完整数据树副本 → 同目录临时文件写入并 `force(true)` → 关闭文件 → 原子替换。保留原始七类数据及 `_note`、未使用字段和已有异常数据。审核单次 API 的状态与日志一起提交；无成功项的批次不新建/重写快照。它不构成审核和标签两个操作的联合事务。
 - 提交前实际探测同目录原子创建和替换能力；不支持时拒绝提交，不降级为非原子覆盖。锁等待上限为 2 秒。不承诺硬件断电后的目录项持久性，也没有跨机器/网络盘保证。
 
-当前没有初始化或重置 CLI。需要初始视图时换一个独立状态目录；损坏工作副本应保留排查，不自动删除。Gateway 保留列表审核语义：最多 20 项、重复调用追加日志，不施加 CLI 的 pending/理由政策。标签 Gateway 接收完整数组，不施加 active 校验；CLI 只开放单条 add，不直接暴露底层宽松能力。
+会话初始化与切换新目录使用 `scripts/enable-contentops.ps1`；没有删除业务记录的 reset 命令。损坏工作副本应保留排查，不自动删除。Gateway 保留列表审核语义：最多 20 项、重复调用追加日志，不施加 CLI 的 pending/理由政策。标签 Gateway 接收完整数组，不施加 active 校验；CLI 只开放单条 add，不直接暴露底层宽松能力。
 
 ## 显式 Mock 故障与恢复
 

@@ -1,0 +1,14 @@
+Usage: contentops [-hV] [--non-interactive] [--env=mock|api]
+                  [--output=table|json] [COMMAND]
+内容运营后台 CLI：单条 Mock 审核与标签维护
+      --env=mock|api        数据源；api 尚未实现，会明确拒绝
+  -h, --help                Show this help message and exit.
+      --non-interactive     禁止交互；当前原型均不读取 stdin，执行需 --execute
+                              --yes
+      --output=table|json   输出格式（默认 table）
+  -V, --version             Print version information and exit.
+Commands:
+  content  查询、单条审核及标签维护
+  tags     查询标签库
+写命令默认预览；原型执行必须同时提供 --execute --yes，不等待人工输入。HTTP 尚未
+实现。

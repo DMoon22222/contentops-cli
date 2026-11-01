@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "relative-custom expected initializer exit 0",
+    "explicit relative argument resolved absolutely",
+    "JAVA_HOME unchanged throughout"
+  ],
+  "passed": true,
+  "calls": [
+    {
+      "exit": 0,
+      "type": "initializer",
+      "name": "relative-custom"
+    }
+  ],
+  "project_root": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\面试解压项目 ContentOps CLI",
+  "state_default": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\面试解压项目 ContentOps CLI\\.contentops\\reviewer",
+  "state_directory": "F:\\AI_TESTEXAM\\.contentops\\cli-entry\\9c7516b6c154459d90560b08a30f8bd6\\面试解压项目 ContentOps CLI\\相对 状态目录",
+  "case": "custom-relative"
+}
