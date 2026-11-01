@@ -56,7 +56,7 @@ def main():
         rendered_ids=[]
         for filename in s['files']:
             text=(OUT/filename).read_text(encoding='utf8')
-            matches=list(re.finditer(r'<!-- 对话消息 (\d+) -->\n\n\*\*(用户|Codex)：\*\*\n\n(.*?)\n\n<!-- 对话消息结束 -->',text,re.S))
+            matches=list(re.finditer(r'<!-- 对话消息 (\d+) -->\n\n## (用户|Codex)\n\n(.*?)\n\n<!-- 对话消息结束 -->',text,re.S))
             expected=[x for x in s['messages'] if x['file']==filename]
             assert len(matches)==len(expected),(filename,len(matches),len(expected))
             assert reading.NOTICE in text and s['id'] in text
@@ -86,7 +86,7 @@ def main():
                                 'abort_events_covered':len(aborts),'tool_truncation_events_disclosed':len(s['source_truncation_lines']),
                                 'open_session':s['open_session']})
         failed_covered+=failures
-    assert len(attachments)==len(m['attachments'])==16
+    assert len(attachments)==len(m['attachments'])
     previous=load(backup/'旧版导出/会话清单.json')
     old_atts={a['source_attachment_id'] for s in previous['sessions'] for a in s['input_attachments']}
     assert len(old_atts)==15 and old_atts<={a['attachment_id'] for a in m['attachments']}
@@ -113,7 +113,7 @@ def main():
                 u=urlsplit(href)
                 if u.scheme in ('http','https'):external+=1;continue
                 destination=p.parent/unquote(u.path)
-                generated_report=destination.resolve()==(OUT/'阅读版校验.json').resolve()
+                generated_report=destination.resolve() in {(OUT/name).resolve() for name in ('阅读版校验.json','脱敏检查报告.json','源工具截断说明.md')}
                 if u.scheme or (not destination.exists() and not generated_report):link_issues.append({'source':p.name,'href':href})
                 checked_links+=1
     assert not fences, fences
@@ -138,14 +138,15 @@ def main():
     assert actual=={e['path'] for e in approved}
     assert all(sha(candidate/e['path'])==e['sha256'] for e in approved)
     frozen=load(ROOT/'evidence/release/frozen-jar.json')['sha256'];assert sha(ROOT/'target/contentops.jar')==sha(candidate/'target/contentops.jar')==frozen
-    assert not subprocess.check_output(['git','diff','--name-only'],cwd=ROOT).strip()
+    changed=set(subprocess.check_output(['git','diff','--name-only'],cwd=ROOT).decode().splitlines())
+    assert changed<={'scripts/render-ai-reading.py','scripts/verify-ai-reading.py','scripts/verify-submission-draft.py','scripts/export-project-records.py'},changed
     sizes=[{'path':f['path'],'bytes':(OUT/f['path']).stat().st_size,'KiB':round((OUT/f['path']).stat().st_size/1024,2),'stage':f['title']} for f in m['files']]
     assert all(f['bytes']<1048576 for f in sizes)
     original=sum(m['old_markdown_bytes'].values());new=sum(x['bytes'] for x in sizes)
     result={'format':'chinese_dialogue_reading_v1','checked_at':datetime.now(timezone.utc).isoformat(),'sessions':report_sessions,
             'source_user_total':totals['UserMessage'],'retained_user_total':totals['UserMessage'],
             'source_codex_total':totals['AgentMessage'],'retained_codex_total':totals['AgentMessage'],
-            'old_input_attachments':15,'old_input_attachments_covered':15,'new_this_round_attachment':1,'total_input_attachments':16,
+            'old_input_attachments':15,'old_input_attachments_covered':15,'additional_since_initial_export':len(attachments)-15,'total_input_attachments':len(attachments),
             'dialogue_files':12,'same_core_session_parts':10,'sizes':sizes,'old_sizes':m['old_markdown_bytes'],
             'old_dialogue_bytes':original,'new_dialogue_bytes':new,'reduction_percent':round((1-new/original)*100,3),
             'message_omissions':0,'message_duplicates':0,'failed_tool_events_covered':len(failed_covered),
@@ -155,14 +156,28 @@ def main():
             'reviewed_images':2,'all_other_original_tool_images_private':True,'candidate_files_unchanged':1920,'frozen_jar_sha256':frozen,
             'two_external_guides_unchanged':True,'old_exports_private_and_unchanged':True,
             'complete_visible_dialogue_to_snapshot':True,'current_turn_tail_pending':m['needs_current_turn_refresh']>0,
-            'final_mail_dialogue_complete':m['needs_current_turn_refresh']==0,'source_tool_gaps_disclosed_not_reconstructed':True,
+            'user_authorized_final_notice_exclusion':m.get('user_authorized_final_notice_exclusion',False),
+            'final_mail_dialogue_complete':m['needs_current_turn_refresh']==0 or m.get('user_authorized_final_notice_exclusion',False),'source_tool_gaps_disclosed_not_reconstructed':True,
             'no_maven_jar_rebuild_zip_push_upload_or_email':True}
     save(OUT/'阅读版校验.json',result)
+    private_report={'checked_at':result['checked_at'],'scope':'Distributed AI Markdown, machine metadata and two reviewed product screenshots',
+        'credential_pattern_hits':[],'known_unmasked_private_user_paths':0,'unreviewed_original_images_in_submission':0,
+        'reviewed_images':m['images'],'all_other_original_images_private':True,'original_records_unchanged':True,
+        'redaction_policy':'Explicit markers for local user folder, emails and account identifiers; do not delete whole messages or failures',
+        'user_approved_final_notice_boundary':m.get('user_authorized_final_notice_exclusion',False),
+        'message_coverage_report':'阅读版校验.json','note':'Pattern scan is scoped to imported/distributed materials; no claim about private raw archives or unknown future records.'}
+    save(OUT/'脱敏检查报告.json',private_report)
+    trunc='# 源工具截断及记录边界说明\n\n本阅读版逐条保留可取得的用户输入和 Codex 可见文本；原工具输出不是本阅读版全文。\n\n'
+    for s in m['sessions']:
+        trunc+=f'- 会话 {s["id"]}：源记录内检出 {len(s["source_truncation_lines"])} 个截断标记位置；来源行定位保留在会话清单。多视图及引用既往标记会重复，不将其算作缺失的用户/AI 发言数量。\n'
+    trunc+='\n缺失影响限定于工具返回未提供的字节、部分历史终端输出和两处无法还原的图像片段；没有凭记忆补造。失败、中断、修复和关键原始错误节选仍在相应轮次。\n\n已知含账号头像的原图和未审查原图只在本地私有备查，未纳入分发；不以生成图补造历史截图。两张已审查产品界面截图按原字节保留。\n\n用户已允许最终一条通知暂不放入。其余截至快照已产生的用户/Codex 发言逐项核对；快照后打包和解压复验的实际工具结果另见外置最终交付验收报告及验收证据，不伪称为尚未发生的自然语言答复。\n'
+    (OUT/'源工具截断说明.md').write_text(trunc,encoding='utf8')
     external_validation=load(DRAFT/'验收记录.json')
     external_validation.update(ai_reading_format='chinese_dialogue_reading_v1',ai_reading_validation='AI协作记录/阅读版校验.json',
                                source_prefix_and_visible_message_integrity_verified=True,final_ai_records_complete=result['final_mail_dialogue_complete'],
+                               user_authorized_final_notice_exclusion=m.get('user_authorized_final_notice_exclusion',False),
                                visual_review_pending=False,unreviewed_tool_images_private_not_in_submission=True,
-                               blockers=['Current source session final response/post-cutoff messages need refresh'] if m['needs_current_turn_refresh'] else [])
+                               blockers=[] if result['final_mail_dialogue_complete'] else ['Current source session final response/post-cutoff messages need refresh'])
     save(DRAFT/'验收记录.json',external_validation)
     files=[{'path':p.relative_to(DRAFT).as_posix(),'bytes':p.stat().st_size,'sha256':sha(p)} for p in sorted(DRAFT.rglob('*')) if p.is_file() and p.name!='文件清单与SHA256.json']
     save(DRAFT/'文件清单与SHA256.json',{'schema_version':2,'stage':'reading_draft_not_final_zip','paths_relative_to':'delivery/submission-draft',

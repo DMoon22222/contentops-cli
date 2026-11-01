@@ -17,6 +17,7 @@ OUT = ROOT / 'delivery/submission-draft/AI协作记录'
 BACKUP = ROOT / json.loads((ROOT / '.contentops/submission-qa/reading-backup-location.json').read_text(encoding='utf8'))['backup_relative_path']
 SOURCE = BACKUP / json.loads((ROOT / '.contentops/submission-qa/reading-backup-location.json').read_text(encoding='utf8')).get('source_subdir','原始记录快照')
 BUILD = BACKUP / ('阅读版构建-' + datetime.now().strftime('%H%M%S-%f'))
+FINAL_NOTICE_EXCLUDED = False
 spec = importlib.util.spec_from_file_location('old_export', ROOT / 'scripts/export-project-records.py')
 old = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(old)
@@ -181,6 +182,7 @@ def main():
     summary = {'format': 'chinese_dialogue_reading_v1', 'generated_at': datetime.now(timezone.utc).isoformat(),
                'confirmed_sessions': 3, 'acquired': 3, 'ended_message_exports': 2, 'pending_manual_export': 0,
                'needs_current_turn_refresh': 0, 'sessions': [], 'files': [], 'attachments': [], 'images': [],
+               'user_authorized_final_notice_exclusion': FINAL_NOTICE_EXCLUDED,
                'old_markdown_bytes': {x['path']:x['bytes'] for x in old_inventory['old_files'] if x['path'].startswith('会话') and x['path'].endswith('.md')},
                'backup_relative_path': BACKUP.relative_to(ROOT).as_posix(), 'source_snapshot_subdir': SOURCE.relative_to(BACKUP).as_posix(), 'tools_are_reading_summaries_not_full_outputs': True}
     all_attachments = {}
@@ -214,7 +216,7 @@ def main():
                         assert current_part is not None;body=display(text,edits);transform='visible_text';att=None
                     ordinal=sum(1 for m in coverage if m['part']==current_part+1)+1
                     marker=f'<!-- 对话消息 {ordinal:03d} -->'
-                    rendered=marker+'\n\n**'+('用户' if typ=='UserMessage' else 'Codex')+'：**\n\n'+body+'\n\n<!-- 对话消息结束 -->\n\n'
+                    rendered=marker+'\n\n## '+('用户' if typ=='UserMessage' else 'Codex')+'\n\n'+body+'\n\n<!-- 对话消息结束 -->\n\n'
                     groups[current_part].append(rendered)
                     coverage.append({'id':item['id'],'role':typ,'source_line':line,'timestamp':row['timestamp'],'round':current_round,
                                      'part':current_part+1,'file':filenames[current_part],'message_ordinal_in_part':ordinal,
@@ -240,7 +242,8 @@ def main():
             head+=NOTICE+'\n\n编排说明：轮次按用户消息顺序编号，补充答复也单列；保留原始 Markdown 正文，行尾统一为 LF。历史本机/图片引用仅显示原引用文字，不自动加载；问题控件仅展开问题和回答，粘贴输入恢复全文。上述展示与隐私处理均在机器清单中可核对。\n\n'
             head+=' · '.join(nav)+'\n\n'
             active=session_active and part+1==len(filenames)
-            if active:head+='**快照限制：本部分包含本轮阅读版整理要求，但本轮仍在进行；截止点之后的消息及最终回复待补。**\n\n'
+            if active:
+                head+=('**记录边界：本轮用户已明确允许最后一条通知暂不放入；截至源快照已产生的用户输入与 Codex 可见回复全部收录。工具复验的最终事实另见外置验收报告。**\n\n' if FINAL_NOTICE_EXCLUDED else '**快照限制：本部分包含当前整理要求，但本轮仍在进行；截止点之后的消息及最终回复待补。**\n\n')
             (BUILD/name).write_text(head+''.join(body),encoding='utf8',newline='\n')
             summary['files'].append({'path':name,'session_id':sid,'part':part+1,'title':parttitle,'user_messages':users,'codex_messages':ai,
                                      'first_timestamp':msgs[0]['timestamp'],'last_timestamp':msgs[-1]['timestamp'],'open_part':active})
@@ -255,6 +258,16 @@ def main():
                                     'source_truncation_lines':source_trunc,'files':filenames,'open_session':session_active})
     summary['attachments']=list(all_attachments.values())
     summary['ended_message_exports']=sum(not s['open_session'] for s in summary['sessions'])
+    if FINAL_NOTICE_EXCLUDED:
+        approved=[]
+        for s in summary['sessions']:
+            rows=[json.loads(x) for x in (SOURCE/s['source_basename']).read_bytes().splitlines()]
+            for line,row in enumerate(rows,1):
+                item=row.get('payload',{}).get('item',{})
+                if item.get('type')=='UserMessage' and any('最后一条回复暂时不用放入' in c.get('text','') for c in item.get('content',[])):
+                    approved.append({'session_id':s['id'],'source_line':line,'id':item['id'],'timestamp':row['timestamp']})
+        assert approved, 'No actual user authorization found for final-notice boundary'
+        summary['final_notice_boundary_authorization']=approved
     # Only two already visually reviewed product screenshots are copied; all other tool images stay private.
     for rel in ('evidence/release/browser/run-04/desktop-product.png','evidence/release/browser/run-04/mobile-playground.png'):
         p=ROOT/rel;h=sha(p.read_bytes());name='附件/已核查-'+p.name
@@ -280,10 +293,12 @@ def write_index(s):
     text+='\n## 会话 02：仓库与交付\n\n[查看对话记录](会话02-仓库与交付.md) · 原应用标题：创建公开 GitHub 仓库；'+f'{(BUILD/"会话02-仓库与交付.md").stat().st_size/1024:.1f} KiB。\n\n## 会话 03：工具配置\n\n[查看对话记录](会话03-工具配置.md) · 原应用标题：配置并验证 Codex 开发工具；'+f'{(BUILD/"会话03-工具配置.md").stat().st_size/1024:.1f} KiB。\n\n'
     total_u=sum(x['source_user_count'] for x in s['sessions']);total_a=sum(x['source_codex_count'] for x in s['sessions'])
     text+=f'## 真实性及完整性说明\n\n{NOTICE}\n\n- 快照内共 {total_u} 条用户输入、{total_a} 条 Codex 可见文本消息；源事件 ID、消息哈希、分卷定位和工具出处放在 [机器清单](会话清单.json)，不占用阅读正文。\n'
-    text+='- 原有 15 个粘贴输入全部保留，并恢复到原用户轮次；本轮另有 1 个新粘贴提示词，合计 16 个，附件目录也保留全文。\n'
+    text+=f'- 原有 15 个粘贴输入全部保留，并恢复到原用户轮次；其后实际追加 {len(s["attachments"])-15} 个提示词，合计 {len(s["attachments"])} 个，附件目录也保留全文。\n'
     text+='- 工具过程按实际调用、文件变更、非零退出、中断和原始错误/结果节选整理；修复说明仍来自相邻真实 Codex 回复。没有逐项重复底层 JSON、Base64、进程 ID 或数千行终端输出。工具日志节选不冒充完整工具原文。\n'
     text+='- 代码块、表格、列表及技术术语保留；仅延续已标注的隐私遮盖。问题控件展开问题/回答，粘贴附件恢复真实全文，历史本机/图片链接显示为引用文字，避免失效导航或自动加载未审查图像。原包装与未变更源记录在本地私有备查。\n'
-    if s['needs_current_turn_refresh']:
+    if s.get('user_authorized_final_notice_exclusion'):
+        text+='- 最终交付轮次中，用户明确决定“最后一条回复暂时不用放入”。本版覆盖源快照中已产生的全部可见发言，最后一条通知按授权排除；不宣称会话引擎已结束。其后本地打包/复验的工具结果由外置最终报告提供，不伪造未发生的回复。\n'
+    elif s['needs_current_turn_refresh']:
         text+='- 已结束会话的全部可见文字已取得；会话 01 第 10 部分仍为当前轮快照，最终回复及截止点后内容待补。**因此不能宣布整个最终邮件会话材料已经收尾完整。**\n'
     else:
         text+='- 三会话均已结束；本次快照内可取得的用户与 Codex 文字已全部收录。源工具截断与图片不属于原工具全文的边界仍按下述说明保留。\n'
@@ -292,12 +307,13 @@ def write_index(s):
     text+='- 未完成隐私审查的原图和已知含账号名/头像的图像均留在私有备查，不在本目录。仅保留两张已查看的产品 UI 截图：[桌面](附件/已核查-desktop-product.png)、[移动端](附件/已核查-mobile-playground.png)。其他原回复图片引用保留文字；如需补图，应先审查或制作标注过的最小遮盖副本。\n'
     new_bytes=sum((BUILD/f['path']).stat().st_size for f in s['files']);old_bytes=sum(s['old_markdown_bytes'].values())
     text+=f'- 原三份正文合计 {old_bytes:,} 字节；新 12 份正文合计 {new_bytes:,} 字节，减少 {(1-new_bytes/old_bytes)*100:.2f}%。缩小来自工具视图整理，没有截断用户/AI 发言。\n'
-    text+='- 完整运行证据在配套产品的 ContentOps-CLI/evidence/；运行说明与补充说明在本目录的上一层。原 JSONL 与旧版大文件保持私有，不属于公开提交件，也没有被删除。\n\n大小、覆盖、重复/遗漏和 Markdown/链接检查见 [阅读版校验](阅读版校验.json)。当前没有制作 ZIP、上传、push 或发送邮件。\n'
+    text+='- 完整运行证据在配套产品的 evidence/；ZIP 内外使用同一份 AI 记录。原 JSONL 与旧版大文件保持私有，不属于公开提交件，也没有被删除。\n\n大小、覆盖、重复/遗漏和 Markdown/链接检查见 [阅读版校验](阅读版校验.json)，另有 [脱敏检查](脱敏检查报告.json) 和 [源工具截断说明](源工具截断说明.md)。本地 ZIP 与独立复验状态以外置最终交付验收报告为准。没有上传、push 或发送邮件。\n'
     (BUILD/'索引.md').write_text(text,encoding='utf8')
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--refresh-source',action='store_true');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--refresh-source',action='store_true');parser.add_argument('--exclude-final-notice',action='store_true');args=parser.parse_args()
+    FINAL_NOTICE_EXCLUDED=args.exclude_final_notice
     if args.refresh_source:
         subdir='原始记录快照-'+datetime.now().strftime('%H%M%S-%f');SOURCE=BACKUP/subdir;SOURCE.mkdir()
         for sid,_,_,_ in old.SESSIONS:
